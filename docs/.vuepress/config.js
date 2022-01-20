@@ -1,8 +1,8 @@
 const { config } = require("vuepress-theme-hope");
 
 module.exports = config({
-  title: "Theme Demo",
-  description: "A demo for vuepress-theme-hope",
+  title: "lllllan notes",
+  // description: "lllllan 的自学笔记",
 
   base: '/',
   dest: "./dist",
@@ -36,25 +36,25 @@ module.exports = config({
   },
 
   themeConfig: {
-    logo: "/logo.svg",
-    hostname: "https://vuepress-theme-hope-demo.mrhope.site",
+    logo: "/lllllan.png",
+    hostname: "https://vue-blog.lllllan.cn",
 
-    author: "Mr.Hope",
-    repo: "https://github.com/vuepress-theme-hope/vuepress-theme-hope",
+    author: "lllllan",
+    repo: "https://github.com/lllllan-fv/blog",
 
     nav: [
       { text: "Blog Home", link: "/", icon: "home" },
       { text: "Project Home", link: "/home/", icon: "home" },
-      {
-        text: "Guide",
-        icon: "creative",
-        link: "/guide/",
-      },
-      {
-        text: "Docs",
-        link: "https://vuepress-theme-hope.github.io/",
-        icon: "note",
-      },
+      // {
+      //   text: "Guide",
+      //   icon: "creative",
+      //   link: "/guide/",
+      // },
+      // {
+      //   text: "Docs",
+      //   link: "https://vuepress-theme-hope.github.io/",
+      //   icon: "note",
+      // },
     ],
 
     sidebar: {
@@ -105,15 +105,15 @@ module.exports = config({
       },
     },
 
-    blog: {
-      intro: "/intro/",
-      sidebarDisplay: "mobile",
-      links: {
-        Zhihu: "https://zhihu.com",
-        Baidu: "https://baidu.com",
-        Github: "https://github.com",
-      },
-    },
+    // blog: {
+    //   intro: "/intro/",
+    //   sidebarDisplay: "mobile",
+    //   links: {
+    //     Zhihu: "https://zhihu.com",
+    //     Baidu: "https://baidu.com",
+    //     Github: "https://github.com",
+    //   },
+    // },
 
     footer: {
       display: true,
@@ -150,37 +150,37 @@ module.exports = config({
     },
 
     pwa: {
-      favicon: "/favicon.ico",
+      favicon: "/logo.png",
       cachePic: true,
       apple: {
-        icon: "/assets/icon/apple-icon-152.png",
+        icon: "/logo.png",
         statusBarColor: "black",
       },
       msTile: {
-        image: "/assets/icon/ms-icon-144.png",
+        image: "/logo.png",
         color: "#ffffff",
       },
       manifest: {
         icons: [
           {
-            src: "/assets/icon/chrome-mask-512.png",
+            src: "/logo.png",
             sizes: "512x512",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-mask-192.png",
+            src: "/logo.png",
             sizes: "192x192",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-512.png",
+            src: "/logo.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-192.png",
+            src: "/logo.png",
             sizes: "192x192",
             type: "image/png",
           },
