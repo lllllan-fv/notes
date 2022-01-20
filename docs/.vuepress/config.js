@@ -53,7 +53,7 @@ module.exports = config({
           title: "java 基础",
           icon: "java",
           prefix: "1-java/1-base/",
-          children: [            
+          children: [
             "1-java-base-core-summary/",
             "2-java-guide-base/",
             {
@@ -131,14 +131,17 @@ module.exports = config({
       content: "默认页脚",
     },
 
-    comment: {
-      type: "waline",
-      serverURL: "https://vuepress-theme-hope-comment.vercel.app",
-    },
+    // comment: {
+    //   type: "waline",
+    //   serverURL: "https://vuepress-theme-hope-comment.vercel.app",
+    // },
 
-    copyright: {
-      status: "global",
-    },
+    copyright: true,
+    // copyright: {
+    //   status: "global",
+    //   // noCopy: false,
+    //   // minLength: 99999,
+    // },
 
     git: {
       timezone: "Asia/Shanghai",
