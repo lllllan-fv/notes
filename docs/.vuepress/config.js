@@ -25,7 +25,7 @@ module.exports = config({
   },
 
   themeConfig: {
-    logo: "/lllllan.png",
+    logo: "/logo.png",
     hostname: "https://vue-blog.lllllan.cn",
 
     author: "lllllan",
