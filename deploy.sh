@@ -14,7 +14,7 @@ echo 'vue-blog.lllllan.cn' > CNAME
 
 git init
 git add -A
-git commit -m '[Java 笔记] 增加侧边栏、条件图标'
+git commit -m '[Java 笔记] 修改标题等级、添加说明'
 
 # 如果你想要部署到 https://<USERNAME>.github.io
 git push -f git@github.com:lllllan-fv/lllllan-fv.github.io.git master

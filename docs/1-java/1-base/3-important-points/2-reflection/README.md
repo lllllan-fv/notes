@@ -29,8 +29,16 @@ star: true
 # footer: 
 ---
 
-> ## 总结
->
+
+
+::: warning
+
+全部抄自 [反射机制详解！ | JavaGuide](https://javaguide.cn/java/basis/反射机制详解/)，列有改动
+
+:::
+
+
+
 > 总之反射就是能获取一个类的所有方法和属性，并能够调用。
 >
 > 然后还能增加代码的灵活性。

@@ -25,10 +25,18 @@ tag:
 star: true
 
 # 你可以自定义页脚
-# footer: 
+# footer:
 ---
 
-## java语言的特点
+
+
+::: warning
+
+全部抄自[Road 2 Coding](https://www.r2coding.com/#/)上提供资料
+
+:::
+
+## 一、 java语言的特点
 
 - 面向对象
 - 平台无关性
@@ -65,11 +73,13 @@ star: true
 
 - 安全性
 
-## 面向对象
+
+
+## 二、面向对象
 
 
 
-### 初始化顺序
+### 2.1 初始化顺序
 
 > - 静态属性
 > - 静态方法快
@@ -127,7 +137,7 @@ public class Solution {
 
 ---
 
-### 三大特性
+### 2.2 三大特性
 
 - 封装
 - 继承
@@ -143,7 +153,7 @@ public class Solution {
 
 ---
 
-### 接口
+### 2.3 接口
 
 - interface、implements
 - 接口只能使用 `public` `default`  两种访问修饰符
@@ -155,7 +165,7 @@ public class Solution {
 
 ---
 
-### 抽象类
+### 2.4 抽象类
 
 - abstract
 - 只有抽象类中能有抽象方法，抽象类中不只有抽象方法。
@@ -165,7 +175,7 @@ public class Solution {
 
 ---
 
-### 内部类
+### 2.5 内部类
 
 - 内部类拥有外部类的访问权限
 
@@ -173,11 +183,11 @@ public class Solution {
 
 
 
-## 异常
+## 三、异常
 
 
 
-### Throwable
+### 3.1 Throwable
 
 `Throable` 类是Java语言中所有 `错误(errors)` 和 `异常(exceptions)` 的父类。
 
@@ -185,19 +195,19 @@ public class Solution {
 
 
 
-### 常见异常
+### 3.2 常见异常
 
 ![image-20211217193021056](README.assets/image-20211217193021056.png)
 
 
 
-### Error
+### 3.3 Error
 
 ![image-20211217194119016](README.assets/image-20211217194119016.png)
 
 
 
-## 集合
+## 四、集合
 
 
 
@@ -213,7 +223,7 @@ public class Solution {
 
 
 
-## 反射
+## 五、反射
 
 Java反射机制是在程序的运行过程中，对于任何一个类，都能知道它的所有属性和方法；对于任意一个对象，都能知道调用它的任意属性和方法。
 
@@ -226,7 +236,7 @@ Java反射机制是在程序的运行过程中，对于任何一个类，都能�
 
 
 
-#### Class 类
+### 5.1 Class 类
 
 当我们编写一个类，在生产的`.class` 文件中，就会产生一个 Class 对象。这个 Class 对象用于标识这个类的类型信息。
 
@@ -236,19 +246,19 @@ Class中没有公共的构造器，也就是说Class对象不能杯实例化。
 
 
 
-### Field 类
+### 5.2 Field 类
 
 Field 类提供类或接口中单独字段的信息，以及对单独字段的动态访问。
 
 
 
-### Method 类
+### 5.3 Method 类
 
 传递 Object 对象及参数调用该对象对应的方法
 
 
 
-### ClassLoader 类
+### 5.4 ClassLoader 类
 
 类装载器是用来把类装载进JVM的。ClassLoader使用的是双亲委托模型来搜索加载类的。
 
@@ -258,7 +268,7 @@ Field 类提供类或接口中单独字段的信息，以及对单独字段的�
 
 
 
-## 枚举
+## 六、枚举
 
 枚举是一个特殊的类，一般表示一组常量
 
@@ -301,7 +311,7 @@ public class TrafficLight {
 
 
 
-## IO
+## 七、IO
 
 ![image-20211224191321306](README.assets/image-20211224191321306.png)
 
@@ -311,7 +321,7 @@ public class TrafficLight {
 
 
 
-### File 类
+### 7.1 File 类
 
 主要涉及 **文件创建、删除文件、获取文件描述**
 
@@ -319,7 +329,7 @@ public class TrafficLight {
 
 
 
-### InputStream
+### 7.2 InputStream
 
 字节输入模式的抽象类
 
@@ -327,7 +337,7 @@ public class TrafficLight {
 
 
 
-### OutputStream
+### 7.3 OutputStream
 
 字节输出模式的抽象类 
 
@@ -335,7 +345,7 @@ public class TrafficLight {
 
 
 
-### Reader
+### 7.4 Reader
 
 字符输入模式的抽象类
 
@@ -343,7 +353,7 @@ public class TrafficLight {
 
 
 
-### Writer
+### 7.5 Writer
 
 字符输出模式的抽象类
 
@@ -351,7 +361,7 @@ public class TrafficLight {
 
 
 
-### 更多其他子类
+### 7.6 更多其他子类
 
 详见 《Java基础核心总结》 p67
 
@@ -363,19 +373,19 @@ public class TrafficLight {
 
 ## 插眼：
 
-#### JDK、JRE、JVM
+### JDK、JRE、JVM
 
-#### switch 实现原理
+### switch 实现原理
 
-#### 深浅拷贝
+### 深浅拷贝
 
-#### 代理，意义何在
+### 代理，意义何在
 
-#### 面向对象三大特性
+### 面向对象三大特性
 
-#### 修饰符
+### 修饰符
 
-#### 集合
+### 集合
 
 
 

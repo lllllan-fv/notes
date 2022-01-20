@@ -30,6 +30,14 @@ star: true
 
 
 
+::: warning
+
+全部抄自 [为什么 Java 中只有值传递？ | JavaGuide](https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/)，略有改动
+
+:::	
+
+
+
 ## 值传递 & 引用传递
 
 程序设计语言将实参传递给方法（或函数）的方式分为两种：
