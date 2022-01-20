@@ -10,11 +10,11 @@ npm run build
 cd dist
 
 # 如果是发布到自定义域名
-# echo 'www.zhangyunchen.cc' > CNAME
+echo 'vue-blog.lllllan.cn' > CNAME
 
 git init
 git add -A
-git commit -m '多级目录'
+git commit -m '页面部署'
 
 # 如果你想要部署到 https://<USERNAME>.github.io
 git push -f git@github.com:lllllan-fv/lllllan-fv.github.io.git master

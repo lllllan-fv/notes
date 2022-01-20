@@ -6,7 +6,7 @@
   <author>
     <name>Mr.Hope</name>
   </author>
-  <updated>2022-01-20T05:30:56.052Z</updated>
+  <updated>2022-01-20T05:39:54.147Z</updated>
   <generator>@mr-hope/vuepress-plugin-feed</generator>
   <link rel="self" href="https://vuepress-theme-hope-demo.mrhope.site/atom.xml"/>
   <link rel="alternate" href="https://vuepress-theme-hope-demo.mrhope.site/"/>
@@ -53,186 +53,12 @@
     <rights>Copyright by Mr.Hope</rights>
   </entry>
   <entry>
-    <title type="html">项目主页</title>
-    <id>https://vuepress-theme-hope-demo.mrhope.site/home/</id>
-    <link href="https://vuepress-theme-hope-demo.mrhope.site/home/"/>
+    <title type="html">Intro Page</title>
+    <id>https://vuepress-theme-hope-demo.mrhope.site/intro/</id>
+    <link href="https://vuepress-theme-hope-demo.mrhope.site/intro/"/>
     <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<p>这是普通主页的案例。你可以在这里放置你的主体内容。</p>
-<p>想要使用此布局，你需要在页面 front matter 中设置 <code>home: true</code>。</p>
-<p>配置项的相关说明详见 <a href="https://vuepress-theme-hope.github.io/zh/guide/layout/home/" target="_blank" rel="noopener noreferrer">项目主页配置</a>。</p>
-]]></content>
-    <author>
-      <name>Mr.Hope</name>
-    </author>
-    <contributor>
-      <name>Mr.Hope</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by Mr.Hope</rights>
-  </entry>
-  <entry>
-    <title type="html">密码加密的文章</title>
-    <id>https://vuepress-theme-hope-demo.mrhope.site/guide/encrypt/</id>
-    <link href="https://vuepress-theme-hope-demo.mrhope.site/guide/encrypt/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="密码加密的文章"> 密码加密的文章</h1>
-<p>实际的文章内容。</p>
-<p>段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字。</p>
-<p>段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字。</p>
-]]></content>
-    <author>
-      <name>Mr.Hope</name>
-    </author>
-    <category term="使用指南"/>
-    <contributor>
-      <name>Mr.Hope</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by Mr.Hope</rights>
-  </entry>
-  <entry>
-    <title type="html">页面配置</title>
-    <id>https://vuepress-theme-hope-demo.mrhope.site/guide/page/</id>
-    <link href="https://vuepress-theme-hope-demo.mrhope.site/guide/page/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="页面信息"> 页面信息</h2>
-<p>你可以在 Markdown 的 Frontmatter 中设置页面信息。</p>
-<ul>
-<li>
-<p>作者设置为 Ms.Hope。</p>
-</li>
-<li>
-<p>写作时间应为 2020 年 1 月 1 日</p>
-</li>
-<li>
-<p>分类为 “使用指南”</p>
-</li>
-<li>
-<p>标签为 “页面配置” 和 “使用指南”</p>
-</li>
-</ul>
-<h2 id="页面内容"> 页面内容</h2>
-<p>你可以自由在这里书写你的 Markdown。</p>
-<div><p>Tips</p>
-<ul>
-<li>
-<p>Markdown 文件夹的图片请使用相对链接 <code>./</code> 进行引用。</p>
-</li>
-<li>
-<p><code>.vuepress/public</code> 文件夹的图片，请使用绝对链接 <code>/</code> 进行引用</p>
-</li>
-</ul>
-</div>
-<p>主题包含了一个自定义徽章章可以使用:</p>
-<blockquote>
-<p>文字结尾应该有深蓝色的 徽章文字 徽章。 <i>Not supported content</i></p>
-</blockquote>
-<h2 id="页面结构"> 页面结构</h2>
-<p>此页面应当包含：</p>
-<ul>
-<li>返回顶部按钮</li>
-<li>路径导航</li>
-<li>评论</li>
-<li>页脚</li>
-</ul>
-]]></content>
-    <author>
-      <name>Ms.Hope</name>
-    </author>
-    <category term="使用指南"/>
-    <contributor>
-      <name>Ms.Hope</name>
-    </contributor>
-    <published>2020-01-01T00:00:00.000Z</published>
-    <rights>Copyright by Ms.Hope</rights>
-  </entry>
-  <entry>
-    <title type="html">主要功能与配置演示</title>
-    <id>https://vuepress-theme-hope-demo.mrhope.site/guide/</id>
-    <link href="https://vuepress-theme-hope-demo.mrhope.site/guide/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="主要功能与配置演示"> 主要功能与配置演示</h1>
-<ul>
-<li>
-<p><a href="./page.html">页面展示</a></p>
-</li>
-<li>
-<p><a href="./markdown.html">Markdown 展示</a></p>
-</li>
-<li>
-<p><a href="./disable.html">禁用展示</a></p>
-</li>
-<li>
-<p><a href="./encrypt.html">加密展示</a></p>
-</li>
-</ul>
-]]></content>
-    <author>
-      <name>Mr.Hope</name>
-    </author>
-    <category term="使用指南"/>
-    <contributor>
-      <name>Mr.Hope</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by Mr.Hope</rights>
-  </entry>
-  <entry>
-    <title type="html">博客主页</title>
-    <id>https://vuepress-theme-hope-demo.mrhope.site/</id>
-    <link href="https://vuepress-theme-hope-demo.mrhope.site/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<p>这是一个博客主页。</p>
-<p>要使用此布局，您应该在页面前端设置 <code>blog: true</code> 和 <code>home: true</code>。</p>
-<p>相关配置文档请见 <a href="https://vuepress-theme-hope.github.io/zh/guide/blog/home/" target="_blank" rel="noopener noreferrer">博客主页</a></p>
-]]></content>
-    <author>
-      <name>Mr.Hope</name>
-    </author>
-    <contributor>
-      <name>Mr.Hope</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by Mr.Hope</rights>
-  </entry>
-  <entry>
-    <title type="html">幻灯片页</title>
-    <id>https://vuepress-theme-hope-demo.mrhope.site/slides/</id>
-    <link href="https://vuepress-theme-hope-demo.mrhope.site/slides/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[
-<i>Not supported content</i>]]></content>
-    <author>
-      <name>Mr.Hope</name>
-    </author>
-    <contributor>
-      <name>Mr.Hope</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by Mr.Hope</rights>
-  </entry>
-  <entry>
-    <title type="html">自定义布局</title>
-    <id>https://vuepress-theme-hope-demo.mrhope.site/layout/</id>
-    <link href="https://vuepress-theme-hope-demo.mrhope.site/layout/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<p>您可以使用带有 Markdown 支持的插槽来自定义页面布局。</p>
-<div><p>Note</p>
-<p>此处仅仅是一个演示，你应该自行根据需求添加样式。</p>
-
-
-</div>
-<template #page-top><p>页面顶部内容</p>
-</template><template #page-bottom><p>页面底部内容</p>
-</template><template #content-top><p>内容顶部内容</p>
-</template><template #content-bottom><p>内容底部内容</p>
-</template><template #navbar-start><p>导航栏起始内容</p>
-</template><template #navbar-center><p>导航栏中部内容</p>
-</template><template #navbar-end><p>导航栏末尾内容</p>
-</template><template #sidebar-top><p>侧边栏顶部内容</p>
-</template><template #sidebar-center><p>侧边栏中部内容</p>
-</template><template #sidebar-bottom><p>侧边栏底部内容</p>
-</template><p>更多详情，详见 <a href="https://vuepress-theme-hope.github.io/zh/guide/layout/custom/" target="_blank" rel="noopener noreferrer">自定义布局</a>.</p>
+    <content type="html"><![CDATA[<h1 id="intro-page"> Intro Page</h1>
+<p>Place your introducation and profile here.</p>
 ]]></content>
     <author>
       <name>Mr.Hope</name>
@@ -709,13 +535,187 @@ $$
     <rights>Copyright by Mr.Hope</rights>
   </entry>
   <entry>
-    <title type="html">Intro Page</title>
-    <id>https://vuepress-theme-hope-demo.mrhope.site/intro/</id>
-    <link href="https://vuepress-theme-hope-demo.mrhope.site/intro/"/>
+    <title type="html">页面配置</title>
+    <id>https://vuepress-theme-hope-demo.mrhope.site/guide/page/</id>
+    <link href="https://vuepress-theme-hope-demo.mrhope.site/guide/page/"/>
     <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="intro-page"> Intro Page</h1>
-<p>Place your introducation and profile here.</p>
+    <content type="html"><![CDATA[<h2 id="页面信息"> 页面信息</h2>
+<p>你可以在 Markdown 的 Frontmatter 中设置页面信息。</p>
+<ul>
+<li>
+<p>作者设置为 Ms.Hope。</p>
+</li>
+<li>
+<p>写作时间应为 2020 年 1 月 1 日</p>
+</li>
+<li>
+<p>分类为 “使用指南”</p>
+</li>
+<li>
+<p>标签为 “页面配置” 和 “使用指南”</p>
+</li>
+</ul>
+<h2 id="页面内容"> 页面内容</h2>
+<p>你可以自由在这里书写你的 Markdown。</p>
+<div><p>Tips</p>
+<ul>
+<li>
+<p>Markdown 文件夹的图片请使用相对链接 <code>./</code> 进行引用。</p>
+</li>
+<li>
+<p><code>.vuepress/public</code> 文件夹的图片，请使用绝对链接 <code>/</code> 进行引用</p>
+</li>
+</ul>
+</div>
+<p>主题包含了一个自定义徽章章可以使用:</p>
+<blockquote>
+<p>文字结尾应该有深蓝色的 徽章文字 徽章。 <i>Not supported content</i></p>
+</blockquote>
+<h2 id="页面结构"> 页面结构</h2>
+<p>此页面应当包含：</p>
+<ul>
+<li>返回顶部按钮</li>
+<li>路径导航</li>
+<li>评论</li>
+<li>页脚</li>
+</ul>
 ]]></content>
+    <author>
+      <name>Ms.Hope</name>
+    </author>
+    <category term="使用指南"/>
+    <contributor>
+      <name>Ms.Hope</name>
+    </contributor>
+    <published>2020-01-01T00:00:00.000Z</published>
+    <rights>Copyright by Ms.Hope</rights>
+  </entry>
+  <entry>
+    <title type="html">密码加密的文章</title>
+    <id>https://vuepress-theme-hope-demo.mrhope.site/guide/encrypt/</id>
+    <link href="https://vuepress-theme-hope-demo.mrhope.site/guide/encrypt/"/>
+    <updated>2022-01-20T05:26:23.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="密码加密的文章"> 密码加密的文章</h1>
+<p>实际的文章内容。</p>
+<p>段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字。</p>
+<p>段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字。</p>
+]]></content>
+    <author>
+      <name>Mr.Hope</name>
+    </author>
+    <category term="使用指南"/>
+    <contributor>
+      <name>Mr.Hope</name>
+    </contributor>
+    <published>2022-01-20T05:26:23.000Z</published>
+    <rights>Copyright by Mr.Hope</rights>
+  </entry>
+  <entry>
+    <title type="html">主要功能与配置演示</title>
+    <id>https://vuepress-theme-hope-demo.mrhope.site/guide/</id>
+    <link href="https://vuepress-theme-hope-demo.mrhope.site/guide/"/>
+    <updated>2022-01-20T05:26:23.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="主要功能与配置演示"> 主要功能与配置演示</h1>
+<ul>
+<li>
+<p><a href="./page.html">页面展示</a></p>
+</li>
+<li>
+<p><a href="./markdown.html">Markdown 展示</a></p>
+</li>
+<li>
+<p><a href="./disable.html">禁用展示</a></p>
+</li>
+<li>
+<p><a href="./encrypt.html">加密展示</a></p>
+</li>
+</ul>
+]]></content>
+    <author>
+      <name>Mr.Hope</name>
+    </author>
+    <category term="使用指南"/>
+    <contributor>
+      <name>Mr.Hope</name>
+    </contributor>
+    <published>2022-01-20T05:26:23.000Z</published>
+    <rights>Copyright by Mr.Hope</rights>
+  </entry>
+  <entry>
+    <title type="html">项目主页</title>
+    <id>https://vuepress-theme-hope-demo.mrhope.site/home/</id>
+    <link href="https://vuepress-theme-hope-demo.mrhope.site/home/"/>
+    <updated>2022-01-20T05:26:23.000Z</updated>
+    <content type="html"><![CDATA[<p>这是普通主页的案例。你可以在这里放置你的主体内容。</p>
+<p>想要使用此布局，你需要在页面 front matter 中设置 <code>home: true</code>。</p>
+<p>配置项的相关说明详见 <a href="https://vuepress-theme-hope.github.io/zh/guide/layout/home/" target="_blank" rel="noopener noreferrer">项目主页配置</a>。</p>
+]]></content>
+    <author>
+      <name>Mr.Hope</name>
+    </author>
+    <contributor>
+      <name>Mr.Hope</name>
+    </contributor>
+    <published>2022-01-20T05:26:23.000Z</published>
+    <rights>Copyright by Mr.Hope</rights>
+  </entry>
+  <entry>
+    <title type="html">博客主页</title>
+    <id>https://vuepress-theme-hope-demo.mrhope.site/</id>
+    <link href="https://vuepress-theme-hope-demo.mrhope.site/"/>
+    <updated>2022-01-20T05:26:23.000Z</updated>
+    <content type="html"><![CDATA[<p>这是一个博客主页。</p>
+<p>要使用此布局，您应该在页面前端设置 <code>blog: true</code> 和 <code>home: true</code>。</p>
+<p>相关配置文档请见 <a href="https://vuepress-theme-hope.github.io/zh/guide/blog/home/" target="_blank" rel="noopener noreferrer">博客主页</a></p>
+]]></content>
+    <author>
+      <name>Mr.Hope</name>
+    </author>
+    <contributor>
+      <name>Mr.Hope</name>
+    </contributor>
+    <published>2022-01-20T05:26:23.000Z</published>
+    <rights>Copyright by Mr.Hope</rights>
+  </entry>
+  <entry>
+    <title type="html">自定义布局</title>
+    <id>https://vuepress-theme-hope-demo.mrhope.site/layout/</id>
+    <link href="https://vuepress-theme-hope-demo.mrhope.site/layout/"/>
+    <updated>2022-01-20T05:26:23.000Z</updated>
+    <content type="html"><![CDATA[<p>您可以使用带有 Markdown 支持的插槽来自定义页面布局。</p>
+<div><p>Note</p>
+<p>此处仅仅是一个演示，你应该自行根据需求添加样式。</p>
+
+
+</div>
+<template #page-top><p>页面顶部内容</p>
+</template><template #page-bottom><p>页面底部内容</p>
+</template><template #content-top><p>内容顶部内容</p>
+</template><template #content-bottom><p>内容底部内容</p>
+</template><template #navbar-start><p>导航栏起始内容</p>
+</template><template #navbar-center><p>导航栏中部内容</p>
+</template><template #navbar-end><p>导航栏末尾内容</p>
+</template><template #sidebar-top><p>侧边栏顶部内容</p>
+</template><template #sidebar-center><p>侧边栏中部内容</p>
+</template><template #sidebar-bottom><p>侧边栏底部内容</p>
+</template><p>更多详情，详见 <a href="https://vuepress-theme-hope.github.io/zh/guide/layout/custom/" target="_blank" rel="noopener noreferrer">自定义布局</a>.</p>
+]]></content>
+    <author>
+      <name>Mr.Hope</name>
+    </author>
+    <contributor>
+      <name>Mr.Hope</name>
+    </contributor>
+    <published>2022-01-20T05:26:23.000Z</published>
+    <rights>Copyright by Mr.Hope</rights>
+  </entry>
+  <entry>
+    <title type="html">幻灯片页</title>
+    <id>https://vuepress-theme-hope-demo.mrhope.site/slides/</id>
+    <link href="https://vuepress-theme-hope-demo.mrhope.site/slides/"/>
+    <updated>2022-01-20T05:26:23.000Z</updated>
+    <content type="html"><![CDATA[
+<i>Not supported content</i>]]></content>
     <author>
       <name>Mr.Hope</name>
     </author>
