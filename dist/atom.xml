@@ -5,12 +5,13 @@
   <author>
     <name>lllllan</name>
   </author>
-  <updated>2022-01-20T07:35:13.968Z</updated>
+  <updated>2022-01-20T08:11:20.699Z</updated>
   <generator>@mr-hope/vuepress-plugin-feed</generator>
   <link rel="self" href="https://vue-blog.lllllan.cn/atom.xml"/>
   <link rel="alternate" href="https://vue-blog.lllllan.cn/"/>
   <rights>Copyright by lllllan</rights>
   <category term="使用指南"/>
+  <category term="Java"/>
   <contributor>
     <name>lllllan</name>
   </contributor>
@@ -52,6 +53,320 @@
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
+    <title type="html">Java 基础核心总结</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-base/1-java-base-core-summary/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-base/1-java-base-core-summary/"/>
+    <updated>2022-01-20T08:11:40.342Z</updated>
+    <content type="html"><![CDATA[<h2 id="java语言的特点"> java语言的特点</h2>
+<ul>
+<li>面向对象</li>
+<li>平台无关性</li>
+</ul>
+<blockquote>
+<p>已编译的java程序可以在任何带 有jvm的平台上运行。</p>
+<p><code>java</code> 代码编译为 <code>.class</code> 文件，然后打包成 <code>.jar</code> 文件，这样就能够在不同系统下运行了。</p>
+</blockquote>
+<ul>
+<li>简单性</li>
+</ul>
+<blockquote>
+<p>摒弃了C++中难以理解的多继承、指针、内存管理等概念，不用手动管理对象的生命周期</p>
+</blockquote>
+<ul>
+<li>解释执行</li>
+</ul>
+<blockquote>
+<p>静态页面，在编译期间救恩那个直到数据类型的语言，在运行前就能检查类型的正确性。</p>
+<p>执行效率相比动态语言更高，速度更快</p>
+</blockquote>
+<ul>
+<li>多线程</li>
+</ul>
+<blockquote>
+<p>java <strong>应该</strong> 在 <code>用户空间</code> 实现的多线程，内核感知不到 java 存在多线程机制。</p>
+</blockquote>
+<ul>
+<li>分布式</li>
+</ul>
+<blockquote>
+<p><img src="./README.assets/image-20211213091134933.png" alt="image-20211213091134933" /></p>
+</blockquote>
+<ul>
+<li>健壮性</li>
+</ul>
+<blockquote>
+<p>强类型机制、异常处理、垃圾的自动收集</p>
+</blockquote>
+<ul>
+<li>高性能</li>
+</ul>
+<blockquote>
+<p><img src="./README.assets/image-20211213090952974.png" alt="image-20211213090952974" /></p>
+</blockquote>
+<ul>
+<li>安全性</li>
+</ul>
+<h2 id="面向对象"> 面向对象</h2>
+<h3 id="初始化顺序"> 初始化顺序</h3>
+<blockquote>
+<ul>
+<li>静态属性</li>
+<li>静态方法快</li>
+<li>普通方法</li>
+<li>普通方法块</li>
+<li>构造函数</li>
+<li>方法</li>
+</ul>
+</blockquote>
+<div><pre><code><span>public</span> <span>class</span> <span>Solution</span> <span>{</span>
+
+    <span>private</span> <span>static</span> <span>String</span> staticField <span>=</span> <span>getStaticField</span><span>(</span><span>)</span><span>;</span>
+
+    <span>public</span> <span>static</span> <span>String</span> <span>getStaticField</span><span>(</span><span>)</span> <span>{</span>
+        <span>String</span> staticFiled <span>=</span> <span>"静态属性初始化"</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>staticFiled<span>)</span><span>;</span>
+        <span>return</span> staticFiled<span>;</span>
+    <span>}</span>
+
+    <span>static</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"静态方法块初始化"</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>private</span> <span>String</span> field <span>=</span> <span>getField</span><span>(</span><span>)</span><span>;</span>
+
+    <span>public</span> <span>String</span> <span>getField</span><span>(</span><span>)</span> <span>{</span>
+        <span>String</span> field <span>=</span> <span>"普通属性初始化"</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>field<span>)</span><span>;</span>
+        <span>return</span> field<span>;</span>
+    <span>}</span>
+
+    <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"普通方法块初始化"</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>Solution</span><span>(</span><span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"构造函数"</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>new</span> <span>Solution</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br></div></div><div><pre><code>静态属性初始化
+静态方法块初始化
+普通属性初始化
+普通方法块初始化
+构造函数
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><hr>
+<h3 id="三大特性"> 三大特性</h3>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h4 id="访问控制权限"> 访问控制权限</h4>
+<p><img src="./README.assets/image-20211217195521425.png" alt="image-20211217195521425" /></p>
+<hr>
+<h3 id="接口"> 接口</h3>
+<ul>
+<li>interface、implements</li>
+<li>接口只能使用 <code>public</code> <code>default</code>  两种访问修饰符</li>
+<li>接口只提供方法的定义。</li>
+<li>接口不能被实例化，所以接口中不能有构造方法。</li>
+<li>接口的实现类必须实现接口的全部方法。</li>
+</ul>
+<hr>
+<h3 id="抽象类"> 抽象类</h3>
+<ul>
+<li>abstract</li>
+<li>只有抽象类中能有抽象方法，抽象类中不只有抽象方法。</li>
+<li>抽象类不能被实例化。</li>
+</ul>
+<hr>
+<h3 id="内部类"> 内部类</h3>
+<ul>
+<li>内部类拥有外部类的访问权限</li>
+</ul>
+<p><img src="./README.assets/image-20211217195726947.png" alt="image-20211217195726947" /></p>
+<h2 id="异常"> 异常</h2>
+<h3 id="throwable"> Throwable</h3>
+<p><code>Throable</code> 类是Java语言中所有 <code>错误(errors)</code> 和 <code>异常(exceptions)</code> 的父类。</p>
+<p><img src="./README.assets/image-20211217184906894.png" alt="image-20211217184906894" /></p>
+<h3 id="常见异常"> 常见异常</h3>
+<p><img src="./README.assets/image-20211217193021056.png" alt="image-20211217193021056" /></p>
+<h3 id="error"> Error</h3>
+<p><img src="./README.assets/image-20211217194119016.png" alt="image-20211217194119016" /></p>
+<h2 id="集合"> 集合</h2>
+<p><img src="./README.assets/image-20211218142929505.png" alt="image-20211218142929505" /></p>
+<p><img src="./README.assets/image-20211218182136734.png" alt="image-20211218182136734" /></p>
+<h2 id="反射"> 反射</h2>
+<p>Java反射机制是在程序的运行过程中，对于任何一个类，都能知道它的所有属性和方法；对于任意一个对象，都能知道调用它的任意属性和方法。</p>
+<p>这种动态获取信息以及动态调用对象方法的功能称为Java语言的反射机制。</p>
+<ul>
+<li>在运行时判断任意一个对象所属的类</li>
+<li>在运行时判断任意一个类的对象</li>
+<li>在运行时判断任意一个类所有的成员变量和方法</li>
+<li>在运行时调用任意一个对象的方法</li>
+</ul>
+<h4 id="class-类"> Class 类</h4>
+<p>当我们编写一个类，在生产的<code>.class</code> 文件中，就会产生一个 Class 对象。这个 Class 对象用于标识这个类的类型信息。</p>
+<p>Class中没有公共的构造器，也就是说Class对象不能杯实例化。</p>
+<p>其中包含了很多方法，详见《Java基础核心总结》P54</p>
+<h3 id="field-类"> Field 类</h3>
+<p>Field 类提供类或接口中单独字段的信息，以及对单独字段的动态访问。</p>
+<h3 id="method-类"> Method 类</h3>
+<p>传递 Object 对象及参数调用该对象对应的方法</p>
+<h3 id="classloader-类"> ClassLoader 类</h3>
+<p>类装载器是用来把类装载进JVM的。ClassLoader使用的是双亲委托模型来搜索加载类的。</p>
+<p><img src="./README.assets/image-20211224112354940.png" alt="image-20211224112354940" /></p>
+<h2 id="枚举"> 枚举</h2>
+<p>枚举是一个特殊的类，一般表示一组常量</p>
+<div><pre><code><span>public</span> <span>enum</span> <span>Family</span> <span>{</span>
+    FATHER<span>,</span>
+    MOTHER<span>,</span>
+    SON<span>,</span>
+    <span>Daughter</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><img src="./README.assets/image-20211224185753390.png" alt="image-20211224185753390" /></p>
+<p>一般 switch 可以和 enum 一起连用，来构造一个小型的状态转换机</p>
+<div><pre><code><span>enum</span> <span>Signal</span> <span>{</span>
+    GREEN<span>,</span> YELLOW<span>,</span> RED
+<span>}</span>
+<span>public</span> <span>class</span> <span>TrafficLight</span> <span>{</span>
+    <span>Signal</span> color <span>=</span> <span>Signal</span><span>.</span>RED<span>;</span>
+    <span>public</span> <span>void</span> <span>change</span><span>(</span><span>)</span> <span>{</span>
+        <span>switch</span> <span>(</span>color<span>)</span> <span>{</span>
+            <span>case</span> RED<span>:</span>
+                color <span>=</span> <span>Signal</span><span>.</span>GREEN<span>;</span>
+                <span>break</span><span>;</span>
+            <span>case</span> YELLOW<span>:</span>
+                color <span>=</span> <span>Signal</span><span>.</span>RED<span>;</span>
+                <span>break</span><span>;</span>
+            <span>case</span> GREEN<span>:</span>
+                color <span>=</span> <span>Signal</span><span>.</span>YELLOW<span>;</span>
+                <span>break</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><h2 id="io"> IO</h2>
+<p><img src="./README.assets/image-20211224191321306.png" alt="image-20211224191321306" /></p>
+<p><img src="./README.assets/image-20211224191353166.png" alt="image-20211224191353166" /></p>
+<h3 id="file-类"> File 类</h3>
+<p>主要涉及 <strong>文件创建、删除文件、获取文件描述</strong></p>
+<p><img src="./README.assets/image-20211224191614348.png" alt="image-20211224191614348" /></p>
+<h3 id="inputstream"> InputStream</h3>
+<p>字节输入模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191724340.png" alt="image-20211224191724340" /></p>
+<h3 id="outputstream"> OutputStream</h3>
+<p>字节输出模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191752947.png" alt="image-20211224191752947" /></p>
+<h3 id="reader"> Reader</h3>
+<p>字符输入模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191816351.png" alt="image-20211224191816351" /></p>
+<h3 id="writer"> Writer</h3>
+<p>字符输出模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191839037.png" alt="image-20211224191839037" /></p>
+<h3 id="更多其他子类"> 更多其他子类</h3>
+<p>详见 《Java基础核心总结》 p67</p>
+<h2 id="插眼"> 插眼：</h2>
+<h4 id="jdk、jre、jvm"> JDK、JRE、JVM</h4>
+<h4 id="switch-实现原理"> switch 实现原理</h4>
+<h4 id="深浅拷贝"> 深浅拷贝</h4>
+<h4 id="代理-意义何在"> 代理，意义何在</h4>
+<h4 id="面向对象三大特性"> 面向对象三大特性</h4>
+<h4 id="修饰符"> 修饰符</h4>
+<h4 id="集合-2"> 集合</h4>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">密码加密的文章</title>
+    <id>https://vue-blog.lllllan.cn/guide/encrypt/</id>
+    <link href="https://vue-blog.lllllan.cn/guide/encrypt/"/>
+    <updated>2022-01-20T05:26:23.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="密码加密的文章"> 密码加密的文章</h1>
+<p>实际的文章内容。</p>
+<p>段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字。</p>
+<p>段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字。</p>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="使用指南"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T05:26:23.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">页面配置</title>
+    <id>https://vue-blog.lllllan.cn/guide/page/</id>
+    <link href="https://vue-blog.lllllan.cn/guide/page/"/>
+    <updated>2022-01-20T05:26:23.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="页面信息"> 页面信息</h2>
+<p>你可以在 Markdown 的 Frontmatter 中设置页面信息。</p>
+<ul>
+<li>
+<p>作者设置为 Ms.Hope。</p>
+</li>
+<li>
+<p>写作时间应为 2020 年 1 月 1 日</p>
+</li>
+<li>
+<p>分类为 “使用指南”</p>
+</li>
+<li>
+<p>标签为 “页面配置” 和 “使用指南”</p>
+</li>
+</ul>
+<h2 id="页面内容"> 页面内容</h2>
+<p>你可以自由在这里书写你的 Markdown。</p>
+<div><p>Tips</p>
+<ul>
+<li>
+<p>Markdown 文件夹的图片请使用相对链接 <code>./</code> 进行引用。</p>
+</li>
+<li>
+<p><code>.vuepress/public</code> 文件夹的图片，请使用绝对链接 <code>/</code> 进行引用</p>
+</li>
+</ul>
+</div>
+<p>主题包含了一个自定义徽章章可以使用:</p>
+<blockquote>
+<p>文字结尾应该有深蓝色的 徽章文字 徽章。 <i>Not supported content</i></p>
+</blockquote>
+<h2 id="页面结构"> 页面结构</h2>
+<p>此页面应当包含：</p>
+<ul>
+<li>返回顶部按钮</li>
+<li>路径导航</li>
+<li>评论</li>
+<li>页脚</li>
+</ul>
+]]></content>
+    <author>
+      <name>Ms.Hope</name>
+    </author>
+    <category term="使用指南"/>
+    <contributor>
+      <name>Ms.Hope</name>
+    </contributor>
+    <published>2020-01-01T00:00:00.000Z</published>
+    <rights>Copyright by Ms.Hope</rights>
+  </entry>
+  <entry>
     <title type="html">主要功能与配置演示</title>
     <id>https://vue-blog.lllllan.cn/guide/</id>
     <link href="https://vue-blog.lllllan.cn/guide/"/>
@@ -76,6 +391,50 @@
       <name>lllllan</name>
     </author>
     <category term="使用指南"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T05:26:23.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">博客主页</title>
+    <id>https://vue-blog.lllllan.cn/</id>
+    <link href="https://vue-blog.lllllan.cn/"/>
+    <updated>2022-01-20T07:35:54.000Z</updated>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T05:26:23.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">幻灯片页</title>
+    <id>https://vue-blog.lllllan.cn/slides/</id>
+    <link href="https://vue-blog.lllllan.cn/slides/"/>
+    <updated>2022-01-20T05:26:23.000Z</updated>
+    <content type="html"><![CDATA[
+<i>Not supported content</i>]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T05:26:23.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">项目主页</title>
+    <id>https://vue-blog.lllllan.cn/home/</id>
+    <link href="https://vue-blog.lllllan.cn/home/"/>
+    <updated>2022-01-20T07:35:54.000Z</updated>
+    <author>
+      <name>lllllan</name>
+    </author>
     <contributor>
       <name>lllllan</name>
     </contributor>
@@ -541,175 +900,6 @@ $$
       <name>lllllan</name>
     </author>
     <category term="使用指南"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">密码加密的文章</title>
-    <id>https://vue-blog.lllllan.cn/guide/encrypt/</id>
-    <link href="https://vue-blog.lllllan.cn/guide/encrypt/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="密码加密的文章"> 密码加密的文章</h1>
-<p>实际的文章内容。</p>
-<p>段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字。</p>
-<p>段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字。</p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="使用指南"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">项目主页</title>
-    <id>https://vue-blog.lllllan.cn/home/</id>
-    <link href="https://vue-blog.lllllan.cn/home/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">页面配置</title>
-    <id>https://vue-blog.lllllan.cn/guide/page/</id>
-    <link href="https://vue-blog.lllllan.cn/guide/page/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<h2 id="页面信息"> 页面信息</h2>
-<p>你可以在 Markdown 的 Frontmatter 中设置页面信息。</p>
-<ul>
-<li>
-<p>作者设置为 Ms.Hope。</p>
-</li>
-<li>
-<p>写作时间应为 2020 年 1 月 1 日</p>
-</li>
-<li>
-<p>分类为 “使用指南”</p>
-</li>
-<li>
-<p>标签为 “页面配置” 和 “使用指南”</p>
-</li>
-</ul>
-<h2 id="页面内容"> 页面内容</h2>
-<p>你可以自由在这里书写你的 Markdown。</p>
-<div><p>Tips</p>
-<ul>
-<li>
-<p>Markdown 文件夹的图片请使用相对链接 <code>./</code> 进行引用。</p>
-</li>
-<li>
-<p><code>.vuepress/public</code> 文件夹的图片，请使用绝对链接 <code>/</code> 进行引用</p>
-</li>
-</ul>
-</div>
-<p>主题包含了一个自定义徽章章可以使用:</p>
-<blockquote>
-<p>文字结尾应该有深蓝色的 徽章文字 徽章。 <i>Not supported content</i></p>
-</blockquote>
-<h2 id="页面结构"> 页面结构</h2>
-<p>此页面应当包含：</p>
-<ul>
-<li>返回顶部按钮</li>
-<li>路径导航</li>
-<li>评论</li>
-<li>页脚</li>
-</ul>
-]]></content>
-    <author>
-      <name>Ms.Hope</name>
-    </author>
-    <category term="使用指南"/>
-    <contributor>
-      <name>Ms.Hope</name>
-    </contributor>
-    <published>2020-01-01T00:00:00.000Z</published>
-    <rights>Copyright by Ms.Hope</rights>
-  </entry>
-  <entry>
-    <title type="html">Intro Page</title>
-    <id>https://vue-blog.lllllan.cn/intro/</id>
-    <link href="https://vue-blog.lllllan.cn/intro/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="intro-page"> Intro Page</h1>
-<p>Place your introducation and profile here.</p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">自定义布局</title>
-    <id>https://vue-blog.lllllan.cn/layout/</id>
-    <link href="https://vue-blog.lllllan.cn/layout/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<p>您可以使用带有 Markdown 支持的插槽来自定义页面布局。</p>
-<div><p>Note</p>
-<p>此处仅仅是一个演示，你应该自行根据需求添加样式。</p>
-
-
-</div>
-<template #page-top><p>页面顶部内容</p>
-</template><template #page-bottom><p>页面底部内容</p>
-</template><template #content-top><p>内容顶部内容</p>
-</template><template #content-bottom><p>内容底部内容</p>
-</template><template #navbar-start><p>导航栏起始内容</p>
-</template><template #navbar-center><p>导航栏中部内容</p>
-</template><template #navbar-end><p>导航栏末尾内容</p>
-</template><template #sidebar-top><p>侧边栏顶部内容</p>
-</template><template #sidebar-center><p>侧边栏中部内容</p>
-</template><template #sidebar-bottom><p>侧边栏底部内容</p>
-</template><p>更多详情，详见 <a href="https://vuepress-theme-hope.github.io/zh/guide/layout/custom/" target="_blank" rel="noopener noreferrer">自定义布局</a>.</p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">博客主页</title>
-    <id>https://vue-blog.lllllan.cn/</id>
-    <link href="https://vue-blog.lllllan.cn/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">幻灯片页</title>
-    <id>https://vue-blog.lllllan.cn/slides/</id>
-    <link href="https://vue-blog.lllllan.cn/slides/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[
-<i>Not supported content</i>]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
     <contributor>
       <name>lllllan</name>
     </contributor>
