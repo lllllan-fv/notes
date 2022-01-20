@@ -52,10 +52,10 @@ module.exports = config({
         {
           title: "java 基础",
           icon: "java",
-          prefix: "1-java/1-base/",
+          prefix: "1-java/1-basic/",
           children: [
-            "1-java-base-core-summary/",
-            "2-java-guide-base/",
+            "1-java-basic-core-summary/",
+            "2-java-guide-basic/",
             {
               title: "重要知识点",
               icon: "tree",
@@ -73,13 +73,14 @@ module.exports = config({
         "",
         "home",
         "slides",
-        "layout",
-        {
-          title: "Guide",
-          icon: "creative",
-          prefix: "guide/",
-          children: ["", "page", "markdown", "disable", "encrypt"],
-        },
+        "guide/"
+        // "layout",
+        // {
+        //   title: "Guide",
+        //   icon: "creative",
+        //   prefix: "guide/",
+        //   children: ["", "page", "markdown", "disable", "encrypt"],
+        // },
       ],
     },
 

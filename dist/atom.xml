@@ -5,13 +5,16 @@
   <author>
     <name>lllllan</name>
   </author>
-  <updated>2022-01-20T13:18:37.358Z</updated>
+  <updated>2022-01-20T14:32:05.765Z</updated>
   <generator>@mr-hope/vuepress-plugin-feed</generator>
   <link rel="self" href="https://vue-blog.lllllan.cn/atom.xml"/>
   <link rel="alternate" href="https://vue-blog.lllllan.cn/"/>
   <rights>Copyright by lllllan</rights>
   <category term="Java"/>
+  <category term="刷题"/>
+  <category term="计算机基础"/>
   <category term="使用指南"/>
+  <category term="MySQL"/>
   <contributor>
     <name>lllllan</name>
   </contributor>
@@ -20,9 +23,9 @@
   </contributor>
   <entry>
     <title type="html">R2Coding - Java 基础核心总结</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-base/1-java-base-core-summary/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-base/1-java-base-core-summary/"/>
-    <updated>2022-01-20T12:05:58.000Z</updated>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/"/>
+    <updated>2022-01-20T14:32:41.133Z</updated>
     <content type="html"><![CDATA[<div><p>Note</p>
 <p>全部抄自<a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a>上提供资料</p>
 </div>
@@ -257,14 +260,13 @@
     <contributor>
       <name>lllllan</name>
     </contributor>
-    <published>2022-01-20T08:12:04.000Z</published>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
     <title type="html">java 是值传递</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-base/3-important-points/1-java-value-passed/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-base/3-important-points/1-java-value-passed/"/>
-    <updated>2022-01-20T12:05:58.000Z</updated>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/"/>
+    <updated>2022-01-20T14:32:41.138Z</updated>
     <content type="html"><![CDATA[<div><p>Note</p>
 <p>全部抄自 <a href="https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/" target="_blank" rel="noopener noreferrer">为什么 Java 中只有值传递？ | JavaGuide</a>，略有改动</p>
 </div>
@@ -367,14 +369,139 @@ xiaoLi<span>:</span>小李
     <contributor>
       <name>lllllan</name>
     </contributor>
-    <published>2022-01-20T08:27:02.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">反射机制</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/"/>
+    <updated>2022-01-20T14:32:41.144Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>全部抄自 <a href="https://javaguide.cn/java/basis/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">反射机制详解！ | JavaGuide</a>，列有改动</p>
+</div>
+<blockquote>
+<p>总之反射就是能获取一个类的所有方法和属性，并能够调用。</p>
+<p>然后还能增加代码的灵活性。</p>
+<p>但是，我还是没有感受到，灵活在哪里。。。</p>
+</blockquote>
+<h2 id="什么是反射"> 什么是反射？</h2>
+<p>反射就是Reflection，Java的反射是指程序在<strong>运行期</strong>可以拿到一个对象的所有信息，，你还可以调用这些方法和属性。</p>
+<h2 id="反射的应用场景"> 反射的应用场景</h2>
+<ul>
+<li>模块化的开发，通过反射去调用对应的字节码</li>
+<li>框架中大量使用动态代理，而动态代理依赖反射机制实现</li>
+<li>注解的实现也用到了反射</li>
+</ul>
+<p><strong>JDBC的数据库连接</strong></p>
+<div><pre><code><span>public</span> <span>static</span> <span>final</span> <span>String</span> DBDRIVER <span>=</span> <span>"com.mysql.jdbc.Driver"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBURL <span>=</span> <span>"jdbc:mysql://localhost:3306/test"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBUSER <span>=</span> <span>"root"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBPASS <span>=</span> <span>""</span><span>;</span>  
+
+<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>  
+    <span>Connection</span> con <span>=</span> <span>null</span><span>;</span>
+    <span>Class</span><span>.</span><span>forName</span><span>(</span>DBDRIVER<span>)</span><span>;</span> <span>//1、使用CLASS 类加载驱动程序 ,反射机制的体现 </span>
+    con <span>=</span> <span>DriverManager</span><span>.</span><span>getConnection</span><span>(</span>DBURL<span>,</span>DBUSER<span>,</span>DBPASS<span>)</span><span>;</span> <span>//2、连接数据库  </span>
+    <span>.</span><span>.</span><span>.</span>
+    con<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span> <span>// 3、关闭数据库  </span>
+<span>}</span>  
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="反射的优缺点"> 反射的优缺点</h2>
+<p><strong>优点：</strong> 让代码更加灵、为各种框架提供开箱即用的功能提供便利</p>
+<p><strong>缺点：</strong> 在运行时有了分析操作类的能力，同样增加了安全问题。性能略差，不过对于框架的影响比较小。</p>
+<h2 id="反射的使用"> 反射的使用</h2>
+<h3 id="获取class对象的四种方式"> 获取Class对象的四种方式</h3>
+<p><strong>1.知道具体类的情况下可以使用</strong></p>
+<div><pre><code><span>Class</span> alunbarClass <span>=</span> <span>TargetObject</span><span>.</span><span>class</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>2.通过 <code>Class.forName()</code> 传入类的路径获取</strong></p>
+<div><pre><code><span>Class</span> alunbarClass1 <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>3.通过对象实例 <code>instance.getClass()</code> 获取</strong></p>
+<div><pre><code><span>TargetObject</span> o <span>=</span> <span>new</span> <span>TargetObject</span><span>(</span><span>)</span><span>;</span>
+<span>Class</span> alunbarClass2 <span>=</span> o<span>.</span><span>getClass</span><span>(</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p><strong>4.通过类加载器 <code>xxxClassLoader.loadClass()</code> 传入类路径获取</strong></p>
+<div><pre><code><span>Class</span> clazz <span>=</span> <span>ClassLoader</span><span>.</span><span>loadClass</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><h3 id="反射的基本操作"> 反射的基本操作</h3>
+<p><strong>1.定义一个类</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>TargetObject</span> <span>{</span>
+    <span>private</span> <span>String</span> value<span>;</span>
+
+    <span>public</span> <span>TargetObject</span><span>(</span><span>)</span> <span>{</span>
+        value <span>=</span> <span>"JavaGuide"</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>void</span> <span>publicMethod</span><span>(</span><span>String</span> s<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"I love "</span> <span>+</span> s<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>private</span> <span>void</span> <span>privateMethod</span><span>(</span><span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"value is "</span> <span>+</span> value<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p><strong>2.使用反射来操作这个类的方法及参数</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>ClassNotFoundException</span><span>,</span> <span>NoSuchMethodException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>InstantiationException</span><span>,</span> <span>InvocationTargetException</span><span>,</span> <span>NoSuchFieldException</span> <span>{</span>
+        <span>/**
+         * 获取TargetObject类的Class对象并且创建TargetObject类实例
+         */</span>
+        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> tagetClass <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+        <span>TargetObject</span> targetObject <span>=</span> <span>(</span><span>TargetObject</span><span>)</span> tagetClass<span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
+        <span>/**
+         * 获取所有类中所有定义的方法
+         */</span>
+        <span>Method</span><span>[</span><span>]</span> methods <span>=</span> tagetClass<span>.</span><span>getDeclaredMethods</span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>/**
+         * 获取指定方法并调用
+         */</span>
+        <span>Method</span> publicMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"publicMethod"</span><span>,</span>
+                <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
+
+        publicMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
+        <span>/**
+         * 获取指定参数并对参数进行修改
+         */</span>
+        <span>Field</span> field <span>=</span> tagetClass<span>.</span><span>getDeclaredField</span><span>(</span><span>"value"</span><span>)</span><span>;</span>
+        <span>//为了对类中的参数进行修改我们取消安全检查</span>
+        field<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        field<span>.</span><span>set</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
+        <span>/**
+         * 调用 private 方法
+         */</span>
+        <span>Method</span> privateMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"privateMethod"</span><span>)</span><span>;</span>
+        <span>//为了调用private方法我们取消安全检查</span>
+        privateMethod<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        privateMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br></div></div><p><strong>3.输出结果</strong></p>
+<div><pre><code>publicMethod
+privateMethod
+<span>I</span> love <span>JavaGuide</span>
+value is <span>JavaGuide</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div>]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
     <title type="html">JavaGuide - Java基础知识</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-base/2-java-guide-base/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-base/2-java-guide-base/"/>
-    <updated>2022-01-20T12:05:58.000Z</updated>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/2-java-guide-basic/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/2-java-guide-basic/"/>
+    <updated>2022-01-20T14:32:41.168Z</updated>
     <content type="html"><![CDATA[<div><p>Note</p>
 <p>全部抄自<a href="https://javaguide.cn/java/basis/java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">Java基础知识&amp;面试题总结 | JavaGuide</a>，略有改动</p>
 </div>
@@ -874,126 +1001,192 @@ input<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
     <contributor>
       <name>lllllan</name>
     </contributor>
-    <published>2022-01-20T08:20:01.000Z</published>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">反射机制</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-base/3-important-points/2-reflection/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-base/3-important-points/2-reflection/"/>
-    <updated>2022-01-20T12:05:58.000Z</updated>
+    <title type="html">代理详解</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/"/>
+    <updated>2022-01-20T14:32:41.175Z</updated>
     <content type="html"><![CDATA[<div><p>Note</p>
-<p>全部抄自 <a href="https://javaguide.cn/java/basis/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">反射机制详解！ | JavaGuide</a>，列有改动</p>
+<p>全部抄自 <a href="https://javaguide.cn/java/basis/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">代理详解！静态代理+JDK/CGLIB 动态代理实战 | JavaGuide</a>， 略有改动</p>
 </div>
-<blockquote>
-<p>总之反射就是能获取一个类的所有方法和属性，并能够调用。</p>
-<p>然后还能增加代码的灵活性。</p>
-<p>但是，我还是没有感受到，灵活在哪里。。。</p>
-</blockquote>
-<h2 id="什么是反射"> 什么是反射？</h2>
-<p>反射就是Reflection，Java的反射是指程序在<strong>运行期</strong>可以拿到一个对象的所有信息，，你还可以调用这些方法和属性。</p>
-<h2 id="反射的应用场景"> 反射的应用场景</h2>
-<ul>
-<li>模块化的开发，通过反射去调用对应的字节码</li>
-<li>框架中大量使用动态代理，而动态代理依赖反射机制实现</li>
-<li>注解的实现也用到了反射</li>
-</ul>
-<p><strong>JDBC的数据库连接</strong></p>
-<div><pre><code><span>public</span> <span>static</span> <span>final</span> <span>String</span> DBDRIVER <span>=</span> <span>"com.mysql.jdbc.Driver"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBURL <span>=</span> <span>"jdbc:mysql://localhost:3306/test"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBUSER <span>=</span> <span>"root"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBPASS <span>=</span> <span>""</span><span>;</span>  
-
-<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>  
-    <span>Connection</span> con <span>=</span> <span>null</span><span>;</span>
-    <span>Class</span><span>.</span><span>forName</span><span>(</span>DBDRIVER<span>)</span><span>;</span> <span>//1、使用CLASS 类加载驱动程序 ,反射机制的体现 </span>
-    con <span>=</span> <span>DriverManager</span><span>.</span><span>getConnection</span><span>(</span>DBURL<span>,</span>DBUSER<span>,</span>DBPASS<span>)</span><span>;</span> <span>//2、连接数据库  </span>
-    <span>.</span><span>.</span><span>.</span>
-    con<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span> <span>// 3、关闭数据库  </span>
-<span>}</span>  
+<h2 id="代理模式"> 代理模式</h2>
+<p>代理模式是一种比较好理解的设计模式。简单来说就是 <strong>我们使用代理对象来代替对真实对象(real object)的访问，这样就可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</strong></p>
+<p><strong>代理模式的主要作用是扩展目标对象的功能，比如说在目标对象的某个方法执行前后你可以增加一些自定义的操作。</strong></p>
+<p><img src="./README.assets/1DjWCgTFm-xqbhbNQVsaWQw.png" alt="Understanding the Proxy Design Pattern | by Mithun Sasidharan | Medium" /></p>
+<h2 id="静态代理"> 静态代理</h2>
+<p><strong>静态代理中，我们对目标对象的每个方法的增强都是手动完成的（<em>后面会具体演示代码</em>），非常不灵活（<em>比如接口一旦新增加方法，目标对象和代理对象都要进行修改</em>）且麻烦(<em>需要对每个目标类都单独写一个代理类</em>)。</strong> 实际应用场景非常非常少，日常开发几乎看不到使用静态代理的场景。</p>
+<p>上面我们是从实现和应用角度来说的静态代理，从 JVM 层面来说， <strong>静态代理在编译时就将接口、实现类、代理类这些都变成了一个个实际的 class 文件。</strong></p>
+<p>静态代理实现步骤:</p>
+<ol>
+<li>定义一个接口及其实现类；</li>
+<li>创建一个代理类同样实现这个接口</li>
+<li>将目标对象注入进代理类，然后在代理类的对应方法调用目标类中的对应方法。这样的话，我们就可以通过代理类屏蔽对目标对象的访问，并且可以在目标方法执行前后做一些自己想做的事情。</li>
+</ol>
+<p>下面通过代码展示！</p>
+<p><strong>1. 定义发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
+    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
+<span>}</span>
 </code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="反射的优缺点"> 反射的优缺点</h2>
-<p><strong>优点：</strong> 让代码更加灵、为各种框架提供开箱即用的功能提供便利</p>
-<p><strong>缺点：</strong> 在运行时有了分析操作类的能力，同样增加了安全问题。性能略差，不过对于框架的影响比较小。</p>
-<h2 id="反射的使用"> 反射的使用</h2>
-<h3 id="获取class对象的四种方式"> 获取Class对象的四种方式</h3>
-<p><strong>1.知道具体类的情况下可以使用</strong></p>
-<div><pre><code><span>Class</span> alunbarClass <span>=</span> <span>TargetObject</span><span>.</span><span>class</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><p><strong>2.通过 <code>Class.forName()</code> 传入类的路径获取</strong></p>
-<div><pre><code><span>Class</span> alunbarClass1 <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><p><strong>3.通过对象实例 <code>instance.getClass()</code> 获取</strong></p>
-<div><pre><code><span>TargetObject</span> o <span>=</span> <span>new</span> <span>TargetObject</span><span>(</span><span>)</span><span>;</span>
-<span>Class</span> alunbarClass2 <span>=</span> o<span>.</span><span>getClass</span><span>(</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p><strong>4.通过类加载器 <code>xxxClassLoader.loadClass()</code> 传入类路径获取</strong></p>
-<div><pre><code><span>Class</span> clazz <span>=</span> <span>ClassLoader</span><span>.</span><span>loadClass</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><h3 id="反射的基本操作"> 反射的基本操作</h3>
-<p><strong>1.定义一个类</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>TargetObject</span> <span>{</span>
-    <span>private</span> <span>String</span> value<span>;</span>
-
-    <span>public</span> <span>TargetObject</span><span>(</span><span>)</span> <span>{</span>
-        value <span>=</span> <span>"JavaGuide"</span><span>;</span>
-    <span>}</span>
-
-    <span>public</span> <span>void</span> <span>publicMethod</span><span>(</span><span>String</span> s<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"I love "</span> <span>+</span> s<span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>private</span> <span>void</span> <span>privateMethod</span><span>(</span><span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"value is "</span> <span>+</span> value<span>)</span><span>;</span>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
+    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
+        <span>return</span> message<span>;</span>
     <span>}</span>
 <span>}</span>
 </code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p><strong>2.使用反射来操作这个类的方法及参数</strong></p>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.创建代理类并同样实现发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>SmsProxy</span> <span>implements</span> <span>SmsService</span> <span>{</span>
+
+    <span>private</span> <span>final</span> <span>SmsService</span> smsService<span>;</span>
+
+    <span>public</span> <span>SmsProxy</span><span>(</span><span>SmsService</span> smsService<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>smsService <span>=</span> smsService<span>;</span>
+    <span>}</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        <span>//调用方法之前，我们可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method send()"</span><span>)</span><span>;</span>
+        smsService<span>.</span><span>send</span><span>(</span>message<span>)</span><span>;</span>
+        <span>//调用方法之后，我们同样可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method send()"</span><span>)</span><span>;</span>
+        <span>return</span> <span>null</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><p><strong>4.实际使用</strong></p>
 <div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>ClassNotFoundException</span><span>,</span> <span>NoSuchMethodException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>InstantiationException</span><span>,</span> <span>InvocationTargetException</span><span>,</span> <span>NoSuchFieldException</span> <span>{</span>
-        <span>/**
-         * 获取TargetObject类的Class对象并且创建TargetObject类实例
-         */</span>
-        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> tagetClass <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-        <span>TargetObject</span> targetObject <span>=</span> <span>(</span><span>TargetObject</span><span>)</span> tagetClass<span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
-        <span>/**
-         * 获取所有类中所有定义的方法
-         */</span>
-        <span>Method</span><span>[</span><span>]</span> methods <span>=</span> tagetClass<span>.</span><span>getDeclaredMethods</span><span>(</span><span>)</span><span>;</span>
-        <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
-            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>}</span>
-        <span>/**
-         * 获取指定方法并调用
-         */</span>
-        <span>Method</span> publicMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"publicMethod"</span><span>,</span>
-                <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
-
-        publicMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
-        <span>/**
-         * 获取指定参数并对参数进行修改
-         */</span>
-        <span>Field</span> field <span>=</span> tagetClass<span>.</span><span>getDeclaredField</span><span>(</span><span>"value"</span><span>)</span><span>;</span>
-        <span>//为了对类中的参数进行修改我们取消安全检查</span>
-        field<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
-        field<span>.</span><span>set</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
-        <span>/**
-         * 调用 private 方法
-         */</span>
-        <span>Method</span> privateMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"privateMethod"</span><span>)</span><span>;</span>
-        <span>//为了调用private方法我们取消安全检查</span>
-        privateMethod<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
-        privateMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>)</span><span>;</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>SmsService</span> smsService <span>=</span> <span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>;</span>
+        <span>SmsProxy</span> smsProxy <span>=</span> <span>new</span> <span>SmsProxy</span><span>(</span>smsService<span>)</span><span>;</span>
+        smsProxy<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
     <span>}</span>
 <span>}</span>
 </code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br></div></div><p><strong>3.输出结果</strong></p>
-<div><pre><code>publicMethod
-privateMethod
-<span>I</span> love <span>JavaGuide</span>
-value is <span>JavaGuide</span>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
+<div><pre><code>before method send<span>(</span><span>)</span>
+send message:java
+after method send<span>(</span><span>)</span>
 </code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div>]]></content>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="动态代理"> 动态代理</h2>
+<p>相比于静态代理来说，动态代理更加灵活。我们不需要针对每个目标类都单独创建一个代理类，并且也不需要我们必须实现接口，我们可以直接代理实现类( <em>CGLIB 动态代理机制</em>)。</p>
+<blockquote>
+<p><strong>从 JVM 角度来说，动态代理是在运行时动态生成类字节码，并加载到 JVM 中的</strong></p>
+</blockquote>
+<p><strong>动态代理在我们日常开发中使用的相对较少，但是在框架中的几乎是必用的一门技术。学会了动态代理之后，对于我们理解和学习各种框架的原理也非常有帮助。</strong></p>
+<p>就 Java 来说，动态代理的实现方式有很多种，比如 <strong>JDK 动态代理</strong>、<strong>CGLIB 动态代理</strong>等等。</p>
+<h3 id="jdk-动态代理机制-没看懂"> JDK 动态代理机制（没看懂）</h3>
+<h4 id="介绍"> 介绍</h4>
+<p><strong>在 Java 动态代理机制中 <code>InvocationHandler</code> 接口和 <code>Proxy</code> 类是核心。</strong></p>
+<p><code>Proxy</code> 类中使用频率最高的方法是：<code>newProxyInstance()</code> ，这个方法主要用来生成一个代理对象。</p>
+<div><pre><code><span>public</span> <span>static</span> <span>Object</span> <span>newProxyInstance</span><span>(</span><span>ClassLoader</span> loader<span>,</span> <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span><span>[</span><span>]</span> interfaces<span>,</span>
+                                      <span>InvocationHandler</span> h<span>)</span>
+    <span>throws</span> <span>IllegalArgumentException</span> <span>{</span>
+    <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>这个方法一共有 3 个参数：</p>
+<ol>
+<li><strong>loader</strong> :类加载器，用于加载代理对象。</li>
+<li><strong>interfaces</strong> : 被代理类实现的一些接口；</li>
+<li><strong>h</strong> : 实现了 <code>InvocationHandler</code> 接口的对象；</li>
+</ol>
+<p>要实现动态代理的话，还必须需要实现<code>InvocationHandler</code> 来自定义处理逻辑。 当我们的动态代理对象调用一个方法时，这个方法的调用就会被转发到实现<code>InvocationHandler</code> 接口类的 <code>invoke</code> 方法来调用。</p>
+<div><pre><code><span>public</span> <span>interface</span> <span>InvocationHandler</span> <span>{</span>
+
+    <span>/**
+     * 当你使用代理对象调用方法的时候实际会调用到这个方法
+     */</span>
+    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span>
+        <span>throws</span> <span>Throwable</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p><code>invoke()</code> 方法有下面三个参数：</p>
+<ol>
+<li><strong>proxy</strong> :动态生成的代理类</li>
+<li><strong>method</strong> : 与代理类对象调用的方法相对应</li>
+<li><strong>args</strong> : 当前 method 方法的参数</li>
+</ol>
+<blockquote>
+<p>也就是说：<strong>你通过<code>Proxy</code> 类的 <code>newProxyInstance()</code> 创建的代理对象在调用方法的时候，实际会调用到实现<code>InvocationHandler</code> 接口的类的 <code>invoke()</code>方法。</strong> 你可以在 <code>invoke()</code> 方法中自定义处理逻辑，比如在方法执行前后做什么事情。</p>
+</blockquote>
+<h4 id="使用步骤"> 使用步骤</h4>
+<ol>
+<li>定义一个接口及其实现类；</li>
+<li>自定义 <code>InvocationHandler</code> 并重写<code>invoke</code>方法，在 <code>invoke</code> 方法中我们会调用原生方法（被代理类的方法）并自定义一些处理逻辑；</li>
+<li>通过 <code>Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)</code> 方法创建代理对象；</li>
+</ol>
+<h4 id="代码示例"> 代码示例</h4>
+<p><strong>1.定义发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
+    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
+    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
+        <span>return</span> message<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.定义一个 JDK 动态代理类</strong></p>
+<div><pre><code><span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationHandler</span><span>;</span>
+<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationTargetException</span><span>;</span>
+<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>Method</span><span>;</span>
+
+<span>/**
+ * @author shuang.kou
+ * @createTime 2020年05月11日 11:23:00
+ */</span>
+<span>public</span> <span>class</span> <span>DebugInvocationHandler</span> <span>implements</span> <span>InvocationHandler</span> <span>{</span>
+    <span>/**
+     * 代理类中的真实对象
+     */</span>
+    <span>private</span> <span>final</span> <span>Object</span> target<span>;</span>
+
+    <span>public</span> <span>DebugInvocationHandler</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>target <span>=</span> target<span>;</span>
+    <span>}</span>
+
+
+    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>InvocationTargetException</span><span>,</span> <span>IllegalAccessException</span> <span>{</span>
+        <span>//调用方法之前，我们可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>Object</span> result <span>=</span> method<span>.</span><span>invoke</span><span>(</span>target<span>,</span> args<span>)</span><span>;</span>
+        <span>//调用方法之后，我们同样可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>return</span> result<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br></div></div><p><code>invoke()</code> 方法: 当我们的动态代理对象调用原生方法的时候，最终实际上调用到的是 <code>invoke()</code> 方法，然后 <code>invoke()</code> 方法代替我们去调用了被代理对象的原生方法。</p>
+<p><strong>4.获取代理对象的工厂类</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>JdkProxyFactory</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>Object</span> <span>getProxy</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
+        <span>return</span> <span>Proxy</span><span>.</span><span>newProxyInstance</span><span>(</span>
+                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getClassLoader</span><span>(</span><span>)</span><span>,</span> <span>// 目标类的类加载</span>
+                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getInterfaces</span><span>(</span><span>)</span><span>,</span>  <span>// 代理需要实现的接口，可指定多个</span>
+                <span>new</span> <span>DebugInvocationHandler</span><span>(</span>target<span>)</span>   <span>// 代理对象对应的自定义 InvocationHandler</span>
+        <span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p><code>getProxy()</code> ：主要通过<code>Proxy.newProxyInstance（）</code>方法获取某个类的代理对象</p>
+<p><strong>5.实际使用</strong></p>
+<div><pre><code><span>SmsService</span> smsService <span>=</span> <span>(</span><span>SmsService</span><span>)</span> <span>JdkProxyFactory</span><span>.</span><span>getProxy</span><span>(</span><span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>)</span><span>;</span>
+smsService<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
+<div><pre><code>before method send
+send message:java
+after method send
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div>]]></content>
     <author>
       <name>lllllan</name>
     </author>
@@ -1001,7 +1194,6 @@ value is <span>JavaGuide</span>
     <contributor>
       <name>lllllan</name>
     </contributor>
-    <published>2022-01-20T08:28:59.000Z</published>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
@@ -1328,200 +1520,6 @@ value is <span>JavaGuide</span>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">代理详解</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-base/3-important-points/3-agent/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-base/3-important-points/3-agent/"/>
-    <updated>2022-01-20T12:44:21.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>全部抄自 <a href="https://javaguide.cn/java/basis/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">代理详解！静态代理+JDK/CGLIB 动态代理实战 | JavaGuide</a>， 略有改动</p>
-</div>
-<h2 id="代理模式"> 代理模式</h2>
-<p>代理模式是一种比较好理解的设计模式。简单来说就是 <strong>我们使用代理对象来代替对真实对象(real object)的访问，这样就可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</strong></p>
-<p><strong>代理模式的主要作用是扩展目标对象的功能，比如说在目标对象的某个方法执行前后你可以增加一些自定义的操作。</strong></p>
-<p><img src="./README.assets/1DjWCgTFm-xqbhbNQVsaWQw.png" alt="Understanding the Proxy Design Pattern | by Mithun Sasidharan | Medium" /></p>
-<h2 id="静态代理"> 静态代理</h2>
-<p><strong>静态代理中，我们对目标对象的每个方法的增强都是手动完成的（<em>后面会具体演示代码</em>），非常不灵活（<em>比如接口一旦新增加方法，目标对象和代理对象都要进行修改</em>）且麻烦(<em>需要对每个目标类都单独写一个代理类</em>)。</strong> 实际应用场景非常非常少，日常开发几乎看不到使用静态代理的场景。</p>
-<p>上面我们是从实现和应用角度来说的静态代理，从 JVM 层面来说， <strong>静态代理在编译时就将接口、实现类、代理类这些都变成了一个个实际的 class 文件。</strong></p>
-<p>静态代理实现步骤:</p>
-<ol>
-<li>定义一个接口及其实现类；</li>
-<li>创建一个代理类同样实现这个接口</li>
-<li>将目标对象注入进代理类，然后在代理类的对应方法调用目标类中的对应方法。这样的话，我们就可以通过代理类屏蔽对目标对象的访问，并且可以在目标方法执行前后做一些自己想做的事情。</li>
-</ol>
-<p>下面通过代码展示！</p>
-<p><strong>1. 定义发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
-    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
-    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
-        <span>return</span> message<span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.创建代理类并同样实现发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>SmsProxy</span> <span>implements</span> <span>SmsService</span> <span>{</span>
-
-    <span>private</span> <span>final</span> <span>SmsService</span> smsService<span>;</span>
-
-    <span>public</span> <span>SmsProxy</span><span>(</span><span>SmsService</span> smsService<span>)</span> <span>{</span>
-        <span>this</span><span>.</span>smsService <span>=</span> smsService<span>;</span>
-    <span>}</span>
-
-    <span>@Override</span>
-    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
-        <span>//调用方法之前，我们可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method send()"</span><span>)</span><span>;</span>
-        smsService<span>.</span><span>send</span><span>(</span>message<span>)</span><span>;</span>
-        <span>//调用方法之后，我们同样可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method send()"</span><span>)</span><span>;</span>
-        <span>return</span> <span>null</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><p><strong>4.实际使用</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-        <span>SmsService</span> smsService <span>=</span> <span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>;</span>
-        <span>SmsProxy</span> smsProxy <span>=</span> <span>new</span> <span>SmsProxy</span><span>(</span>smsService<span>)</span><span>;</span>
-        smsProxy<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
-<div><pre><code>before method send<span>(</span><span>)</span>
-send message:java
-after method send<span>(</span><span>)</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="动态代理"> 动态代理</h2>
-<p>相比于静态代理来说，动态代理更加灵活。我们不需要针对每个目标类都单独创建一个代理类，并且也不需要我们必须实现接口，我们可以直接代理实现类( <em>CGLIB 动态代理机制</em>)。</p>
-<blockquote>
-<p><strong>从 JVM 角度来说，动态代理是在运行时动态生成类字节码，并加载到 JVM 中的</strong></p>
-</blockquote>
-<p><strong>动态代理在我们日常开发中使用的相对较少，但是在框架中的几乎是必用的一门技术。学会了动态代理之后，对于我们理解和学习各种框架的原理也非常有帮助。</strong></p>
-<p>就 Java 来说，动态代理的实现方式有很多种，比如 <strong>JDK 动态代理</strong>、<strong>CGLIB 动态代理</strong>等等。</p>
-<h3 id="jdk-动态代理机制-没看懂"> JDK 动态代理机制（没看懂）</h3>
-<h4 id="介绍"> 介绍</h4>
-<p><strong>在 Java 动态代理机制中 <code>InvocationHandler</code> 接口和 <code>Proxy</code> 类是核心。</strong></p>
-<p><code>Proxy</code> 类中使用频率最高的方法是：<code>newProxyInstance()</code> ，这个方法主要用来生成一个代理对象。</p>
-<div><pre><code><span>public</span> <span>static</span> <span>Object</span> <span>newProxyInstance</span><span>(</span><span>ClassLoader</span> loader<span>,</span> <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span><span>[</span><span>]</span> interfaces<span>,</span>
-                                      <span>InvocationHandler</span> h<span>)</span>
-    <span>throws</span> <span>IllegalArgumentException</span> <span>{</span>
-    <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>这个方法一共有 3 个参数：</p>
-<ol>
-<li><strong>loader</strong> :类加载器，用于加载代理对象。</li>
-<li><strong>interfaces</strong> : 被代理类实现的一些接口；</li>
-<li><strong>h</strong> : 实现了 <code>InvocationHandler</code> 接口的对象；</li>
-</ol>
-<p>要实现动态代理的话，还必须需要实现<code>InvocationHandler</code> 来自定义处理逻辑。 当我们的动态代理对象调用一个方法时，这个方法的调用就会被转发到实现<code>InvocationHandler</code> 接口类的 <code>invoke</code> 方法来调用。</p>
-<div><pre><code><span>public</span> <span>interface</span> <span>InvocationHandler</span> <span>{</span>
-
-    <span>/**
-     * 当你使用代理对象调用方法的时候实际会调用到这个方法
-     */</span>
-    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span>
-        <span>throws</span> <span>Throwable</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p><code>invoke()</code> 方法有下面三个参数：</p>
-<ol>
-<li><strong>proxy</strong> :动态生成的代理类</li>
-<li><strong>method</strong> : 与代理类对象调用的方法相对应</li>
-<li><strong>args</strong> : 当前 method 方法的参数</li>
-</ol>
-<blockquote>
-<p>也就是说：<strong>你通过<code>Proxy</code> 类的 <code>newProxyInstance()</code> 创建的代理对象在调用方法的时候，实际会调用到实现<code>InvocationHandler</code> 接口的类的 <code>invoke()</code>方法。</strong> 你可以在 <code>invoke()</code> 方法中自定义处理逻辑，比如在方法执行前后做什么事情。</p>
-</blockquote>
-<h4 id="使用步骤"> 使用步骤</h4>
-<ol>
-<li>定义一个接口及其实现类；</li>
-<li>自定义 <code>InvocationHandler</code> 并重写<code>invoke</code>方法，在 <code>invoke</code> 方法中我们会调用原生方法（被代理类的方法）并自定义一些处理逻辑；</li>
-<li>通过 <code>Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)</code> 方法创建代理对象；</li>
-</ol>
-<h4 id="代码示例"> 代码示例</h4>
-<p><strong>1.定义发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
-    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
-    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
-        <span>return</span> message<span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.定义一个 JDK 动态代理类</strong></p>
-<div><pre><code><span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationHandler</span><span>;</span>
-<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationTargetException</span><span>;</span>
-<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>Method</span><span>;</span>
-
-<span>/**
- * @author shuang.kou
- * @createTime 2020年05月11日 11:23:00
- */</span>
-<span>public</span> <span>class</span> <span>DebugInvocationHandler</span> <span>implements</span> <span>InvocationHandler</span> <span>{</span>
-    <span>/**
-     * 代理类中的真实对象
-     */</span>
-    <span>private</span> <span>final</span> <span>Object</span> target<span>;</span>
-
-    <span>public</span> <span>DebugInvocationHandler</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
-        <span>this</span><span>.</span>target <span>=</span> target<span>;</span>
-    <span>}</span>
-
-
-    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>InvocationTargetException</span><span>,</span> <span>IllegalAccessException</span> <span>{</span>
-        <span>//调用方法之前，我们可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>Object</span> result <span>=</span> method<span>.</span><span>invoke</span><span>(</span>target<span>,</span> args<span>)</span><span>;</span>
-        <span>//调用方法之后，我们同样可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>return</span> result<span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br></div></div><p><code>invoke()</code> 方法: 当我们的动态代理对象调用原生方法的时候，最终实际上调用到的是 <code>invoke()</code> 方法，然后 <code>invoke()</code> 方法代替我们去调用了被代理对象的原生方法。</p>
-<p><strong>4.获取代理对象的工厂类</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>JdkProxyFactory</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>Object</span> <span>getProxy</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
-        <span>return</span> <span>Proxy</span><span>.</span><span>newProxyInstance</span><span>(</span>
-                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getClassLoader</span><span>(</span><span>)</span><span>,</span> <span>// 目标类的类加载</span>
-                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getInterfaces</span><span>(</span><span>)</span><span>,</span>  <span>// 代理需要实现的接口，可指定多个</span>
-                <span>new</span> <span>DebugInvocationHandler</span><span>(</span>target<span>)</span>   <span>// 代理对象对应的自定义 InvocationHandler</span>
-        <span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p><code>getProxy()</code> ：主要通过<code>Proxy.newProxyInstance（）</code>方法获取某个类的代理对象</p>
-<p><strong>5.实际使用</strong></p>
-<div><pre><code><span>SmsService</span> smsService <span>=</span> <span>(</span><span>SmsService</span><span>)</span> <span>JdkProxyFactory</span><span>.</span><span>getProxy</span><span>(</span><span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>)</span><span>;</span>
-smsService<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
-<div><pre><code>before method send
-send message:java
-after method send
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div>]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T08:30:55.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
     <title type="html">Java 垃圾回收</title>
     <id>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</id>
     <link href="https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/"/>
@@ -1585,6 +1583,20 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
+    <title type="html">刷题 笔记</title>
+    <id>https://vue-blog.lllllan.cn/4-practice/</id>
+    <link href="https://vue-blog.lllllan.cn/4-practice/"/>
+    <updated>2022-01-20T14:32:41.187Z</updated>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="刷题"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
     <title type="html">Java 笔记</title>
     <id>https://vue-blog.lllllan.cn/1-java/</id>
     <link href="https://vue-blog.lllllan.cn/1-java/"/>
@@ -1613,37 +1625,17 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">组件禁用</title>
-    <id>https://vue-blog.lllllan.cn/guide/disable/</id>
-    <link href="https://vue-blog.lllllan.cn/guide/disable/"/>
-    <updated>2022-01-20T05:26:23.000Z</updated>
-    <summary type="html"><![CDATA[<p>你可以通过设置页面的 Frontmatter，在页面禁用一些功能。</p>
-]]></summary>
-    <content type="html"><![CDATA[<p>你可以通过设置页面的 Frontmatter，在页面禁用一些功能。</p>
-
-<p>本页面应当禁用了:</p>
-<ul>
-<li>导航栏</li>
-<li>侧边栏</li>
-<li>路径导航</li>
-<li>页面信息</li>
-<li>贡献者</li>
-<li>编辑此页链接</li>
-<li>更新时间</li>
-<li>上一篇/下一篇 链接</li>
-<li>评论</li>
-<li>页脚</li>
-<li>返回顶部按钮</li>
-</ul>
-]]></content>
+    <title type="html">计算机基础</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/"/>
+    <updated>2022-01-20T14:32:41.187Z</updated>
     <author>
       <name>lllllan</name>
     </author>
-    <category term="使用指南"/>
+    <category term="计算机基础"/>
     <contributor>
       <name>lllllan</name>
     </contributor>
-    <published>2022-01-20T05:26:23.000Z</published>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
@@ -1667,24 +1659,45 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">主要功能与配置演示</title>
-    <id>https://vue-blog.lllllan.cn/guide/</id>
-    <link href="https://vue-blog.lllllan.cn/guide/"/>
+    <title type="html">MySQL 笔记</title>
+    <id>https://vue-blog.lllllan.cn/2-mysql/</id>
+    <link href="https://vue-blog.lllllan.cn/2-mysql/"/>
+    <updated>2022-01-20T14:32:41.188Z</updated>
+    <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
+<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
+<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="MySQL"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">组件禁用</title>
+    <id>https://vue-blog.lllllan.cn/guide/disable/</id>
+    <link href="https://vue-blog.lllllan.cn/guide/disable/"/>
     <updated>2022-01-20T05:26:23.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="主要功能与配置演示"> 主要功能与配置演示</h1>
+    <summary type="html"><![CDATA[<p>你可以通过设置页面的 Frontmatter，在页面禁用一些功能。</p>
+]]></summary>
+    <content type="html"><![CDATA[<p>你可以通过设置页面的 Frontmatter，在页面禁用一些功能。</p>
+
+<p>本页面应当禁用了:</p>
 <ul>
-<li>
-<p><a href="./page.html">页面展示</a></p>
-</li>
-<li>
-<p><a href="./markdown.html">Markdown 展示</a></p>
-</li>
-<li>
-<p><a href="./disable.html">禁用展示</a></p>
-</li>
-<li>
-<p><a href="./encrypt.html">加密展示</a></p>
-</li>
+<li>导航栏</li>
+<li>侧边栏</li>
+<li>路径导航</li>
+<li>页面信息</li>
+<li>贡献者</li>
+<li>编辑此页链接</li>
+<li>更新时间</li>
+<li>上一篇/下一篇 链接</li>
+<li>评论</li>
+<li>页脚</li>
+<li>返回顶部按钮</li>
 </ul>
 ]]></content>
     <author>
@@ -1752,6 +1765,20 @@ after method send
     </contributor>
     <published>2020-01-01T00:00:00.000Z</published>
     <rights>Copyright by Ms.Hope</rights>
+  </entry>
+  <entry>
+    <title type="html">Java 笔记</title>
+    <id>https://vue-blog.lllllan.cn/guide/</id>
+    <link href="https://vue-blog.lllllan.cn/guide/"/>
+    <updated>2022-01-20T05:26:23.000Z</updated>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T05:26:23.000Z</published>
+    <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
     <title type="html">Markdown 增强</title>
@@ -2236,7 +2263,7 @@ $$
     <title type="html">博客主页</title>
     <id>https://vue-blog.lllllan.cn/</id>
     <link href="https://vue-blog.lllllan.cn/"/>
-    <updated>2022-01-20T07:35:54.000Z</updated>
+    <updated>2022-01-20T13:21:14.000Z</updated>
     <author>
       <name>lllllan</name>
     </author>
