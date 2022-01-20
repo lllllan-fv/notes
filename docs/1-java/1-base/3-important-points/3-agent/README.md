@@ -16,6 +16,8 @@ category: Java
 
 # 一个页面可以有多个标签
 tag:
+- Java基础
+- 代理
 
 # 此页面会在文章列表指定
 # sticky: true

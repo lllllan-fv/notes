@@ -26,6 +26,10 @@ features:
     details: 我的微信 - lllllan
     link: http://lllllan.cn/personal_data/img/Wechatcode.jpg
 
+  - title: Java基础
+    details: 自学笔记之Java基础
+    link: /1-java/
+
 copyrightText: false
 footer: MIT Licensed | Copyright © 2019-present lllllan
 ---

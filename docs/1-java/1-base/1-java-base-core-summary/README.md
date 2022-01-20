@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: Java 基础核心总结
+title: R2Coding - Java 基础核心总结
 
 # 设置作者
 author: lllllan
@@ -16,6 +16,7 @@ category: Java
 
 # 一个页面可以有多个标签
 tag:
+- Java基础
 
 # 此页面会在文章列表指定
 # sticky: true

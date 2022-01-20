@@ -108,7 +108,7 @@ module.exports = {
 
 ### 任务列表
 
-- [x] 计划 1
+- [ ] 计划 1
 - [ ] 计划 2
 
 ::: details Code

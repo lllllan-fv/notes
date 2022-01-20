@@ -8,21 +8,10 @@ module.exports = config({
   dest: "./dist",
 
   head: [
-    [
-      "script",
-      { src: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" },
-    ],
-    [
-      "script",
-      {
-        src: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js",
-      },
-    ],
+    ["script", { src: "https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js" },],
+    ["script", { src: "https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js", },],
     ["script", { src: "https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js" }],
-    [
-      "script",
-      { src: "https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js" },
-    ],
+    ["script", { src: "https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js" },],
   ],
 
   locales: {
@@ -58,6 +47,28 @@ module.exports = config({
     ],
 
     sidebar: {
+      "/1-java": [
+        "1-java/",
+        {
+          title: "java 基础",
+          icon: "java",
+          prefix: "1-java/1-base/",
+          children: [            
+            "1-java-base-core-summary/",
+            "2-java-guide-base/",
+            {
+              title: "重要知识点",
+              icon: "tree",
+              prefix: "3-important-points/",
+              children: [
+                "1-java-value-passed/",
+                "2-reflection/",
+                "3-agent/"
+              ],
+            },
+          ],
+        },
+      ],
       "/": [
         "",
         "home",
