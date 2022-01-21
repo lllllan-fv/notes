@@ -115,18 +115,18 @@ module.exports = config({
           ],
         },
       ],
-      "/": [
-        "",
-        "home",
-        "slides",
-        "guide/"
-        // "layout",
-        // {
-        //   title: "Guide",
-        //   icon: "creative",
-        //   prefix: "guide/",
-        //   children: ["", "page", "markdown", "disable", "encrypt"],
-        // },
+
+
+      "/4-practice": [
+        "4-practice/",
+        {
+          title: "题型分类",
+          icon: "",
+          prefix: "4-practice/1-group/",
+          children: [
+            "1-array/"
+          ],
+        }
       ],
     },
 

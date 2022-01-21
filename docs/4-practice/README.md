@@ -3,7 +3,7 @@
 icon: info
 
 # 这是文章的标题
-title: 刷题 笔记
+title: 刷题笔记
 
 # 设置作者
 author: lllllan

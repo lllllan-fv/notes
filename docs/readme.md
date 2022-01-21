@@ -30,6 +30,8 @@ features:
   - title: 计算机基础
     link: /3-cs-basic/
 
+  - title: 刷题笔记
+    link: /4-practice/
 
 copyrightText: false
 footer: MIT Licensed | Copyright © 2019-present lllllan
