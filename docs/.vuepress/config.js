@@ -1,7 +1,7 @@
 const { config } = require("vuepress-theme-hope");
 
 module.exports = config({
-  title: "lllllan notes",
+  title: "lllllan",
   // description: "lllllan 的自学笔记",
 
   base: '/',
@@ -33,7 +33,6 @@ module.exports = config({
 
     nav: [
       { text: "Blog Home", link: "/", icon: "home" },
-      { text: "Project Home", link: "/home/", icon: "home" },
       // {
       //   text: "Guide",
       //   icon: "creative",
