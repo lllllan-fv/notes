@@ -6,22 +6,143 @@
     <link>https://vue-blog.lllllan.cn/</link>
     <description></description>
     <language>en-US</language>
-    <pubDate>Thu, 20 Jan 2022 14:32:05 GMT</pubDate>
-    <lastBuildDate>Thu, 20 Jan 2022 14:32:05 GMT</lastBuildDate>
+    <pubDate>Fri, 21 Jan 2022 01:15:54 GMT</pubDate>
+    <lastBuildDate>Fri, 21 Jan 2022 01:15:54 GMT</lastBuildDate>
     <generator>@mr-hope/vuepress-plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <copyright>Copyright by lllllan</copyright>
     <category>Java</category>
-    <category>刷题</category>
+    <category>MySQL</category>
     <category>计算机基础</category>
     <category>使用指南</category>
-    <category>MySQL</category>
+    <category>刷题</category>
+    <item>
+      <title>反射机制</title>
+      <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</link>
+      <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">反射机制</source>
+      <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>Note</p>
+<p>全部抄自 <a href="https://javaguide.cn/java/basis/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">反射机制详解！ | JavaGuide</a>，列有改动</p>
+</div>
+<blockquote>
+<p>总之反射就是能获取一个类的所有方法和属性，并能够调用。</p>
+<p>然后还能增加代码的灵活性。</p>
+<p>但是，我还是没有感受到，灵活在哪里。。。</p>
+</blockquote>
+<h2 id="什么是反射"> 什么是反射？</h2>
+<p>反射就是Reflection，Java的反射是指程序在<strong>运行期</strong>可以拿到一个对象的所有信息，，你还可以调用这些方法和属性。</p>
+<h2 id="反射的应用场景"> 反射的应用场景</h2>
+<ul>
+<li>模块化的开发，通过反射去调用对应的字节码</li>
+<li>框架中大量使用动态代理，而动态代理依赖反射机制实现</li>
+<li>注解的实现也用到了反射</li>
+</ul>
+<p><strong>JDBC的数据库连接</strong></p>
+<div><pre><code><span>public</span> <span>static</span> <span>final</span> <span>String</span> DBDRIVER <span>=</span> <span>"com.mysql.jdbc.Driver"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBURL <span>=</span> <span>"jdbc:mysql://localhost:3306/test"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBUSER <span>=</span> <span>"root"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBPASS <span>=</span> <span>""</span><span>;</span>  
+
+<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>  
+    <span>Connection</span> con <span>=</span> <span>null</span><span>;</span>
+    <span>Class</span><span>.</span><span>forName</span><span>(</span>DBDRIVER<span>)</span><span>;</span> <span>//1、使用CLASS 类加载驱动程序 ,反射机制的体现 </span>
+    con <span>=</span> <span>DriverManager</span><span>.</span><span>getConnection</span><span>(</span>DBURL<span>,</span>DBUSER<span>,</span>DBPASS<span>)</span><span>;</span> <span>//2、连接数据库  </span>
+    <span>.</span><span>.</span><span>.</span>
+    con<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span> <span>// 3、关闭数据库  </span>
+<span>}</span>  
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="反射的优缺点"> 反射的优缺点</h2>
+<p><strong>优点：</strong> 让代码更加灵、为各种框架提供开箱即用的功能提供便利</p>
+<p><strong>缺点：</strong> 在运行时有了分析操作类的能力，同样增加了安全问题。性能略差，不过对于框架的影响比较小。</p>
+<h2 id="反射的使用"> 反射的使用</h2>
+<h3 id="获取class对象的四种方式"> 获取Class对象的四种方式</h3>
+<p><strong>1.知道具体类的情况下可以使用</strong></p>
+<div><pre><code><span>Class</span> alunbarClass <span>=</span> <span>TargetObject</span><span>.</span><span>class</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>2.通过 <code>Class.forName()</code> 传入类的路径获取</strong></p>
+<div><pre><code><span>Class</span> alunbarClass1 <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>3.通过对象实例 <code>instance.getClass()</code> 获取</strong></p>
+<div><pre><code><span>TargetObject</span> o <span>=</span> <span>new</span> <span>TargetObject</span><span>(</span><span>)</span><span>;</span>
+<span>Class</span> alunbarClass2 <span>=</span> o<span>.</span><span>getClass</span><span>(</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p><strong>4.通过类加载器 <code>xxxClassLoader.loadClass()</code> 传入类路径获取</strong></p>
+<div><pre><code><span>Class</span> clazz <span>=</span> <span>ClassLoader</span><span>.</span><span>loadClass</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><h3 id="反射的基本操作"> 反射的基本操作</h3>
+<p><strong>1.定义一个类</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>TargetObject</span> <span>{</span>
+    <span>private</span> <span>String</span> value<span>;</span>
+
+    <span>public</span> <span>TargetObject</span><span>(</span><span>)</span> <span>{</span>
+        value <span>=</span> <span>"JavaGuide"</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>void</span> <span>publicMethod</span><span>(</span><span>String</span> s<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"I love "</span> <span>+</span> s<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>private</span> <span>void</span> <span>privateMethod</span><span>(</span><span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"value is "</span> <span>+</span> value<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p><strong>2.使用反射来操作这个类的方法及参数</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>ClassNotFoundException</span><span>,</span> <span>NoSuchMethodException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>InstantiationException</span><span>,</span> <span>InvocationTargetException</span><span>,</span> <span>NoSuchFieldException</span> <span>{</span>
+        <span>/**
+         * 获取TargetObject类的Class对象并且创建TargetObject类实例
+         */</span>
+        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> tagetClass <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+        <span>TargetObject</span> targetObject <span>=</span> <span>(</span><span>TargetObject</span><span>)</span> tagetClass<span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
+        <span>/**
+         * 获取所有类中所有定义的方法
+         */</span>
+        <span>Method</span><span>[</span><span>]</span> methods <span>=</span> tagetClass<span>.</span><span>getDeclaredMethods</span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>/**
+         * 获取指定方法并调用
+         */</span>
+        <span>Method</span> publicMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"publicMethod"</span><span>,</span>
+                <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
+
+        publicMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
+        <span>/**
+         * 获取指定参数并对参数进行修改
+         */</span>
+        <span>Field</span> field <span>=</span> tagetClass<span>.</span><span>getDeclaredField</span><span>(</span><span>"value"</span><span>)</span><span>;</span>
+        <span>//为了对类中的参数进行修改我们取消安全检查</span>
+        field<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        field<span>.</span><span>set</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
+        <span>/**
+         * 调用 private 方法
+         */</span>
+        <span>Method</span> privateMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"privateMethod"</span><span>)</span><span>;</span>
+        <span>//为了调用private方法我们取消安全检查</span>
+        privateMethod<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        privateMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br></div></div><p><strong>3.输出结果</strong></p>
+<div><pre><code>publicMethod
+privateMethod
+<span>I</span> love <span>JavaGuide</span>
+value is <span>JavaGuide</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div>]]></content:encoded>
+    </item>
     <item>
       <title>R2Coding - Java 基础核心总结</title>
       <link>https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/</link>
       <guid>https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/</guid>
       <source url="https://vue-blog.lllllan.cn/rss.xml">R2Coding - Java 基础核心总结</source>
       <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
       <content:encoded><![CDATA[<div><p>Note</p>
 <p>全部抄自<a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a>上提供资料</p>
 </div>
@@ -251,232 +372,12 @@
 ]]></content:encoded>
     </item>
     <item>
-      <title>java 是值传递</title>
-      <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</link>
-      <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">java 是值传递</source>
-      <category>Java</category>
-      <content:encoded><![CDATA[<div><p>Note</p>
-<p>全部抄自 <a href="https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/" target="_blank" rel="noopener noreferrer">为什么 Java 中只有值传递？ | JavaGuide</a>，略有改动</p>
-</div>
-<h2 id="值传递-引用传递"> 值传递 &amp; 引用传递</h2>
-<p>程序设计语言将实参传递给方法（或函数）的方式分为两种：</p>
-<ul>
-<li><strong>值传递</strong> ：方法接收的是实参值的拷贝，会创建副本。</li>
-<li><strong>引用传递</strong> ：方法接收的直接是实参所引用的对象在堆中的地址，不会创建副本，对形参的修改将影响到实参。</li>
-</ul>
-<p>很多程序设计语言（比如 C++、 Pascal )提供了两种参数传递的方式，不过，在 Java 中只有值传递。</p>
-<h2 id="实例"> 实例</h2>
-<h3 id="对基本数据类型进行修改"> 对基本数据类型进行修改</h3>
-<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>int</span> num1 <span>=</span> <span>10</span><span>;</span>
-    <span>int</span> num2 <span>=</span> <span>20</span><span>;</span>
-    <span>swap</span><span>(</span>num1<span>,</span> num2<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num1 = "</span> <span>+</span> num1<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num2 = "</span> <span>+</span> num2<span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>int</span> a<span>,</span> <span>int</span> b<span>)</span> <span>{</span>
-    <span>int</span> temp <span>=</span> a<span>;</span>
-    a <span>=</span> b<span>;</span>
-    b <span>=</span> temp<span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"a = "</span> <span>+</span> a<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"b = "</span> <span>+</span> b<span>)</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-    
-a <span>=</span> <span>20</span>
-b <span>=</span> <span>10</span>
-num1 <span>=</span> <span>10</span>
-num2 <span>=</span> <span>20</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div><ul>
-<li>a和b只是从num1和num2复制得到了值，怎么操作都不会产生影响</li>
-</ul>
-<p><img src="./README.assets/java-value-passing-01.ab88fb01.png" alt="基本数据类型参数" /></p>
-<h3 id="修改引用类型中的值"> 修改引用类型中的值</h3>
-<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>int</span><span>[</span><span>]</span> arr <span>=</span> <span>{</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span> <span>}</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
-    <span>change</span><span>(</span>arr<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>change</span><span>(</span><span>int</span><span>[</span><span>]</span> array<span>)</span> <span>{</span>
-    <span>// 将数组的第一个元素变为0</span>
-    array<span>[</span><span>0</span><span>]</span> <span>=</span> <span>0</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-   
-<span>1</span>
-<span>0</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p><img src="./README.assets/java-value-passing-02.ff1b76c9.png" alt="引用数据类型参数1" /></p>
-<h3 id="修改引用类型的对象"> 修改引用类型的对象</h3>
-<div><pre><code><span>public</span> <span>class</span> <span>Person</span> <span>{</span>
-    <span>private</span> <span>String</span> name<span>;</span>
-   <span>// 省略构造函数、Getter&amp;Setter方法</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>Person</span> xiaoZhang <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小张"</span><span>)</span><span>;</span>
-    <span>Person</span> xiaoLi <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小李"</span><span>)</span><span>;</span>
-    <span>swap</span><span>(</span>xiaoZhang<span>,</span> xiaoLi<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoZhang:"</span> <span>+</span> xiaoZhang<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoLi:"</span> <span>+</span> xiaoLi<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>Person</span> person1<span>,</span> <span>Person</span> person2<span>)</span> <span>{</span>
-    <span>Person</span> temp <span>=</span> person1<span>;</span>
-    person1 <span>=</span> person2<span>;</span>
-    person2 <span>=</span> temp<span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person1:"</span> <span>+</span> person1<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person2:"</span> <span>+</span> person2<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-    
-person1<span>:</span>小李
-person2<span>:</span>小张
-xiaoZhang<span>:</span>小张
-xiaoLi<span>:</span>小李
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br></div></div><p><img src="./README.assets/java-value-passing-03.da4d0422.png" alt="引用数据类型参数2" /></p>
-<h2 id="总结"> 总结</h2>
-<p>Java 中将实参传递给方法（或函数）的方式是 <strong>值传递</strong> ：</p>
-<ul>
-<li>如果参数是基本类型的话，很简单，传递的就是基本类型的字面量值的拷贝，会创建副本。</li>
-<li>如果参数是引用类型，传递的就是实参所引用的对象在堆中地址值的拷贝，同样也会创建副本。</li>
-</ul>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>反射机制</title>
-      <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</link>
-      <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">反射机制</source>
-      <category>Java</category>
-      <content:encoded><![CDATA[<div><p>Note</p>
-<p>全部抄自 <a href="https://javaguide.cn/java/basis/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">反射机制详解！ | JavaGuide</a>，列有改动</p>
-</div>
-<blockquote>
-<p>总之反射就是能获取一个类的所有方法和属性，并能够调用。</p>
-<p>然后还能增加代码的灵活性。</p>
-<p>但是，我还是没有感受到，灵活在哪里。。。</p>
-</blockquote>
-<h2 id="什么是反射"> 什么是反射？</h2>
-<p>反射就是Reflection，Java的反射是指程序在<strong>运行期</strong>可以拿到一个对象的所有信息，，你还可以调用这些方法和属性。</p>
-<h2 id="反射的应用场景"> 反射的应用场景</h2>
-<ul>
-<li>模块化的开发，通过反射去调用对应的字节码</li>
-<li>框架中大量使用动态代理，而动态代理依赖反射机制实现</li>
-<li>注解的实现也用到了反射</li>
-</ul>
-<p><strong>JDBC的数据库连接</strong></p>
-<div><pre><code><span>public</span> <span>static</span> <span>final</span> <span>String</span> DBDRIVER <span>=</span> <span>"com.mysql.jdbc.Driver"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBURL <span>=</span> <span>"jdbc:mysql://localhost:3306/test"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBUSER <span>=</span> <span>"root"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBPASS <span>=</span> <span>""</span><span>;</span>  
-
-<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>  
-    <span>Connection</span> con <span>=</span> <span>null</span><span>;</span>
-    <span>Class</span><span>.</span><span>forName</span><span>(</span>DBDRIVER<span>)</span><span>;</span> <span>//1、使用CLASS 类加载驱动程序 ,反射机制的体现 </span>
-    con <span>=</span> <span>DriverManager</span><span>.</span><span>getConnection</span><span>(</span>DBURL<span>,</span>DBUSER<span>,</span>DBPASS<span>)</span><span>;</span> <span>//2、连接数据库  </span>
-    <span>.</span><span>.</span><span>.</span>
-    con<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span> <span>// 3、关闭数据库  </span>
-<span>}</span>  
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="反射的优缺点"> 反射的优缺点</h2>
-<p><strong>优点：</strong> 让代码更加灵、为各种框架提供开箱即用的功能提供便利</p>
-<p><strong>缺点：</strong> 在运行时有了分析操作类的能力，同样增加了安全问题。性能略差，不过对于框架的影响比较小。</p>
-<h2 id="反射的使用"> 反射的使用</h2>
-<h3 id="获取class对象的四种方式"> 获取Class对象的四种方式</h3>
-<p><strong>1.知道具体类的情况下可以使用</strong></p>
-<div><pre><code><span>Class</span> alunbarClass <span>=</span> <span>TargetObject</span><span>.</span><span>class</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><p><strong>2.通过 <code>Class.forName()</code> 传入类的路径获取</strong></p>
-<div><pre><code><span>Class</span> alunbarClass1 <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><p><strong>3.通过对象实例 <code>instance.getClass()</code> 获取</strong></p>
-<div><pre><code><span>TargetObject</span> o <span>=</span> <span>new</span> <span>TargetObject</span><span>(</span><span>)</span><span>;</span>
-<span>Class</span> alunbarClass2 <span>=</span> o<span>.</span><span>getClass</span><span>(</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p><strong>4.通过类加载器 <code>xxxClassLoader.loadClass()</code> 传入类路径获取</strong></p>
-<div><pre><code><span>Class</span> clazz <span>=</span> <span>ClassLoader</span><span>.</span><span>loadClass</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><h3 id="反射的基本操作"> 反射的基本操作</h3>
-<p><strong>1.定义一个类</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>TargetObject</span> <span>{</span>
-    <span>private</span> <span>String</span> value<span>;</span>
-
-    <span>public</span> <span>TargetObject</span><span>(</span><span>)</span> <span>{</span>
-        value <span>=</span> <span>"JavaGuide"</span><span>;</span>
-    <span>}</span>
-
-    <span>public</span> <span>void</span> <span>publicMethod</span><span>(</span><span>String</span> s<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"I love "</span> <span>+</span> s<span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>private</span> <span>void</span> <span>privateMethod</span><span>(</span><span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"value is "</span> <span>+</span> value<span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p><strong>2.使用反射来操作这个类的方法及参数</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>ClassNotFoundException</span><span>,</span> <span>NoSuchMethodException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>InstantiationException</span><span>,</span> <span>InvocationTargetException</span><span>,</span> <span>NoSuchFieldException</span> <span>{</span>
-        <span>/**
-         * 获取TargetObject类的Class对象并且创建TargetObject类实例
-         */</span>
-        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> tagetClass <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-        <span>TargetObject</span> targetObject <span>=</span> <span>(</span><span>TargetObject</span><span>)</span> tagetClass<span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
-        <span>/**
-         * 获取所有类中所有定义的方法
-         */</span>
-        <span>Method</span><span>[</span><span>]</span> methods <span>=</span> tagetClass<span>.</span><span>getDeclaredMethods</span><span>(</span><span>)</span><span>;</span>
-        <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
-            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>}</span>
-        <span>/**
-         * 获取指定方法并调用
-         */</span>
-        <span>Method</span> publicMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"publicMethod"</span><span>,</span>
-                <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
-
-        publicMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
-        <span>/**
-         * 获取指定参数并对参数进行修改
-         */</span>
-        <span>Field</span> field <span>=</span> tagetClass<span>.</span><span>getDeclaredField</span><span>(</span><span>"value"</span><span>)</span><span>;</span>
-        <span>//为了对类中的参数进行修改我们取消安全检查</span>
-        field<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
-        field<span>.</span><span>set</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
-        <span>/**
-         * 调用 private 方法
-         */</span>
-        <span>Method</span> privateMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"privateMethod"</span><span>)</span><span>;</span>
-        <span>//为了调用private方法我们取消安全检查</span>
-        privateMethod<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
-        privateMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br></div></div><p><strong>3.输出结果</strong></p>
-<div><pre><code>publicMethod
-privateMethod
-<span>I</span> love <span>JavaGuide</span>
-value is <span>JavaGuide</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div>]]></content:encoded>
-    </item>
-    <item>
       <title>JavaGuide - Java基础知识</title>
       <link>https://vue-blog.lllllan.cn/1-java/1-basic/2-java-guide-basic/</link>
       <guid>https://vue-blog.lllllan.cn/1-java/1-basic/2-java-guide-basic/</guid>
       <source url="https://vue-blog.lllllan.cn/rss.xml">JavaGuide - Java基础知识</source>
       <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
       <content:encoded><![CDATA[<div><p>Note</p>
 <p>全部抄自<a href="https://javaguide.cn/java/basis/java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">Java基础知识&amp;面试题总结 | JavaGuide</a>，略有改动</p>
 </div>
@@ -971,11 +872,115 @@ input<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
 ]]></content:encoded>
     </item>
     <item>
+      <title>java 是值传递</title>
+      <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</link>
+      <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">java 是值传递</source>
+      <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>Note</p>
+<p>全部抄自 <a href="https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/" target="_blank" rel="noopener noreferrer">为什么 Java 中只有值传递？ | JavaGuide</a>，略有改动</p>
+</div>
+<h2 id="值传递-引用传递"> 值传递 &amp; 引用传递</h2>
+<p>程序设计语言将实参传递给方法（或函数）的方式分为两种：</p>
+<ul>
+<li><strong>值传递</strong> ：方法接收的是实参值的拷贝，会创建副本。</li>
+<li><strong>引用传递</strong> ：方法接收的直接是实参所引用的对象在堆中的地址，不会创建副本，对形参的修改将影响到实参。</li>
+</ul>
+<p>很多程序设计语言（比如 C++、 Pascal )提供了两种参数传递的方式，不过，在 Java 中只有值传递。</p>
+<h2 id="实例"> 实例</h2>
+<h3 id="对基本数据类型进行修改"> 对基本数据类型进行修改</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>int</span> num1 <span>=</span> <span>10</span><span>;</span>
+    <span>int</span> num2 <span>=</span> <span>20</span><span>;</span>
+    <span>swap</span><span>(</span>num1<span>,</span> num2<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num1 = "</span> <span>+</span> num1<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num2 = "</span> <span>+</span> num2<span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>int</span> a<span>,</span> <span>int</span> b<span>)</span> <span>{</span>
+    <span>int</span> temp <span>=</span> a<span>;</span>
+    a <span>=</span> b<span>;</span>
+    b <span>=</span> temp<span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"a = "</span> <span>+</span> a<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"b = "</span> <span>+</span> b<span>)</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+    
+a <span>=</span> <span>20</span>
+b <span>=</span> <span>10</span>
+num1 <span>=</span> <span>10</span>
+num2 <span>=</span> <span>20</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div><ul>
+<li>a和b只是从num1和num2复制得到了值，怎么操作都不会产生影响</li>
+</ul>
+<p><img src="./README.assets/java-value-passing-01.ab88fb01.png" alt="基本数据类型参数" /></p>
+<h3 id="修改引用类型中的值"> 修改引用类型中的值</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>int</span><span>[</span><span>]</span> arr <span>=</span> <span>{</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span> <span>}</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
+    <span>change</span><span>(</span>arr<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>change</span><span>(</span><span>int</span><span>[</span><span>]</span> array<span>)</span> <span>{</span>
+    <span>// 将数组的第一个元素变为0</span>
+    array<span>[</span><span>0</span><span>]</span> <span>=</span> <span>0</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+   
+<span>1</span>
+<span>0</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p><img src="./README.assets/java-value-passing-02.ff1b76c9.png" alt="引用数据类型参数1" /></p>
+<h3 id="修改引用类型的对象"> 修改引用类型的对象</h3>
+<div><pre><code><span>public</span> <span>class</span> <span>Person</span> <span>{</span>
+    <span>private</span> <span>String</span> name<span>;</span>
+   <span>// 省略构造函数、Getter&amp;Setter方法</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>Person</span> xiaoZhang <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小张"</span><span>)</span><span>;</span>
+    <span>Person</span> xiaoLi <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小李"</span><span>)</span><span>;</span>
+    <span>swap</span><span>(</span>xiaoZhang<span>,</span> xiaoLi<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoZhang:"</span> <span>+</span> xiaoZhang<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoLi:"</span> <span>+</span> xiaoLi<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>Person</span> person1<span>,</span> <span>Person</span> person2<span>)</span> <span>{</span>
+    <span>Person</span> temp <span>=</span> person1<span>;</span>
+    person1 <span>=</span> person2<span>;</span>
+    person2 <span>=</span> temp<span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person1:"</span> <span>+</span> person1<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person2:"</span> <span>+</span> person2<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+    
+person1<span>:</span>小李
+person2<span>:</span>小张
+xiaoZhang<span>:</span>小张
+xiaoLi<span>:</span>小李
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br></div></div><p><img src="./README.assets/java-value-passing-03.da4d0422.png" alt="引用数据类型参数2" /></p>
+<h2 id="总结"> 总结</h2>
+<p>Java 中将实参传递给方法（或函数）的方式是 <strong>值传递</strong> ：</p>
+<ul>
+<li>如果参数是基本类型的话，很简单，传递的就是基本类型的字面量值的拷贝，会创建副本。</li>
+<li>如果参数是引用类型，传递的就是实参所引用的对象在堆中地址值的拷贝，同样也会创建副本。</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
       <title>代理详解</title>
       <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/</link>
       <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/</guid>
       <source url="https://vue-blog.lllllan.cn/rss.xml">代理详解</source>
       <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
       <content:encoded><![CDATA[<div><p>Note</p>
 <p>全部抄自 <a href="https://javaguide.cn/java/basis/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">代理详解！静态代理+JDK/CGLIB 动态代理实战 | JavaGuide</a>， 略有改动</p>
 </div>
@@ -1155,6 +1160,62 @@ send message:java
 after method send
 </code></pre>
 <div><span>1</span><br><span>2</span><br><span>3</span><br></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>Java 垃圾回收</title>
+      <link>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</link>
+      <guid>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">Java 垃圾回收</source>
+      <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 08:35:36 GMT</pubDate>
+      <content:encoded><![CDATA[<blockquote>
+<p><a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide</a></p>
+</blockquote>
+<h1 id="写在前面"> 写在前面</h1>
+<h2 id="常见面试题"> 常见面试题</h2>
+<ul>
+<li>如何判断对象是否死亡（两种方法）。</li>
+<li>简单的介绍一下强引用、软引用、弱引用、虚引用（虚引用与软引用和弱引用的区别、使用软引用能带来的好处）。</li>
+<li>如何判断一个常量是废弃常量</li>
+<li>如何判断一个类是无用的类</li>
+<li>垃圾收集有哪些算法，各自的特点？</li>
+<li>HotSpot 为什么要分为新生代和老年代？</li>
+<li>常见的垃圾回收器有哪些？</li>
+<li>介绍一下 CMS,G1 收集器。</li>
+<li>Minor Gc 和 Full GC 有什么不同呢？</li>
+</ul>
+<h2 id="核心问题"> 核心问题</h2>
+<ol>
+<li>内存如何分配和回收</li>
+<li>哪些垃圾需要回收</li>
+<li>什么时候回收</li>
+<li>如何回收</li>
+</ol>
+<p><img src="./README.assets/image-20220118102736004.png" alt="image-20220118102736004" /></p>
+<h1 id="一、jvm内存分配与回收"> 一、JVM内存分配与回收</h1>
+<p>Java 的自动内存管理主要是针对<strong>对象内存</strong>的回收和对象内存的分配。同时，Java 自动内存管理最核心的功能是 <strong>堆</strong> 内存中对象的分配与回收。</p>
+<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>.从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：新生代和老年代：再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
+<p><img src="./README.assets/01d330d8-2710-4fad-a91c-7bbbfaaefc0e.fac41c8a.png" alt="img" /></p>
+<blockquote>
+<h2 id="第一次理解"> 第一次理解</h2>
+<p>如图所示，一般对象的创建，会先分配到图左1的 <code>Eden</code> 区域，随着垃圾回收的进行，仍然存活的对象会根据存活时间向老年代转移。</p>
+<h2 id="常见分配策略"> 常见分配策略</h2>
+<ol>
+<li>对象优先在 <code>Eden</code> 区域分配</li>
+<li>大对象直接进入老年代</li>
+<li>长期存活的对象将进入老年代</li>
+</ol>
+</blockquote>
+<h2 id="_1-1-对象优先在-eden-区域分配"> 1.1 对象优先在 <code>Eden</code> 区域分配</h2>
+<p>目前主流的垃圾收集器都会采用<strong>分代回收算法</strong>，因此需要将堆内存分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。</p>
+<p>大多数情况下，对象在新生代中 eden 区分配。当 eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC.</p>
+<p>具体测试见 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/#_1-1-%E5%AF%B9%E8%B1%A1%E4%BC%98%E5%85%88%E5%9C%A8-eden-%E5%8C%BA%E5%88%86%E9%85%8D" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide | 1.1 对象优先在 <code>Eden</code> 区域分配</a></p>
+<h2 id="_1-2-大对象直接进入老年代"> 1.2 大对象直接进入老年代</h2>
+<p><strong>为什么要这样呢？</strong></p>
+<p>为了避免为大对象分配内存时由于分配担保机制带来的复制而降低效率。（我的理解是：eden中内存分配不足时，总有对象要被转移到老年代的，不如一开始就将比较大的对象直接分配在老年代）</p>
+<h2 id="_1-3-长期存活的对象将进入老年代"> 1.3 长期存活的对象将进入老年代</h2>
+<p>如果对象在 Eden 出生并经过第一次 Minor GC 后仍然能够存活，并且能被 Survivor 容纳的话，将被移动到 Survivor 空间中，并将对象年龄设为 1.对象在 Survivor 中每熬过一次 MinorGC,年龄就增加 1 岁，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置。</p>
+]]></content:encoded>
     </item>
     <item>
       <title>java 内存区域详解</title>
@@ -1473,67 +1534,16 @@ after method send
 <div><span>1</span><br><span>2</span><br><span>3</span><br></div></div>]]></content:encoded>
     </item>
     <item>
-      <title>Java 垃圾回收</title>
-      <link>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</link>
-      <guid>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">Java 垃圾回收</source>
-      <category>Java</category>
-      <pubDate>Thu, 20 Jan 2022 08:35:36 GMT</pubDate>
-      <content:encoded><![CDATA[<blockquote>
-<p><a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide</a></p>
-</blockquote>
-<h1 id="写在前面"> 写在前面</h1>
-<h2 id="常见面试题"> 常见面试题</h2>
-<ul>
-<li>如何判断对象是否死亡（两种方法）。</li>
-<li>简单的介绍一下强引用、软引用、弱引用、虚引用（虚引用与软引用和弱引用的区别、使用软引用能带来的好处）。</li>
-<li>如何判断一个常量是废弃常量</li>
-<li>如何判断一个类是无用的类</li>
-<li>垃圾收集有哪些算法，各自的特点？</li>
-<li>HotSpot 为什么要分为新生代和老年代？</li>
-<li>常见的垃圾回收器有哪些？</li>
-<li>介绍一下 CMS,G1 收集器。</li>
-<li>Minor Gc 和 Full GC 有什么不同呢？</li>
-</ul>
-<h2 id="核心问题"> 核心问题</h2>
-<ol>
-<li>内存如何分配和回收</li>
-<li>哪些垃圾需要回收</li>
-<li>什么时候回收</li>
-<li>如何回收</li>
-</ol>
-<p><img src="./README.assets/image-20220118102736004.png" alt="image-20220118102736004" /></p>
-<h1 id="一、jvm内存分配与回收"> 一、JVM内存分配与回收</h1>
-<p>Java 的自动内存管理主要是针对<strong>对象内存</strong>的回收和对象内存的分配。同时，Java 自动内存管理最核心的功能是 <strong>堆</strong> 内存中对象的分配与回收。</p>
-<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>.从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：新生代和老年代：再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
-<p><img src="./README.assets/01d330d8-2710-4fad-a91c-7bbbfaaefc0e.fac41c8a.png" alt="img" /></p>
-<blockquote>
-<h2 id="第一次理解"> 第一次理解</h2>
-<p>如图所示，一般对象的创建，会先分配到图左1的 <code>Eden</code> 区域，随着垃圾回收的进行，仍然存活的对象会根据存活时间向老年代转移。</p>
-<h2 id="常见分配策略"> 常见分配策略</h2>
-<ol>
-<li>对象优先在 <code>Eden</code> 区域分配</li>
-<li>大对象直接进入老年代</li>
-<li>长期存活的对象将进入老年代</li>
-</ol>
-</blockquote>
-<h2 id="_1-1-对象优先在-eden-区域分配"> 1.1 对象优先在 <code>Eden</code> 区域分配</h2>
-<p>目前主流的垃圾收集器都会采用<strong>分代回收算法</strong>，因此需要将堆内存分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。</p>
-<p>大多数情况下，对象在新生代中 eden 区分配。当 eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC.</p>
-<p>具体测试见 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/#_1-1-%E5%AF%B9%E8%B1%A1%E4%BC%98%E5%85%88%E5%9C%A8-eden-%E5%8C%BA%E5%88%86%E9%85%8D" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide | 1.1 对象优先在 <code>Eden</code> 区域分配</a></p>
-<h2 id="_1-2-大对象直接进入老年代"> 1.2 大对象直接进入老年代</h2>
-<p><strong>为什么要这样呢？</strong></p>
-<p>为了避免为大对象分配内存时由于分配担保机制带来的复制而降低效率。（我的理解是：eden中内存分配不足时，总有对象要被转移到老年代的，不如一开始就将比较大的对象直接分配在老年代）</p>
-<h2 id="_1-3-长期存活的对象将进入老年代"> 1.3 长期存活的对象将进入老年代</h2>
-<p>如果对象在 Eden 出生并经过第一次 Minor GC 后仍然能够存活，并且能被 Survivor 容纳的话，将被移动到 Survivor 空间中，并将对象年龄设为 1.对象在 Survivor 中每熬过一次 MinorGC,年龄就增加 1 岁，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置。</p>
+      <title>MySQL 笔记</title>
+      <link>https://vue-blog.lllllan.cn/2-mysql/</link>
+      <guid>https://vue-blog.lllllan.cn/2-mysql/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">MySQL 笔记</source>
+      <category>MySQL</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+      <content:encoded><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
+<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
+<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
 ]]></content:encoded>
-    </item>
-    <item>
-      <title>刷题 笔记</title>
-      <link>https://vue-blog.lllllan.cn/4-practice/</link>
-      <guid>https://vue-blog.lllllan.cn/4-practice/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">刷题 笔记</source>
-      <category>刷题</category>
     </item>
     <item>
       <title>Java 笔记</title>
@@ -1557,34 +1567,602 @@ after method send
 ]]></content:encoded>
     </item>
     <item>
-      <title>计算机基础</title>
-      <link>https://vue-blog.lllllan.cn/3-cs-basic/</link>
-      <guid>https://vue-blog.lllllan.cn/3-cs-basic/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">计算机基础</source>
+      <title>第一章、浏览器生成消息</title>
+      <link>https://vue-blog.lllllan.cn/3-cs-basic/1-computer-network/1-how-is-the-network-connected/1-browser-generated-messages/</link>
+      <guid>https://vue-blog.lllllan.cn/3-cs-basic/1-computer-network/1-how-is-the-network-connected/1-browser-generated-messages/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">第一章、浏览器生成消息</source>
       <category>计算机基础</category>
-    </item>
-    <item>
-      <title>密码加密的文章</title>
-      <link>https://vue-blog.lllllan.cn/guide/encrypt/</link>
-      <guid>https://vue-blog.lllllan.cn/guide/encrypt/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">密码加密的文章</source>
-      <category>使用指南</category>
-      <pubDate>Thu, 20 Jan 2022 05:26:23 GMT</pubDate>
-      <content:encoded><![CDATA[<h1 id="密码加密的文章"> 密码加密的文章</h1>
-<p>实际的文章内容。</p>
-<p>段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字。</p>
-<p>段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字。</p>
+      <content:encoded><![CDATA[<h2 id="一、生成-http-请求消息"> 一、生成 HTTP 请求消息</h2>
+<h3 id="_1-1-网址-url-uniform-resource-locator"> 1.1 网址（URL, Uniform Resource Locator）</h3>
+<p><img src="./README.assets/image-20211217214228466.png" alt="image-20211217214228466" /></p>
+<h3 id="_1-2-解析-url"> 1.2 解析 URL</h3>
+<p><img src="./README.assets/image-20211217214541708.png" alt="image-20211217214541708" /></p>
+<p><img src="./README.assets/image-20211217214555087.png" alt="image-20211217214555087" /></p>
+<h3 id="_1-3-文件名省略"> 1.3 文件名省略</h3>
+<ul>
+<li>当 URL 以 <code>/</code> 结尾时，服务器会默认访问该路径下的 <code>index.html</code> 或 <code>default.html</code> 文件</li>
+<li>当 URL 连 <code>/</code> 和文件类型都省略的时候：</li>
+</ul>
+<p><img src="./README.assets/image-20211217215354653.png" alt="image-20211217215354653" /></p>
+<p>（实测：当一个文件没有文件类型的时候，不允许和一个同名文件夹同时存在。而当这个文件有后缀时，应该会访问同名文件夹）</p>
+<h3 id="_1-4-http-基本思路"> 1.4 HTTP 基本思路</h3>
+<ul>
+<li>对什么 + 进行怎样的操作</li>
+</ul>
+<p><img src="./README.assets/image-20211217215856796.png" alt="image-20211217215856796" /></p>
+<p><img src="./README.assets/image-20211217215922575.png" alt="image-20211217215922575" /></p>
+<h3 id="_1-5-生成-http-请求信息"> 1.5 生成 HTTP 请求信息</h3>
+<blockquote>
+<p><strong>一条请求消息中只能写一个URI</strong>。如果需要获取多个文件，必须对每个文件单独发送一条请求</p>
+</blockquote>
+<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
+<p><img src="./../../../../../../data/r2coding/4.计算机基础/1.计算机网络/1.网络是怎样连接的/网络是怎样连接的.assets/image-20211217223351942.png" alt="image-20211217223351942" /></p>
+<p>更多字段信息见文档 44 页。</p>
+<h3 id="_1-6-服务器响应"> 1.6 服务器响应</h3>
+<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
+<blockquote>
+<p>状态码时一个数字，主要用来向程序告知执行的结果</p>
+<p>响应短语是一段文字，用来向人们告知执行的结果</p>
+</blockquote>
+<p><img src="./README.assets/image-20211217224050584.png" alt="image-20211217224050584" /></p>
+<p><img src="./README.assets/image-20211217224916808.png" alt="image-20211217224916808" /></p>
+<h2 id="二、向-dns-服务器查询-web-服务器的-ip-地址"> 二、向 DNS 服务器查询 Web 服务器的 IP 地址</h2>
+<h3 id="_2-1-ip-地址的基本知识"> 2.1 IP 地址的基本知识</h3>
+<p><img src="./README.assets/image-20211219221243726.png" alt="image-20211219221243726" /></p>
+<p><img src="./README.assets/image-20211219221343432.png" alt="image-20211219221343432" /></p>
+<ul>
+<li>IP 地址是 32 比特的数字，被分成了4组</li>
+<li>子网掩码也是 32 比特的数字
+<ul>
+<li><strong>左边全1的部分表示网络号</strong></li>
+<li><strong>右边全0的部分表示主机号</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="./README.assets/image-20211219222137630.png" alt="image-20211219222137630" /></p>
+<p><img src="./README.assets/image-20211219222245701.png" alt="image-20211219222245701" /></p>
+<h3 id="_2-2-域名和ip地址并用的理由"> 2.2 域名和IP地址并用的理由</h3>
+<ul>
+<li>域名比IP地址更容易记忆</li>
+<li>IP地址的传输比域名更高效（IP地址只是4字节的数字，域名最长可以是255字节的字符）</li>
+</ul>
+<p>于是让人来使用域名，让路由器来使用IP地址，这个机制就是<strong>DNS</strong>。</p>
+<h3 id="_2-3-socket-库提供查询-ip-地址的功能"> 2.3 Socket 库提供查询 IP 地址的功能</h3>
+<blockquote>
+<p><strong>域名解析</strong>：通过DNS查询IP地址的操作。</p>
+</blockquote>
+<blockquote>
+<p><strong>解析器</strong>：负责执行域名解析的DNS客户端。（解析器实际上是一段程序。）</p>
+</blockquote>
+<p>​	库是一堆通用程序组件的集合，他们具有诸多好处：</p>
+<ul>
+<li>节省编程工作量</li>
+<li>实现程序的标准化</li>
+<li>等等</li>
+</ul>
+<p>​	Socket库也是一种库，其中包含的程序组件可以让其他的应用程序调用操作系统的网络功能，而解析器就是这个库中的其中一种程序组件。</p>
+<h3 id="_2-4-通过解析器向dns服务器发出查询"> 2.4 通过解析器向DNS服务器发出查询</h3>
+<ul>
+<li>调用解析器</li>
+<li>解析器向DNS服务器发送查询消息</li>
+<li>DNS服务器返回响应消息</li>
+<li>解析器从响应消息中取出IP地址并写入内存</li>
+</ul>
+<p><img src="./README.assets/image-20211223215500444.png" alt="image-20211223215500444" /></p>
+<p>根据域名查询IP地址时，浏览器会使用Socket库中的解析器。</p>
+<h3 id="_2-5-解析器的内部原理"> 2.5 解析器的内部原理</h3>
+<blockquote>
+<p><strong>控制流程转移</strong>：由于调用了其他程序，原本运行的程序进入暂停状态，而被调用的程序开始运行。</p>
+</blockquote>
+<ul>
+<li>从上往下顺序执行应用程序编写的操作内容，当到达需要调用解析器的部分时</li>
+<li>控制流程转移到解析器，解析器会生成要发送给DNS服务器的查询消息</li>
+<li>委托操作系统内部的协议栈来发送这个消息（因为解析器本身并不具备使用网络收发数据的功能</li>
+</ul>
+<p><img src="./README.assets/image-20211224205322811.png" alt="image-20211224205322811" /></p>
+<p>向DNS服务器发送消息时，也需要知道DNS服务器的IP地址。这是这个地址实现设置好了，不需要再查询。</p>
+<p><img src="./README.assets/image-20211224213701480.png" alt="image-20211224213701480" /></p>
+<h2 id="三、dns-服务器"> 三、DNS 服务器</h2>
+<h3 id="_3-1-dns-服务器的基本工作"> 3.1 DNS 服务器的基本工作</h3>
+<p>DNS 服务器的基本工作就是根据需要查询的域名和记录类型查找相关的记录，并向客户端返回响应消息。</p>
+<ul>
+<li>域名：服务器、邮件服务器（邮件地址@后面的部分）的名称</li>
+<li>Class：代表互联网的IN</li>
+<li>记录类型：表示域名对应何种类型的记录。</li>
+</ul>
+<p><img src="./README.assets/image-20211224215024279.png" alt="image-20211224215024279" /></p>
+<h3 id="_3-2-域名的层次结构"> 3.2 域名的层次结构</h3>
+<p>由于存在着不计其数的服务器，不可能将所有服务器的信息保存在一台DNS服务器中，只能是将这些信息分布保存在多台DNS服务器中。</p>
+<ul>
+<li>按域名以分层次的结构来保存</li>
+<li>域名中越靠右的位置表示气层级越高</li>
+<li>每个域都是作为一个整体存放在DNS服务器中的</li>
+</ul>
+<h3 id="_3-3-寻找相应的-dns-服务器并获取-ip-地址"> 3.3 寻找相应的 DNS 服务器并获取 IP 地址</h3>
+<ul>
+<li>负责管理下级域的 DNS 服务器的 IP 地址注册到他们的上级 DNS 服务器中</li>
+<li>com和jp 的上面存在一个 根域</li>
+<li>所有 DNS 服务器中都保存有根域的 DNS 服务器信息</li>
+</ul>
+<p><img src="./README.assets/image-20211224220739596.png" alt="image-20211224220739596" /></p>
+<p><img src="./README.assets/image-20211224220802400.png" alt="image-20211224220802400" /></p>
+<h3 id="_3-4-通过缓存加快-dns-服务器的响应"> 3.4 通过缓存加快 DNS 服务器的响应</h3>
+<p>DNS 服务器有一个缓存功能，可以记住之前查询过的域名</p>
+<ul>
+<li>如果要查询的域名和相关信息已经在缓存中，那么就可以直接返回响应。</li>
+<li>当查询的域名不存在时，“不存在”这一响应结果也会被缓存</li>
+<li>缓存信息设置有一个有效期，当信息超过有效期后，数据会从缓存中删除</li>
+<li>DNS服务器返回响应时，会告知这一响应结果是来自缓存还是来自负责管理该域名的DNS服务器</li>
+</ul>
+<h2 id="四、委托协议栈发送消息"> 四、委托协议栈发送消息</h2>
+<h3 id="_4-1-数据收发操作概览"> 4.1 数据收发操作概览</h3>
+<blockquote>
+<p>委托操作系统内部的协议栈发送HTTP消息，适用于<strong>任何</strong>网络应用程序。</p>
+</blockquote>
+<p><img src="./README.assets/image-20211225120920801.png" alt="image-20211225120920801" /></p>
+<ul>
+<li>创建套接字（出入口） —— <strong>创建套接字阶段</strong></li>
+<li>【客户端】向【服务器端】套接字连接管道 —— <strong>连接阶段</strong></li>
+<li>收发数据 —— <strong>通信阶段</strong></li>
+<li>断开管道并删除套接字 —— <strong>断开阶段</strong></li>
+</ul>
+<blockquote>
+<p>这个管道中，<em>数据流动是<strong>双向</strong>的</em></p>
+</blockquote>
+<h3 id="_4-2-创建套接字阶段"> 4.2 创建套接字阶段</h3>
+<blockquote>
+<p>创建套接字需要调用 Socket 库中的 <strong>socket 程序组件</strong></p>
+</blockquote>
+<p>客户端创建套接字：</p>
+<ul>
+<li>调用 Socket 库中的 socket 程序组件</li>
+<li>控制流程转移到 socket 内部并执行创建套接字操作</li>
+<li>控制流程交回应用程序</li>
+</ul>
+<p><img src="./README.assets/image-20211225122553775.png" alt="image-20211225122553775" /></p>
+<blockquote>
+<p>套接字创建完成以后，协议栈返回一个<strong>描述符</strong>，用来标识该套接字</p>
+</blockquote>
+<h3 id="_4-3-连接阶段"> 4.3 连接阶段</h3>
+<blockquote>
+<p>连接阶段需要调用 Socket 库中的 <strong>connect 程序组件</strong></p>
+</blockquote>
+<p>调用 connect 时需要指定三个参数：描述符、服务器IP地址、端口号</p>
+<p><img src="./README.assets/image-20211225130205613.png" alt="image-20211225130205613" /></p>
+<h3 id="_4-4-通信阶段"> 4.4 通信阶段</h3>
+<blockquote>
+<p>通信阶段需要调用 Socket 库中的 <strong>write 程序组件</strong>、<strong>read 程序组件</strong></p>
+</blockquote>
+<p>发送数据：</p>
+<ul>
+<li>生成 HTTP 请求消息</li>
+<li>指定描述符和要发送的数据，由协议栈将数据发送到服务器</li>
+</ul>
+<p>接收数据：</p>
+<ul>
+<li>指定存放响应消息的内存地址（称为接收缓冲区）</li>
+<li>read 将接收到的响应消息存放到接收缓冲区中</li>
+</ul>
+<h3 id="_4-5-断开阶段"> 4.5 断开阶段</h3>
+<blockquote>
+<p>断开阶段需要调用 Socket 库中的 <strong>close 程序组件</strong></p>
+</blockquote>
+<ul>
+<li>Web服务器在发送完响应消息之后，会首先调用 close 来断开连接</li>
+<li>客户端中 read 执行接收数据时，会告知浏览器通信阶段已结束</li>
+<li>浏览器调用 close 进入断开阶段</li>
+</ul>
+<h3 id="_4-6-各阶段功能和调用组件"> 4.6 各阶段功能和调用组件</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">阶段</th>
+<th style="text-align:center">组件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">创建套接字</td>
+<td style="text-align:center">socket</td>
+</tr>
+<tr>
+<td style="text-align:center">连接</td>
+<td style="text-align:center">connect</td>
+</tr>
+<tr>
+<td style="text-align:center">通信</td>
+<td style="text-align:center">发送：write<br>接收：read</td>
+</tr>
+<tr>
+<td style="text-align:center">断开</td>
+<td style="text-align:center">close</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五、本章回顾"> 五、本章回顾</h2>
+<ul>
+<li>网址前的 <code>http</code> 代表什么意思</li>
+</ul>
+<blockquote>
+<p>HTTP，即超文本传输协议，是 HyperText Transfer Protocol的缩写。</p>
+</blockquote>
+<ul>
+<li>用来识别连接在互联网上的计算机和服务器的地址叫什么</li>
+</ul>
+<blockquote>
+<p>IP 地址</p>
+</blockquote>
+<ul>
+<li>根据Web服务器的域名来查询IP地址时所用的服务器叫什么</li>
+</ul>
+<blockquote>
+<p>DNS 服务器</p>
+</blockquote>
+<ul>
+<li>向DNS服务器发送请求消息的程序叫什么</li>
+</ul>
+<blockquote>
+<p>协议栈</p>
+</blockquote>
 ]]></content:encoded>
     </item>
     <item>
-      <title>MySQL 笔记</title>
-      <link>https://vue-blog.lllllan.cn/2-mysql/</link>
-      <guid>https://vue-blog.lllllan.cn/2-mysql/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">MySQL 笔记</source>
-      <category>MySQL</category>
-      <content:encoded><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
-<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
-<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
+      <title>第二章、用电信号传输 TCP/IP 数据</title>
+      <link>https://vue-blog.lllllan.cn/3-cs-basic/1-computer-network/1-how-is-the-network-connected/2-transmission-of-electrical-signal/</link>
+      <guid>https://vue-blog.lllllan.cn/3-cs-basic/1-computer-network/1-how-is-the-network-connected/2-transmission-of-electrical-signal/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">第二章、用电信号传输 TCP/IP 数据</source>
+      <category>计算机基础</category>
+      <content:encoded><![CDATA[<h2 id="零、前情提要"> 零、前情提要</h2>
+<ol>
+<li>创建套接字。</li>
+<li>连接服务器。</li>
+<li>收发数据。</li>
+<li>断开连接并删除套接字。</li>
+<li>IP与以太网的包收发操作。</li>
+<li>用UDP协议收发数据的操作。</li>
+</ol>
+<p><img src="./README.assets/image-20211226140619512.png" alt="image-20211226140619512" /></p>
+<h2 id="一、创建套接字"> 一、创建套接字</h2>
+<h3 id="_1-1-协议栈的内部结构"> 1.1 协议栈的内部结构</h3>
+<p><img src="./README.assets/image-20211226140825219.png" alt="image-20211226140825219" /></p>
+<blockquote>
+<p>浏览器、邮件等<strong>一般应用程序收发数据时用TCP</strong>；</p>
+<p><strong>DNS查询等收发较短的控制数据时用UDP</strong>。</p>
+</blockquote>
+<blockquote>
+<p><strong>ICMP用于告知网络包传送过程中产生的错误以及各种控制消息</strong>；</p>
+<p><strong>ARP用于根据IP地址查询相应的以太网MAC地址</strong>。</p>
+</blockquote>
+<h3 id="_1-2-套接字的实体就是通信控制信息"> 1.2 套接字的实体就是通信控制信息</h3>
+<blockquote>
+<p>协议栈是根据套接字中记录的控制信息来工作的。</p>
+</blockquote>
+<p><img src="./README.assets/image-20211226141825503.png" alt="image-20211226141825503" /></p>
+<p><img src="./README.assets/image-20211226141937848.png" alt="image-20211226141937848" /></p>
+<h3 id="_1-3-调用-socket-时的操作"> 1.3 调用 socket 时的操作</h3>
+<blockquote>
+<p>创建套接字时，首先分配一个套接字所需的内存空间，让后向其中写入初始状态。</p>
+</blockquote>
+<p><img src="./README.assets/image-20211226142213413.png" alt="image-20211226142213413" /></p>
+<h2 id="二、连接服务器"> 二、连接服务器</h2>
+<h3 id="_2-1-连接"> 2.1 连接</h3>
+<blockquote>
+<p>连接实际上是通信双方交换控制信息，在套接字中记录一些必要信息并准备数据收发的一连串操作。</p>
+</blockquote>
+<ul>
+<li>把服务器的IP地址和端口号等信息告知协议栈</li>
+<li>客户端向服务器传达开始通信的请求</li>
+<li>开辟一个空间作为缓冲区</li>
+</ul>
+<h3 id="_2-2-负责保存控制信息的头部"> 2.2 负责保存控制信息的头部</h3>
+<p>通信操作中使用的控制信息分为两类：</p>
+<ul>
+<li>头部中记录的信息</li>
+<li>套接字中记录的信息</li>
+</ul>
+<p><img src="../../../../../../data/r2coding/4.计算机基础/1.计算机网络/1.网络是怎样连接的/网络是怎样连接的.assets/image-20211227214442175.png" alt="image-20211227214442175" style="zoom:150%;" /><img src="./README.assets/image-20211227214507743.png" alt="image-20211227214507743" /></p>
+<h3 id="_2-3-连接操作的实际过程"> 2.3 连接操作的实际过程</h3>
+<ul>
+<li>在TCP模块处创建表示连接控制信息的头部</li>
+<li>通过TCP头部中的发送方和接收方端口号可以找到要连接的套接字
+<ul>
+<li>TCP模块将信息发送给IP模块并委托它进行发送</li>
+<li>IP模块执行网络包发送到达服务器</li>
+<li>服务器上的IP模块将接收的信息传递给TCP模块</li>
+<li>服务器上的TCP模块根据TCP头部中的信息找到端口号对应的套接字</li>
+<li>在套接字中写入相应信息，修改状态为正在连接，并向客户端返回响应</li>
+</ul>
+</li>
+<li>客户端接收到服务器的套接字信息，向服务器再次发回消息表示接收成功</li>
+</ul>
+<h2 id="三、收发数据"> 三、收发数据</h2>
+<h3 id="_3-1-将-http-请求交给协议栈"> 3.1 将 HTTP 请求交给协议栈</h3>
+<p>协议栈接收到数据后，先将数据存到内部的发送缓冲区。根据以下两个维度的判断，再将HTTP请求发送出去：</p>
+<ul>
+<li>当从应用程序收到的数据长度超过或接近MSS时再发送出去，可以避免发送大量小包的问题。
+<ul>
+<li><strong>MTU</strong>：一个网络包的最大长度，一般是1500字节</li>
+<li><strong>MSS</strong>：除去头部之后，一个网络包所能容纳的TCP数据的最大长度</li>
+</ul>
+</li>
+<li>协议栈内部有一个计时器，当经过一定时间以后，就会把网络包发送出去。</li>
+</ul>
+<blockquote>
+<p>应用程序在发送数据时可以指定一些选项，比如指定“不等待填满缓冲区直接发送“，协议栈就会按照要求直接发送。</p>
+</blockquote>
+<h3 id="_3-2-对较大数据进行拆分"> 3.2 对较大数据进行拆分</h3>
+<p>当一个HTTP请求的长度，超过了网络包的最大长度，就需要对该请求进行拆分。</p>
+<p><img src="./README.assets/image-20211228205521676.png" alt="image-20211228205521676" /></p>
+<h3 id="_3-3-使用ack号确认网络包收到"> 3.3 使用ACK号确认网络包收到</h3>
+<ul>
+<li>发送方：从第xxx字节开始，共有xxx字节</li>
+<li>接收方：收到到第xxx字节之前的全部数据</li>
+</ul>
+<img src="README.assets/image-20211229180218040.png" alt="image-20211229180218040" style="zoom: 150%;" />
+<p><img src="./README.assets/image-20211229181203165.png" alt="image-20211229181203165" /><img src="./README.assets/image-20211229181227356.png" alt="image-20211229181227356" /></p>
+<blockquote>
+<p>在得到对方的确认之前，发送过的包会保存在发送缓存区。如果对方一直没有返回某些包的ACK号，就会重新发送这些包。</p>
+</blockquote>
+<h3 id="_3-4-根据网络包平均往返时间调整ack号等待时间"> 3.4 根据网络包平均往返时间调整ACK号等待时间</h3>
+<p>TCP会在发送数据的过程中持续测量ACK号的返回时间，如果ACK号返回变慢，则相应延长等待时间；如果ACK号马上就能返回，则相应缩短等待时间。</p>
+<h3 id="_3-5-使用窗口有效管理ack号"> 3.5 使用窗口有效管理ACK号</h3>
+<blockquote>
+<p>滑动窗口：在发送一个包之后，不等待ACK号返回，直接发送后续的一系列包。</p>
+<p>接收方需要告诉发送方自己最多能接收多少数据，然后发送方根据这个值对数据发送操作进行控制，这就是滑动窗口的基本思路。</p>
+</blockquote>
+<p><img src="./README.assets/image-20211229190220706.png" alt="image-20211229190220706" /></p>
+<p>如果不等待ACK号返回一直自顾自地持续发送，就可能出现发送包的频率超过接收方的处理能力的情况。</p>
+<p>接收方收到包之后会保存在接收缓冲区中，计算ACK号并返回给发送方，还要将数据传递给应用程序。如果这些操作还未完成，就有新的数据包到达，都会暂存早接收缓冲区中。但是当接收缓冲区中已经存满，再发送数据包也不可能存的下，这时候发送方的发送频率就超出了接收方的处理能力。</p>
+<p>因此接收方会实现告知发送方自己的处理能力（接收缓冲区的大小），发送方会根据已发送的数据包、接收方的缓冲区计算，判断是否还可以继续发送数据。</p>
+<p><img src="./README.assets/image-20211229190610804.png" alt="image-20211229190610804" /></p>
+<h3 id="_3-6-ack与窗口的合并"> 3.6 ACK与窗口的合并</h3>
+<p><strong>问题描述：</strong></p>
+<p>当接收方接收到一个数据包，计算好ACK号返回给发送方。假设接收方的接收缓冲区中就只够保存一个数据包，返回了ACK号并不代表他可以继续接收新的数据包。因为还需要将这个数据传递给应用程序，到这个时候才可以从缓冲区将数据包删除，腾出空间来接收新的数据包。</p>
+<p>从这个角度出发，接收方收到一个数据包，分别要返回一个ACK号和更新窗口的信息。如果是这样的话，要返回的包就太多了，会导致网络效率的下降。</p>
+<p><strong>解决：</strong></p>
+<p>接收方计算好ACK号时、窗口更新时，不会马上把包发送出去。</p>
+<p>而是等ACK号和窗口更新，或者多个ACK号一起合并发送，以此来减少包的数量。</p>
+<h3 id="_3-7-接收http响应消息"> 3.7 接收HTTP响应消息</h3>
+<p><img src="./README.assets/image-20211229200045483.png" alt="image-20211229200045483" /></p>
+<h2 id="四、从服务器断开并删除套接字"> 四、从服务器断开并删除套接字</h2>
+<h3 id="_4-1-断开连接"> 4.1 断开连接</h3>
+<blockquote>
+<ul>
+<li>协议栈在设计上允许<strong>任何一方</strong>（客户端/服务器端）先发起断开过程</li>
+<li>无论哪种，完成数据发送的一方都会发起断开过程。（无非谁先谁后而已）</li>
+</ul>
+</blockquote>
+<p>eg：</p>
+<ul>
+<li>服务器端先断开连接：
+<ul>
+<li>调用 Socket 库中的 close</li>
+<li>生成一个包含断开信息的 TCP 头部，控制位中 <strong>FIN</strong> 比特位为1</li>
+<li>协议栈委托 IP 模块向客户端发送数据</li>
+<li>套接字中记录断开操作的信息</li>
+</ul>
+</li>
+<li>客户端接收断开信息：
+<ul>
+<li>收到服务器发来的 <strong>FIN</strong> 为1的 TCP 头部</li>
+<li>协议栈将套接字标记为断开操作状态</li>
+<li>向服务器返回一个 <strong>ACK</strong> 号</li>
+</ul>
+</li>
+<li>客户端断开连接：
+<ul>
+<li>执行和服务器相同的操作</li>
+<li>服务器也向客户端返回一个 <strong>ACK</strong> 号</li>
+</ul>
+</li>
+</ul>
+<p><img src="./README.assets/image-20220107205801563.png" alt="image-20220107205801563" /></p>
+<h3 id="_4-2-删除套接字"> 4.2 删除套接字</h3>
+<blockquote>
+<p>通信结束以后，会等待一段时间再删除套接字</p>
+</blockquote>
+<p><strong>原因：</strong></p>
+<div><pre><code>	如果服务器向客户端发送 **FIN**，而客户端向服务器返回的 **ACK** 号丢失了，那么服务器可能会重新发送一次 **FIN**。但是服务器没有等待，直接删除了这个套接字。
+</code></pre>
+</div><p>​		之后新的任务到达，有一个新的套接字分配得到了这个端口号。而客户端因为服务器重新发送的 <strong>FIN</strong>，返回的 <strong>ACK</strong> 号达到了。这时候服务器就会断开这个刚刚创建的新的套接字。</p>
+<h3 id="_4-3-数据收发小结"> 4.3 数据收发小结</h3>
+<p><img src="./README.assets/image-20220107214550624.png" alt="image-20220107214550624" /></p>
+<h2 id="五、ip-与以太网的包的收发操作"> 五、IP 与以太网的包的收发操作</h2>
+<h3 id="_5-1-包的基本知识"> 5.1 包的基本知识</h3>
+<p><img src="./README.assets/image-20220108091227641.png" alt="image-20220108091227641" /></p>
+<p>数据收发过程中的双方，在不同时刻可能互为接收方和发送方，因此统称为 <strong>终端节点</strong></p>
+<p>数据包会经过一个个的网络转发设备，最后到达接收方。</p>
+<ul>
+<li>发送方将接收方的 IP 地址写入 IP头部</li>
+<li>IP 协议根据这一 IP地址查找包的传输方向，从而确定下一个路由器的位置</li>
+<li><strong>IP协议查出下一个路由器的以太网地址（MAC地址）</strong>，并将地址写入MAC头部</li>
+<li>IP协议委托以太网协议将包传输</li>
+</ul>
+<blockquote>
+<ul>
+<li>路由器根据目标地址判断下一个路由器的位置 —— IP协议</li>
+<li>集线器在子网中将网络包传输到下一个路由 —— 以太网协议</li>
+</ul>
+</blockquote>
+<p><img src="./README.assets/image-20220108093602850.png" alt="image-20220108093602850" /></p>
+<h3 id="_5-2-包收发操作概览"> 5.2 包收发操作概览</h3>
+<ol>
+<li>TCP模块委托IP模块发送包：
+<ul>
+<li>TCP模块在数据块前面加上TCP头部</li>
+<li><strong>指定通信对象的IP地址</strong></li>
+<li>整个传递给IP模块</li>
+</ul>
+</li>
+<li>IP模块封装数据包：
+<ul>
+<li><strong>IP模块会添加IP头部和MAC头部</strong></li>
+<li>转交给网络硬件</li>
+</ul>
+</li>
+<li>网络包在网卡间传递</li>
+<li>接收方接收网络包：
+<ul>
+<li>网卡将包转化为数字信息传递给IP模块</li>
+<li>IP模块解除IP头部和MAC头部，将TCP头部和数据块传递给TCP模块</li>
+<li>TCP模块处理数据</li>
+</ul>
+</li>
+</ol>
+<p><img src="./README.assets/image-20220108105125589.png" alt="image-20220108105125589" /></p>
+<blockquote>
+<p><strong>IP模块的职责就是将委托的东西打包送到对方手里。不关心TCP头部和数据内容，也不关心TCP的操作。</strong></p>
+</blockquote>
+<h3 id="_5-3-ip头部"> 5.3 IP头部</h3>
+<img src="README.assets/image-20220108124243007.png" alt="image-20220108124243007" style="zoom:150%;" />
+<p><img src="./README.assets/image-20220108124706189.png" alt="image-20220108124706189" /></p>
+<h3 id="_5-4-mac头部"> 5.4 MAC头部</h3>
+<p>IP模块根据路由表 Gateway 栏的内容判断应该把包发送给谁。</p>
+<p>再根据IP地址查询MAC地址</p>
+<p><img src="./README.assets/image-20220108161553247.png" alt="image-20220108161553247" /></p>
+<h3 id="_5-5-arp查询目标路由器的mac地址"> 5.5 ARP查询目标路由器的MAC地址</h3>
+<ul>
+<li>ARP利用广播对所有设备问 <code>XX这个IP地址是谁的，请把你的MAC地址告诉我</code>，然后等待目标路由器将MAC地址返回</li>
+</ul>
+<p><img src="./README.assets/image-20220108162056855.png" alt="image-20220108162056855" /></p>
+<ul>
+<li>ARP缓存</li>
+</ul>
+<p><img src="./README.assets/image-20220108163905777.png" alt="image-20220108163905777" /></p>
+<ul>
+<li>MAC地址</li>
+</ul>
+<p><img src="./README.assets/image-20220108163921704.png" alt="image-20220108163921704" /></p>
+<ul>
+<li>ARP缓存过几分钟就会将原记录删除，以防因为IP地址的改变而导致通信异常</li>
+</ul>
+<h3 id="_5-6-以太网基本知识"> 5.6 以太网基本知识</h3>
+<img src="README.assets/image-20220108164652863.png" alt="image-20220108164652863" style="zoom:150%;" />
+<h3 id="_5-7-发送光电信号"> 5.7 发送光电信号</h3>
+<blockquote>
+<p>网卡的ROM中保存着全世界唯一的MAC地址，这是在生产网卡时写入的</p>
+<p>网卡中保存的MAC地址会由网卡驱动程序读取并分配给MAC模块</p>
+</blockquote>
+<p><img src="./README.assets/image-20220108165951786.png" alt="image-20220108165951786" /></p>
+<h3 id="_5-8-给网络包添加控制数据"> 5.8 给网络包添加控制数据</h3>
+<blockquote>
+<p>MAC模块将网络包从缓存中取出，并在开头加上 <strong>报头</strong> 和 <strong>起始帧分节符</strong>，在末尾加上 <strong>帧校验序列(FCS)</strong></p>
+</blockquote>
+<p><img src="./README.assets/image-20220109091031789.png" alt="image-20220109091031789" /></p>
+<ul>
+<li>用电信号来表达数字信息，让0和1分别对应特定的电压和电流
+<ul>
+<li><strong>数据信号如果出现连续的1或0，由于电流和电压没有变化，我们没办法判断其中每个比特从哪里切分</strong></li>
+</ul>
+</li>
+<li>再发送一组用来区分比特间隔的时钟信号
+<ul>
+<li><strong>当距离较远、网线较长时，两条线路的长度可能会发生差异，数据信号和时钟信号的传输会产生时间差，时钟就会偏移</strong></li>
+</ul>
+</li>
+<li>将数据信号和时钟信号叠加在一起
+<ul>
+<li><strong>由于时钟信号是按固定频率变化的，只要找到这个变化的周期就能从中提取出时钟信号，进而计算出数据信号</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="./README.assets/image-20220109091740442.png" alt="image-20220109091740442" /></p>
+<h3 id="_5-9-向集线器发送网络包"> 5.9 向集线器发送网络包</h3>
+<blockquote>
+<p>发送信号的两种操作：使用集线器的<strong>半双工模式</strong>、使用交换机的<strong>全双工模式</strong></p>
+</blockquote>
+<p>​	半双工模式中，需要先判断网线中是否存在其他设备发送的信号。如果有，需要等待信号传输完毕才能发送，否则两组信号会发生碰撞。</p>
+<ol>
+<li>
+<p><strong>MAC 模块将数字信号按每个比特转换成电信号</strong></p>
+</li>
+<li>
+<p><strong>PHY（MAU）模块将该信号进行格式转换</strong>并通过网线发送出去、监控接受线路中有无信号进来</p>
+</li>
+</ol>
+<blockquote>
+<p>协议栈的TCP会负责搞定可能发生的错误，因此发送信号是没有必要检查错误</p>
+</blockquote>
+<h3 id="_5-10-接受返回包"> 5.10 接受返回包</h3>
+<p><strong>接受步骤：</strong></p>
+<ol>
+<li>把通过接受线路的所有信号都接收进来</li>
+<li>PHY（MAU）模块将信号转换成通用格式并发送给 MAC 模块</li>
+<li>MAC 模块从头开始将信号转换成数字信息，并存放到缓冲区</li>
+<li>检查 FCS 和 MAC 地址，将数据受污染和地址不一致的包直接丢弃</li>
+<li>网卡通过 <strong>中断机制</strong> 通知计算机收到一个包
+<ol>
+<li>网卡向扩展总线中的中断信号发送信号</li>
+<li>该信号通过中断控制器连接到CPU</li>
+<li>CPU暂时挂起正在处理的任务，切换到中断处理程序</li>
+<li>中断处理程序调用网卡驱动</li>
+<li>网卡执行接收操作</li>
+</ol>
+</li>
+<li>网卡根据包中不同协议类型，将包发送给不同的栈</li>
+</ol>
+<h3 id="_5-11-将服务器的响应包从ip传递给tcp"> 5.11 将服务器的响应包从IP传递给TCP</h3>
+<p><strong>IP模块的任务：</strong></p>
+<ol>
+<li>检查IP头部，确认格式是否正确</li>
+<li>查看接收方IP地址，如果有误通过ICMP消息告知对方</li>
+<li>分片重组：如果原始的包被分成了多个小包，需要将他们还原成原始的包</li>
+</ol>
+<p><img src="./README.assets/image-20220111144946393.png" alt="image-20220111144946393" /></p>
+<p><strong>TCP模块的任务：</strong></p>
+<ol>
+<li>找到对应套接字，根据通信记录执行操作：
+<ul>
+<li>如果包的内容是应用程序数据，则返回确认接收的包，并将数据放入缓冲区，等待应用程序来读取</li>
+<li>如果是建立或断开连接的控制包，则返回相应的响应控制包，并告知应用程序建立或断开连接的操作状态</li>
+</ul>
+</li>
+</ol>
+<h2 id="六、udp-协议的收发操作"> 六、UDP 协议的收发操作</h2>
+<h3 id="_6-1-不需要重发的数据用-udp-更高效"> 6.1 不需要重发的数据用 UDP 更高效</h3>
+<blockquote>
+<p>TCP为了实现可靠性和高效传输，需要将数据分片发送，并将对方未接收的数据包重新发送。</p>
+</blockquote>
+<h3 id="_6-2-控制用的短数据"> 6.2 控制用的短数据</h3>
+<p>像DNS查询等交换控制信息的操作基本上都可以在一个包的大小范围内解决，这种场景既可以用UDP来代替TCP</p>
+<blockquote>
+<p>UDP只负责发送包，不管任何可能出现的错误</p>
+</blockquote>
+<p><img src="./README.assets/image-20220111153930637.png" alt="image-20220111153930637" /></p>
+<h3 id="_6-3-音频和视频数据"> 6.3 音频和视频数据</h3>
+<p>音频和视频数据必须在规定时间内送达，（一旦错过播放时间，重发数据也没用）因此无需重发数据。这种情况下使用UDP发送数据的效率更高</p>
+<h2 id="七、本章回顾"> 七、本章回顾</h2>
+<ul>
+<li>表示网络包收件人的接收方IP地址是位于IP头部还是TCP头部？</li>
+</ul>
+<blockquote>
+<p>**IP头部。**接收方IP地址最初从应用程序获得， 经由TCP模块告知IP模块</p>
+</blockquote>
+<ul>
+<li>端口号所用来指定服务器程序的种类，那么他位于TCP头部还是IP头部？</li>
+</ul>
+<blockquote>
+<p>**TCP头部。**连接操作的第一步是在TCP模块处创建表示连接控制信息的头部。通过TCP头部中的发送方和接收方端口号可以找到要连接的套接字。</p>
+</blockquote>
+<ul>
+<li>会对包是否正确送达进行确认的是TCP还是IP呢？</li>
+</ul>
+<blockquote>
+<p>TCP</p>
+</blockquote>
+<ul>
+<li>根据IP地址查询MAC地址的机制叫什么？</li>
+</ul>
+<blockquote>
+<p>ARP</p>
+<p>在以太网中，有一种叫作广播的方法，可以把包发给连接在同一以太网中的所有设备。ARP就是利用广播对所有设备提问：“××这个IP地址是谁的？请把你的MAC地址告诉我。”然后就会有人回答：“这个IP地址是我的，我的MAC地址是××××。”</p>
+</blockquote>
+<ul>
+<li>在收到ACK号之前继续发送下一个包的方式叫什么？</li>
+</ul>
+<blockquote>
+<p>滑动窗口方式</p>
+</blockquote>
 ]]></content:encoded>
     </item>
     <item>
@@ -1615,60 +2193,68 @@ after method send
 ]]></content:encoded>
     </item>
     <item>
-      <title>页面配置</title>
-      <link>https://vue-blog.lllllan.cn/guide/page/</link>
-      <guid>https://vue-blog.lllllan.cn/guide/page/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">页面配置</source>
-      <category>使用指南</category>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 GMT</pubDate>
-      <content:encoded><![CDATA[<h2 id="页面信息"> 页面信息</h2>
-<p>你可以在 Markdown 的 Frontmatter 中设置页面信息。</p>
-<ul>
-<li>
-<p>作者设置为 Ms.Hope。</p>
-</li>
-<li>
-<p>写作时间应为 2020 年 1 月 1 日</p>
-</li>
-<li>
-<p>分类为 “使用指南”</p>
-</li>
-<li>
-<p>标签为 “页面配置” 和 “使用指南”</p>
-</li>
-</ul>
-<h2 id="页面内容"> 页面内容</h2>
-<p>你可以自由在这里书写你的 Markdown。</p>
-<div><p>Tips</p>
-<ul>
-<li>
-<p>Markdown 文件夹的图片请使用相对链接 <code>./</code> 进行引用。</p>
-</li>
-<li>
-<p><code>.vuepress/public</code> 文件夹的图片，请使用绝对链接 <code>/</code> 进行引用</p>
-</li>
-</ul>
-</div>
-<p>主题包含了一个自定义徽章章可以使用:</p>
+      <title>第三章、从网线到网络设备</title>
+      <link>https://vue-blog.lllllan.cn/3-cs-basic/1-computer-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</link>
+      <guid>https://vue-blog.lllllan.cn/3-cs-basic/1-computer-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">第三章、从网线到网络设备</source>
+      <category>计算机基础</category>
+      <content:encoded><![CDATA[<h2 id="一、信号在网线和集线器中传输"> 一、信号在网线和集线器中传输</h2>
+<h3 id="_1-1-每个包都是独立传输的"> 1.1 每个包都是独立传输的</h3>
+<p><img src="./README.assets/image-20220113145717884.png" alt="image-20220113145717884" /></p>
+<h3 id="_1-2-网线中的信号衰减"> 1.2 网线中的信号衰减</h3>
+<p>以太网信号的本质是正负变化的电压。</p>
+<p>信号在网线的传输过程中，能量会逐渐损失。网线越长，信号衰减就越严重。</p>
+<p>同时噪声也会进一步加剧信号的失真。</p>
+<h3 id="_1-3-双绞线抑制噪声"> 1.3 双绞线抑制噪声</h3>
 <blockquote>
-<p>文字结尾应该有深蓝色的 徽章文字 徽章。 <i>Not supported content</i></p>
+<p>产生噪声的原因是网线周围的电磁波，当电磁波接触到金属等导体时，在其中就会产生电流。信号和噪声的电流混杂在一起之后，导致信号的波形发生失真。</p>
 </blockquote>
-<h2 id="页面结构"> 页面结构</h2>
-<p>此页面应当包含：</p>
-<ul>
-<li>返回顶部按钮</li>
-<li>路径导航</li>
-<li>评论</li>
-<li>页脚</li>
-</ul>
+<p>影响网线的电磁波分为两种：</p>
+<h4 id="来自网线之外的其他设备"> 来自网线之外的其他设备：</h4>
+<p>当电磁波接触到信号线时，会沿电磁波传播的右旋方向产生电流。</p>
+<p>如果我们将信号线缠绕在一起，信号线就变成了螺旋形，其中两根信号线产生的噪声电流方向就会相反，从而使得噪声电流相互抵消。</p>
+<p><img src="./README.assets/image-20220113150630538.png" alt="image-20220113150630538" /></p>
+<p><img src="./README.assets/image-20220113150651814.png" alt="image-20220113150651814" /></p>
+<h4 id="相邻信号线泄露出来"> 相邻信号线泄露出来：</h4>
+<p>这种内部产生的噪声称为 <strong>串扰</strong></p>
+<p><img src="./README.assets/image-20220113151240119.png" alt="image-20220113151240119" /></p>
+<p><img src="./README.assets/image-20220113151203170.png" alt="image-20220113151203170" /></p>
+<h3 id="_1-4-集线器将信号发往所有线路"> 1.4 集线器将信号发往所有线路</h3>
+<blockquote>
+<p>集线器将信号发送给所有连接在它上面的线路。</p>
+</blockquote>
+<p><img src="./README.assets/image-20220113151435359.png" alt="image-20220113151435359" /></p>
+<p><img src="./README.assets/image-20220113151613603.png" alt="image-20220113151613603" /></p>
 ]]></content:encoded>
     </item>
     <item>
-      <title>Java 笔记</title>
-      <link>https://vue-blog.lllllan.cn/guide/</link>
-      <guid>https://vue-blog.lllllan.cn/guide/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">Java 笔记</source>
+      <title>计算机基础</title>
+      <link>https://vue-blog.lllllan.cn/3-cs-basic/</link>
+      <guid>https://vue-blog.lllllan.cn/3-cs-basic/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">计算机基础</source>
+      <category>计算机基础</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+    </item>
+    <item>
+      <title>密码加密的文章</title>
+      <link>https://vue-blog.lllllan.cn/guide/encrypt/</link>
+      <guid>https://vue-blog.lllllan.cn/guide/encrypt/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">密码加密的文章</source>
+      <category>使用指南</category>
       <pubDate>Thu, 20 Jan 2022 05:26:23 GMT</pubDate>
+      <content:encoded><![CDATA[<h1 id="密码加密的文章"> 密码加密的文章</h1>
+<p>实际的文章内容。</p>
+<p>段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字段落 1 文字。</p>
+<p>段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字段落 2 文字。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>刷题 笔记</title>
+      <link>https://vue-blog.lllllan.cn/4-practice/</link>
+      <guid>https://vue-blog.lllllan.cn/4-practice/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">刷题 笔记</source>
+      <category>刷题</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
     </item>
     <item>
       <title>Markdown 增强</title>
@@ -2129,18 +2715,53 @@ $$
 ]]></content:encoded>
     </item>
     <item>
-      <title>项目主页</title>
-      <link>https://vue-blog.lllllan.cn/home/</link>
-      <guid>https://vue-blog.lllllan.cn/home/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">项目主页</source>
-      <pubDate>Thu, 20 Jan 2022 05:26:23 GMT</pubDate>
-    </item>
-    <item>
-      <title>博客主页</title>
-      <link>https://vue-blog.lllllan.cn/</link>
-      <guid>https://vue-blog.lllllan.cn/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">博客主页</source>
-      <pubDate>Thu, 20 Jan 2022 05:26:23 GMT</pubDate>
+      <title>页面配置</title>
+      <link>https://vue-blog.lllllan.cn/guide/page/</link>
+      <guid>https://vue-blog.lllllan.cn/guide/page/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">页面配置</source>
+      <category>使用指南</category>
+      <pubDate>Wed, 01 Jan 2020 00:00:00 GMT</pubDate>
+      <content:encoded><![CDATA[<h2 id="页面信息"> 页面信息</h2>
+<p>你可以在 Markdown 的 Frontmatter 中设置页面信息。</p>
+<ul>
+<li>
+<p>作者设置为 Ms.Hope。</p>
+</li>
+<li>
+<p>写作时间应为 2020 年 1 月 1 日</p>
+</li>
+<li>
+<p>分类为 “使用指南”</p>
+</li>
+<li>
+<p>标签为 “页面配置” 和 “使用指南”</p>
+</li>
+</ul>
+<h2 id="页面内容"> 页面内容</h2>
+<p>你可以自由在这里书写你的 Markdown。</p>
+<div><p>Tips</p>
+<ul>
+<li>
+<p>Markdown 文件夹的图片请使用相对链接 <code>./</code> 进行引用。</p>
+</li>
+<li>
+<p><code>.vuepress/public</code> 文件夹的图片，请使用绝对链接 <code>/</code> 进行引用</p>
+</li>
+</ul>
+</div>
+<p>主题包含了一个自定义徽章章可以使用:</p>
+<blockquote>
+<p>文字结尾应该有深蓝色的 徽章文字 徽章。 <i>Not supported content</i></p>
+</blockquote>
+<h2 id="页面结构"> 页面结构</h2>
+<p>此页面应当包含：</p>
+<ul>
+<li>返回顶部按钮</li>
+<li>路径导航</li>
+<li>评论</li>
+<li>页脚</li>
+</ul>
+]]></content:encoded>
     </item>
     <item>
       <title>幻灯片页</title>
@@ -2151,6 +2772,27 @@ $$
       <content:encoded><![CDATA[
 <i>Not supported content</i>]]></content:encoded>
       <enclosure url="https://vue-blog.lllllan.cn/logo.svg" type="image/svg+xml"/>
+    </item>
+    <item>
+      <title>博客主页</title>
+      <link>https://vue-blog.lllllan.cn/</link>
+      <guid>https://vue-blog.lllllan.cn/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">博客主页</source>
+      <pubDate>Thu, 20 Jan 2022 05:26:23 GMT</pubDate>
+    </item>
+    <item>
+      <title>Java 笔记</title>
+      <link>https://vue-blog.lllllan.cn/guide/</link>
+      <guid>https://vue-blog.lllllan.cn/guide/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">Java 笔记</source>
+      <pubDate>Thu, 20 Jan 2022 05:26:23 GMT</pubDate>
+    </item>
+    <item>
+      <title>项目主页</title>
+      <link>https://vue-blog.lllllan.cn/home/</link>
+      <guid>https://vue-blog.lllllan.cn/home/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">项目主页</source>
+      <pubDate>Thu, 20 Jan 2022 05:26:23 GMT</pubDate>
     </item>
   </channel>
 </rss>

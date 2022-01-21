@@ -69,6 +69,33 @@ module.exports = config({
           ],
         },
       ],
+
+      "/3-cs-basic": [
+        "3-cs-basic/",
+        {
+          title: "计算机网络",
+          icon: "",
+          prefix: "3-cs-basic/1-computer-network/",
+          children: [
+            {
+              title: "网络是怎样连接的",
+              icon: "",
+              prefix: "1-how-is-the-network-connected/",
+              children: [
+                "1-browser-generated-messages/",
+                "2-transmission-of-electrical-signal/",
+                "3-network-cables-to-network-devices/",
+              ],
+            },
+          ],
+        },
+        {
+          title: "操作系统",
+          icon: "",
+          prefix: "",
+          children: [],
+        },
+      ],
       "/": [
         "",
         "home",
