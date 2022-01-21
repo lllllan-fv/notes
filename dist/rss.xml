@@ -6,8 +6,8 @@
     <link>https://vue-blog.lllllan.cn/</link>
     <description></description>
     <language>en-US</language>
-    <pubDate>Fri, 21 Jan 2022 11:44:27 GMT</pubDate>
-    <lastBuildDate>Fri, 21 Jan 2022 11:44:27 GMT</lastBuildDate>
+    <pubDate>Fri, 21 Jan 2022 11:54:39 GMT</pubDate>
+    <lastBuildDate>Fri, 21 Jan 2022 11:54:39 GMT</lastBuildDate>
     <generator>@mr-hope/vuepress-plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <copyright>Copyright by lllllan</copyright>
@@ -248,6 +248,109 @@
 <h3 id="面向对象三大特性"> 面向对象三大特性</h3>
 <h3 id="修饰符"> 修饰符</h3>
 <h3 id="集合"> 集合</h3>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>java 是值传递</title>
+      <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</link>
+      <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">java 是值传递</source>
+      <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/" target="_blank" rel="noopener noreferrer">为什么 Java 中只有值传递？ | JavaGuide</a>，略有改动</p>
+</div>
+<h2 id="值传递-引用传递"> 值传递 &amp; 引用传递</h2>
+<p>程序设计语言将实参传递给方法（或函数）的方式分为两种：</p>
+<ul>
+<li><strong>值传递</strong> ：方法接收的是实参值的拷贝，会创建副本。</li>
+<li><strong>引用传递</strong> ：方法接收的直接是实参所引用的对象在堆中的地址，不会创建副本，对形参的修改将影响到实参。</li>
+</ul>
+<p>很多程序设计语言（比如 C++、 Pascal )提供了两种参数传递的方式，不过，在 Java 中只有值传递。</p>
+<h2 id="实例"> 实例</h2>
+<h3 id="对基本数据类型进行修改"> 对基本数据类型进行修改</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>int</span> num1 <span>=</span> <span>10</span><span>;</span>
+    <span>int</span> num2 <span>=</span> <span>20</span><span>;</span>
+    <span>swap</span><span>(</span>num1<span>,</span> num2<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num1 = "</span> <span>+</span> num1<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num2 = "</span> <span>+</span> num2<span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>int</span> a<span>,</span> <span>int</span> b<span>)</span> <span>{</span>
+    <span>int</span> temp <span>=</span> a<span>;</span>
+    a <span>=</span> b<span>;</span>
+    b <span>=</span> temp<span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"a = "</span> <span>+</span> a<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"b = "</span> <span>+</span> b<span>)</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+    
+a <span>=</span> <span>20</span>
+b <span>=</span> <span>10</span>
+num1 <span>=</span> <span>10</span>
+num2 <span>=</span> <span>20</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div><ul>
+<li>a和b只是从num1和num2复制得到了值，怎么操作都不会产生影响</li>
+</ul>
+<p><img src="./README.assets/java-value-passing-01.ab88fb01.png" alt="基本数据类型参数" /></p>
+<h3 id="修改引用类型中的值"> 修改引用类型中的值</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>int</span><span>[</span><span>]</span> arr <span>=</span> <span>{</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span> <span>}</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
+    <span>change</span><span>(</span>arr<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>change</span><span>(</span><span>int</span><span>[</span><span>]</span> array<span>)</span> <span>{</span>
+    <span>// 将数组的第一个元素变为0</span>
+    array<span>[</span><span>0</span><span>]</span> <span>=</span> <span>0</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+   
+<span>1</span>
+<span>0</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p><img src="./README.assets/java-value-passing-02.ff1b76c9.png" alt="引用数据类型参数1" /></p>
+<h3 id="修改引用类型的对象"> 修改引用类型的对象</h3>
+<div><pre><code><span>public</span> <span>class</span> <span>Person</span> <span>{</span>
+    <span>private</span> <span>String</span> name<span>;</span>
+   <span>// 省略构造函数、Getter&amp;Setter方法</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>Person</span> xiaoZhang <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小张"</span><span>)</span><span>;</span>
+    <span>Person</span> xiaoLi <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小李"</span><span>)</span><span>;</span>
+    <span>swap</span><span>(</span>xiaoZhang<span>,</span> xiaoLi<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoZhang:"</span> <span>+</span> xiaoZhang<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoLi:"</span> <span>+</span> xiaoLi<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>Person</span> person1<span>,</span> <span>Person</span> person2<span>)</span> <span>{</span>
+    <span>Person</span> temp <span>=</span> person1<span>;</span>
+    person1 <span>=</span> person2<span>;</span>
+    person2 <span>=</span> temp<span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person1:"</span> <span>+</span> person1<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person2:"</span> <span>+</span> person2<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+    
+person1<span>:</span>小李
+person2<span>:</span>小张
+xiaoZhang<span>:</span>小张
+xiaoLi<span>:</span>小李
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br></div></div><p><img src="./README.assets/java-value-passing-03.da4d0422.png" alt="引用数据类型参数2" /></p>
+<h2 id="总结"> 总结</h2>
+<p>Java 中将实参传递给方法（或函数）的方式是 <strong>值传递</strong> ：</p>
+<ul>
+<li>如果参数是基本类型的话，很简单，传递的就是基本类型的字面量值的拷贝，会创建副本。</li>
+<li>如果参数是引用类型，传递的就是实参所引用的对象在堆中地址值的拷贝，同样也会创建副本。</li>
+</ul>
 ]]></content:encoded>
     </item>
     <item>
@@ -751,318 +854,6 @@ input<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
 ]]></content:encoded>
     </item>
     <item>
-      <title>java 是值传递</title>
-      <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</link>
-      <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">java 是值传递</source>
-      <category>Java</category>
-      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
-      <content:encoded><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/" target="_blank" rel="noopener noreferrer">为什么 Java 中只有值传递？ | JavaGuide</a>，略有改动</p>
-</div>
-<h2 id="值传递-引用传递"> 值传递 &amp; 引用传递</h2>
-<p>程序设计语言将实参传递给方法（或函数）的方式分为两种：</p>
-<ul>
-<li><strong>值传递</strong> ：方法接收的是实参值的拷贝，会创建副本。</li>
-<li><strong>引用传递</strong> ：方法接收的直接是实参所引用的对象在堆中的地址，不会创建副本，对形参的修改将影响到实参。</li>
-</ul>
-<p>很多程序设计语言（比如 C++、 Pascal )提供了两种参数传递的方式，不过，在 Java 中只有值传递。</p>
-<h2 id="实例"> 实例</h2>
-<h3 id="对基本数据类型进行修改"> 对基本数据类型进行修改</h3>
-<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>int</span> num1 <span>=</span> <span>10</span><span>;</span>
-    <span>int</span> num2 <span>=</span> <span>20</span><span>;</span>
-    <span>swap</span><span>(</span>num1<span>,</span> num2<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num1 = "</span> <span>+</span> num1<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num2 = "</span> <span>+</span> num2<span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>int</span> a<span>,</span> <span>int</span> b<span>)</span> <span>{</span>
-    <span>int</span> temp <span>=</span> a<span>;</span>
-    a <span>=</span> b<span>;</span>
-    b <span>=</span> temp<span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"a = "</span> <span>+</span> a<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"b = "</span> <span>+</span> b<span>)</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-    
-a <span>=</span> <span>20</span>
-b <span>=</span> <span>10</span>
-num1 <span>=</span> <span>10</span>
-num2 <span>=</span> <span>20</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div><ul>
-<li>a和b只是从num1和num2复制得到了值，怎么操作都不会产生影响</li>
-</ul>
-<p><img src="./README.assets/java-value-passing-01.ab88fb01.png" alt="基本数据类型参数" /></p>
-<h3 id="修改引用类型中的值"> 修改引用类型中的值</h3>
-<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>int</span><span>[</span><span>]</span> arr <span>=</span> <span>{</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span> <span>}</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
-    <span>change</span><span>(</span>arr<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>change</span><span>(</span><span>int</span><span>[</span><span>]</span> array<span>)</span> <span>{</span>
-    <span>// 将数组的第一个元素变为0</span>
-    array<span>[</span><span>0</span><span>]</span> <span>=</span> <span>0</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-   
-<span>1</span>
-<span>0</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p><img src="./README.assets/java-value-passing-02.ff1b76c9.png" alt="引用数据类型参数1" /></p>
-<h3 id="修改引用类型的对象"> 修改引用类型的对象</h3>
-<div><pre><code><span>public</span> <span>class</span> <span>Person</span> <span>{</span>
-    <span>private</span> <span>String</span> name<span>;</span>
-   <span>// 省略构造函数、Getter&amp;Setter方法</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>Person</span> xiaoZhang <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小张"</span><span>)</span><span>;</span>
-    <span>Person</span> xiaoLi <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小李"</span><span>)</span><span>;</span>
-    <span>swap</span><span>(</span>xiaoZhang<span>,</span> xiaoLi<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoZhang:"</span> <span>+</span> xiaoZhang<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoLi:"</span> <span>+</span> xiaoLi<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>Person</span> person1<span>,</span> <span>Person</span> person2<span>)</span> <span>{</span>
-    <span>Person</span> temp <span>=</span> person1<span>;</span>
-    person1 <span>=</span> person2<span>;</span>
-    person2 <span>=</span> temp<span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person1:"</span> <span>+</span> person1<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person2:"</span> <span>+</span> person2<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-    
-person1<span>:</span>小李
-person2<span>:</span>小张
-xiaoZhang<span>:</span>小张
-xiaoLi<span>:</span>小李
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br></div></div><p><img src="./README.assets/java-value-passing-03.da4d0422.png" alt="引用数据类型参数2" /></p>
-<h2 id="总结"> 总结</h2>
-<p>Java 中将实参传递给方法（或函数）的方式是 <strong>值传递</strong> ：</p>
-<ul>
-<li>如果参数是基本类型的话，很简单，传递的就是基本类型的字面量值的拷贝，会创建副本。</li>
-<li>如果参数是引用类型，传递的就是实参所引用的对象在堆中地址值的拷贝，同样也会创建副本。</li>
-</ul>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>反射机制</title>
-      <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</link>
-      <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">反射机制</source>
-      <category>Java</category>
-      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
-      <content:encoded><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/basis/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">反射机制详解！ | JavaGuide</a>，略有改动</p>
-</div>
-<blockquote>
-<p>总之反射就是能获取一个类的所有方法和属性，并能够调用。</p>
-<p>然后还能增加代码的灵活性。</p>
-<p>但是，我还是没有感受到，灵活在哪里。。。</p>
-</blockquote>
-<h2 id="什么是反射"> 什么是反射？</h2>
-<p>反射就是Reflection，Java的反射是指程序在<strong>运行期</strong>可以拿到一个对象的所有信息，，你还可以调用这些方法和属性。</p>
-<h2 id="反射的应用场景"> 反射的应用场景</h2>
-<ul>
-<li>模块化的开发，通过反射去调用对应的字节码</li>
-<li>框架中大量使用动态代理，而动态代理依赖反射机制实现</li>
-<li>注解的实现也用到了反射</li>
-</ul>
-<p><strong>JDBC的数据库连接</strong></p>
-<div><pre><code><span>public</span> <span>static</span> <span>final</span> <span>String</span> DBDRIVER <span>=</span> <span>"com.mysql.jdbc.Driver"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBURL <span>=</span> <span>"jdbc:mysql://localhost:3306/test"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBUSER <span>=</span> <span>"root"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBPASS <span>=</span> <span>""</span><span>;</span>  
-
-<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>  
-    <span>Connection</span> con <span>=</span> <span>null</span><span>;</span>
-    <span>Class</span><span>.</span><span>forName</span><span>(</span>DBDRIVER<span>)</span><span>;</span> <span>//1、使用CLASS 类加载驱动程序 ,反射机制的体现 </span>
-    con <span>=</span> <span>DriverManager</span><span>.</span><span>getConnection</span><span>(</span>DBURL<span>,</span>DBUSER<span>,</span>DBPASS<span>)</span><span>;</span> <span>//2、连接数据库  </span>
-    <span>.</span><span>.</span><span>.</span>
-    con<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span> <span>// 3、关闭数据库  </span>
-<span>}</span>  
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="反射的优缺点"> 反射的优缺点</h2>
-<p><strong>优点：</strong> 让代码更加灵、为各种框架提供开箱即用的功能提供便利</p>
-<p><strong>缺点：</strong> 在运行时有了分析操作类的能力，同样增加了安全问题。性能略差，不过对于框架的影响比较小。</p>
-<h2 id="反射的使用"> 反射的使用</h2>
-<h3 id="获取class对象的四种方式"> 获取Class对象的四种方式</h3>
-<p><strong>1.知道具体类的情况下可以使用</strong></p>
-<div><pre><code><span>Class</span> alunbarClass <span>=</span> <span>TargetObject</span><span>.</span><span>class</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><p><strong>2.通过 <code>Class.forName()</code> 传入类的路径获取</strong></p>
-<div><pre><code><span>Class</span> alunbarClass1 <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><p><strong>3.通过对象实例 <code>instance.getClass()</code> 获取</strong></p>
-<div><pre><code><span>TargetObject</span> o <span>=</span> <span>new</span> <span>TargetObject</span><span>(</span><span>)</span><span>;</span>
-<span>Class</span> alunbarClass2 <span>=</span> o<span>.</span><span>getClass</span><span>(</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p><strong>4.通过类加载器 <code>xxxClassLoader.loadClass()</code> 传入类路径获取</strong></p>
-<div><pre><code><span>Class</span> clazz <span>=</span> <span>ClassLoader</span><span>.</span><span>loadClass</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><h3 id="反射的基本操作"> 反射的基本操作</h3>
-<p><strong>1.定义一个类</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>TargetObject</span> <span>{</span>
-    <span>private</span> <span>String</span> value<span>;</span>
-
-    <span>public</span> <span>TargetObject</span><span>(</span><span>)</span> <span>{</span>
-        value <span>=</span> <span>"JavaGuide"</span><span>;</span>
-    <span>}</span>
-
-    <span>public</span> <span>void</span> <span>publicMethod</span><span>(</span><span>String</span> s<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"I love "</span> <span>+</span> s<span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>private</span> <span>void</span> <span>privateMethod</span><span>(</span><span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"value is "</span> <span>+</span> value<span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p><strong>2.使用反射来操作这个类的方法及参数</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>ClassNotFoundException</span><span>,</span> <span>NoSuchMethodException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>InstantiationException</span><span>,</span> <span>InvocationTargetException</span><span>,</span> <span>NoSuchFieldException</span> <span>{</span>
-        <span>/**
-         * 获取TargetObject类的Class对象并且创建TargetObject类实例
-         */</span>
-        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> tagetClass <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-        <span>TargetObject</span> targetObject <span>=</span> <span>(</span><span>TargetObject</span><span>)</span> tagetClass<span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
-        <span>/**
-         * 获取所有类中所有定义的方法
-         */</span>
-        <span>Method</span><span>[</span><span>]</span> methods <span>=</span> tagetClass<span>.</span><span>getDeclaredMethods</span><span>(</span><span>)</span><span>;</span>
-        <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
-            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>}</span>
-        <span>/**
-         * 获取指定方法并调用
-         */</span>
-        <span>Method</span> publicMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"publicMethod"</span><span>,</span>
-                <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
-
-        publicMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
-        <span>/**
-         * 获取指定参数并对参数进行修改
-         */</span>
-        <span>Field</span> field <span>=</span> tagetClass<span>.</span><span>getDeclaredField</span><span>(</span><span>"value"</span><span>)</span><span>;</span>
-        <span>//为了对类中的参数进行修改我们取消安全检查</span>
-        field<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
-        field<span>.</span><span>set</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
-        <span>/**
-         * 调用 private 方法
-         */</span>
-        <span>Method</span> privateMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"privateMethod"</span><span>)</span><span>;</span>
-        <span>//为了调用private方法我们取消安全检查</span>
-        privateMethod<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
-        privateMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br></div></div><p><strong>3.输出结果</strong></p>
-<div><pre><code>publicMethod
-privateMethod
-<span>I</span> love <span>JavaGuide</span>
-value is <span>JavaGuide</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div>]]></content:encoded>
-    </item>
-    <item>
-      <title>MySQL 笔记</title>
-      <link>https://vue-blog.lllllan.cn/2-mysql/</link>
-      <guid>https://vue-blog.lllllan.cn/2-mysql/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">MySQL 笔记</source>
-      <category>MySQL</category>
-      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
-      <content:encoded><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
-<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
-<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>Java 垃圾回收</title>
-      <link>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</link>
-      <guid>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">Java 垃圾回收</source>
-      <category>Java</category>
-      <pubDate>Thu, 20 Jan 2022 08:35:36 GMT</pubDate>
-      <content:encoded><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide</a></p>
-</div>
-<h1 id="写在前面"> 写在前面</h1>
-<h2 id="常见面试题"> 常见面试题</h2>
-<ul>
-<li>如何判断对象是否死亡（两种方法）。</li>
-<li>简单的介绍一下强引用、软引用、弱引用、虚引用（虚引用与软引用和弱引用的区别、使用软引用能带来的好处）。</li>
-<li>如何判断一个常量是废弃常量</li>
-<li>如何判断一个类是无用的类</li>
-<li>垃圾收集有哪些算法，各自的特点？</li>
-<li>HotSpot 为什么要分为新生代和老年代？</li>
-<li>常见的垃圾回收器有哪些？</li>
-<li>介绍一下 CMS,G1 收集器。</li>
-<li>Minor Gc 和 Full GC 有什么不同呢？</li>
-</ul>
-<h2 id="核心问题"> 核心问题</h2>
-<ol>
-<li>内存如何分配和回收</li>
-<li>哪些垃圾需要回收</li>
-<li>什么时候回收</li>
-<li>如何回收</li>
-</ol>
-<p><img src="./README.assets/image-20220118102736004.png" alt="image-20220118102736004" /></p>
-<h1 id="一、jvm内存分配与回收"> 一、JVM内存分配与回收</h1>
-<p>Java 的自动内存管理主要是针对<strong>对象内存</strong>的回收和对象内存的分配。同时，Java 自动内存管理最核心的功能是 <strong>堆</strong> 内存中对象的分配与回收。</p>
-<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>.从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：新生代和老年代：再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
-<p><img src="./README.assets/01d330d8-2710-4fad-a91c-7bbbfaaefc0e.fac41c8a.png" alt="img" /></p>
-<blockquote>
-<h2 id="第一次理解"> 第一次理解</h2>
-<p>如图所示，一般对象的创建，会先分配到图左1的 <code>Eden</code> 区域，随着垃圾回收的进行，仍然存活的对象会根据存活时间向老年代转移。</p>
-<h2 id="常见分配策略"> 常见分配策略</h2>
-<ol>
-<li>对象优先在 <code>Eden</code> 区域分配</li>
-<li>大对象直接进入老年代</li>
-<li>长期存活的对象将进入老年代</li>
-</ol>
-</blockquote>
-<h2 id="_1-1-对象优先在-eden-区域分配"> 1.1 对象优先在 <code>Eden</code> 区域分配</h2>
-<p>目前主流的垃圾收集器都会采用<strong>分代回收算法</strong>，因此需要将堆内存分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。</p>
-<p>大多数情况下，对象在新生代中 eden 区分配。当 eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC.</p>
-<p>具体测试见 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/#_1-1-%E5%AF%B9%E8%B1%A1%E4%BC%98%E5%85%88%E5%9C%A8-eden-%E5%8C%BA%E5%88%86%E9%85%8D" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide | 1.1 对象优先在 <code>Eden</code> 区域分配</a></p>
-<h2 id="_1-2-大对象直接进入老年代"> 1.2 大对象直接进入老年代</h2>
-<p><strong>为什么要这样呢？</strong></p>
-<p>为了避免为大对象分配内存时由于分配担保机制带来的复制而降低效率。（我的理解是：eden中内存分配不足时，总有对象要被转移到老年代的，不如一开始就将比较大的对象直接分配在老年代）</p>
-<h2 id="_1-3-长期存活的对象将进入老年代"> 1.3 长期存活的对象将进入老年代</h2>
-<p>如果对象在 Eden 出生并经过第一次 Minor GC 后仍然能够存活，并且能被 Survivor 容纳的话，将被移动到 Survivor 空间中，并将对象年龄设为 1.对象在 Survivor 中每熬过一次 MinorGC,年龄就增加 1 岁，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置。</p>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>Java 笔记</title>
-      <link>https://vue-blog.lllllan.cn/1-java/</link>
-      <guid>https://vue-blog.lllllan.cn/1-java/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">Java 笔记</source>
-      <category>Java</category>
-      <pubDate>Thu, 20 Jan 2022 09:33:02 GMT</pubDate>
-      <content:encoded><![CDATA[<div><p>重要声明</p>
-<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
-</div>
-<h2 id="参考"> 参考</h2>
-<ul>
-<li>
-<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
-</li>
-<li>
-<p><a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a></p>
-</li>
-</ul>
-]]></content:encoded>
-    </item>
-    <item>
       <title>代理详解</title>
       <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/</link>
       <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/</guid>
@@ -1328,6 +1119,215 @@ after method send
 <span>}</span>
 </code></pre>
 <div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。为什么呢？我觉得还是和底层数据结构有关！<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O(n)，所以不支持快速随机访问。，<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。 <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的！</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Java 笔记</title>
+      <link>https://vue-blog.lllllan.cn/1-java/</link>
+      <guid>https://vue-blog.lllllan.cn/1-java/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">Java 笔记</source>
+      <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 09:33:02 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>重要声明</p>
+<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
+</div>
+<h2 id="参考"> 参考</h2>
+<ul>
+<li>
+<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
+</li>
+<li>
+<p><a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a></p>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>反射机制</title>
+      <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</link>
+      <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">反射机制</source>
+      <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/basis/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">反射机制详解！ | JavaGuide</a>，略有改动</p>
+</div>
+<blockquote>
+<p>总之反射就是能获取一个类的所有方法和属性，并能够调用。</p>
+<p>然后还能增加代码的灵活性。</p>
+<p>但是，我还是没有感受到，灵活在哪里。。。</p>
+</blockquote>
+<h2 id="什么是反射"> 什么是反射？</h2>
+<p>反射就是Reflection，Java的反射是指程序在<strong>运行期</strong>可以拿到一个对象的所有信息，，你还可以调用这些方法和属性。</p>
+<h2 id="反射的应用场景"> 反射的应用场景</h2>
+<ul>
+<li>模块化的开发，通过反射去调用对应的字节码</li>
+<li>框架中大量使用动态代理，而动态代理依赖反射机制实现</li>
+<li>注解的实现也用到了反射</li>
+</ul>
+<p><strong>JDBC的数据库连接</strong></p>
+<div><pre><code><span>public</span> <span>static</span> <span>final</span> <span>String</span> DBDRIVER <span>=</span> <span>"com.mysql.jdbc.Driver"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBURL <span>=</span> <span>"jdbc:mysql://localhost:3306/test"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBUSER <span>=</span> <span>"root"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBPASS <span>=</span> <span>""</span><span>;</span>  
+
+<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>  
+    <span>Connection</span> con <span>=</span> <span>null</span><span>;</span>
+    <span>Class</span><span>.</span><span>forName</span><span>(</span>DBDRIVER<span>)</span><span>;</span> <span>//1、使用CLASS 类加载驱动程序 ,反射机制的体现 </span>
+    con <span>=</span> <span>DriverManager</span><span>.</span><span>getConnection</span><span>(</span>DBURL<span>,</span>DBUSER<span>,</span>DBPASS<span>)</span><span>;</span> <span>//2、连接数据库  </span>
+    <span>.</span><span>.</span><span>.</span>
+    con<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span> <span>// 3、关闭数据库  </span>
+<span>}</span>  
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="反射的优缺点"> 反射的优缺点</h2>
+<p><strong>优点：</strong> 让代码更加灵、为各种框架提供开箱即用的功能提供便利</p>
+<p><strong>缺点：</strong> 在运行时有了分析操作类的能力，同样增加了安全问题。性能略差，不过对于框架的影响比较小。</p>
+<h2 id="反射的使用"> 反射的使用</h2>
+<h3 id="获取class对象的四种方式"> 获取Class对象的四种方式</h3>
+<p><strong>1.知道具体类的情况下可以使用</strong></p>
+<div><pre><code><span>Class</span> alunbarClass <span>=</span> <span>TargetObject</span><span>.</span><span>class</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>2.通过 <code>Class.forName()</code> 传入类的路径获取</strong></p>
+<div><pre><code><span>Class</span> alunbarClass1 <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>3.通过对象实例 <code>instance.getClass()</code> 获取</strong></p>
+<div><pre><code><span>TargetObject</span> o <span>=</span> <span>new</span> <span>TargetObject</span><span>(</span><span>)</span><span>;</span>
+<span>Class</span> alunbarClass2 <span>=</span> o<span>.</span><span>getClass</span><span>(</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p><strong>4.通过类加载器 <code>xxxClassLoader.loadClass()</code> 传入类路径获取</strong></p>
+<div><pre><code><span>Class</span> clazz <span>=</span> <span>ClassLoader</span><span>.</span><span>loadClass</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><h3 id="反射的基本操作"> 反射的基本操作</h3>
+<p><strong>1.定义一个类</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>TargetObject</span> <span>{</span>
+    <span>private</span> <span>String</span> value<span>;</span>
+
+    <span>public</span> <span>TargetObject</span><span>(</span><span>)</span> <span>{</span>
+        value <span>=</span> <span>"JavaGuide"</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>void</span> <span>publicMethod</span><span>(</span><span>String</span> s<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"I love "</span> <span>+</span> s<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>private</span> <span>void</span> <span>privateMethod</span><span>(</span><span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"value is "</span> <span>+</span> value<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p><strong>2.使用反射来操作这个类的方法及参数</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>ClassNotFoundException</span><span>,</span> <span>NoSuchMethodException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>InstantiationException</span><span>,</span> <span>InvocationTargetException</span><span>,</span> <span>NoSuchFieldException</span> <span>{</span>
+        <span>/**
+         * 获取TargetObject类的Class对象并且创建TargetObject类实例
+         */</span>
+        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> tagetClass <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+        <span>TargetObject</span> targetObject <span>=</span> <span>(</span><span>TargetObject</span><span>)</span> tagetClass<span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
+        <span>/**
+         * 获取所有类中所有定义的方法
+         */</span>
+        <span>Method</span><span>[</span><span>]</span> methods <span>=</span> tagetClass<span>.</span><span>getDeclaredMethods</span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>/**
+         * 获取指定方法并调用
+         */</span>
+        <span>Method</span> publicMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"publicMethod"</span><span>,</span>
+                <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
+
+        publicMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
+        <span>/**
+         * 获取指定参数并对参数进行修改
+         */</span>
+        <span>Field</span> field <span>=</span> tagetClass<span>.</span><span>getDeclaredField</span><span>(</span><span>"value"</span><span>)</span><span>;</span>
+        <span>//为了对类中的参数进行修改我们取消安全检查</span>
+        field<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        field<span>.</span><span>set</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
+        <span>/**
+         * 调用 private 方法
+         */</span>
+        <span>Method</span> privateMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"privateMethod"</span><span>)</span><span>;</span>
+        <span>//为了调用private方法我们取消安全检查</span>
+        privateMethod<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        privateMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br></div></div><p><strong>3.输出结果</strong></p>
+<div><pre><code>publicMethod
+privateMethod
+<span>I</span> love <span>JavaGuide</span>
+value is <span>JavaGuide</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>Java 垃圾回收</title>
+      <link>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</link>
+      <guid>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">Java 垃圾回收</source>
+      <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 08:35:36 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide</a></p>
+</div>
+<h1 id="写在前面"> 写在前面</h1>
+<h2 id="常见面试题"> 常见面试题</h2>
+<ul>
+<li>如何判断对象是否死亡（两种方法）。</li>
+<li>简单的介绍一下强引用、软引用、弱引用、虚引用（虚引用与软引用和弱引用的区别、使用软引用能带来的好处）。</li>
+<li>如何判断一个常量是废弃常量</li>
+<li>如何判断一个类是无用的类</li>
+<li>垃圾收集有哪些算法，各自的特点？</li>
+<li>HotSpot 为什么要分为新生代和老年代？</li>
+<li>常见的垃圾回收器有哪些？</li>
+<li>介绍一下 CMS,G1 收集器。</li>
+<li>Minor Gc 和 Full GC 有什么不同呢？</li>
+</ul>
+<h2 id="核心问题"> 核心问题</h2>
+<ol>
+<li>内存如何分配和回收</li>
+<li>哪些垃圾需要回收</li>
+<li>什么时候回收</li>
+<li>如何回收</li>
+</ol>
+<p><img src="./README.assets/image-20220118102736004.png" alt="image-20220118102736004" /></p>
+<h1 id="一、jvm内存分配与回收"> 一、JVM内存分配与回收</h1>
+<p>Java 的自动内存管理主要是针对<strong>对象内存</strong>的回收和对象内存的分配。同时，Java 自动内存管理最核心的功能是 <strong>堆</strong> 内存中对象的分配与回收。</p>
+<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>.从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：新生代和老年代：再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
+<p><img src="./README.assets/01d330d8-2710-4fad-a91c-7bbbfaaefc0e.fac41c8a.png" alt="img" /></p>
+<blockquote>
+<h2 id="第一次理解"> 第一次理解</h2>
+<p>如图所示，一般对象的创建，会先分配到图左1的 <code>Eden</code> 区域，随着垃圾回收的进行，仍然存活的对象会根据存活时间向老年代转移。</p>
+<h2 id="常见分配策略"> 常见分配策略</h2>
+<ol>
+<li>对象优先在 <code>Eden</code> 区域分配</li>
+<li>大对象直接进入老年代</li>
+<li>长期存活的对象将进入老年代</li>
+</ol>
+</blockquote>
+<h2 id="_1-1-对象优先在-eden-区域分配"> 1.1 对象优先在 <code>Eden</code> 区域分配</h2>
+<p>目前主流的垃圾收集器都会采用<strong>分代回收算法</strong>，因此需要将堆内存分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。</p>
+<p>大多数情况下，对象在新生代中 eden 区分配。当 eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC.</p>
+<p>具体测试见 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/#_1-1-%E5%AF%B9%E8%B1%A1%E4%BC%98%E5%85%88%E5%9C%A8-eden-%E5%8C%BA%E5%88%86%E9%85%8D" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide | 1.1 对象优先在 <code>Eden</code> 区域分配</a></p>
+<h2 id="_1-2-大对象直接进入老年代"> 1.2 大对象直接进入老年代</h2>
+<p><strong>为什么要这样呢？</strong></p>
+<p>为了避免为大对象分配内存时由于分配担保机制带来的复制而降低效率。（我的理解是：eden中内存分配不足时，总有对象要被转移到老年代的，不如一开始就将比较大的对象直接分配在老年代）</p>
+<h2 id="_1-3-长期存活的对象将进入老年代"> 1.3 长期存活的对象将进入老年代</h2>
+<p>如果对象在 Eden 出生并经过第一次 Minor GC 后仍然能够存活，并且能被 Survivor 容纳的话，将被移动到 Survivor 空间中，并将对象年龄设为 1.对象在 Survivor 中每熬过一次 MinorGC,年龄就增加 1 岁，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>MySQL 笔记</title>
+      <link>https://vue-blog.lllllan.cn/2-mysql/</link>
+      <guid>https://vue-blog.lllllan.cn/2-mysql/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">MySQL 笔记</source>
+      <category>MySQL</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+      <content:encoded><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
+<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
+<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
 ]]></content:encoded>
     </item>
     <item>
@@ -2423,11 +2423,52 @@ after method send
 ]]></content:encoded>
     </item>
     <item>
+      <title>操作系统-常见面试题</title>
+      <link>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</link>
+      <guid>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">操作系统-常见面试题</source>
+      <category>计算机基础</category>
+      <pubDate>Fri, 21 Jan 2022 02:30:27 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/cs-basics/operating-system/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98&amp;%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">操作系统常见面试题总结 | JavaGuide</a></p>
+</div>
+<h2 id="一、操作系统基础"> 一、操作系统基础</h2>
+<h3 id="_1-1-操作系统"> 1.1 操作系统</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/105945721" target="_blank" rel="noopener noreferrer">什么是操作系统？ - 知乎 (zhihu.com)</a></p>
+<p>操作系统(Operation System, OS) 是指控制和管理整个计算机系统的硬件和软件资源，并合理的组织和调度计算机的工作和资源的分配，以提供给用户和其它软件方便的接口和环境，它是计算机系统中最基本的系统软件。</p>
+<img src="README.assets/v2-9e3753e45963e8de97ec5af05aa4f6e9_720w.jpg" alt="img" style="zoom: 33%;" />
+<p><strong>操作系统说明：</strong></p>
+<ol>
+<li>负责管理协调硬件、软件等计算机资源的工作</li>
+<li>为上层的应用程序、用户提供简单易用的服务</li>
+<li>操作系统是系统软件，而不是硬件</li>
+</ol>
+<p><img src="./README.assets/v2-80e382880632b6067b9c1b7c679de331_720w.jpg" alt="img" /></p>
+<h3 id="_1-2-系统调用"> 1.2 系统调用</h3>
+<p>根据进程访问资源的特点，我们可以把进程在系统上的运行分为两个级别：</p>
+<ol>
+<li>用户态(user mode)：用户态运行的进程可以直接读取用户程序的数据。</li>
+<li>内核态(kernel mode)：可以简单的理解系统态运行的进程或程序几乎可以访问计算机的任何资源，不受限制。</li>
+</ol>
+<p>我们运行的程序基本都是运行在用户态，如果我们调用操作系统提供的系统态级别的子功能咋办呢？那就需要系统调用了！</p>
+<p>也就是说在我们运行的用户程序中，凡是与系统态级别的资源有关的操作（如文件管理、进程控制、内存管理等)，都必须通过系统调用方式向操作系统提出服务请求，并由操作系统代为完成。</p>
+<p>这些系统调用按功能大致可分为如下几类：</p>
+<ul>
+<li>设备管理。完成设备的请求或释放，以及设备启动等功能。</li>
+<li>文件管理。完成文件的读、写、创建及删除等功能。</li>
+<li>进程控制。完成进程的创建、撤销、阻塞及唤醒等功能。</li>
+<li>进程通信。完成进程之间的消息传递或信号传递等功能。</li>
+<li>内存管理。完成内存的分配、回收以及获取作业占用内存区大小及地址等功能。</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
       <title>数组练习</title>
       <link>https://vue-blog.lllllan.cn/4-practice/1-group/1-array/</link>
       <guid>https://vue-blog.lllllan.cn/4-practice/1-group/1-array/</guid>
       <source url="https://vue-blog.lllllan.cn/rss.xml">数组练习</source>
       <category>刷题</category>
+      <pubDate>Fri, 21 Jan 2022 11:45:45 GMT</pubDate>
       <content:encoded><![CDATA[<div><p>Info</p>
 <p>感谢 <a href="https://mp.weixin.qq.com/s/3olK6pBq1tzdoz2EzQZ6Gg" target="_blank" rel="noopener noreferrer">「代码随想录」刷题攻略 (qq.com)</a> 的整理，本章是数组相关题型的简单整理</p>
 </div>
@@ -2771,58 +2812,18 @@ after method send
 <div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br><span>47</span><br><span>48</span><br><span>49</span><br><span>50</span><br><span>51</span><br><span>52</span><br><span>53</span><br><span>54</span><br><span>55</span><br></div></div>]]></content:encoded>
     </item>
     <item>
-      <title>操作系统-常见面试题</title>
-      <link>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</link>
-      <guid>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">操作系统-常见面试题</source>
-      <category>计算机基础</category>
-      <pubDate>Fri, 21 Jan 2022 02:30:27 GMT</pubDate>
-      <content:encoded><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/cs-basics/operating-system/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98&amp;%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">操作系统常见面试题总结 | JavaGuide</a></p>
-</div>
-<h2 id="一、操作系统基础"> 一、操作系统基础</h2>
-<h3 id="_1-1-操作系统"> 1.1 操作系统</h3>
-<p><a href="https://zhuanlan.zhihu.com/p/105945721" target="_blank" rel="noopener noreferrer">什么是操作系统？ - 知乎 (zhihu.com)</a></p>
-<p>操作系统(Operation System, OS) 是指控制和管理整个计算机系统的硬件和软件资源，并合理的组织和调度计算机的工作和资源的分配，以提供给用户和其它软件方便的接口和环境，它是计算机系统中最基本的系统软件。</p>
-<img src="README.assets/v2-9e3753e45963e8de97ec5af05aa4f6e9_720w.jpg" alt="img" style="zoom: 33%;" />
-<p><strong>操作系统说明：</strong></p>
-<ol>
-<li>负责管理协调硬件、软件等计算机资源的工作</li>
-<li>为上层的应用程序、用户提供简单易用的服务</li>
-<li>操作系统是系统软件，而不是硬件</li>
-</ol>
-<p><img src="./README.assets/v2-80e382880632b6067b9c1b7c679de331_720w.jpg" alt="img" /></p>
-<h3 id="_1-2-系统调用"> 1.2 系统调用</h3>
-<p>根据进程访问资源的特点，我们可以把进程在系统上的运行分为两个级别：</p>
-<ol>
-<li>用户态(user mode)：用户态运行的进程可以直接读取用户程序的数据。</li>
-<li>内核态(kernel mode)：可以简单的理解系统态运行的进程或程序几乎可以访问计算机的任何资源，不受限制。</li>
-</ol>
-<p>我们运行的程序基本都是运行在用户态，如果我们调用操作系统提供的系统态级别的子功能咋办呢？那就需要系统调用了！</p>
-<p>也就是说在我们运行的用户程序中，凡是与系统态级别的资源有关的操作（如文件管理、进程控制、内存管理等)，都必须通过系统调用方式向操作系统提出服务请求，并由操作系统代为完成。</p>
-<p>这些系统调用按功能大致可分为如下几类：</p>
-<ul>
-<li>设备管理。完成设备的请求或释放，以及设备启动等功能。</li>
-<li>文件管理。完成文件的读、写、创建及删除等功能。</li>
-<li>进程控制。完成进程的创建、撤销、阻塞及唤醒等功能。</li>
-<li>进程通信。完成进程之间的消息传递或信号传递等功能。</li>
-<li>内存管理。完成内存的分配、回收以及获取作业占用内存区大小及地址等功能。</li>
-</ul>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>项目主页</title>
-      <link>https://vue-blog.lllllan.cn/</link>
-      <guid>https://vue-blog.lllllan.cn/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">项目主页</source>
-    </item>
-    <item>
       <title>刷题笔记</title>
       <link>https://vue-blog.lllllan.cn/4-practice/</link>
       <guid>https://vue-blog.lllllan.cn/4-practice/</guid>
       <source url="https://vue-blog.lllllan.cn/rss.xml">刷题笔记</source>
       <category>刷题</category>
       <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+    </item>
+    <item>
+      <title>项目主页</title>
+      <link>https://vue-blog.lllllan.cn/</link>
+      <guid>https://vue-blog.lllllan.cn/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">项目主页</source>
     </item>
   </channel>
 </rss>

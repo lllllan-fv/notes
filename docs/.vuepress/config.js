@@ -175,20 +175,12 @@ module.exports = config({
 
     footer: {
       display: true,
-      content: "默认页脚",
+      content: '<a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021095794号</a>',
     },
 
-    // comment: {
-    //   type: "waline",
-    //   serverURL: "https://vuepress-theme-hope-comment.vercel.app",
-    // },
-
-    copyright: true,
-    // copyright: {
-    //   status: "global",
-    //   // noCopy: false,
-    //   // minLength: 99999,
-    // },
+    copyright: {
+      status: "global",
+    },
 
     git: {
       timezone: "Asia/Shanghai",

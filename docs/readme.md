@@ -34,7 +34,7 @@ features:
     link: /4-practice/
 
 copyrightText: false
-footer: MIT Licensed | Copyright © 2019-present lllllan
+footer: MIT Licensed | Copyright © 2022 lllllan
 ---
 
 
