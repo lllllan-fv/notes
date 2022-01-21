@@ -33,7 +33,7 @@ star: true
 
 ::: warning
 
-全部抄自 [反射机制详解！ | JavaGuide](https://javaguide.cn/java/basis/反射机制详解/)，列有改动
+本文转载自 [反射机制详解！ | JavaGuide](https://javaguide.cn/java/basis/反射机制详解/)，列有改动
 
 :::
 

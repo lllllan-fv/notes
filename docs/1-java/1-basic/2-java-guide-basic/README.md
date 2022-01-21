@@ -32,7 +32,7 @@ star: true
 
 ::: warning
 
-全部抄自[Java基础知识&面试题总结 | JavaGuide](https://javaguide.cn/java/basis/java基础知识总结/)，略有改动
+本文转载自 [Java基础知识&面试题总结 | JavaGuide](https://javaguide.cn/java/basis/java基础知识总结/)，略有改动
 
 :::
 

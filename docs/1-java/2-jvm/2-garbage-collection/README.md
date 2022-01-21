@@ -28,7 +28,13 @@ star: true
 # footer: 
 ---
 
-> [JVM 垃圾回收详解 | JavaGuide](https://javaguide.cn/java/jvm/jvm-garbage-collection/)
+
+
+::: warning
+
+本文转载自 [JVM 垃圾回收详解 | JavaGuide](https://javaguide.cn/java/jvm/jvm-garbage-collection/)
+
+:::
 
 
 

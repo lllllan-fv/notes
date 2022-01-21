@@ -1,4 +1,4 @@
-```
+---
 # 这是页面的图标
 icon: page
 
@@ -26,7 +26,17 @@ star: true
 
 # 你可以自定义页脚
 # footer: 
-```
+---
+
+
+
+::: warning
+
+本文转载自 [Java集合框架基础知识&面试题总结 | JavaGuide](https://javaguide.cn/java/collection/java集合框架基础知识&面试题总结/)，略有改动
+
+:::
+
+
 
 # 一、集合概述
 

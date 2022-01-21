@@ -32,7 +32,7 @@ star: true
 
 ::: warning
 
-全部抄自 [为什么 Java 中只有值传递？ | JavaGuide](https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/)，略有改动
+本文转载自 [为什么 Java 中只有值传递？ | JavaGuide](https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/)，略有改动
 
 :::	
 

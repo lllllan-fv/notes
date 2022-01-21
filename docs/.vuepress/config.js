@@ -68,6 +68,23 @@ module.exports = config({
             },
           ],
         },
+        {
+          title: "JVM",
+          icon: "",
+          prefix: "1-java/2-jvm/",
+          children: [
+            "1-memory-area-details/",
+            "2-garbage-collection/"
+          ],
+        },
+        {
+          title: "容器",
+          icon: "",
+          prefix: "1-java/3-container/",
+          children: [
+            "1-collection-basic/"
+          ],
+        },
       ],
 
       "/3-cs-basic": [
@@ -75,8 +92,9 @@ module.exports = config({
         {
           title: "计算机网络",
           icon: "",
-          prefix: "3-cs-basic/1-computer-network/",
+          prefix: "3-cs-basic/1-network/",
           children: [
+            "2-interview-questions/",
             {
               title: "网络是怎样连接的",
               icon: "",
@@ -92,8 +110,10 @@ module.exports = config({
         {
           title: "操作系统",
           icon: "",
-          prefix: "",
-          children: [],
+          prefix: "3-cs-basic/2-operating-system/",
+          children: [
+            "1-interview-questions/"
+          ],
         },
       ],
       "/": [

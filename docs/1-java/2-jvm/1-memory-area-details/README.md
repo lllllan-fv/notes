@@ -28,9 +28,17 @@ star: true
 # footer: 
 ---
 
-> 本文抄自 [Java 内存区域详解 | JavaGuide Java 内存区域详解](https://javaguide.cn/java/jvm/memory-area/)
->
-> 这部分内容未免有些太过抽象，这次作为 **泛读**，大概看一眼有一个印象，~~（因为实在是看不懂）~~
+
+
+::: warning
+
+本文转载自 [Java 内存区域详解 | JavaGuide Java 内存区域详解](https://javaguide.cn/java/jvm/memory-area/)
+
+这部分内容未免有些太过抽象，这次作为 **泛读**，大概看一眼有一个印象，~~（因为实在是看不懂）~~
+
+:::
+
+
 
 #  一 概述
 
