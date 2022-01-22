@@ -14,7 +14,7 @@ echo 'vue-blog.lllllan.cn' > CNAME
 
 git init
 git add -A
-git commit -m '[docs] ArrayList 源码解读-一点点'
+git commit -m '[docs] 修改标题'
 
 # 如果你想要部署到 https://<USERNAME>.github.io
 git push -f git@github.com:lllllan-fv/lllllan-fv.github.io.git master
