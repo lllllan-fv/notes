@@ -5,7 +5,7 @@
   <author>
     <name>lllllan</name>
   </author>
-  <updated>2022-01-22T11:36:25.802Z</updated>
+  <updated>2022-01-22T13:21:44.260Z</updated>
   <generator>@mr-hope/vuepress-plugin-feed</generator>
   <link rel="self" href="https://vue-blog.lllllan.cn/atom.xml"/>
   <link rel="alternate" href="https://vue-blog.lllllan.cn/"/>
@@ -249,6 +249,243 @@
 <h3 id="修饰符"> 修饰符</h3>
 <h3 id="集合"> 集合</h3>
 ]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">java 是值传递</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/"/>
+    <updated>2022-01-21T02:30:27.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/" target="_blank" rel="noopener noreferrer">为什么 Java 中只有值传递？ | JavaGuide</a>，略有改动</p>
+</div>
+<h2 id="值传递-引用传递"> 值传递 &amp; 引用传递</h2>
+<p>程序设计语言将实参传递给方法（或函数）的方式分为两种：</p>
+<ul>
+<li><strong>值传递</strong> ：方法接收的是实参值的拷贝，会创建副本。</li>
+<li><strong>引用传递</strong> ：方法接收的直接是实参所引用的对象在堆中的地址，不会创建副本，对形参的修改将影响到实参。</li>
+</ul>
+<p>很多程序设计语言（比如 C++、 Pascal )提供了两种参数传递的方式，不过，在 Java 中只有值传递。</p>
+<h2 id="实例"> 实例</h2>
+<h3 id="对基本数据类型进行修改"> 对基本数据类型进行修改</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>int</span> num1 <span>=</span> <span>10</span><span>;</span>
+    <span>int</span> num2 <span>=</span> <span>20</span><span>;</span>
+    <span>swap</span><span>(</span>num1<span>,</span> num2<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num1 = "</span> <span>+</span> num1<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num2 = "</span> <span>+</span> num2<span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>int</span> a<span>,</span> <span>int</span> b<span>)</span> <span>{</span>
+    <span>int</span> temp <span>=</span> a<span>;</span>
+    a <span>=</span> b<span>;</span>
+    b <span>=</span> temp<span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"a = "</span> <span>+</span> a<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"b = "</span> <span>+</span> b<span>)</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+    
+a <span>=</span> <span>20</span>
+b <span>=</span> <span>10</span>
+num1 <span>=</span> <span>10</span>
+num2 <span>=</span> <span>20</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div><ul>
+<li>a和b只是从num1和num2复制得到了值，怎么操作都不会产生影响</li>
+</ul>
+<p><img src="./README.assets/java-value-passing-01.ab88fb01.png" alt="基本数据类型参数" /></p>
+<h3 id="修改引用类型中的值"> 修改引用类型中的值</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>int</span><span>[</span><span>]</span> arr <span>=</span> <span>{</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span> <span>}</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
+    <span>change</span><span>(</span>arr<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>change</span><span>(</span><span>int</span><span>[</span><span>]</span> array<span>)</span> <span>{</span>
+    <span>// 将数组的第一个元素变为0</span>
+    array<span>[</span><span>0</span><span>]</span> <span>=</span> <span>0</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+   
+<span>1</span>
+<span>0</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p><img src="./README.assets/java-value-passing-02.ff1b76c9.png" alt="引用数据类型参数1" /></p>
+<h3 id="修改引用类型的对象"> 修改引用类型的对象</h3>
+<div><pre><code><span>public</span> <span>class</span> <span>Person</span> <span>{</span>
+    <span>private</span> <span>String</span> name<span>;</span>
+   <span>// 省略构造函数、Getter&amp;Setter方法</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>Person</span> xiaoZhang <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小张"</span><span>)</span><span>;</span>
+    <span>Person</span> xiaoLi <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小李"</span><span>)</span><span>;</span>
+    <span>swap</span><span>(</span>xiaoZhang<span>,</span> xiaoLi<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoZhang:"</span> <span>+</span> xiaoZhang<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoLi:"</span> <span>+</span> xiaoLi<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>Person</span> person1<span>,</span> <span>Person</span> person2<span>)</span> <span>{</span>
+    <span>Person</span> temp <span>=</span> person1<span>;</span>
+    person1 <span>=</span> person2<span>;</span>
+    person2 <span>=</span> temp<span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person1:"</span> <span>+</span> person1<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person2:"</span> <span>+</span> person2<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+    
+person1<span>:</span>小李
+person2<span>:</span>小张
+xiaoZhang<span>:</span>小张
+xiaoLi<span>:</span>小李
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br></div></div><p><img src="./README.assets/java-value-passing-03.da4d0422.png" alt="引用数据类型参数2" /></p>
+<h2 id="总结"> 总结</h2>
+<p>Java 中将实参传递给方法（或函数）的方式是 <strong>值传递</strong> ：</p>
+<ul>
+<li>如果参数是基本类型的话，很简单，传递的就是基本类型的字面量值的拷贝，会创建副本。</li>
+<li>如果参数是引用类型，传递的就是实参所引用的对象在堆中地址值的拷贝，同样也会创建副本。</li>
+</ul>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">反射机制</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/"/>
+    <updated>2022-01-21T08:24:40.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/basis/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">反射机制详解！ | JavaGuide</a>，略有改动</p>
+</div>
+<blockquote>
+<p>总之反射就是能获取一个类的所有方法和属性，并能够调用。</p>
+<p>然后还能增加代码的灵活性。</p>
+<p>但是，我还是没有感受到，灵活在哪里。。。</p>
+</blockquote>
+<h2 id="什么是反射"> 什么是反射？</h2>
+<p>反射就是Reflection，Java的反射是指程序在<strong>运行期</strong>可以拿到一个对象的所有信息，，你还可以调用这些方法和属性。</p>
+<h2 id="反射的应用场景"> 反射的应用场景</h2>
+<ul>
+<li>模块化的开发，通过反射去调用对应的字节码</li>
+<li>框架中大量使用动态代理，而动态代理依赖反射机制实现</li>
+<li>注解的实现也用到了反射</li>
+</ul>
+<p><strong>JDBC的数据库连接</strong></p>
+<div><pre><code><span>public</span> <span>static</span> <span>final</span> <span>String</span> DBDRIVER <span>=</span> <span>"com.mysql.jdbc.Driver"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBURL <span>=</span> <span>"jdbc:mysql://localhost:3306/test"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBUSER <span>=</span> <span>"root"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBPASS <span>=</span> <span>""</span><span>;</span>  
+
+<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>  
+    <span>Connection</span> con <span>=</span> <span>null</span><span>;</span>
+    <span>Class</span><span>.</span><span>forName</span><span>(</span>DBDRIVER<span>)</span><span>;</span> <span>//1、使用CLASS 类加载驱动程序 ,反射机制的体现 </span>
+    con <span>=</span> <span>DriverManager</span><span>.</span><span>getConnection</span><span>(</span>DBURL<span>,</span>DBUSER<span>,</span>DBPASS<span>)</span><span>;</span> <span>//2、连接数据库  </span>
+    <span>.</span><span>.</span><span>.</span>
+    con<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span> <span>// 3、关闭数据库  </span>
+<span>}</span>  
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="反射的优缺点"> 反射的优缺点</h2>
+<p><strong>优点：</strong> 让代码更加灵、为各种框架提供开箱即用的功能提供便利</p>
+<p><strong>缺点：</strong> 在运行时有了分析操作类的能力，同样增加了安全问题。性能略差，不过对于框架的影响比较小。</p>
+<h2 id="反射的使用"> 反射的使用</h2>
+<h3 id="获取class对象的四种方式"> 获取Class对象的四种方式</h3>
+<p><strong>1.知道具体类的情况下可以使用</strong></p>
+<div><pre><code><span>Class</span> alunbarClass <span>=</span> <span>TargetObject</span><span>.</span><span>class</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>2.通过 <code>Class.forName()</code> 传入类的路径获取</strong></p>
+<div><pre><code><span>Class</span> alunbarClass1 <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><p><strong>3.通过对象实例 <code>instance.getClass()</code> 获取</strong></p>
+<div><pre><code><span>TargetObject</span> o <span>=</span> <span>new</span> <span>TargetObject</span><span>(</span><span>)</span><span>;</span>
+<span>Class</span> alunbarClass2 <span>=</span> o<span>.</span><span>getClass</span><span>(</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p><strong>4.通过类加载器 <code>xxxClassLoader.loadClass()</code> 传入类路径获取</strong></p>
+<div><pre><code><span>Class</span> clazz <span>=</span> <span>ClassLoader</span><span>.</span><span>loadClass</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><h3 id="反射的基本操作"> 反射的基本操作</h3>
+<p><strong>1.定义一个类</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>TargetObject</span> <span>{</span>
+    <span>private</span> <span>String</span> value<span>;</span>
+
+    <span>public</span> <span>TargetObject</span><span>(</span><span>)</span> <span>{</span>
+        value <span>=</span> <span>"JavaGuide"</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>void</span> <span>publicMethod</span><span>(</span><span>String</span> s<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"I love "</span> <span>+</span> s<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>private</span> <span>void</span> <span>privateMethod</span><span>(</span><span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"value is "</span> <span>+</span> value<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p><strong>2.使用反射来操作这个类的方法及参数</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>ClassNotFoundException</span><span>,</span> <span>NoSuchMethodException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>InstantiationException</span><span>,</span> <span>InvocationTargetException</span><span>,</span> <span>NoSuchFieldException</span> <span>{</span>
+        <span>/**
+         * 获取TargetObject类的Class对象并且创建TargetObject类实例
+         */</span>
+        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> tagetClass <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+        <span>TargetObject</span> targetObject <span>=</span> <span>(</span><span>TargetObject</span><span>)</span> tagetClass<span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
+        <span>/**
+         * 获取所有类中所有定义的方法
+         */</span>
+        <span>Method</span><span>[</span><span>]</span> methods <span>=</span> tagetClass<span>.</span><span>getDeclaredMethods</span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>/**
+         * 获取指定方法并调用
+         */</span>
+        <span>Method</span> publicMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"publicMethod"</span><span>,</span>
+                <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
+
+        publicMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
+        <span>/**
+         * 获取指定参数并对参数进行修改
+         */</span>
+        <span>Field</span> field <span>=</span> tagetClass<span>.</span><span>getDeclaredField</span><span>(</span><span>"value"</span><span>)</span><span>;</span>
+        <span>//为了对类中的参数进行修改我们取消安全检查</span>
+        field<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        field<span>.</span><span>set</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
+        <span>/**
+         * 调用 private 方法
+         */</span>
+        <span>Method</span> privateMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"privateMethod"</span><span>)</span><span>;</span>
+        <span>//为了调用private方法我们取消安全检查</span>
+        privateMethod<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        privateMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br></div></div><p><strong>3.输出结果</strong></p>
+<div><pre><code>publicMethod
+privateMethod
+<span>I</span> love <span>JavaGuide</span>
+value is <span>JavaGuide</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div>]]></content>
     <author>
       <name>lllllan</name>
     </author>
@@ -767,243 +1004,6 @@ input<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">反射机制</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/"/>
-    <updated>2022-01-21T08:24:40.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/basis/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">反射机制详解！ | JavaGuide</a>，略有改动</p>
-</div>
-<blockquote>
-<p>总之反射就是能获取一个类的所有方法和属性，并能够调用。</p>
-<p>然后还能增加代码的灵活性。</p>
-<p>但是，我还是没有感受到，灵活在哪里。。。</p>
-</blockquote>
-<h2 id="什么是反射"> 什么是反射？</h2>
-<p>反射就是Reflection，Java的反射是指程序在<strong>运行期</strong>可以拿到一个对象的所有信息，，你还可以调用这些方法和属性。</p>
-<h2 id="反射的应用场景"> 反射的应用场景</h2>
-<ul>
-<li>模块化的开发，通过反射去调用对应的字节码</li>
-<li>框架中大量使用动态代理，而动态代理依赖反射机制实现</li>
-<li>注解的实现也用到了反射</li>
-</ul>
-<p><strong>JDBC的数据库连接</strong></p>
-<div><pre><code><span>public</span> <span>static</span> <span>final</span> <span>String</span> DBDRIVER <span>=</span> <span>"com.mysql.jdbc.Driver"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBURL <span>=</span> <span>"jdbc:mysql://localhost:3306/test"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBUSER <span>=</span> <span>"root"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBPASS <span>=</span> <span>""</span><span>;</span>  
-
-<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>  
-    <span>Connection</span> con <span>=</span> <span>null</span><span>;</span>
-    <span>Class</span><span>.</span><span>forName</span><span>(</span>DBDRIVER<span>)</span><span>;</span> <span>//1、使用CLASS 类加载驱动程序 ,反射机制的体现 </span>
-    con <span>=</span> <span>DriverManager</span><span>.</span><span>getConnection</span><span>(</span>DBURL<span>,</span>DBUSER<span>,</span>DBPASS<span>)</span><span>;</span> <span>//2、连接数据库  </span>
-    <span>.</span><span>.</span><span>.</span>
-    con<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span> <span>// 3、关闭数据库  </span>
-<span>}</span>  
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="反射的优缺点"> 反射的优缺点</h2>
-<p><strong>优点：</strong> 让代码更加灵、为各种框架提供开箱即用的功能提供便利</p>
-<p><strong>缺点：</strong> 在运行时有了分析操作类的能力，同样增加了安全问题。性能略差，不过对于框架的影响比较小。</p>
-<h2 id="反射的使用"> 反射的使用</h2>
-<h3 id="获取class对象的四种方式"> 获取Class对象的四种方式</h3>
-<p><strong>1.知道具体类的情况下可以使用</strong></p>
-<div><pre><code><span>Class</span> alunbarClass <span>=</span> <span>TargetObject</span><span>.</span><span>class</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><p><strong>2.通过 <code>Class.forName()</code> 传入类的路径获取</strong></p>
-<div><pre><code><span>Class</span> alunbarClass1 <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><p><strong>3.通过对象实例 <code>instance.getClass()</code> 获取</strong></p>
-<div><pre><code><span>TargetObject</span> o <span>=</span> <span>new</span> <span>TargetObject</span><span>(</span><span>)</span><span>;</span>
-<span>Class</span> alunbarClass2 <span>=</span> o<span>.</span><span>getClass</span><span>(</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p><strong>4.通过类加载器 <code>xxxClassLoader.loadClass()</code> 传入类路径获取</strong></p>
-<div><pre><code><span>Class</span> clazz <span>=</span> <span>ClassLoader</span><span>.</span><span>loadClass</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><h3 id="反射的基本操作"> 反射的基本操作</h3>
-<p><strong>1.定义一个类</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>TargetObject</span> <span>{</span>
-    <span>private</span> <span>String</span> value<span>;</span>
-
-    <span>public</span> <span>TargetObject</span><span>(</span><span>)</span> <span>{</span>
-        value <span>=</span> <span>"JavaGuide"</span><span>;</span>
-    <span>}</span>
-
-    <span>public</span> <span>void</span> <span>publicMethod</span><span>(</span><span>String</span> s<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"I love "</span> <span>+</span> s<span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>private</span> <span>void</span> <span>privateMethod</span><span>(</span><span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"value is "</span> <span>+</span> value<span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p><strong>2.使用反射来操作这个类的方法及参数</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>ClassNotFoundException</span><span>,</span> <span>NoSuchMethodException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>InstantiationException</span><span>,</span> <span>InvocationTargetException</span><span>,</span> <span>NoSuchFieldException</span> <span>{</span>
-        <span>/**
-         * 获取TargetObject类的Class对象并且创建TargetObject类实例
-         */</span>
-        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> tagetClass <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-        <span>TargetObject</span> targetObject <span>=</span> <span>(</span><span>TargetObject</span><span>)</span> tagetClass<span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
-        <span>/**
-         * 获取所有类中所有定义的方法
-         */</span>
-        <span>Method</span><span>[</span><span>]</span> methods <span>=</span> tagetClass<span>.</span><span>getDeclaredMethods</span><span>(</span><span>)</span><span>;</span>
-        <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
-            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>}</span>
-        <span>/**
-         * 获取指定方法并调用
-         */</span>
-        <span>Method</span> publicMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"publicMethod"</span><span>,</span>
-                <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
-
-        publicMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
-        <span>/**
-         * 获取指定参数并对参数进行修改
-         */</span>
-        <span>Field</span> field <span>=</span> tagetClass<span>.</span><span>getDeclaredField</span><span>(</span><span>"value"</span><span>)</span><span>;</span>
-        <span>//为了对类中的参数进行修改我们取消安全检查</span>
-        field<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
-        field<span>.</span><span>set</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
-        <span>/**
-         * 调用 private 方法
-         */</span>
-        <span>Method</span> privateMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"privateMethod"</span><span>)</span><span>;</span>
-        <span>//为了调用private方法我们取消安全检查</span>
-        privateMethod<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
-        privateMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br></div></div><p><strong>3.输出结果</strong></p>
-<div><pre><code>publicMethod
-privateMethod
-<span>I</span> love <span>JavaGuide</span>
-value is <span>JavaGuide</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div>]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">java 是值传递</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/" target="_blank" rel="noopener noreferrer">为什么 Java 中只有值传递？ | JavaGuide</a>，略有改动</p>
-</div>
-<h2 id="值传递-引用传递"> 值传递 &amp; 引用传递</h2>
-<p>程序设计语言将实参传递给方法（或函数）的方式分为两种：</p>
-<ul>
-<li><strong>值传递</strong> ：方法接收的是实参值的拷贝，会创建副本。</li>
-<li><strong>引用传递</strong> ：方法接收的直接是实参所引用的对象在堆中的地址，不会创建副本，对形参的修改将影响到实参。</li>
-</ul>
-<p>很多程序设计语言（比如 C++、 Pascal )提供了两种参数传递的方式，不过，在 Java 中只有值传递。</p>
-<h2 id="实例"> 实例</h2>
-<h3 id="对基本数据类型进行修改"> 对基本数据类型进行修改</h3>
-<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>int</span> num1 <span>=</span> <span>10</span><span>;</span>
-    <span>int</span> num2 <span>=</span> <span>20</span><span>;</span>
-    <span>swap</span><span>(</span>num1<span>,</span> num2<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num1 = "</span> <span>+</span> num1<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num2 = "</span> <span>+</span> num2<span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>int</span> a<span>,</span> <span>int</span> b<span>)</span> <span>{</span>
-    <span>int</span> temp <span>=</span> a<span>;</span>
-    a <span>=</span> b<span>;</span>
-    b <span>=</span> temp<span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"a = "</span> <span>+</span> a<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"b = "</span> <span>+</span> b<span>)</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-    
-a <span>=</span> <span>20</span>
-b <span>=</span> <span>10</span>
-num1 <span>=</span> <span>10</span>
-num2 <span>=</span> <span>20</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div><ul>
-<li>a和b只是从num1和num2复制得到了值，怎么操作都不会产生影响</li>
-</ul>
-<p><img src="./README.assets/java-value-passing-01.ab88fb01.png" alt="基本数据类型参数" /></p>
-<h3 id="修改引用类型中的值"> 修改引用类型中的值</h3>
-<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>int</span><span>[</span><span>]</span> arr <span>=</span> <span>{</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span> <span>}</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
-    <span>change</span><span>(</span>arr<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>change</span><span>(</span><span>int</span><span>[</span><span>]</span> array<span>)</span> <span>{</span>
-    <span>// 将数组的第一个元素变为0</span>
-    array<span>[</span><span>0</span><span>]</span> <span>=</span> <span>0</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-   
-<span>1</span>
-<span>0</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p><img src="./README.assets/java-value-passing-02.ff1b76c9.png" alt="引用数据类型参数1" /></p>
-<h3 id="修改引用类型的对象"> 修改引用类型的对象</h3>
-<div><pre><code><span>public</span> <span>class</span> <span>Person</span> <span>{</span>
-    <span>private</span> <span>String</span> name<span>;</span>
-   <span>// 省略构造函数、Getter&amp;Setter方法</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>Person</span> xiaoZhang <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小张"</span><span>)</span><span>;</span>
-    <span>Person</span> xiaoLi <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小李"</span><span>)</span><span>;</span>
-    <span>swap</span><span>(</span>xiaoZhang<span>,</span> xiaoLi<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoZhang:"</span> <span>+</span> xiaoZhang<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoLi:"</span> <span>+</span> xiaoLi<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>Person</span> person1<span>,</span> <span>Person</span> person2<span>)</span> <span>{</span>
-    <span>Person</span> temp <span>=</span> person1<span>;</span>
-    person1 <span>=</span> person2<span>;</span>
-    person2 <span>=</span> temp<span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person1:"</span> <span>+</span> person1<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person2:"</span> <span>+</span> person2<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-    
-person1<span>:</span>小李
-person2<span>:</span>小张
-xiaoZhang<span>:</span>小张
-xiaoLi<span>:</span>小李
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br></div></div><p><img src="./README.assets/java-value-passing-03.da4d0422.png" alt="引用数据类型参数2" /></p>
-<h2 id="总结"> 总结</h2>
-<p>Java 中将实参传递给方法（或函数）的方式是 <strong>值传递</strong> ：</p>
-<ul>
-<li>如果参数是基本类型的话，很简单，传递的就是基本类型的字面量值的拷贝，会创建副本。</li>
-<li>如果参数是引用类型，传递的就是实参所引用的对象在堆中地址值的拷贝，同样也会创建副本。</li>
-</ul>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
     <title type="html">代理详解</title>
     <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/</id>
     <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/"/>
@@ -1312,6 +1312,615 @@ after method send
       <name>lllllan</name>
     </contributor>
     <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">ArrayList 源码解读</title>
+    <id>https://vue-blog.lllllan.cn/1-java/3-container/2-source-code/1-arraylist/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/3-container/2-source-code/1-arraylist/"/>
+    <updated>2022-01-22T11:37:26.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://snailclimb.gitee.io/javaguide/#/docs/java/collection/arraylist-source-code" target="_blank" rel="noopener noreferrer">2. ArrayList 核心源码解读</a>，略有改动</p>
+</div>
+<h2 id="一、arraylist-简介"> <a href="https://snailclimb.gitee.io/javaguide/#/docs/java/collection/arraylist-source-code?id=_1-arraylist-%E7%AE%80%E4%BB%8B" target="_blank" rel="noopener noreferrer">一、ArrayList 简介</a></h2>
+<p><code>ArrayList</code> 的底层是数组队列，相当于动态数组。与 Java 中的数组相比，它的容量能动态增长。在添加大量元素前，应用程序可以使用<code>ensureCapacity</code>操作来增加 <code>ArrayList</code> 实例的容量。这可以减少递增式再分配的数量。</p>
+<p><code>ArrayList</code>继承于 <strong><code>AbstractList</code></strong> ，实现了 <strong><code>List</code></strong>, <strong><code>RandomAccess</code></strong>, <strong><code>Cloneable</code></strong>, <strong><code>java.io.Serializable</code></strong> 这些接口。</p>
+<div><pre><code><span>public</span> <span>class</span> <span>ArrayList</span><span><span>&lt;</span><span>E</span><span>></span></span> <span>extends</span> <span>AbstractList</span><span><span>&lt;</span><span>E</span><span>></span></span>
+        <span>implements</span> <span>List</span><span><span>&lt;</span><span>E</span><span>></span></span><span>,</span> <span>RandomAccess</span><span>,</span> <span>Cloneable</span><span>,</span> <span><span>java<span>.</span>io<span>.</span></span>Serializable</span><span>{</span>
+
+  <span>}</span><span>Copy</span> <span>to</span> <span>clipboardErrorCopied</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><ul>
+<li><code>RandomAccess</code> 是一个标志接口，表明实现这个这个接口的 List 集合是支持<strong>快速随机访问</strong>的。在 <code>ArrayList</code> 中，我们即可以通过元素的序号快速获取元素对象，这就是快速随机访问。</li>
+<li><code>ArrayList</code> 实现了 <strong><code>Cloneable</code> 接口</strong> ，即覆盖了函数<code>clone()</code>，能被克隆。</li>
+<li><code>ArrayList</code> 实现了 <code>java.io.Serializable</code>接口，这意味着<code>ArrayList</code>支持序列化，能通过序列化去传输。</li>
+</ul>
+<h3 id="_1-1-arraylist-和-vector-的区别"> 1.1 ArrayList 和 Vector 的区别</h3>
+<p><code>ArrayList</code> 是 <code>List</code> 的主要实现类，底层使用 <code>Object[]</code>存储，适用于频繁的查找工作，线程不安全 ；</p>
+<p><code>Vector</code> 是 <code>List</code> 的古老实现类，底层使用<code>Object[]</code> 存储，线程安全的（代价就是效率差一些）。</p>
+<h3 id="_1-2-arraylist-和-linkedlist-的区别"> 1.2 ArrayList  和 LinkedList 的区别</h3>
+<p><strong>是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</p>
+<p><strong>底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</p>
+<p><strong>插入和删除是否受元素位置的影响：</strong></p>
+<ul>
+<li><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。</li>
+<li><code>LinkedList</code> 采用链表存储，所以，如果是在头尾插入或者删除元素不受元素位置的影响（<code>add(E e)</code>、<code>addFirst(E e)</code>、<code>addLast(E e)</code>、<code>removeFirst()</code> 、 <code>removeLast()</code>），近似 O(1)，如果是要在指定位置 <code>i</code> 插入和删除元素的话（<code>add(int index, E element)</code>，<code>remove(Object o)</code>） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。</li>
+</ul>
+<p><strong>是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</p>
+<p><strong>内存空间占用：</strong> ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。</p>
+<h2 id="二、arraylist-核心源码"> 二、ArrayList 核心源码</h2>
+<div><pre><code><span>package</span> <span>java<span>.</span>util</span><span>;</span>
+
+<span>import</span> <span>java<span>.</span>util<span>.</span>function<span>.</span></span><span>Consumer</span><span>;</span>
+<span>import</span> <span>java<span>.</span>util<span>.</span>function<span>.</span></span><span>Predicate</span><span>;</span>
+<span>import</span> <span>java<span>.</span>util<span>.</span>function<span>.</span></span><span>UnaryOperator</span><span>;</span>
+<span>import</span> <span>sun<span>.</span>misc<span>.</span></span><span>SharedSecrets</span><span>;</span>
+
+<span>public</span> <span>class</span> <span>ArrayList</span><span><span>&lt;</span><span>E</span><span>></span></span> <span>extends</span> <span>AbstractList</span><span><span>&lt;</span><span>E</span><span>></span></span>
+        <span>implements</span> <span>List</span><span><span>&lt;</span><span>E</span><span>></span></span><span>,</span> <span>RandomAccess</span><span>,</span> <span>Cloneable</span><span>,</span> <span><span>java<span>.</span>io<span>.</span></span>Serializable</span> <span>{</span>
+    <span>private</span> <span>static</span> <span>final</span> <span>long</span> serialVersionUID <span>=</span> <span>8683452581122892189L</span><span>;</span>
+
+    <span>/**
+     * Default initial capacity. 默认/初始 容量大小为10
+     */</span>
+    <span>private</span> <span>static</span> <span>final</span> <span>int</span> DEFAULT_CAPACITY <span>=</span> <span>10</span><span>;</span>
+
+    <span>/**
+     * 空数组（用于空实例）
+     */</span>
+    <span>private</span> <span>static</span> <span>final</span> <span>Object</span><span>[</span><span>]</span> EMPTY_ELEMENTDATA <span>=</span> <span>{</span><span>}</span><span>;</span>
+
+    <span>/**
+     * 另一个空数组（用于无参构造）
+     */</span>
+    <span>private</span> <span>static</span> <span>final</span> <span>Object</span><span>[</span><span>]</span> DEFAULTCAPACITY_EMPTY_ELEMENTDATA <span>=</span> <span>{</span><span>}</span><span>;</span>
+
+    <span>/**
+     * 真正保存数据的数组
+     */</span>
+    <span>transient</span> <span>Object</span><span>[</span><span>]</span> elementData<span>;</span> <span>// non-private to simplify nested class access</span>
+
+    <span>/**
+     * 数组中的元素个数
+     */</span>
+    <span>private</span> <span>int</span> size<span>;</span>
+
+    <span>/**
+     * 有参构造（指定数组的初始大小）
+     */</span>
+    <span>public</span> <span>ArrayList</span><span>(</span><span>int</span> initialCapacity<span>)</span> <span>{</span>
+        <span>if</span> <span>(</span>initialCapacity <span>></span> <span>0</span><span>)</span> <span>{</span>
+            <span>// 如果指定大小 > 0，创建指定大小的数组</span>
+            <span>this</span><span>.</span>elementData <span>=</span> <span>new</span> <span>Object</span><span>[</span>initialCapacity<span>]</span><span>;</span>
+        <span>}</span> <span>else</span> <span>if</span> <span>(</span>initialCapacity <span>==</span> <span>0</span><span>)</span> <span>{</span>
+            <span>// 如果指定大小 == 0，创建空数组</span>
+            <span>this</span><span>.</span>elementData <span>=</span> EMPTY_ELEMENTDATA<span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            <span>// 如果指定大小 &lt; 0，抛出异常</span>
+            <span>throw</span> <span>new</span> <span>IllegalArgumentException</span><span>(</span><span>"Illegal Capacity: "</span><span>+</span> initialCapacity<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>/**
+     * 默认无参构造函数
+     * 存放数据的数组指向了另一个空数组，当添加第一个元素之后，才将数组扩容至 10
+     */</span>
+    <span>public</span> <span>ArrayList</span><span>(</span><span>)</span> <span>{</span>
+        <span>this</span><span>.</span>elementData <span>=</span> DEFAULTCAPACITY_EMPTY_ELEMENTDATA<span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 有参构造（指定集合）
+     */</span>
+    <span>public</span> <span>ArrayList</span><span>(</span><span>Collection</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>E</span><span>></span></span> c<span>)</span> <span>{</span>
+        <span>// 将指定集合转换为数组</span>
+        <span>Object</span><span>[</span><span>]</span> a <span>=</span> c<span>.</span><span>toArray</span><span>(</span><span>)</span><span>;</span>
+        <span>if</span> <span>(</span><span>(</span>size <span>=</span> a<span>.</span>length<span>)</span> <span>!=</span> <span>0</span><span>)</span> <span>{</span>
+            <span>// 数组长度不为零的情况</span>
+            <span>if</span> <span>(</span>c<span>.</span><span>getClass</span><span>(</span><span>)</span> <span>==</span> <span>ArrayList</span><span>.</span><span>class</span><span>)</span> <span>{</span>
+                <span>// 如果数据类型相同，直接使用该数组</span>
+                elementData <span>=</span> a<span>;</span>
+            <span>}</span> <span>else</span> <span>{</span>
+                <span>// 如果数据类型不相同，则复制一份相同数据类型的数组</span>
+                elementData <span>=</span> <span>Arrays</span><span>.</span><span>copyOf</span><span>(</span>a<span>,</span> size<span>,</span> <span>Object</span><span>[</span><span>]</span><span>.</span><span>class</span><span>)</span><span>;</span>
+            <span>}</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            <span>// 数组长度为零，指向空数组</span>
+            elementData <span>=</span> EMPTY_ELEMENTDATA<span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>/**
+     * 修改数组容量为当前元素个数，以最小化实例的存储
+     */</span>
+    <span>public</span> <span>void</span> <span>trimToSize</span><span>(</span><span>)</span> <span>{</span>
+        modCount<span>++</span><span>;</span>
+        <span>// size为数组中元素个数，len为数组（容量）大小</span>
+        <span>if</span> <span>(</span>size <span>&lt;</span> elementData<span>.</span>length<span>)</span> <span>{</span>
+            <span>// 如果个数为零，指向空数组</span>
+            <span>// 否则复制一个大小为 size 的数组</span>
+            elementData <span>=</span> <span>(</span>size <span>==</span> <span>0</span><span>)</span> <span>?</span> EMPTY_ELEMENTDATA <span>:</span> <span>Arrays</span><span>.</span><span>copyOf</span><span>(</span>elementData<span>,</span> size<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>/**
+     * 核心扩容机制见后面解释
+     */</span>
+
+    <span>/**
+     * 获取元素个数
+     */</span>
+    <span>public</span> <span>int</span> <span>size</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> size<span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 判断列表是否为空
+     */</span>
+    <span>public</span> <span>boolean</span> <span>isEmpty</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> size <span>==</span> <span>0</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 判断列表中是否包含目标元素
+     */</span>
+    <span>public</span> <span>boolean</span> <span>contains</span><span>(</span><span>Object</span> o<span>)</span> <span>{</span>
+        <span>return</span> <span>indexOf</span><span>(</span>o<span>)</span> <span>>=</span> <span>0</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 返回此列表中指定元素的首次出现的索引，如果此列表不包含此元素，则为-1
+     */</span>
+    <span>public</span> <span>int</span> <span>indexOf</span><span>(</span><span>Object</span> o<span>)</span> <span>{</span>
+        <span>if</span> <span>(</span>o <span>==</span> <span>null</span><span>)</span> <span>{</span>
+            <span>// 如果是 null，需要单独判断</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> size<span>;</span> i<span>++</span><span>)</span>
+                <span>if</span> <span>(</span>elementData<span>[</span>i<span>]</span><span>==</span><span>null</span><span>)</span>
+                    <span>return</span> i<span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> size<span>;</span> i<span>++</span><span>)</span>
+                <span>if</span> <span>(</span>o<span>.</span><span>equals</span><span>(</span>elementData<span>[</span>i<span>]</span><span>)</span><span>)</span>
+                    <span>return</span> i<span>;</span>
+        <span>}</span>
+        <span>return</span> <span>-</span><span>1</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 返回此列表中指定元素的最后一次出现的索引，如果此列表不包含元素，则返回-1。.
+     */</span>
+    <span>public</span> <span>int</span> <span>lastIndexOf</span><span>(</span><span>Object</span> o<span>)</span> <span>{</span>
+        <span>if</span> <span>(</span>o <span>==</span> <span>null</span><span>)</span> <span>{</span>
+            <span>// 如果是 null，需要单独判断</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> size<span>-</span><span>1</span><span>;</span> i <span>>=</span> <span>0</span><span>;</span> i<span>--</span><span>)</span>
+                <span>if</span> <span>(</span>elementData<span>[</span>i<span>]</span><span>==</span><span>null</span><span>)</span>
+                    <span>return</span> i<span>;</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            <span>for</span> <span>(</span><span>int</span> i <span>=</span> size<span>-</span><span>1</span><span>;</span> i <span>>=</span> <span>0</span><span>;</span> i<span>--</span><span>)</span>
+                <span>if</span> <span>(</span>o<span>.</span><span>equals</span><span>(</span>elementData<span>[</span>i<span>]</span><span>)</span><span>)</span>
+                    <span>return</span> i<span>;</span>
+        <span>}</span>
+        <span>return</span> <span>-</span><span>1</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 返回实例的浅拷贝 ！！！浅拷贝
+     */</span>
+    <span>public</span> <span>Object</span> <span>clone</span><span>(</span><span>)</span> <span>{</span>
+        <span>try</span> <span>{</span>
+            <span>ArrayList</span><span><span>&lt;</span><span>?</span><span>></span></span> v <span>=</span> <span>(</span><span>ArrayList</span><span><span>&lt;</span><span>?</span><span>></span></span><span>)</span> <span>super</span><span>.</span><span>clone</span><span>(</span><span>)</span><span>;</span>
+            v<span>.</span>elementData <span>=</span> <span>Arrays</span><span>.</span><span>copyOf</span><span>(</span>elementData<span>,</span> size<span>)</span><span>;</span>
+            v<span>.</span>modCount <span>=</span> <span>0</span><span>;</span>
+            <span>return</span> v<span>;</span>
+        <span>}</span> <span>catch</span> <span>(</span><span>CloneNotSupportedException</span> e<span>)</span> <span>{</span>
+            <span>// this shouldn't happen, since we are Cloneable</span>
+            <span>throw</span> <span>new</span> <span>InternalError</span><span>(</span>e<span>)</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+
+    <span>/**
+     * 以正确的顺序（从第一个到最后一个元素）返回一个包含此列表中所有元素的数组。
+     */</span>
+    <span>public</span> <span>Object</span><span>[</span><span>]</span> <span>toArray</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> <span>Arrays</span><span>.</span><span>copyOf</span><span>(</span>elementData<span>,</span> size<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 以正确的顺序返回一个包含此列表中所有元素的数组（从第一个到最后一个元素）;
+     * 返回数组的类型，需要时运行时类型
+     */</span>
+    <span>@SuppressWarnings</span><span>(</span><span>"unchecked"</span><span>)</span>
+    <span>public</span> <span><span>&lt;</span><span>T</span><span>></span></span> <span>T</span><span>[</span><span>]</span> <span>toArray</span><span>(</span><span>T</span><span>[</span><span>]</span> a<span>)</span> <span>{</span>
+        <span>if</span> <span>(</span>a<span>.</span>length <span>&lt;</span> size<span>)</span>
+            <span>// 新建一个运行时类型的数组，但是内容为该列表的元素</span>
+            <span>return</span> <span>(</span><span>T</span><span>[</span><span>]</span><span>)</span> <span>Arrays</span><span>.</span><span>copyOf</span><span>(</span>elementData<span>,</span> size<span>,</span> a<span>.</span><span>getClass</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>System</span><span>.</span><span>arraycopy</span><span>(</span>elementData<span>,</span> <span>0</span><span>,</span> a<span>,</span> <span>0</span><span>,</span> size<span>)</span><span>;</span>
+        <span>if</span> <span>(</span>a<span>.</span>length <span>></span> size<span>)</span>
+            a<span>[</span>size<span>]</span> <span>=</span> <span>null</span><span>;</span>
+        <span>return</span> a<span>;</span>
+    <span>}</span>
+
+    <span>// Positional Access Operations</span>
+
+    <span>@SuppressWarnings</span><span>(</span><span>"unchecked"</span><span>)</span>
+    <span>E</span> <span>elementData</span><span>(</span><span>int</span> index<span>)</span> <span>{</span>
+        <span>return</span> <span>(</span><span>E</span><span>)</span> elementData<span>[</span>index<span>]</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 获取索引 index 处的元素
+     */</span>
+    <span>public</span> <span>E</span> <span>get</span><span>(</span><span>int</span> index<span>)</span> <span>{</span>
+        <span>rangeCheck</span><span>(</span>index<span>)</span><span>;</span>
+
+        <span>return</span> <span>elementData</span><span>(</span>index<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 修改索引 index 处的元素为 element，并返回原元素
+     */</span>
+    <span>public</span> <span>E</span> <span>set</span><span>(</span><span>int</span> index<span>,</span> <span>E</span> element<span>)</span> <span>{</span>
+        <span>// 检查 index 是否合法</span>
+        <span>rangeCheck</span><span>(</span>index<span>)</span><span>;</span>
+
+        <span>E</span> oldValue <span>=</span> <span>elementData</span><span>(</span>index<span>)</span><span>;</span>
+        elementData<span>[</span>index<span>]</span> <span>=</span> element<span>;</span>
+        <span>return</span> oldValue<span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 在列表最后面插入一个元素
+     */</span>
+    <span>public</span> <span>boolean</span> <span>add</span><span>(</span><span>E</span> e<span>)</span> <span>{</span>
+        <span>// 如有必要，进行扩容</span>
+        <span>ensureCapacityInternal</span><span>(</span>size <span>+</span> <span>1</span><span>)</span><span>;</span>  <span>// Increments modCount!!</span>
+        elementData<span>[</span>size<span>++</span><span>]</span> <span>=</span> e<span>;</span>
+        <span>return</span> <span>true</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 在索引 index 处插入一个元素
+     */</span>
+    <span>public</span> <span>void</span> <span>add</span><span>(</span><span>int</span> index<span>,</span> <span>E</span> element<span>)</span> <span>{</span>
+        <span>// 检查 index 是否合法</span>
+        <span>rangeCheckForAdd</span><span>(</span>index<span>)</span><span>;</span>
+
+        <span>// 如有必要，进行扩容</span>
+        <span>ensureCapacityInternal</span><span>(</span>size <span>+</span> <span>1</span><span>)</span><span>;</span>  
+        <span>// 整体后移</span>
+        <span>System</span><span>.</span><span>arraycopy</span><span>(</span>elementData<span>,</span> index<span>,</span> elementData<span>,</span> index <span>+</span> <span>1</span><span>,</span> size <span>-</span> index<span>)</span><span>;</span>
+        elementData<span>[</span>index<span>]</span> <span>=</span> element<span>;</span>
+        size<span>++</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 删除指定索引 index 处的元素，并返回该元素
+     */</span>
+    <span>public</span> <span>E</span> <span>remove</span><span>(</span><span>int</span> index<span>)</span> <span>{</span>
+        <span>// 先检查 index 是否合法</span>
+        <span>rangeCheck</span><span>(</span>index<span>)</span><span>;</span>
+
+        modCount<span>++</span><span>;</span>
+        <span>E</span> oldValue <span>=</span> <span>elementData</span><span>(</span>index<span>)</span><span>;</span>
+
+        <span>int</span> numMoved <span>=</span> size <span>-</span> index <span>-</span> <span>1</span><span>;</span>
+        <span>if</span> <span>(</span>numMoved <span>></span> <span>0</span><span>)</span>
+            <span>System</span><span>.</span><span>arraycopy</span><span>(</span>elementData<span>,</span> index<span>+</span><span>1</span><span>,</span> elementData<span>,</span> index<span>,</span> numMoved<span>)</span><span>;</span>
+        elementData<span>[</span><span>--</span>size<span>]</span> <span>=</span> <span>null</span><span>;</span> <span>// clear to let GC do its work</span>
+
+        <span>return</span> oldValue<span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 从列表中删除第一个出现的元素 o
+     * 返回是否成功删除（如果列表中不含该元素，则为 false）
+     */</span>
+    <span>public</span> <span>boolean</span> <span>remove</span><span>(</span><span>Object</span> o<span>)</span> <span>{</span>
+        <span>if</span> <span>(</span>o <span>==</span> <span>null</span><span>)</span> <span>{</span>
+            <span>// 如果目标元素是 null，则需要特别判断</span>
+            <span>for</span> <span>(</span><span>int</span> index <span>=</span> <span>0</span><span>;</span> index <span>&lt;</span> size<span>;</span> index<span>++</span><span>)</span>
+                <span>if</span> <span>(</span>elementData<span>[</span>index<span>]</span> <span>==</span> <span>null</span><span>)</span> <span>{</span>
+                    <span>fastRemove</span><span>(</span>index<span>)</span><span>;</span>
+                    <span>return</span> <span>true</span><span>;</span>
+                <span>}</span>
+        <span>}</span> <span>else</span> <span>{</span>
+            <span>for</span> <span>(</span><span>int</span> index <span>=</span> <span>0</span><span>;</span> index <span>&lt;</span> size<span>;</span> index<span>++</span><span>)</span>
+                <span>if</span> <span>(</span>o<span>.</span><span>equals</span><span>(</span>elementData<span>[</span>index<span>]</span><span>)</span><span>)</span> <span>{</span>
+                    <span>fastRemove</span><span>(</span>index<span>)</span><span>;</span>
+                    <span>return</span> <span>true</span><span>;</span>
+                <span>}</span>
+        <span>}</span>
+        <span>return</span> <span>false</span><span>;</span>
+    <span>}</span>
+
+    <span>/*
+     * （快速）删除指定索引 index 处的元素，无返回值
+     */</span>
+    <span>private</span> <span>void</span> <span>fastRemove</span><span>(</span><span>int</span> index<span>)</span> <span>{</span>
+        modCount<span>++</span><span>;</span>
+        <span>int</span> numMoved <span>=</span> size <span>-</span> index <span>-</span> <span>1</span><span>;</span>
+        <span>if</span> <span>(</span>numMoved <span>></span> <span>0</span><span>)</span>
+            <span>System</span><span>.</span><span>arraycopy</span><span>(</span>elementData<span>,</span> index<span>+</span><span>1</span><span>,</span> elementData<span>,</span> index<span>,</span> numMoved<span>)</span><span>;</span>
+        elementData<span>[</span><span>--</span>size<span>]</span> <span>=</span> <span>null</span><span>;</span> <span>// clear to let GC do its work</span>
+    <span>}</span>
+
+    <span>/**
+     * 删除列表中所有元素
+     */</span>
+    <span>public</span> <span>void</span> <span>clear</span><span>(</span><span>)</span> <span>{</span>
+        modCount<span>++</span><span>;</span>
+
+        <span>// clear to let GC do its work</span>
+        <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> size<span>;</span> i<span>++</span><span>)</span>
+            elementData<span>[</span>i<span>]</span> <span>=</span> <span>null</span><span>;</span>
+
+        size <span>=</span> <span>0</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 将指定集合的所有元素插入到列表最后
+     */</span>
+    <span>public</span> <span>boolean</span> <span>addAll</span><span>(</span><span>Collection</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>E</span><span>></span></span> c<span>)</span> <span>{</span>
+        <span>Object</span><span>[</span><span>]</span> a <span>=</span> c<span>.</span><span>toArray</span><span>(</span><span>)</span><span>;</span>
+        <span>int</span> numNew <span>=</span> a<span>.</span>length<span>;</span>
+        <span>// 如有必要则进行扩容</span>
+        <span>ensureCapacityInternal</span><span>(</span>size <span>+</span> numNew<span>)</span><span>;</span>  <span>// Increments modCount</span>
+        <span>System</span><span>.</span><span>arraycopy</span><span>(</span>a<span>,</span> <span>0</span><span>,</span> elementData<span>,</span> size<span>,</span> numNew<span>)</span><span>;</span>
+        size <span>+=</span> numNew<span>;</span>
+        <span>return</span> numNew <span>!=</span> <span>0</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 将指定集合 c 中的所有元素，插入到该列表索引 index 处
+     */</span>
+    <span>public</span> <span>boolean</span> <span>addAll</span><span>(</span><span>int</span> index<span>,</span> <span>Collection</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>E</span><span>></span></span> c<span>)</span> <span>{</span>
+        <span>// 先检查 index 是否合法</span>
+        <span>rangeCheckForAdd</span><span>(</span>index<span>)</span><span>;</span>
+
+        <span>Object</span><span>[</span><span>]</span> a <span>=</span> c<span>.</span><span>toArray</span><span>(</span><span>)</span><span>;</span>
+        <span>int</span> numNew <span>=</span> a<span>.</span>length<span>;</span>
+        <span>// 如有必要则进行扩容</span>
+        <span>ensureCapacityInternal</span><span>(</span>size <span>+</span> numNew<span>)</span><span>;</span>  <span>// Increments modCount</span>
+
+        <span>int</span> numMoved <span>=</span> size <span>-</span> index<span>;</span>
+        <span>if</span> <span>(</span>numMoved <span>></span> <span>0</span><span>)</span>
+            <span>// 如有必要，将原 index 索引及后续所有元素整体后移</span>
+            <span>System</span><span>.</span><span>arraycopy</span><span>(</span>elementData<span>,</span> index<span>,</span> elementData<span>,</span> index <span>+</span> numNew<span>,</span> numMoved<span>)</span><span>;</span>
+
+        <span>// 将集合中的所有元素复制进来</span>
+        <span>System</span><span>.</span><span>arraycopy</span><span>(</span>a<span>,</span> <span>0</span><span>,</span> elementData<span>,</span> index<span>,</span> numNew<span>)</span><span>;</span>
+        size <span>+=</span> numNew<span>;</span>
+        <span>return</span> numNew <span>!=</span> <span>0</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 删除 fromIndex 到 toIndex 之间的所有元素
+     */</span>
+    <span>protected</span> <span>void</span> <span>removeRange</span><span>(</span><span>int</span> fromIndex<span>,</span> <span>int</span> toIndex<span>)</span> <span>{</span>
+        modCount<span>++</span><span>;</span>
+        <span>int</span> numMoved <span>=</span> size <span>-</span> toIndex<span>;</span>
+        <span>// 将 toIndex 索引开始 numMoved 个元素整体复制（移动）到 fromIndex 索引处</span>
+        <span>System</span><span>.</span><span>arraycopy</span><span>(</span>elementData<span>,</span> toIndex<span>,</span> elementData<span>,</span> fromIndex<span>,</span> numMoved<span>)</span><span>;</span>
+
+        <span>// 计算得到删除后的元素个数，将后面所有元素赋为 null</span>
+        <span>int</span> newSize <span>=</span> size <span>-</span> <span>(</span>toIndex<span>-</span>fromIndex<span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>int</span> i <span>=</span> newSize<span>;</span> i <span>&lt;</span> size<span>;</span> i<span>++</span><span>)</span> <span>{</span>
+            elementData<span>[</span>i<span>]</span> <span>=</span> <span>null</span><span>;</span>
+        <span>}</span>
+        size <span>=</span> newSize<span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 检查给定索引是否在范围内
+     * 对比的是（元素个数）size，而不是 （容量大小）length
+     */</span>
+    <span>private</span> <span>void</span> <span>rangeCheck</span><span>(</span><span>int</span> index<span>)</span> <span>{</span>
+        <span>if</span> <span>(</span>index <span>>=</span> size<span>)</span>
+            <span>throw</span> <span>new</span> <span>IndexOutOfBoundsException</span><span>(</span><span>outOfBoundsMsg</span><span>(</span>index<span>)</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * add 和 addAll 前检查 index 的范围是否有异常
+     * 对比的是（元素个数）size，而不是 （容量大小）length
+     */</span>
+    <span>private</span> <span>void</span> <span>rangeCheckForAdd</span><span>(</span><span>int</span> index<span>)</span> <span>{</span>
+        <span>if</span> <span>(</span>index <span>></span> size <span>||</span> index <span>&lt;</span> <span>0</span><span>)</span>
+            <span>throw</span> <span>new</span> <span>IndexOutOfBoundsException</span><span>(</span><span>outOfBoundsMsg</span><span>(</span>index<span>)</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 返回 outOfBoundsMsg 的具体信息
+     */</span>
+    <span>private</span> <span>String</span> <span>outOfBoundsMsg</span><span>(</span><span>int</span> index<span>)</span> <span>{</span>
+        <span>return</span> <span>"Index: "</span><span>+</span>index<span>+</span><span>", Size: "</span><span>+</span>size<span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 从此列表中删除（指定集合 c 中出现过的所有）元素
+     */</span>
+    <span>public</span> <span>boolean</span> <span>removeAll</span><span>(</span><span>Collection</span><span><span>&lt;</span><span>?</span><span>></span></span> c<span>)</span> <span>{</span>
+        <span>Objects</span><span>.</span><span>requireNonNull</span><span>(</span>c<span>)</span><span>;</span>
+        <span>return</span> <span>batchRemove</span><span>(</span>c<span>,</span> <span>false</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 仅保留此列表中（在指定集合 c 中出现过的）元素
+     */</span>
+    <span>public</span> <span>boolean</span> <span>retainAll</span><span>(</span><span>Collection</span><span><span>&lt;</span><span>?</span><span>></span></span> c<span>)</span> <span>{</span>
+        <span>Objects</span><span>.</span><span>requireNonNull</span><span>(</span>c<span>)</span><span>;</span>
+        <span>return</span> <span>batchRemove</span><span>(</span>c<span>,</span> <span>true</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 返回第 index 个元素的迭代器
+     */</span>
+    <span>public</span> <span>ListIterator</span><span><span>&lt;</span><span>E</span><span>></span></span> <span>listIterator</span><span>(</span><span>int</span> index<span>)</span> <span>{</span>
+        <span>if</span> <span>(</span>index <span>&lt;</span> <span>0</span> <span>||</span> index <span>></span> size<span>)</span>
+            <span>throw</span> <span>new</span> <span>IndexOutOfBoundsException</span><span>(</span><span>"Index: "</span><span>+</span>index<span>)</span><span>;</span>
+        <span>return</span> <span>new</span> <span>ListItr</span><span>(</span>index<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 获取第一个元素的迭代器
+     */</span>
+    <span>public</span> <span>ListIterator</span><span><span>&lt;</span><span>E</span><span>></span></span> <span>listIterator</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> <span>new</span> <span>ListItr</span><span>(</span><span>0</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>/**
+     * 以正确的顺序返回该列表中的元素的迭代器
+     */</span>
+    <span>public</span> <span>Iterator</span><span><span>&lt;</span><span>E</span><span>></span></span> <span>iterator</span><span>(</span><span>)</span> <span>{</span>
+        <span>return</span> <span>new</span> <span>Itr</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br><span>47</span><br><span>48</span><br><span>49</span><br><span>50</span><br><span>51</span><br><span>52</span><br><span>53</span><br><span>54</span><br><span>55</span><br><span>56</span><br><span>57</span><br><span>58</span><br><span>59</span><br><span>60</span><br><span>61</span><br><span>62</span><br><span>63</span><br><span>64</span><br><span>65</span><br><span>66</span><br><span>67</span><br><span>68</span><br><span>69</span><br><span>70</span><br><span>71</span><br><span>72</span><br><span>73</span><br><span>74</span><br><span>75</span><br><span>76</span><br><span>77</span><br><span>78</span><br><span>79</span><br><span>80</span><br><span>81</span><br><span>82</span><br><span>83</span><br><span>84</span><br><span>85</span><br><span>86</span><br><span>87</span><br><span>88</span><br><span>89</span><br><span>90</span><br><span>91</span><br><span>92</span><br><span>93</span><br><span>94</span><br><span>95</span><br><span>96</span><br><span>97</span><br><span>98</span><br><span>99</span><br><span>100</span><br><span>101</span><br><span>102</span><br><span>103</span><br><span>104</span><br><span>105</span><br><span>106</span><br><span>107</span><br><span>108</span><br><span>109</span><br><span>110</span><br><span>111</span><br><span>112</span><br><span>113</span><br><span>114</span><br><span>115</span><br><span>116</span><br><span>117</span><br><span>118</span><br><span>119</span><br><span>120</span><br><span>121</span><br><span>122</span><br><span>123</span><br><span>124</span><br><span>125</span><br><span>126</span><br><span>127</span><br><span>128</span><br><span>129</span><br><span>130</span><br><span>131</span><br><span>132</span><br><span>133</span><br><span>134</span><br><span>135</span><br><span>136</span><br><span>137</span><br><span>138</span><br><span>139</span><br><span>140</span><br><span>141</span><br><span>142</span><br><span>143</span><br><span>144</span><br><span>145</span><br><span>146</span><br><span>147</span><br><span>148</span><br><span>149</span><br><span>150</span><br><span>151</span><br><span>152</span><br><span>153</span><br><span>154</span><br><span>155</span><br><span>156</span><br><span>157</span><br><span>158</span><br><span>159</span><br><span>160</span><br><span>161</span><br><span>162</span><br><span>163</span><br><span>164</span><br><span>165</span><br><span>166</span><br><span>167</span><br><span>168</span><br><span>169</span><br><span>170</span><br><span>171</span><br><span>172</span><br><span>173</span><br><span>174</span><br><span>175</span><br><span>176</span><br><span>177</span><br><span>178</span><br><span>179</span><br><span>180</span><br><span>181</span><br><span>182</span><br><span>183</span><br><span>184</span><br><span>185</span><br><span>186</span><br><span>187</span><br><span>188</span><br><span>189</span><br><span>190</span><br><span>191</span><br><span>192</span><br><span>193</span><br><span>194</span><br><span>195</span><br><span>196</span><br><span>197</span><br><span>198</span><br><span>199</span><br><span>200</span><br><span>201</span><br><span>202</span><br><span>203</span><br><span>204</span><br><span>205</span><br><span>206</span><br><span>207</span><br><span>208</span><br><span>209</span><br><span>210</span><br><span>211</span><br><span>212</span><br><span>213</span><br><span>214</span><br><span>215</span><br><span>216</span><br><span>217</span><br><span>218</span><br><span>219</span><br><span>220</span><br><span>221</span><br><span>222</span><br><span>223</span><br><span>224</span><br><span>225</span><br><span>226</span><br><span>227</span><br><span>228</span><br><span>229</span><br><span>230</span><br><span>231</span><br><span>232</span><br><span>233</span><br><span>234</span><br><span>235</span><br><span>236</span><br><span>237</span><br><span>238</span><br><span>239</span><br><span>240</span><br><span>241</span><br><span>242</span><br><span>243</span><br><span>244</span><br><span>245</span><br><span>246</span><br><span>247</span><br><span>248</span><br><span>249</span><br><span>250</span><br><span>251</span><br><span>252</span><br><span>253</span><br><span>254</span><br><span>255</span><br><span>256</span><br><span>257</span><br><span>258</span><br><span>259</span><br><span>260</span><br><span>261</span><br><span>262</span><br><span>263</span><br><span>264</span><br><span>265</span><br><span>266</span><br><span>267</span><br><span>268</span><br><span>269</span><br><span>270</span><br><span>271</span><br><span>272</span><br><span>273</span><br><span>274</span><br><span>275</span><br><span>276</span><br><span>277</span><br><span>278</span><br><span>279</span><br><span>280</span><br><span>281</span><br><span>282</span><br><span>283</span><br><span>284</span><br><span>285</span><br><span>286</span><br><span>287</span><br><span>288</span><br><span>289</span><br><span>290</span><br><span>291</span><br><span>292</span><br><span>293</span><br><span>294</span><br><span>295</span><br><span>296</span><br><span>297</span><br><span>298</span><br><span>299</span><br><span>300</span><br><span>301</span><br><span>302</span><br><span>303</span><br><span>304</span><br><span>305</span><br><span>306</span><br><span>307</span><br><span>308</span><br><span>309</span><br><span>310</span><br><span>311</span><br><span>312</span><br><span>313</span><br><span>314</span><br><span>315</span><br><span>316</span><br><span>317</span><br><span>318</span><br><span>319</span><br><span>320</span><br><span>321</span><br><span>322</span><br><span>323</span><br><span>324</span><br><span>325</span><br><span>326</span><br><span>327</span><br><span>328</span><br><span>329</span><br><span>330</span><br><span>331</span><br><span>332</span><br><span>333</span><br><span>334</span><br><span>335</span><br><span>336</span><br><span>337</span><br><span>338</span><br><span>339</span><br><span>340</span><br><span>341</span><br><span>342</span><br><span>343</span><br><span>344</span><br><span>345</span><br><span>346</span><br><span>347</span><br><span>348</span><br><span>349</span><br><span>350</span><br><span>351</span><br><span>352</span><br><span>353</span><br><span>354</span><br><span>355</span><br><span>356</span><br><span>357</span><br><span>358</span><br><span>359</span><br><span>360</span><br><span>361</span><br><span>362</span><br><span>363</span><br><span>364</span><br><span>365</span><br><span>366</span><br><span>367</span><br><span>368</span><br><span>369</span><br><span>370</span><br><span>371</span><br><span>372</span><br><span>373</span><br><span>374</span><br><span>375</span><br><span>376</span><br><span>377</span><br><span>378</span><br><span>379</span><br><span>380</span><br><span>381</span><br><span>382</span><br><span>383</span><br><span>384</span><br><span>385</span><br><span>386</span><br><span>387</span><br><span>388</span><br><span>389</span><br><span>390</span><br><span>391</span><br><span>392</span><br><span>393</span><br><span>394</span><br><span>395</span><br><span>396</span><br><span>397</span><br><span>398</span><br><span>399</span><br><span>400</span><br><span>401</span><br><span>402</span><br><span>403</span><br><span>404</span><br><span>405</span><br><span>406</span><br><span>407</span><br><span>408</span><br><span>409</span><br><span>410</span><br><span>411</span><br><span>412</span><br><span>413</span><br><span>414</span><br><span>415</span><br><span>416</span><br><span>417</span><br><span>418</span><br><span>419</span><br><span>420</span><br><span>421</span><br><span>422</span><br><span>423</span><br><span>424</span><br><span>425</span><br></div></div>]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-22T11:37:26.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">Java 集合框架基础知识</title>
+    <id>https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/"/>
+    <updated>2022-01-22T11:37:26.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/collection/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86&amp;%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">Java集合框架基础知识&amp;面试题总结 | JavaGuide</a>，略有改动</p>
+</div>
+<h2 id="一、集合概述"> 一、集合概述</h2>
+<h3 id="_1-0-java集合概览"> 1.0 Java集合概览</h3>
+<p><img src="./README.assets/java-collection-hierarchy.71519bdb.png" alt="img" /></p>
+<h3 id="_1-1-集合框架底层数据结构"> 1.1 集合框架底层数据结构</h3>
+<ul>
+<li><code>Collection</code>
+<ul>
+<li><code>List</code>
+<ul>
+<li><code>ArrayList</code>: Object[] 数组</li>
+<li><code>Vector</code>: Object[] 数组</li>
+<li><code>LinkedList</code>: 双向链表</li>
+</ul>
+</li>
+<li><code>Set</code>
+<ul>
+<li><code>HashSet</code>（无序）: 基于 <code>HashMap</code> 实现</li>
+<li><code>LinkedHashSet</code>: <code>HashSet</code> 的子类，基于 <code>LinkedHashMap</code> 实现</li>
+<li><code>TreeSet</code>（有序）: 红黑树（自平衡的排序二叉树）</li>
+</ul>
+</li>
+<li><code>Queue</code>
+<ul>
+<li><code>PriorityQueue</code> : Object[] 数组实现二叉堆</li>
+<li><code>ArrayQueue</code> : Object[] 数组 + 双指针</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Map</code>
+<ul>
+<li><code>HashMap</code> : 数组 + 链表 + 红黑树（链表根据大小和阈值进行扩容，扩容到一定大小转换为红黑树）</li>
+<li><code>LinkedMap</code> : 继承自 <code>HashMap</code>，增加一条双向链表以保持插入顺序</li>
+<li><code>Hashtable</code> : 数组 + 链表</li>
+<li><code>TreeMap</code> : 红黑树</li>
+</ul>
+</li>
+</ul>
+<h3 id="_1-2-集合的选择"> 1.2 集合的选择</h3>
+<p><img src="./README.assets/image-20220118101609300.png" alt="image-20220118101609300" /></p>
+<h2 id="二、list"> 二、List</h2>
+<h3 id="_2-1-arraylist-和-vector-的区别"> 2.1 ArrayList 和 Vector 的区别</h3>
+<p><code>ArrayList</code> 是 <code>List</code> 的主要实现类，底层使用 <code>Object[]</code>存储，适用于频繁的查找工作，线程不安全 ；</p>
+<p><code>Vector</code> 是 <code>List</code> 的古老实现类，底层使用<code>Object[]</code> 存储，线程安全的（代价就是效率差一些）。</p>
+<h3 id="_2-2-arraylist-和-linkedlist-的区别"> 2.2 ArrayList  和 LinkedList 的区别</h3>
+<p><strong>是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</p>
+<p><strong>底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</p>
+<p><strong>插入和删除是否受元素位置的影响：</strong></p>
+<ul>
+<li><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。</li>
+<li><code>LinkedList</code> 采用链表存储，所以，如果是在头尾插入或者删除元素不受元素位置的影响（<code>add(E e)</code>、<code>addFirst(E e)</code>、<code>addLast(E e)</code>、<code>removeFirst()</code> 、 <code>removeLast()</code>），近似 O(1)，如果是要在指定位置 <code>i</code> 插入和删除元素的话（<code>add(int index, E element)</code>，<code>remove(Object o)</code>） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。</li>
+</ul>
+<p><strong>是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</p>
+<p><strong>内存空间占用：</strong> ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。</p>
+<h3 id="_2-3-randomaccess-接口"> 2.3 RandomAccess 接口</h3>
+<div><pre><code><span>public</span> <span>interface</span> <span>RandomAccess</span> <span>{</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p>查看源码我们发现实际上 <code>RandomAccess</code> 接口中什么都没有定义。所以，在我看来 <code>RandomAccess</code> 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p>
+<p>在 <code>binarySearch()</code>方法中，它要判断传入的 list 是否 <code>RamdomAccess</code>的实例，如果是，调用<code>indexedBinarySearch()</code>方法，如果不是，那么调用<code>iteratorBinarySearch()</code>方法</p>
+<div><pre><code><span>public</span> <span>static</span> <span><span>&lt;</span><span>T</span><span>></span></span>
+    <span>int</span> <span>binarySearch</span><span>(</span><span>List</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>Comparable</span><span>&lt;</span><span>?</span> <span>super</span> <span>T</span><span>></span><span>></span></span> list<span>,</span> <span>T</span> key<span>)</span> <span>{</span>
+    <span>if</span> <span>(</span>list <span>instanceof</span> <span>RandomAccess</span> <span>||</span> list<span>.</span><span>size</span><span>(</span><span>)</span><span>&lt;</span>BINARYSEARCH_THRESHOLD<span>)</span>
+        <span>return</span> <span>Collections</span><span>.</span><span>indexedBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
+    <span>else</span>
+        <span>return</span> <span>Collections</span><span>.</span><span>iteratorBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。为什么呢？我觉得还是和底层数据结构有关！<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O(n)，所以不支持快速随机访问。，<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。 <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的！</p>
+<h3 id="_2-4-arraylist-扩容机制"> 2.4 ArrayList 扩容机制</h3>
+<p>详见另一篇 <a href="../2-source-code/1-arraylist">ArrayList 源码解读</a></p>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">MySQL 笔记</title>
+    <id>https://vue-blog.lllllan.cn/2-mysql/</id>
+    <link href="https://vue-blog.lllllan.cn/2-mysql/"/>
+    <updated>2022-01-20T14:33:14.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
+<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
+<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="MySQL"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">Java 笔记</title>
+    <id>https://vue-blog.lllllan.cn/1-java/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/"/>
+    <updated>2022-01-20T09:33:02.000Z</updated>
+    <content type="html"><![CDATA[<div><p>重要声明</p>
+<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
+</div>
+<h2 id="参考"> 参考</h2>
+<ul>
+<li>
+<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
+</li>
+<li>
+<p><a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a></p>
+</li>
+</ul>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T09:33:02.000Z</published>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
@@ -1793,412 +2402,6 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">ArrayList 源码解读</title>
-    <id>https://vue-blog.lllllan.cn/1-java/3-container/2-source-code/1-arraylist/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/3-container/2-source-code/1-arraylist/"/>
-    <updated>2022-01-22T11:36:54.571Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://snailclimb.gitee.io/javaguide/#/docs/java/collection/arraylist-source-code" target="_blank" rel="noopener noreferrer">2. ArrayList 核心源码解读 (gitee.io)</a>，略有改动</p>
-</div>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">Java 集合框架基础知识</title>
-    <id>https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/collection/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86&amp;%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">Java集合框架基础知识&amp;面试题总结 | JavaGuide</a>，略有改动</p>
-</div>
-<h2 id="一、集合概述"> 一、集合概述</h2>
-<h3 id="_1-0-java集合概览"> 1.0 Java集合概览</h3>
-<p><img src="./README.assets/java-collection-hierarchy.71519bdb.png" alt="img" /></p>
-<h3 id="_1-1-集合框架底层数据结构"> 1.1 集合框架底层数据结构</h3>
-<ul>
-<li><code>Collection</code>
-<ul>
-<li><code>List</code>
-<ul>
-<li><code>ArrayList</code>: Object[] 数组</li>
-<li><code>Vector</code>: Object[] 数组</li>
-<li><code>LinkedList</code>: 双向链表</li>
-</ul>
-</li>
-<li><code>Set</code>
-<ul>
-<li><code>HashSet</code>（无序）: 基于 <code>HashMap</code> 实现</li>
-<li><code>LinkedHashSet</code>: <code>HashSet</code> 的子类，基于 <code>LinkedHashMap</code> 实现</li>
-<li><code>TreeSet</code>（有序）: 红黑树（自平衡的排序二叉树）</li>
-</ul>
-</li>
-<li><code>Queue</code>
-<ul>
-<li><code>PriorityQueue</code> : Object[] 数组实现二叉堆</li>
-<li><code>ArrayQueue</code> : Object[] 数组 + 双指针</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>Map</code>
-<ul>
-<li><code>HashMap</code> : 数组 + 链表 + 红黑树（链表根据大小和阈值进行扩容，扩容到一定大小转换为红黑树）</li>
-<li><code>LinkedMap</code> : 继承自 <code>HashMap</code>，增加一条双向链表以保持插入顺序</li>
-<li><code>Hashtable</code> : 数组 + 链表</li>
-<li><code>TreeMap</code> : 红黑树</li>
-</ul>
-</li>
-</ul>
-<h3 id="_1-2-集合的选择"> 1.2 集合的选择</h3>
-<p><img src="./README.assets/image-20220118101609300.png" alt="image-20220118101609300" /></p>
-<h2 id="二、list"> 二、List</h2>
-<h3 id="_2-1-arraylist-和-vector-的区别"> 2.1 ArrayList 和 Vector 的区别</h3>
-<p><code>ArrayList</code> 是 <code>List</code> 的主要实现类，底层使用 <code>Object[]</code>存储，适用于频繁的查找工作，线程不安全 ；</p>
-<p><code>Vector</code> 是 <code>List</code> 的古老实现类，底层使用<code>Object[]</code> 存储，线程安全的（代价就是效率差一些）。</p>
-<h3 id="_2-2-arraylist-和-linkedlist-的区别"> 2.2 ArrayList  和 LinkedList 的区别</h3>
-<p><strong>是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</p>
-<p><strong>底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</p>
-<p><strong>插入和删除是否受元素位置的影响：</strong></p>
-<ul>
-<li><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。</li>
-<li><code>LinkedList</code> 采用链表存储，所以，如果是在头尾插入或者删除元素不受元素位置的影响（<code>add(E e)</code>、<code>addFirst(E e)</code>、<code>addLast(E e)</code>、<code>removeFirst()</code> 、 <code>removeLast()</code>），近似 O(1)，如果是要在指定位置 <code>i</code> 插入和删除元素的话（<code>add(int index, E element)</code>，<code>remove(Object o)</code>） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。</li>
-</ul>
-<p><strong>是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</p>
-<p><strong>内存空间占用：</strong> ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。</p>
-<h3 id="_2-3-randomaccess-接口"> 2.3 RandomAccess 接口</h3>
-<div><pre><code><span>public</span> <span>interface</span> <span>RandomAccess</span> <span>{</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p>查看源码我们发现实际上 <code>RandomAccess</code> 接口中什么都没有定义。所以，在我看来 <code>RandomAccess</code> 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p>
-<p>在 <code>binarySearch()</code>方法中，它要判断传入的 list 是否 <code>RamdomAccess</code>的实例，如果是，调用<code>indexedBinarySearch()</code>方法，如果不是，那么调用<code>iteratorBinarySearch()</code>方法</p>
-<div><pre><code><span>public</span> <span>static</span> <span><span>&lt;</span><span>T</span><span>></span></span>
-    <span>int</span> <span>binarySearch</span><span>(</span><span>List</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>Comparable</span><span>&lt;</span><span>?</span> <span>super</span> <span>T</span><span>></span><span>></span></span> list<span>,</span> <span>T</span> key<span>)</span> <span>{</span>
-    <span>if</span> <span>(</span>list <span>instanceof</span> <span>RandomAccess</span> <span>||</span> list<span>.</span><span>size</span><span>(</span><span>)</span><span>&lt;</span>BINARYSEARCH_THRESHOLD<span>)</span>
-        <span>return</span> <span>Collections</span><span>.</span><span>indexedBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
-    <span>else</span>
-        <span>return</span> <span>Collections</span><span>.</span><span>iteratorBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。为什么呢？我觉得还是和底层数据结构有关！<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O(n)，所以不支持快速随机访问。，<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。 <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的！</p>
-<h3 id="_2-4-arraylist-扩容机制"> 2.4 ArrayList 扩容机制</h3>
-<p>详见另一篇 <a href="../2-source-code/1-arraylist">ArrayList 源码解读</a></p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">MySQL 笔记</title>
-    <id>https://vue-blog.lllllan.cn/2-mysql/</id>
-    <link href="https://vue-blog.lllllan.cn/2-mysql/"/>
-    <updated>2022-01-20T14:33:14.000Z</updated>
-    <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
-<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
-<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="MySQL"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">第一章、浏览器生成消息</title>
-    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/</id>
-    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文作为 《网络是怎样连接的》 的笔记，绝大部分内容均抄自该书。</p>
-</div>
-<h2 id="一、生成-http-请求消息"> 一、生成 HTTP 请求消息</h2>
-<h3 id="_1-1-网址-url-uniform-resource-locator"> 1.1 网址（URL, Uniform Resource Locator）</h3>
-<p><img src="./README.assets/image-20211217214228466.png" alt="image-20211217214228466" /></p>
-<h3 id="_1-2-解析-url"> 1.2 解析 URL</h3>
-<p><img src="./README.assets/image-20211217214541708.png" alt="image-20211217214541708" /></p>
-<p><img src="./README.assets/image-20211217214555087.png" alt="image-20211217214555087" /></p>
-<h3 id="_1-3-文件名省略"> 1.3 文件名省略</h3>
-<ul>
-<li>当 URL 以 <code>/</code> 结尾时，服务器会默认访问该路径下的 <code>index.html</code> 或 <code>default.html</code> 文件</li>
-<li>当 URL 连 <code>/</code> 和文件类型都省略的时候：</li>
-</ul>
-<p><img src="./README.assets/image-20211217215354653.png" alt="image-20211217215354653" /></p>
-<p>（实测：当一个文件没有文件类型的时候，不允许和一个同名文件夹同时存在。而当这个文件有后缀时，应该会访问同名文件夹）</p>
-<h3 id="_1-4-http-基本思路"> 1.4 HTTP 基本思路</h3>
-<ul>
-<li>对什么 + 进行怎样的操作</li>
-</ul>
-<p><img src="./README.assets/image-20211217215856796.png" alt="image-20211217215856796" /></p>
-<p><img src="./README.assets/image-20211217215922575.png" alt="image-20211217215922575" /></p>
-<h3 id="_1-5-生成-http-请求信息"> 1.5 生成 HTTP 请求信息</h3>
-<blockquote>
-<p><strong>一条请求消息中只能写一个URI</strong>。如果需要获取多个文件，必须对每个文件单独发送一条请求</p>
-</blockquote>
-<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
-<p><img src="./../../../../../../data/r2coding/4.计算机基础/1.计算机网络/1.网络是怎样连接的/网络是怎样连接的.assets/image-20211217223351942.png" alt="image-20211217223351942" /></p>
-<p>更多字段信息见文档 44 页。</p>
-<h3 id="_1-6-服务器响应"> 1.6 服务器响应</h3>
-<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
-<blockquote>
-<p>状态码时一个数字，主要用来向程序告知执行的结果</p>
-<p>响应短语是一段文字，用来向人们告知执行的结果</p>
-</blockquote>
-<p><img src="./README.assets/image-20211217224050584.png" alt="image-20211217224050584" /></p>
-<p><img src="./README.assets/image-20211217224916808.png" alt="image-20211217224916808" /></p>
-<h2 id="二、向-dns-服务器查询-web-服务器的-ip-地址"> 二、向 DNS 服务器查询 Web 服务器的 IP 地址</h2>
-<h3 id="_2-1-ip-地址的基本知识"> 2.1 IP 地址的基本知识</h3>
-<p><img src="./README.assets/image-20211219221243726.png" alt="image-20211219221243726" /></p>
-<p><img src="./README.assets/image-20211219221343432.png" alt="image-20211219221343432" /></p>
-<ul>
-<li>IP 地址是 32 比特的数字，被分成了4组</li>
-<li>子网掩码也是 32 比特的数字
-<ul>
-<li><strong>左边全1的部分表示网络号</strong></li>
-<li><strong>右边全0的部分表示主机号</strong></li>
-</ul>
-</li>
-</ul>
-<p><img src="./README.assets/image-20211219222137630.png" alt="image-20211219222137630" /></p>
-<p><img src="./README.assets/image-20211219222245701.png" alt="image-20211219222245701" /></p>
-<h3 id="_2-2-域名和ip地址并用的理由"> 2.2 域名和IP地址并用的理由</h3>
-<ul>
-<li>域名比IP地址更容易记忆</li>
-<li>IP地址的传输比域名更高效（IP地址只是4字节的数字，域名最长可以是255字节的字符）</li>
-</ul>
-<p>于是让人来使用域名，让路由器来使用IP地址，这个机制就是<strong>DNS</strong>。</p>
-<h3 id="_2-3-socket-库提供查询-ip-地址的功能"> 2.3 Socket 库提供查询 IP 地址的功能</h3>
-<blockquote>
-<p><strong>域名解析</strong>：通过DNS查询IP地址的操作。</p>
-</blockquote>
-<blockquote>
-<p><strong>解析器</strong>：负责执行域名解析的DNS客户端。（解析器实际上是一段程序。）</p>
-</blockquote>
-<p>​	库是一堆通用程序组件的集合，他们具有诸多好处：</p>
-<ul>
-<li>节省编程工作量</li>
-<li>实现程序的标准化</li>
-<li>等等</li>
-</ul>
-<p>​	Socket库也是一种库，其中包含的程序组件可以让其他的应用程序调用操作系统的网络功能，而解析器就是这个库中的其中一种程序组件。</p>
-<h3 id="_2-4-通过解析器向dns服务器发出查询"> 2.4 通过解析器向DNS服务器发出查询</h3>
-<ul>
-<li>调用解析器</li>
-<li>解析器向DNS服务器发送查询消息</li>
-<li>DNS服务器返回响应消息</li>
-<li>解析器从响应消息中取出IP地址并写入内存</li>
-</ul>
-<p><img src="./README.assets/image-20211223215500444.png" alt="image-20211223215500444" /></p>
-<p>根据域名查询IP地址时，浏览器会使用Socket库中的解析器。</p>
-<h3 id="_2-5-解析器的内部原理"> 2.5 解析器的内部原理</h3>
-<blockquote>
-<p><strong>控制流程转移</strong>：由于调用了其他程序，原本运行的程序进入暂停状态，而被调用的程序开始运行。</p>
-</blockquote>
-<ul>
-<li>从上往下顺序执行应用程序编写的操作内容，当到达需要调用解析器的部分时</li>
-<li>控制流程转移到解析器，解析器会生成要发送给DNS服务器的查询消息</li>
-<li>委托操作系统内部的协议栈来发送这个消息（因为解析器本身并不具备使用网络收发数据的功能</li>
-</ul>
-<p><img src="./README.assets/image-20211224205322811.png" alt="image-20211224205322811" /></p>
-<p>向DNS服务器发送消息时，也需要知道DNS服务器的IP地址。这是这个地址实现设置好了，不需要再查询。</p>
-<p><img src="./README.assets/image-20211224213701480.png" alt="image-20211224213701480" /></p>
-<h2 id="三、dns-服务器"> 三、DNS 服务器</h2>
-<h3 id="_3-1-dns-服务器的基本工作"> 3.1 DNS 服务器的基本工作</h3>
-<p>DNS 服务器的基本工作就是根据需要查询的域名和记录类型查找相关的记录，并向客户端返回响应消息。</p>
-<ul>
-<li>域名：服务器、邮件服务器（邮件地址@后面的部分）的名称</li>
-<li>Class：代表互联网的IN</li>
-<li>记录类型：表示域名对应何种类型的记录。</li>
-</ul>
-<p><img src="./README.assets/image-20211224215024279.png" alt="image-20211224215024279" /></p>
-<h3 id="_3-2-域名的层次结构"> 3.2 域名的层次结构</h3>
-<p>由于存在着不计其数的服务器，不可能将所有服务器的信息保存在一台DNS服务器中，只能是将这些信息分布保存在多台DNS服务器中。</p>
-<ul>
-<li>按域名以分层次的结构来保存</li>
-<li>域名中越靠右的位置表示气层级越高</li>
-<li>每个域都是作为一个整体存放在DNS服务器中的</li>
-</ul>
-<h3 id="_3-3-寻找相应的-dns-服务器并获取-ip-地址"> 3.3 寻找相应的 DNS 服务器并获取 IP 地址</h3>
-<ul>
-<li>负责管理下级域的 DNS 服务器的 IP 地址注册到他们的上级 DNS 服务器中</li>
-<li>com和jp 的上面存在一个 根域</li>
-<li>所有 DNS 服务器中都保存有根域的 DNS 服务器信息</li>
-</ul>
-<p><img src="./README.assets/image-20211224220739596.png" alt="image-20211224220739596" /></p>
-<p><img src="./README.assets/image-20211224220802400.png" alt="image-20211224220802400" /></p>
-<h3 id="_3-4-通过缓存加快-dns-服务器的响应"> 3.4 通过缓存加快 DNS 服务器的响应</h3>
-<p>DNS 服务器有一个缓存功能，可以记住之前查询过的域名</p>
-<ul>
-<li>如果要查询的域名和相关信息已经在缓存中，那么就可以直接返回响应。</li>
-<li>当查询的域名不存在时，“不存在”这一响应结果也会被缓存</li>
-<li>缓存信息设置有一个有效期，当信息超过有效期后，数据会从缓存中删除</li>
-<li>DNS服务器返回响应时，会告知这一响应结果是来自缓存还是来自负责管理该域名的DNS服务器</li>
-</ul>
-<h2 id="四、委托协议栈发送消息"> 四、委托协议栈发送消息</h2>
-<h3 id="_4-1-数据收发操作概览"> 4.1 数据收发操作概览</h3>
-<blockquote>
-<p>委托操作系统内部的协议栈发送HTTP消息，适用于<strong>任何</strong>网络应用程序。</p>
-</blockquote>
-<p><img src="./README.assets/image-20211225120920801.png" alt="image-20211225120920801" /></p>
-<ul>
-<li>创建套接字（出入口） —— <strong>创建套接字阶段</strong></li>
-<li>【客户端】向【服务器端】套接字连接管道 —— <strong>连接阶段</strong></li>
-<li>收发数据 —— <strong>通信阶段</strong></li>
-<li>断开管道并删除套接字 —— <strong>断开阶段</strong></li>
-</ul>
-<blockquote>
-<p>这个管道中，<em>数据流动是<strong>双向</strong>的</em></p>
-</blockquote>
-<h3 id="_4-2-创建套接字阶段"> 4.2 创建套接字阶段</h3>
-<blockquote>
-<p>创建套接字需要调用 Socket 库中的 <strong>socket 程序组件</strong></p>
-</blockquote>
-<p>客户端创建套接字：</p>
-<ul>
-<li>调用 Socket 库中的 socket 程序组件</li>
-<li>控制流程转移到 socket 内部并执行创建套接字操作</li>
-<li>控制流程交回应用程序</li>
-</ul>
-<p><img src="./README.assets/image-20211225122553775.png" alt="image-20211225122553775" /></p>
-<blockquote>
-<p>套接字创建完成以后，协议栈返回一个<strong>描述符</strong>，用来标识该套接字</p>
-</blockquote>
-<h3 id="_4-3-连接阶段"> 4.3 连接阶段</h3>
-<blockquote>
-<p>连接阶段需要调用 Socket 库中的 <strong>connect 程序组件</strong></p>
-</blockquote>
-<p>调用 connect 时需要指定三个参数：描述符、服务器IP地址、端口号</p>
-<p><img src="./README.assets/image-20211225130205613.png" alt="image-20211225130205613" /></p>
-<h3 id="_4-4-通信阶段"> 4.4 通信阶段</h3>
-<blockquote>
-<p>通信阶段需要调用 Socket 库中的 <strong>write 程序组件</strong>、<strong>read 程序组件</strong></p>
-</blockquote>
-<p>发送数据：</p>
-<ul>
-<li>生成 HTTP 请求消息</li>
-<li>指定描述符和要发送的数据，由协议栈将数据发送到服务器</li>
-</ul>
-<p>接收数据：</p>
-<ul>
-<li>指定存放响应消息的内存地址（称为接收缓冲区）</li>
-<li>read 将接收到的响应消息存放到接收缓冲区中</li>
-</ul>
-<h3 id="_4-5-断开阶段"> 4.5 断开阶段</h3>
-<blockquote>
-<p>断开阶段需要调用 Socket 库中的 <strong>close 程序组件</strong></p>
-</blockquote>
-<ul>
-<li>Web服务器在发送完响应消息之后，会首先调用 close 来断开连接</li>
-<li>客户端中 read 执行接收数据时，会告知浏览器通信阶段已结束</li>
-<li>浏览器调用 close 进入断开阶段</li>
-</ul>
-<h3 id="_4-6-各阶段功能和调用组件"> 4.6 各阶段功能和调用组件</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">阶段</th>
-<th style="text-align:center">组件</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">创建套接字</td>
-<td style="text-align:center">socket</td>
-</tr>
-<tr>
-<td style="text-align:center">连接</td>
-<td style="text-align:center">connect</td>
-</tr>
-<tr>
-<td style="text-align:center">通信</td>
-<td style="text-align:center">发送：write<br>接收：read</td>
-</tr>
-<tr>
-<td style="text-align:center">断开</td>
-<td style="text-align:center">close</td>
-</tr>
-</tbody>
-</table>
-<h2 id="五、本章回顾"> 五、本章回顾</h2>
-<ul>
-<li>网址前的 <code>http</code> 代表什么意思</li>
-</ul>
-<blockquote>
-<p>HTTP，即超文本传输协议，是 HyperText Transfer Protocol的缩写。</p>
-</blockquote>
-<ul>
-<li>用来识别连接在互联网上的计算机和服务器的地址叫什么</li>
-</ul>
-<blockquote>
-<p>IP 地址</p>
-</blockquote>
-<ul>
-<li>根据Web服务器的域名来查询IP地址时所用的服务器叫什么</li>
-</ul>
-<blockquote>
-<p>DNS 服务器</p>
-</blockquote>
-<ul>
-<li>向DNS服务器发送请求消息的程序叫什么</li>
-</ul>
-<blockquote>
-<p>协议栈</p>
-</blockquote>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="计算机基础"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-21T02:30:27.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">Java 笔记</title>
-    <id>https://vue-blog.lllllan.cn/1-java/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/"/>
-    <updated>2022-01-20T09:33:02.000Z</updated>
-    <content type="html"><![CDATA[<div><p>重要声明</p>
-<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
-</div>
-<h2 id="参考"> 参考</h2>
-<ul>
-<li>
-<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
-</li>
-<li>
-<p><a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a></p>
-</li>
-</ul>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T09:33:02.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
     <title type="html">第二章、用电信号传输 TCP/IP 数据</title>
     <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/2-transmission-of-electrical-signal/</id>
     <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/2-transmission-of-electrical-signal/"/>
@@ -2569,52 +2772,6 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">第三章、从网线到网络设备</title>
-    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</id>
-    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文作为 《网络是怎样连接的》 的笔记，绝大部分内容均抄自该书。</p>
-</div>
-<h2 id="一、信号在网线和集线器中传输"> 一、信号在网线和集线器中传输</h2>
-<h3 id="_1-1-每个包都是独立传输的"> 1.1 每个包都是独立传输的</h3>
-<p><img src="./README.assets/image-20220113145717884.png" alt="image-20220113145717884" /></p>
-<h3 id="_1-2-网线中的信号衰减"> 1.2 网线中的信号衰减</h3>
-<p>以太网信号的本质是正负变化的电压。</p>
-<p>信号在网线的传输过程中，能量会逐渐损失。网线越长，信号衰减就越严重。</p>
-<p>同时噪声也会进一步加剧信号的失真。</p>
-<h3 id="_1-3-双绞线抑制噪声"> 1.3 双绞线抑制噪声</h3>
-<blockquote>
-<p>产生噪声的原因是网线周围的电磁波，当电磁波接触到金属等导体时，在其中就会产生电流。信号和噪声的电流混杂在一起之后，导致信号的波形发生失真。</p>
-</blockquote>
-<p>影响网线的电磁波分为两种：</p>
-<h4 id="来自网线之外的其他设备"> 来自网线之外的其他设备：</h4>
-<p>当电磁波接触到信号线时，会沿电磁波传播的右旋方向产生电流。</p>
-<p>如果我们将信号线缠绕在一起，信号线就变成了螺旋形，其中两根信号线产生的噪声电流方向就会相反，从而使得噪声电流相互抵消。</p>
-<p><img src="./README.assets/image-20220113150630538.png" alt="image-20220113150630538" /></p>
-<p><img src="./README.assets/image-20220113150651814.png" alt="image-20220113150651814" /></p>
-<h4 id="相邻信号线泄露出来"> 相邻信号线泄露出来：</h4>
-<p>这种内部产生的噪声称为 <strong>串扰</strong></p>
-<p><img src="./README.assets/image-20220113151240119.png" alt="image-20220113151240119" /></p>
-<p><img src="./README.assets/image-20220113151203170.png" alt="image-20220113151203170" /></p>
-<h3 id="_1-4-集线器将信号发往所有线路"> 1.4 集线器将信号发往所有线路</h3>
-<blockquote>
-<p>集线器将信号发送给所有连接在它上面的线路。</p>
-</blockquote>
-<p><img src="./README.assets/image-20220113151435359.png" alt="image-20220113151435359" /></p>
-<p><img src="./README.assets/image-20220113151613603.png" alt="image-20220113151613603" /></p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="计算机基础"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-21T02:30:27.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
     <title type="html">计算机网络-常见面试题</title>
     <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/2-interview-questions/</id>
     <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/2-interview-questions/"/>
@@ -2731,6 +2888,344 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
+    <title type="html">第一章、浏览器生成消息</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/"/>
+    <updated>2022-01-21T02:30:27.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文作为 《网络是怎样连接的》 的笔记，绝大部分内容均抄自该书。</p>
+</div>
+<h2 id="一、生成-http-请求消息"> 一、生成 HTTP 请求消息</h2>
+<h3 id="_1-1-网址-url-uniform-resource-locator"> 1.1 网址（URL, Uniform Resource Locator）</h3>
+<p><img src="./README.assets/image-20211217214228466.png" alt="image-20211217214228466" /></p>
+<h3 id="_1-2-解析-url"> 1.2 解析 URL</h3>
+<p><img src="./README.assets/image-20211217214541708.png" alt="image-20211217214541708" /></p>
+<p><img src="./README.assets/image-20211217214555087.png" alt="image-20211217214555087" /></p>
+<h3 id="_1-3-文件名省略"> 1.3 文件名省略</h3>
+<ul>
+<li>当 URL 以 <code>/</code> 结尾时，服务器会默认访问该路径下的 <code>index.html</code> 或 <code>default.html</code> 文件</li>
+<li>当 URL 连 <code>/</code> 和文件类型都省略的时候：</li>
+</ul>
+<p><img src="./README.assets/image-20211217215354653.png" alt="image-20211217215354653" /></p>
+<p>（实测：当一个文件没有文件类型的时候，不允许和一个同名文件夹同时存在。而当这个文件有后缀时，应该会访问同名文件夹）</p>
+<h3 id="_1-4-http-基本思路"> 1.4 HTTP 基本思路</h3>
+<ul>
+<li>对什么 + 进行怎样的操作</li>
+</ul>
+<p><img src="./README.assets/image-20211217215856796.png" alt="image-20211217215856796" /></p>
+<p><img src="./README.assets/image-20211217215922575.png" alt="image-20211217215922575" /></p>
+<h3 id="_1-5-生成-http-请求信息"> 1.5 生成 HTTP 请求信息</h3>
+<blockquote>
+<p><strong>一条请求消息中只能写一个URI</strong>。如果需要获取多个文件，必须对每个文件单独发送一条请求</p>
+</blockquote>
+<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
+<p><img src="./../../../../../../data/r2coding/4.计算机基础/1.计算机网络/1.网络是怎样连接的/网络是怎样连接的.assets/image-20211217223351942.png" alt="image-20211217223351942" /></p>
+<p>更多字段信息见文档 44 页。</p>
+<h3 id="_1-6-服务器响应"> 1.6 服务器响应</h3>
+<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
+<blockquote>
+<p>状态码时一个数字，主要用来向程序告知执行的结果</p>
+<p>响应短语是一段文字，用来向人们告知执行的结果</p>
+</blockquote>
+<p><img src="./README.assets/image-20211217224050584.png" alt="image-20211217224050584" /></p>
+<p><img src="./README.assets/image-20211217224916808.png" alt="image-20211217224916808" /></p>
+<h2 id="二、向-dns-服务器查询-web-服务器的-ip-地址"> 二、向 DNS 服务器查询 Web 服务器的 IP 地址</h2>
+<h3 id="_2-1-ip-地址的基本知识"> 2.1 IP 地址的基本知识</h3>
+<p><img src="./README.assets/image-20211219221243726.png" alt="image-20211219221243726" /></p>
+<p><img src="./README.assets/image-20211219221343432.png" alt="image-20211219221343432" /></p>
+<ul>
+<li>IP 地址是 32 比特的数字，被分成了4组</li>
+<li>子网掩码也是 32 比特的数字
+<ul>
+<li><strong>左边全1的部分表示网络号</strong></li>
+<li><strong>右边全0的部分表示主机号</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="./README.assets/image-20211219222137630.png" alt="image-20211219222137630" /></p>
+<p><img src="./README.assets/image-20211219222245701.png" alt="image-20211219222245701" /></p>
+<h3 id="_2-2-域名和ip地址并用的理由"> 2.2 域名和IP地址并用的理由</h3>
+<ul>
+<li>域名比IP地址更容易记忆</li>
+<li>IP地址的传输比域名更高效（IP地址只是4字节的数字，域名最长可以是255字节的字符）</li>
+</ul>
+<p>于是让人来使用域名，让路由器来使用IP地址，这个机制就是<strong>DNS</strong>。</p>
+<h3 id="_2-3-socket-库提供查询-ip-地址的功能"> 2.3 Socket 库提供查询 IP 地址的功能</h3>
+<blockquote>
+<p><strong>域名解析</strong>：通过DNS查询IP地址的操作。</p>
+</blockquote>
+<blockquote>
+<p><strong>解析器</strong>：负责执行域名解析的DNS客户端。（解析器实际上是一段程序。）</p>
+</blockquote>
+<p>​	库是一堆通用程序组件的集合，他们具有诸多好处：</p>
+<ul>
+<li>节省编程工作量</li>
+<li>实现程序的标准化</li>
+<li>等等</li>
+</ul>
+<p>​	Socket库也是一种库，其中包含的程序组件可以让其他的应用程序调用操作系统的网络功能，而解析器就是这个库中的其中一种程序组件。</p>
+<h3 id="_2-4-通过解析器向dns服务器发出查询"> 2.4 通过解析器向DNS服务器发出查询</h3>
+<ul>
+<li>调用解析器</li>
+<li>解析器向DNS服务器发送查询消息</li>
+<li>DNS服务器返回响应消息</li>
+<li>解析器从响应消息中取出IP地址并写入内存</li>
+</ul>
+<p><img src="./README.assets/image-20211223215500444.png" alt="image-20211223215500444" /></p>
+<p>根据域名查询IP地址时，浏览器会使用Socket库中的解析器。</p>
+<h3 id="_2-5-解析器的内部原理"> 2.5 解析器的内部原理</h3>
+<blockquote>
+<p><strong>控制流程转移</strong>：由于调用了其他程序，原本运行的程序进入暂停状态，而被调用的程序开始运行。</p>
+</blockquote>
+<ul>
+<li>从上往下顺序执行应用程序编写的操作内容，当到达需要调用解析器的部分时</li>
+<li>控制流程转移到解析器，解析器会生成要发送给DNS服务器的查询消息</li>
+<li>委托操作系统内部的协议栈来发送这个消息（因为解析器本身并不具备使用网络收发数据的功能</li>
+</ul>
+<p><img src="./README.assets/image-20211224205322811.png" alt="image-20211224205322811" /></p>
+<p>向DNS服务器发送消息时，也需要知道DNS服务器的IP地址。这是这个地址实现设置好了，不需要再查询。</p>
+<p><img src="./README.assets/image-20211224213701480.png" alt="image-20211224213701480" /></p>
+<h2 id="三、dns-服务器"> 三、DNS 服务器</h2>
+<h3 id="_3-1-dns-服务器的基本工作"> 3.1 DNS 服务器的基本工作</h3>
+<p>DNS 服务器的基本工作就是根据需要查询的域名和记录类型查找相关的记录，并向客户端返回响应消息。</p>
+<ul>
+<li>域名：服务器、邮件服务器（邮件地址@后面的部分）的名称</li>
+<li>Class：代表互联网的IN</li>
+<li>记录类型：表示域名对应何种类型的记录。</li>
+</ul>
+<p><img src="./README.assets/image-20211224215024279.png" alt="image-20211224215024279" /></p>
+<h3 id="_3-2-域名的层次结构"> 3.2 域名的层次结构</h3>
+<p>由于存在着不计其数的服务器，不可能将所有服务器的信息保存在一台DNS服务器中，只能是将这些信息分布保存在多台DNS服务器中。</p>
+<ul>
+<li>按域名以分层次的结构来保存</li>
+<li>域名中越靠右的位置表示气层级越高</li>
+<li>每个域都是作为一个整体存放在DNS服务器中的</li>
+</ul>
+<h3 id="_3-3-寻找相应的-dns-服务器并获取-ip-地址"> 3.3 寻找相应的 DNS 服务器并获取 IP 地址</h3>
+<ul>
+<li>负责管理下级域的 DNS 服务器的 IP 地址注册到他们的上级 DNS 服务器中</li>
+<li>com和jp 的上面存在一个 根域</li>
+<li>所有 DNS 服务器中都保存有根域的 DNS 服务器信息</li>
+</ul>
+<p><img src="./README.assets/image-20211224220739596.png" alt="image-20211224220739596" /></p>
+<p><img src="./README.assets/image-20211224220802400.png" alt="image-20211224220802400" /></p>
+<h3 id="_3-4-通过缓存加快-dns-服务器的响应"> 3.4 通过缓存加快 DNS 服务器的响应</h3>
+<p>DNS 服务器有一个缓存功能，可以记住之前查询过的域名</p>
+<ul>
+<li>如果要查询的域名和相关信息已经在缓存中，那么就可以直接返回响应。</li>
+<li>当查询的域名不存在时，“不存在”这一响应结果也会被缓存</li>
+<li>缓存信息设置有一个有效期，当信息超过有效期后，数据会从缓存中删除</li>
+<li>DNS服务器返回响应时，会告知这一响应结果是来自缓存还是来自负责管理该域名的DNS服务器</li>
+</ul>
+<h2 id="四、委托协议栈发送消息"> 四、委托协议栈发送消息</h2>
+<h3 id="_4-1-数据收发操作概览"> 4.1 数据收发操作概览</h3>
+<blockquote>
+<p>委托操作系统内部的协议栈发送HTTP消息，适用于<strong>任何</strong>网络应用程序。</p>
+</blockquote>
+<p><img src="./README.assets/image-20211225120920801.png" alt="image-20211225120920801" /></p>
+<ul>
+<li>创建套接字（出入口） —— <strong>创建套接字阶段</strong></li>
+<li>【客户端】向【服务器端】套接字连接管道 —— <strong>连接阶段</strong></li>
+<li>收发数据 —— <strong>通信阶段</strong></li>
+<li>断开管道并删除套接字 —— <strong>断开阶段</strong></li>
+</ul>
+<blockquote>
+<p>这个管道中，<em>数据流动是<strong>双向</strong>的</em></p>
+</blockquote>
+<h3 id="_4-2-创建套接字阶段"> 4.2 创建套接字阶段</h3>
+<blockquote>
+<p>创建套接字需要调用 Socket 库中的 <strong>socket 程序组件</strong></p>
+</blockquote>
+<p>客户端创建套接字：</p>
+<ul>
+<li>调用 Socket 库中的 socket 程序组件</li>
+<li>控制流程转移到 socket 内部并执行创建套接字操作</li>
+<li>控制流程交回应用程序</li>
+</ul>
+<p><img src="./README.assets/image-20211225122553775.png" alt="image-20211225122553775" /></p>
+<blockquote>
+<p>套接字创建完成以后，协议栈返回一个<strong>描述符</strong>，用来标识该套接字</p>
+</blockquote>
+<h3 id="_4-3-连接阶段"> 4.3 连接阶段</h3>
+<blockquote>
+<p>连接阶段需要调用 Socket 库中的 <strong>connect 程序组件</strong></p>
+</blockquote>
+<p>调用 connect 时需要指定三个参数：描述符、服务器IP地址、端口号</p>
+<p><img src="./README.assets/image-20211225130205613.png" alt="image-20211225130205613" /></p>
+<h3 id="_4-4-通信阶段"> 4.4 通信阶段</h3>
+<blockquote>
+<p>通信阶段需要调用 Socket 库中的 <strong>write 程序组件</strong>、<strong>read 程序组件</strong></p>
+</blockquote>
+<p>发送数据：</p>
+<ul>
+<li>生成 HTTP 请求消息</li>
+<li>指定描述符和要发送的数据，由协议栈将数据发送到服务器</li>
+</ul>
+<p>接收数据：</p>
+<ul>
+<li>指定存放响应消息的内存地址（称为接收缓冲区）</li>
+<li>read 将接收到的响应消息存放到接收缓冲区中</li>
+</ul>
+<h3 id="_4-5-断开阶段"> 4.5 断开阶段</h3>
+<blockquote>
+<p>断开阶段需要调用 Socket 库中的 <strong>close 程序组件</strong></p>
+</blockquote>
+<ul>
+<li>Web服务器在发送完响应消息之后，会首先调用 close 来断开连接</li>
+<li>客户端中 read 执行接收数据时，会告知浏览器通信阶段已结束</li>
+<li>浏览器调用 close 进入断开阶段</li>
+</ul>
+<h3 id="_4-6-各阶段功能和调用组件"> 4.6 各阶段功能和调用组件</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">阶段</th>
+<th style="text-align:center">组件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">创建套接字</td>
+<td style="text-align:center">socket</td>
+</tr>
+<tr>
+<td style="text-align:center">连接</td>
+<td style="text-align:center">connect</td>
+</tr>
+<tr>
+<td style="text-align:center">通信</td>
+<td style="text-align:center">发送：write<br>接收：read</td>
+</tr>
+<tr>
+<td style="text-align:center">断开</td>
+<td style="text-align:center">close</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五、本章回顾"> 五、本章回顾</h2>
+<ul>
+<li>网址前的 <code>http</code> 代表什么意思</li>
+</ul>
+<blockquote>
+<p>HTTP，即超文本传输协议，是 HyperText Transfer Protocol的缩写。</p>
+</blockquote>
+<ul>
+<li>用来识别连接在互联网上的计算机和服务器的地址叫什么</li>
+</ul>
+<blockquote>
+<p>IP 地址</p>
+</blockquote>
+<ul>
+<li>根据Web服务器的域名来查询IP地址时所用的服务器叫什么</li>
+</ul>
+<blockquote>
+<p>DNS 服务器</p>
+</blockquote>
+<ul>
+<li>向DNS服务器发送请求消息的程序叫什么</li>
+</ul>
+<blockquote>
+<p>协议栈</p>
+</blockquote>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="计算机基础"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-21T02:30:27.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">第三章、从网线到网络设备</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/"/>
+    <updated>2022-01-21T02:30:27.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文作为 《网络是怎样连接的》 的笔记，绝大部分内容均抄自该书。</p>
+</div>
+<h2 id="一、信号在网线和集线器中传输"> 一、信号在网线和集线器中传输</h2>
+<h3 id="_1-1-每个包都是独立传输的"> 1.1 每个包都是独立传输的</h3>
+<p><img src="./README.assets/image-20220113145717884.png" alt="image-20220113145717884" /></p>
+<h3 id="_1-2-网线中的信号衰减"> 1.2 网线中的信号衰减</h3>
+<p>以太网信号的本质是正负变化的电压。</p>
+<p>信号在网线的传输过程中，能量会逐渐损失。网线越长，信号衰减就越严重。</p>
+<p>同时噪声也会进一步加剧信号的失真。</p>
+<h3 id="_1-3-双绞线抑制噪声"> 1.3 双绞线抑制噪声</h3>
+<blockquote>
+<p>产生噪声的原因是网线周围的电磁波，当电磁波接触到金属等导体时，在其中就会产生电流。信号和噪声的电流混杂在一起之后，导致信号的波形发生失真。</p>
+</blockquote>
+<p>影响网线的电磁波分为两种：</p>
+<h4 id="来自网线之外的其他设备"> 来自网线之外的其他设备：</h4>
+<p>当电磁波接触到信号线时，会沿电磁波传播的右旋方向产生电流。</p>
+<p>如果我们将信号线缠绕在一起，信号线就变成了螺旋形，其中两根信号线产生的噪声电流方向就会相反，从而使得噪声电流相互抵消。</p>
+<p><img src="./README.assets/image-20220113150630538.png" alt="image-20220113150630538" /></p>
+<p><img src="./README.assets/image-20220113150651814.png" alt="image-20220113150651814" /></p>
+<h4 id="相邻信号线泄露出来"> 相邻信号线泄露出来：</h4>
+<p>这种内部产生的噪声称为 <strong>串扰</strong></p>
+<p><img src="./README.assets/image-20220113151240119.png" alt="image-20220113151240119" /></p>
+<p><img src="./README.assets/image-20220113151203170.png" alt="image-20220113151203170" /></p>
+<h3 id="_1-4-集线器将信号发往所有线路"> 1.4 集线器将信号发往所有线路</h3>
+<blockquote>
+<p>集线器将信号发送给所有连接在它上面的线路。</p>
+</blockquote>
+<p><img src="./README.assets/image-20220113151435359.png" alt="image-20220113151435359" /></p>
+<p><img src="./README.assets/image-20220113151613603.png" alt="image-20220113151613603" /></p>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="计算机基础"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-21T02:30:27.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">项目主页</title>
+    <id>https://vue-blog.lllllan.cn/</id>
+    <link href="https://vue-blog.lllllan.cn/"/>
+    <updated>2022-01-22T13:22:09.140Z</updated>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">计算机基础</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/"/>
+    <updated>2022-01-21T02:30:27.000Z</updated>
+    <content type="html"><![CDATA[<div><p>重要声明</p>
+<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
+</div>
+<h2 id="参考"> 参考</h2>
+<ul>
+<li>
+<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
+</li>
+<li>
+<p>《网络是怎样连接的》</p>
+</li>
+</ul>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="计算机基础"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
     <title type="html">操作系统-常见面试题</title>
     <id>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</id>
     <link href="https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/"/>
@@ -2778,34 +3273,6 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">计算机基础</title>
-    <id>https://vue-blog.lllllan.cn/3-cs-basic/</id>
-    <link href="https://vue-blog.lllllan.cn/3-cs-basic/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>重要声明</p>
-<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
-</div>
-<h2 id="参考"> 参考</h2>
-<ul>
-<li>
-<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
-</li>
-<li>
-<p>《网络是怎样连接的》</p>
-</li>
-</ul>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="计算机基础"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
     <title type="html">刷题笔记</title>
     <id>https://vue-blog.lllllan.cn/4-practice/</id>
     <link href="https://vue-blog.lllllan.cn/4-practice/"/>
@@ -2818,19 +3285,6 @@ after method send
       <name>lllllan</name>
     </contributor>
     <published>2022-01-20T14:33:14.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">项目主页</title>
-    <id>https://vue-blog.lllllan.cn/</id>
-    <link href="https://vue-blog.lllllan.cn/"/>
-    <updated>2022-01-22T11:36:54.594Z</updated>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
