@@ -5,7 +5,7 @@
   <author>
     <name>lllllan</name>
   </author>
-  <updated>2022-01-21T11:54:39.015Z</updated>
+  <updated>2022-01-22T07:56:43.064Z</updated>
   <generator>@mr-hope/vuepress-plugin-feed</generator>
   <link rel="self" href="https://vue-blog.lllllan.cn/atom.xml"/>
   <link rel="alternate" href="https://vue-blog.lllllan.cn/"/>
@@ -260,105 +260,122 @@
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">java 是值传递</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
+    <title type="html">反射机制</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/"/>
+    <updated>2022-01-21T08:24:40.000Z</updated>
     <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/" target="_blank" rel="noopener noreferrer">为什么 Java 中只有值传递？ | JavaGuide</a>，略有改动</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/basis/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">反射机制详解！ | JavaGuide</a>，略有改动</p>
 </div>
-<h2 id="值传递-引用传递"> 值传递 &amp; 引用传递</h2>
-<p>程序设计语言将实参传递给方法（或函数）的方式分为两种：</p>
+<blockquote>
+<p>总之反射就是能获取一个类的所有方法和属性，并能够调用。</p>
+<p>然后还能增加代码的灵活性。</p>
+<p>但是，我还是没有感受到，灵活在哪里。。。</p>
+</blockquote>
+<h2 id="什么是反射"> 什么是反射？</h2>
+<p>反射就是Reflection，Java的反射是指程序在<strong>运行期</strong>可以拿到一个对象的所有信息，，你还可以调用这些方法和属性。</p>
+<h2 id="反射的应用场景"> 反射的应用场景</h2>
 <ul>
-<li><strong>值传递</strong> ：方法接收的是实参值的拷贝，会创建副本。</li>
-<li><strong>引用传递</strong> ：方法接收的直接是实参所引用的对象在堆中的地址，不会创建副本，对形参的修改将影响到实参。</li>
+<li>模块化的开发，通过反射去调用对应的字节码</li>
+<li>框架中大量使用动态代理，而动态代理依赖反射机制实现</li>
+<li>注解的实现也用到了反射</li>
 </ul>
-<p>很多程序设计语言（比如 C++、 Pascal )提供了两种参数传递的方式，不过，在 Java 中只有值传递。</p>
-<h2 id="实例"> 实例</h2>
-<h3 id="对基本数据类型进行修改"> 对基本数据类型进行修改</h3>
-<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>int</span> num1 <span>=</span> <span>10</span><span>;</span>
-    <span>int</span> num2 <span>=</span> <span>20</span><span>;</span>
-    <span>swap</span><span>(</span>num1<span>,</span> num2<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num1 = "</span> <span>+</span> num1<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num2 = "</span> <span>+</span> num2<span>)</span><span>;</span>
-<span>}</span>
+<p><strong>JDBC的数据库连接</strong></p>
+<div><pre><code><span>public</span> <span>static</span> <span>final</span> <span>String</span> DBDRIVER <span>=</span> <span>"com.mysql.jdbc.Driver"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBURL <span>=</span> <span>"jdbc:mysql://localhost:3306/test"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBUSER <span>=</span> <span>"root"</span><span>;</span>  
+<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBPASS <span>=</span> <span>""</span><span>;</span>  
 
-<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>int</span> a<span>,</span> <span>int</span> b<span>)</span> <span>{</span>
-    <span>int</span> temp <span>=</span> a<span>;</span>
-    a <span>=</span> b<span>;</span>
-    b <span>=</span> temp<span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"a = "</span> <span>+</span> a<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"b = "</span> <span>+</span> b<span>)</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-    
-a <span>=</span> <span>20</span>
-b <span>=</span> <span>10</span>
-num1 <span>=</span> <span>10</span>
-num2 <span>=</span> <span>20</span>
+<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>  
+    <span>Connection</span> con <span>=</span> <span>null</span><span>;</span>
+    <span>Class</span><span>.</span><span>forName</span><span>(</span>DBDRIVER<span>)</span><span>;</span> <span>//1、使用CLASS 类加载驱动程序 ,反射机制的体现 </span>
+    con <span>=</span> <span>DriverManager</span><span>.</span><span>getConnection</span><span>(</span>DBURL<span>,</span>DBUSER<span>,</span>DBPASS<span>)</span><span>;</span> <span>//2、连接数据库  </span>
+    <span>.</span><span>.</span><span>.</span>
+    con<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span> <span>// 3、关闭数据库  </span>
+<span>}</span>  
 </code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div><ul>
-<li>a和b只是从num1和num2复制得到了值，怎么操作都不会产生影响</li>
-</ul>
-<p><img src="./README.assets/java-value-passing-01.ab88fb01.png" alt="基本数据类型参数" /></p>
-<h3 id="修改引用类型中的值"> 修改引用类型中的值</h3>
-<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>int</span><span>[</span><span>]</span> arr <span>=</span> <span>{</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span> <span>}</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
-    <span>change</span><span>(</span>arr<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>change</span><span>(</span><span>int</span><span>[</span><span>]</span> array<span>)</span> <span>{</span>
-    <span>// 将数组的第一个元素变为0</span>
-    array<span>[</span><span>0</span><span>]</span> <span>=</span> <span>0</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-   
-<span>1</span>
-<span>0</span>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="反射的优缺点"> 反射的优缺点</h2>
+<p><strong>优点：</strong> 让代码更加灵、为各种框架提供开箱即用的功能提供便利</p>
+<p><strong>缺点：</strong> 在运行时有了分析操作类的能力，同样增加了安全问题。性能略差，不过对于框架的影响比较小。</p>
+<h2 id="反射的使用"> 反射的使用</h2>
+<h3 id="获取class对象的四种方式"> 获取Class对象的四种方式</h3>
+<p><strong>1.知道具体类的情况下可以使用</strong></p>
+<div><pre><code><span>Class</span> alunbarClass <span>=</span> <span>TargetObject</span><span>.</span><span>class</span><span>;</span>
 </code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p><img src="./README.assets/java-value-passing-02.ff1b76c9.png" alt="引用数据类型参数1" /></p>
-<h3 id="修改引用类型的对象"> 修改引用类型的对象</h3>
-<div><pre><code><span>public</span> <span>class</span> <span>Person</span> <span>{</span>
-    <span>private</span> <span>String</span> name<span>;</span>
-   <span>// 省略构造函数、Getter&amp;Setter方法</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-    <span>Person</span> xiaoZhang <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小张"</span><span>)</span><span>;</span>
-    <span>Person</span> xiaoLi <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小李"</span><span>)</span><span>;</span>
-    <span>swap</span><span>(</span>xiaoZhang<span>,</span> xiaoLi<span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoZhang:"</span> <span>+</span> xiaoZhang<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoLi:"</span> <span>+</span> xiaoLi<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>Person</span> person1<span>,</span> <span>Person</span> person2<span>)</span> <span>{</span>
-    <span>Person</span> temp <span>=</span> person1<span>;</span>
-    person1 <span>=</span> person2<span>;</span>
-    person2 <span>=</span> temp<span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person1:"</span> <span>+</span> person1<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person2:"</span> <span>+</span> person2<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-<span>}</span>
-
-<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
-    
-person1<span>:</span>小李
-person2<span>:</span>小张
-xiaoZhang<span>:</span>小张
-xiaoLi<span>:</span>小李
+<div><span>1</span><br></div></div><p><strong>2.通过 <code>Class.forName()</code> 传入类的路径获取</strong></p>
+<div><pre><code><span>Class</span> alunbarClass1 <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
 </code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br></div></div><p><img src="./README.assets/java-value-passing-03.da4d0422.png" alt="引用数据类型参数2" /></p>
-<h2 id="总结"> 总结</h2>
-<p>Java 中将实参传递给方法（或函数）的方式是 <strong>值传递</strong> ：</p>
-<ul>
-<li>如果参数是基本类型的话，很简单，传递的就是基本类型的字面量值的拷贝，会创建副本。</li>
-<li>如果参数是引用类型，传递的就是实参所引用的对象在堆中地址值的拷贝，同样也会创建副本。</li>
-</ul>
-]]></content>
+<div><span>1</span><br></div></div><p><strong>3.通过对象实例 <code>instance.getClass()</code> 获取</strong></p>
+<div><pre><code><span>TargetObject</span> o <span>=</span> <span>new</span> <span>TargetObject</span><span>(</span><span>)</span><span>;</span>
+<span>Class</span> alunbarClass2 <span>=</span> o<span>.</span><span>getClass</span><span>(</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p><strong>4.通过类加载器 <code>xxxClassLoader.loadClass()</code> 传入类路径获取</strong></p>
+<div><pre><code><span>Class</span> clazz <span>=</span> <span>ClassLoader</span><span>.</span><span>loadClass</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br></div></div><h3 id="反射的基本操作"> 反射的基本操作</h3>
+<p><strong>1.定义一个类</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>TargetObject</span> <span>{</span>
+    <span>private</span> <span>String</span> value<span>;</span>
+
+    <span>public</span> <span>TargetObject</span><span>(</span><span>)</span> <span>{</span>
+        value <span>=</span> <span>"JavaGuide"</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>void</span> <span>publicMethod</span><span>(</span><span>String</span> s<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"I love "</span> <span>+</span> s<span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>private</span> <span>void</span> <span>privateMethod</span><span>(</span><span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"value is "</span> <span>+</span> value<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p><strong>2.使用反射来操作这个类的方法及参数</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>ClassNotFoundException</span><span>,</span> <span>NoSuchMethodException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>InstantiationException</span><span>,</span> <span>InvocationTargetException</span><span>,</span> <span>NoSuchFieldException</span> <span>{</span>
+        <span>/**
+         * 获取TargetObject类的Class对象并且创建TargetObject类实例
+         */</span>
+        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> tagetClass <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
+        <span>TargetObject</span> targetObject <span>=</span> <span>(</span><span>TargetObject</span><span>)</span> tagetClass<span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
+        <span>/**
+         * 获取所有类中所有定义的方法
+         */</span>
+        <span>Method</span><span>[</span><span>]</span> methods <span>=</span> tagetClass<span>.</span><span>getDeclaredMethods</span><span>(</span><span>)</span><span>;</span>
+        <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
+            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>}</span>
+        <span>/**
+         * 获取指定方法并调用
+         */</span>
+        <span>Method</span> publicMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"publicMethod"</span><span>,</span>
+                <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
+
+        publicMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
+        <span>/**
+         * 获取指定参数并对参数进行修改
+         */</span>
+        <span>Field</span> field <span>=</span> tagetClass<span>.</span><span>getDeclaredField</span><span>(</span><span>"value"</span><span>)</span><span>;</span>
+        <span>//为了对类中的参数进行修改我们取消安全检查</span>
+        field<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        field<span>.</span><span>set</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
+        <span>/**
+         * 调用 private 方法
+         */</span>
+        <span>Method</span> privateMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"privateMethod"</span><span>)</span><span>;</span>
+        <span>//为了调用private方法我们取消安全检查</span>
+        privateMethod<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
+        privateMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br></div></div><p><strong>3.输出结果</strong></p>
+<div><pre><code>publicMethod
+privateMethod
+<span>I</span> love <span>JavaGuide</span>
+value is <span>JavaGuide</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div>]]></content>
     <author>
       <name>lllllan</name>
     </author>
@@ -877,276 +894,104 @@ input<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">代理详解</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/"/>
+    <title type="html">java 是值传递</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/1-java-value-passed/"/>
     <updated>2022-01-21T02:30:27.000Z</updated>
     <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/basis/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">代理详解！静态代理+JDK/CGLIB 动态代理实战 | JavaGuide</a>， 略有改动</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/basis/why-there-only-value-passing-in-java/" target="_blank" rel="noopener noreferrer">为什么 Java 中只有值传递？ | JavaGuide</a>，略有改动</p>
 </div>
-<h2 id="代理模式"> 代理模式</h2>
-<p>代理模式是一种比较好理解的设计模式。简单来说就是 <strong>我们使用代理对象来代替对真实对象(real object)的访问，这样就可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</strong></p>
-<p><strong>代理模式的主要作用是扩展目标对象的功能，比如说在目标对象的某个方法执行前后你可以增加一些自定义的操作。</strong></p>
-<p><img src="./README.assets/1DjWCgTFm-xqbhbNQVsaWQw.png" alt="Understanding the Proxy Design Pattern | by Mithun Sasidharan | Medium" /></p>
-<h2 id="静态代理"> 静态代理</h2>
-<p><strong>静态代理中，我们对目标对象的每个方法的增强都是手动完成的（<em>后面会具体演示代码</em>），非常不灵活（<em>比如接口一旦新增加方法，目标对象和代理对象都要进行修改</em>）且麻烦(<em>需要对每个目标类都单独写一个代理类</em>)。</strong> 实际应用场景非常非常少，日常开发几乎看不到使用静态代理的场景。</p>
-<p>上面我们是从实现和应用角度来说的静态代理，从 JVM 层面来说， <strong>静态代理在编译时就将接口、实现类、代理类这些都变成了一个个实际的 class 文件。</strong></p>
-<p>静态代理实现步骤:</p>
-<ol>
-<li>定义一个接口及其实现类；</li>
-<li>创建一个代理类同样实现这个接口</li>
-<li>将目标对象注入进代理类，然后在代理类的对应方法调用目标类中的对应方法。这样的话，我们就可以通过代理类屏蔽对目标对象的访问，并且可以在目标方法执行前后做一些自己想做的事情。</li>
-</ol>
-<p>下面通过代码展示！</p>
-<p><strong>1. 定义发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
-    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
-    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
-        <span>return</span> message<span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.创建代理类并同样实现发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>SmsProxy</span> <span>implements</span> <span>SmsService</span> <span>{</span>
-
-    <span>private</span> <span>final</span> <span>SmsService</span> smsService<span>;</span>
-
-    <span>public</span> <span>SmsProxy</span><span>(</span><span>SmsService</span> smsService<span>)</span> <span>{</span>
-        <span>this</span><span>.</span>smsService <span>=</span> smsService<span>;</span>
-    <span>}</span>
-
-    <span>@Override</span>
-    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
-        <span>//调用方法之前，我们可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method send()"</span><span>)</span><span>;</span>
-        smsService<span>.</span><span>send</span><span>(</span>message<span>)</span><span>;</span>
-        <span>//调用方法之后，我们同样可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method send()"</span><span>)</span><span>;</span>
-        <span>return</span> <span>null</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><p><strong>4.实际使用</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-        <span>SmsService</span> smsService <span>=</span> <span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>;</span>
-        <span>SmsProxy</span> smsProxy <span>=</span> <span>new</span> <span>SmsProxy</span><span>(</span>smsService<span>)</span><span>;</span>
-        smsProxy<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
-<div><pre><code>before method send<span>(</span><span>)</span>
-send message:java
-after method send<span>(</span><span>)</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="动态代理"> 动态代理</h2>
-<p>相比于静态代理来说，动态代理更加灵活。我们不需要针对每个目标类都单独创建一个代理类，并且也不需要我们必须实现接口，我们可以直接代理实现类( <em>CGLIB 动态代理机制</em>)。</p>
-<blockquote>
-<p><strong>从 JVM 角度来说，动态代理是在运行时动态生成类字节码，并加载到 JVM 中的</strong></p>
-</blockquote>
-<p><strong>动态代理在我们日常开发中使用的相对较少，但是在框架中的几乎是必用的一门技术。学会了动态代理之后，对于我们理解和学习各种框架的原理也非常有帮助。</strong></p>
-<p>就 Java 来说，动态代理的实现方式有很多种，比如 <strong>JDK 动态代理</strong>、<strong>CGLIB 动态代理</strong>等等。</p>
-<h3 id="jdk-动态代理机制-没看懂"> JDK 动态代理机制（没看懂）</h3>
-<h4 id="介绍"> 介绍</h4>
-<p><strong>在 Java 动态代理机制中 <code>InvocationHandler</code> 接口和 <code>Proxy</code> 类是核心。</strong></p>
-<p><code>Proxy</code> 类中使用频率最高的方法是：<code>newProxyInstance()</code> ，这个方法主要用来生成一个代理对象。</p>
-<div><pre><code><span>public</span> <span>static</span> <span>Object</span> <span>newProxyInstance</span><span>(</span><span>ClassLoader</span> loader<span>,</span> <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span><span>[</span><span>]</span> interfaces<span>,</span>
-                                      <span>InvocationHandler</span> h<span>)</span>
-    <span>throws</span> <span>IllegalArgumentException</span> <span>{</span>
-    <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>这个方法一共有 3 个参数：</p>
-<ol>
-<li><strong>loader</strong> :类加载器，用于加载代理对象。</li>
-<li><strong>interfaces</strong> : 被代理类实现的一些接口；</li>
-<li><strong>h</strong> : 实现了 <code>InvocationHandler</code> 接口的对象；</li>
-</ol>
-<p>要实现动态代理的话，还必须需要实现<code>InvocationHandler</code> 来自定义处理逻辑。 当我们的动态代理对象调用一个方法时，这个方法的调用就会被转发到实现<code>InvocationHandler</code> 接口类的 <code>invoke</code> 方法来调用。</p>
-<div><pre><code><span>public</span> <span>interface</span> <span>InvocationHandler</span> <span>{</span>
-
-    <span>/**
-     * 当你使用代理对象调用方法的时候实际会调用到这个方法
-     */</span>
-    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span>
-        <span>throws</span> <span>Throwable</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p><code>invoke()</code> 方法有下面三个参数：</p>
-<ol>
-<li><strong>proxy</strong> :动态生成的代理类</li>
-<li><strong>method</strong> : 与代理类对象调用的方法相对应</li>
-<li><strong>args</strong> : 当前 method 方法的参数</li>
-</ol>
-<blockquote>
-<p>也就是说：<strong>你通过<code>Proxy</code> 类的 <code>newProxyInstance()</code> 创建的代理对象在调用方法的时候，实际会调用到实现<code>InvocationHandler</code> 接口的类的 <code>invoke()</code>方法。</strong> 你可以在 <code>invoke()</code> 方法中自定义处理逻辑，比如在方法执行前后做什么事情。</p>
-</blockquote>
-<h4 id="使用步骤"> 使用步骤</h4>
-<ol>
-<li>定义一个接口及其实现类；</li>
-<li>自定义 <code>InvocationHandler</code> 并重写<code>invoke</code>方法，在 <code>invoke</code> 方法中我们会调用原生方法（被代理类的方法）并自定义一些处理逻辑；</li>
-<li>通过 <code>Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)</code> 方法创建代理对象；</li>
-</ol>
-<h4 id="代码示例"> 代码示例</h4>
-<p><strong>1.定义发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
-    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
-    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
-        <span>return</span> message<span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.定义一个 JDK 动态代理类</strong></p>
-<div><pre><code><span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationHandler</span><span>;</span>
-<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationTargetException</span><span>;</span>
-<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>Method</span><span>;</span>
-
-<span>/**
- * @author shuang.kou
- * @createTime 2020年05月11日 11:23:00
- */</span>
-<span>public</span> <span>class</span> <span>DebugInvocationHandler</span> <span>implements</span> <span>InvocationHandler</span> <span>{</span>
-    <span>/**
-     * 代理类中的真实对象
-     */</span>
-    <span>private</span> <span>final</span> <span>Object</span> target<span>;</span>
-
-    <span>public</span> <span>DebugInvocationHandler</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
-        <span>this</span><span>.</span>target <span>=</span> target<span>;</span>
-    <span>}</span>
-
-
-    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>InvocationTargetException</span><span>,</span> <span>IllegalAccessException</span> <span>{</span>
-        <span>//调用方法之前，我们可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>Object</span> result <span>=</span> method<span>.</span><span>invoke</span><span>(</span>target<span>,</span> args<span>)</span><span>;</span>
-        <span>//调用方法之后，我们同样可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>return</span> result<span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br></div></div><p><code>invoke()</code> 方法: 当我们的动态代理对象调用原生方法的时候，最终实际上调用到的是 <code>invoke()</code> 方法，然后 <code>invoke()</code> 方法代替我们去调用了被代理对象的原生方法。</p>
-<p><strong>4.获取代理对象的工厂类</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>JdkProxyFactory</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>Object</span> <span>getProxy</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
-        <span>return</span> <span>Proxy</span><span>.</span><span>newProxyInstance</span><span>(</span>
-                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getClassLoader</span><span>(</span><span>)</span><span>,</span> <span>// 目标类的类加载</span>
-                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getInterfaces</span><span>(</span><span>)</span><span>,</span>  <span>// 代理需要实现的接口，可指定多个</span>
-                <span>new</span> <span>DebugInvocationHandler</span><span>(</span>target<span>)</span>   <span>// 代理对象对应的自定义 InvocationHandler</span>
-        <span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p><code>getProxy()</code> ：主要通过<code>Proxy.newProxyInstance（）</code>方法获取某个类的代理对象</p>
-<p><strong>5.实际使用</strong></p>
-<div><pre><code><span>SmsService</span> smsService <span>=</span> <span>(</span><span>SmsService</span><span>)</span> <span>JdkProxyFactory</span><span>.</span><span>getProxy</span><span>(</span><span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>)</span><span>;</span>
-smsService<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
-<div><pre><code>before method send
-send message:java
-after method send
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div>]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">Java 集合框架基础知识</title>
-    <id>https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/collection/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86&amp;%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">Java集合框架基础知识&amp;面试题总结 | JavaGuide</a>，略有改动</p>
-</div>
-<h1 id="一、集合概述"> 一、集合概述</h1>
-<h2 id="_1-0-java集合概览"> 1.0 Java集合概览</h2>
-<p><img src="./README.assets/java-collection-hierarchy.71519bdb.png" alt="img" /></p>
-<h2 id="_1-1-集合框架底层数据结构"> 1.1 集合框架底层数据结构</h2>
+<h2 id="值传递-引用传递"> 值传递 &amp; 引用传递</h2>
+<p>程序设计语言将实参传递给方法（或函数）的方式分为两种：</p>
 <ul>
-<li><code>Collection</code>
-<ul>
-<li><code>List</code>
-<ul>
-<li><code>ArrayList</code>: Object[] 数组</li>
-<li><code>Vector</code>: Object[] 数组</li>
-<li><code>LinkedList</code>: 双向链表</li>
+<li><strong>值传递</strong> ：方法接收的是实参值的拷贝，会创建副本。</li>
+<li><strong>引用传递</strong> ：方法接收的直接是实参所引用的对象在堆中的地址，不会创建副本，对形参的修改将影响到实参。</li>
 </ul>
-</li>
-<li><code>Set</code>
-<ul>
-<li><code>HashSet</code>（无序）: 基于 <code>HashMap</code> 实现</li>
-<li><code>LinkedHashSet</code>: <code>HashSet</code> 的子类，基于 <code>LinkedHashMap</code> 实现</li>
-<li><code>TreeSet</code>（有序）: 红黑树（自平衡的排序二叉树）</li>
-</ul>
-</li>
-<li><code>Queue</code>
-<ul>
-<li><code>PriorityQueue</code> : Object[] 数组实现二叉堆</li>
-<li><code>ArrayQueue</code> : Object[] 数组 + 双指针</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>Map</code>
-<ul>
-<li><code>HashMap</code> : 数组 + 链表 + 红黑树（链表根据大小和阈值进行扩容，扩容到一定大小转换为红黑树）</li>
-<li><code>LinkedMap</code> : 继承自 <code>HashMap</code>，增加一条双向链表以保持插入顺序</li>
-<li><code>Hashtable</code> : 数组 + 链表</li>
-<li><code>TreeMap</code> : 红黑树</li>
-</ul>
-</li>
-</ul>
-<h2 id="_1-2-集合的选择"> 1.2 集合的选择</h2>
-<p><img src="./README.assets/image-20220118101609300.png" alt="image-20220118101609300" /></p>
-<h1 id="二、list"> 二、List</h1>
-<h2 id="_2-1-arraylist-和-vector-的区别"> 2.1 ArrayList 和 Vector 的区别</h2>
-<p><code>ArrayList</code> 是 <code>List</code> 的主要实现类，底层使用 <code>Object[]</code>存储，适用于频繁的查找工作，线程不安全 ；</p>
-<p><code>Vector</code> 是 <code>List</code> 的古老实现类，底层使用<code>Object[]</code> 存储，线程安全的（代价就是效率差一些）。</p>
-<h2 id="_2-2-arraylist-和-linkedlist-的区别"> 2.2 ArrayList  和 LinkedList 的区别</h2>
-<p><strong>是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</p>
-<p><strong>底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</p>
-<p><strong>插入和删除是否受元素位置的影响：</strong></p>
-<ul>
-<li><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。</li>
-<li><code>LinkedList</code> 采用链表存储，所以，如果是在头尾插入或者删除元素不受元素位置的影响（<code>add(E e)</code>、<code>addFirst(E e)</code>、<code>addLast(E e)</code>、<code>removeFirst()</code> 、 <code>removeLast()</code>），近似 O(1)，如果是要在指定位置 <code>i</code> 插入和删除元素的话（<code>add(int index, E element)</code>，<code>remove(Object o)</code>） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。</li>
-</ul>
-<p><strong>是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</p>
-<p><strong>内存空间占用：</strong> ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。</p>
-<h2 id="_2-3-randomaccess-接口"> 2.3 RandomAccess 接口</h2>
-<div><pre><code><span>public</span> <span>interface</span> <span>RandomAccess</span> <span>{</span>
+<p>很多程序设计语言（比如 C++、 Pascal )提供了两种参数传递的方式，不过，在 Java 中只有值传递。</p>
+<h2 id="实例"> 实例</h2>
+<h3 id="对基本数据类型进行修改"> 对基本数据类型进行修改</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>int</span> num1 <span>=</span> <span>10</span><span>;</span>
+    <span>int</span> num2 <span>=</span> <span>20</span><span>;</span>
+    <span>swap</span><span>(</span>num1<span>,</span> num2<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num1 = "</span> <span>+</span> num1<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"num2 = "</span> <span>+</span> num2<span>)</span><span>;</span>
 <span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p>查看源码我们发现实际上 <code>RandomAccess</code> 接口中什么都没有定义。所以，在我看来 <code>RandomAccess</code> 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p>
-<p>在 <code>binarySearch()</code>方法中，它要判断传入的 list 是否 <code>RamdomAccess</code>的实例，如果是，调用<code>indexedBinarySearch()</code>方法，如果不是，那么调用<code>iteratorBinarySearch()</code>方法</p>
-<div><pre><code><span>public</span> <span>static</span> <span><span>&lt;</span><span>T</span><span>></span></span>
-    <span>int</span> <span>binarySearch</span><span>(</span><span>List</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>Comparable</span><span>&lt;</span><span>?</span> <span>super</span> <span>T</span><span>></span><span>></span></span> list<span>,</span> <span>T</span> key<span>)</span> <span>{</span>
-    <span>if</span> <span>(</span>list <span>instanceof</span> <span>RandomAccess</span> <span>||</span> list<span>.</span><span>size</span><span>(</span><span>)</span><span>&lt;</span>BINARYSEARCH_THRESHOLD<span>)</span>
-        <span>return</span> <span>Collections</span><span>.</span><span>indexedBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
-    <span>else</span>
-        <span>return</span> <span>Collections</span><span>.</span><span>iteratorBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>int</span> a<span>,</span> <span>int</span> b<span>)</span> <span>{</span>
+    <span>int</span> temp <span>=</span> a<span>;</span>
+    a <span>=</span> b<span>;</span>
+    b <span>=</span> temp<span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"a = "</span> <span>+</span> a<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"b = "</span> <span>+</span> b<span>)</span><span>;</span>
 <span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+    
+a <span>=</span> <span>20</span>
+b <span>=</span> <span>10</span>
+num1 <span>=</span> <span>10</span>
+num2 <span>=</span> <span>20</span>
 </code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。为什么呢？我觉得还是和底层数据结构有关！<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O(n)，所以不支持快速随机访问。，<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。 <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的！</p>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br></div></div><ul>
+<li>a和b只是从num1和num2复制得到了值，怎么操作都不会产生影响</li>
+</ul>
+<p><img src="./README.assets/java-value-passing-01.ab88fb01.png" alt="基本数据类型参数" /></p>
+<h3 id="修改引用类型中的值"> 修改引用类型中的值</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>int</span><span>[</span><span>]</span> arr <span>=</span> <span>{</span> <span>1</span><span>,</span> <span>2</span><span>,</span> <span>3</span><span>,</span> <span>4</span><span>,</span> <span>5</span> <span>}</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
+    <span>change</span><span>(</span>arr<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>arr<span>[</span><span>0</span><span>]</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>change</span><span>(</span><span>int</span><span>[</span><span>]</span> array<span>)</span> <span>{</span>
+    <span>// 将数组的第一个元素变为0</span>
+    array<span>[</span><span>0</span><span>]</span> <span>=</span> <span>0</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+   
+<span>1</span>
+<span>0</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><p><img src="./README.assets/java-value-passing-02.ff1b76c9.png" alt="引用数据类型参数1" /></p>
+<h3 id="修改引用类型的对象"> 修改引用类型的对象</h3>
+<div><pre><code><span>public</span> <span>class</span> <span>Person</span> <span>{</span>
+    <span>private</span> <span>String</span> name<span>;</span>
+   <span>// 省略构造函数、Getter&amp;Setter方法</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+    <span>Person</span> xiaoZhang <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小张"</span><span>)</span><span>;</span>
+    <span>Person</span> xiaoLi <span>=</span> <span>new</span> <span>Person</span><span>(</span><span>"小李"</span><span>)</span><span>;</span>
+    <span>swap</span><span>(</span>xiaoZhang<span>,</span> xiaoLi<span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoZhang:"</span> <span>+</span> xiaoZhang<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"xiaoLi:"</span> <span>+</span> xiaoLi<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>public</span> <span>static</span> <span>void</span> <span>swap</span><span>(</span><span>Person</span> person1<span>,</span> <span>Person</span> person2<span>)</span> <span>{</span>
+    <span>Person</span> temp <span>=</span> person1<span>;</span>
+    person1 <span>=</span> person2<span>;</span>
+    person2 <span>=</span> temp<span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person1:"</span> <span>+</span> person1<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+    <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"person2:"</span> <span>+</span> person2<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+<span>}</span>
+
+<span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>--</span><span>-</span>
+    
+person1<span>:</span>小李
+person2<span>:</span>小张
+xiaoZhang<span>:</span>小张
+xiaoLi<span>:</span>小李
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br></div></div><p><img src="./README.assets/java-value-passing-03.da4d0422.png" alt="引用数据类型参数2" /></p>
+<h2 id="总结"> 总结</h2>
+<p>Java 中将实参传递给方法（或函数）的方式是 <strong>值传递</strong> ：</p>
+<ul>
+<li>如果参数是基本类型的话，很简单，传递的就是基本类型的字面量值的拷贝，会创建副本。</li>
+<li>如果参数是引用类型，传递的就是实参所引用的对象在堆中地址值的拷贝，同样也会创建副本。</li>
+</ul>
 ]]></content>
     <author>
       <name>lllllan</name>
@@ -1184,133 +1029,6 @@ after method send
       <name>lllllan</name>
     </contributor>
     <published>2022-01-20T09:33:02.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">反射机制</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/"/>
-    <updated>2022-01-21T08:24:40.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/basis/%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">反射机制详解！ | JavaGuide</a>，略有改动</p>
-</div>
-<blockquote>
-<p>总之反射就是能获取一个类的所有方法和属性，并能够调用。</p>
-<p>然后还能增加代码的灵活性。</p>
-<p>但是，我还是没有感受到，灵活在哪里。。。</p>
-</blockquote>
-<h2 id="什么是反射"> 什么是反射？</h2>
-<p>反射就是Reflection，Java的反射是指程序在<strong>运行期</strong>可以拿到一个对象的所有信息，，你还可以调用这些方法和属性。</p>
-<h2 id="反射的应用场景"> 反射的应用场景</h2>
-<ul>
-<li>模块化的开发，通过反射去调用对应的字节码</li>
-<li>框架中大量使用动态代理，而动态代理依赖反射机制实现</li>
-<li>注解的实现也用到了反射</li>
-</ul>
-<p><strong>JDBC的数据库连接</strong></p>
-<div><pre><code><span>public</span> <span>static</span> <span>final</span> <span>String</span> DBDRIVER <span>=</span> <span>"com.mysql.jdbc.Driver"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBURL <span>=</span> <span>"jdbc:mysql://localhost:3306/test"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBUSER <span>=</span> <span>"root"</span><span>;</span>  
-<span>public</span> <span>static</span> <span>final</span> <span>String</span> DBPASS <span>=</span> <span>""</span><span>;</span>  
-
-<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>Exception</span> <span>{</span>  
-    <span>Connection</span> con <span>=</span> <span>null</span><span>;</span>
-    <span>Class</span><span>.</span><span>forName</span><span>(</span>DBDRIVER<span>)</span><span>;</span> <span>//1、使用CLASS 类加载驱动程序 ,反射机制的体现 </span>
-    con <span>=</span> <span>DriverManager</span><span>.</span><span>getConnection</span><span>(</span>DBURL<span>,</span>DBUSER<span>,</span>DBPASS<span>)</span><span>;</span> <span>//2、连接数据库  </span>
-    <span>.</span><span>.</span><span>.</span>
-    con<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span> <span>// 3、关闭数据库  </span>
-<span>}</span>  
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h2 id="反射的优缺点"> 反射的优缺点</h2>
-<p><strong>优点：</strong> 让代码更加灵、为各种框架提供开箱即用的功能提供便利</p>
-<p><strong>缺点：</strong> 在运行时有了分析操作类的能力，同样增加了安全问题。性能略差，不过对于框架的影响比较小。</p>
-<h2 id="反射的使用"> 反射的使用</h2>
-<h3 id="获取class对象的四种方式"> 获取Class对象的四种方式</h3>
-<p><strong>1.知道具体类的情况下可以使用</strong></p>
-<div><pre><code><span>Class</span> alunbarClass <span>=</span> <span>TargetObject</span><span>.</span><span>class</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><p><strong>2.通过 <code>Class.forName()</code> 传入类的路径获取</strong></p>
-<div><pre><code><span>Class</span> alunbarClass1 <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><p><strong>3.通过对象实例 <code>instance.getClass()</code> 获取</strong></p>
-<div><pre><code><span>TargetObject</span> o <span>=</span> <span>new</span> <span>TargetObject</span><span>(</span><span>)</span><span>;</span>
-<span>Class</span> alunbarClass2 <span>=</span> o<span>.</span><span>getClass</span><span>(</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p><strong>4.通过类加载器 <code>xxxClassLoader.loadClass()</code> 传入类路径获取</strong></p>
-<div><pre><code><span>Class</span> clazz <span>=</span> <span>ClassLoader</span><span>.</span><span>loadClass</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br></div></div><h3 id="反射的基本操作"> 反射的基本操作</h3>
-<p><strong>1.定义一个类</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>TargetObject</span> <span>{</span>
-    <span>private</span> <span>String</span> value<span>;</span>
-
-    <span>public</span> <span>TargetObject</span><span>(</span><span>)</span> <span>{</span>
-        value <span>=</span> <span>"JavaGuide"</span><span>;</span>
-    <span>}</span>
-
-    <span>public</span> <span>void</span> <span>publicMethod</span><span>(</span><span>String</span> s<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"I love "</span> <span>+</span> s<span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>private</span> <span>void</span> <span>privateMethod</span><span>(</span><span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"value is "</span> <span>+</span> value<span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br></div></div><p><strong>2.使用反射来操作这个类的方法及参数</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>ClassNotFoundException</span><span>,</span> <span>NoSuchMethodException</span><span>,</span> <span>IllegalAccessException</span><span>,</span> <span>InstantiationException</span><span>,</span> <span>InvocationTargetException</span><span>,</span> <span>NoSuchFieldException</span> <span>{</span>
-        <span>/**
-         * 获取TargetObject类的Class对象并且创建TargetObject类实例
-         */</span>
-        <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> tagetClass <span>=</span> <span>Class</span><span>.</span><span>forName</span><span>(</span><span>"cn.javaguide.TargetObject"</span><span>)</span><span>;</span>
-        <span>TargetObject</span> targetObject <span>=</span> <span>(</span><span>TargetObject</span><span>)</span> tagetClass<span>.</span><span>newInstance</span><span>(</span><span>)</span><span>;</span>
-        <span>/**
-         * 获取所有类中所有定义的方法
-         */</span>
-        <span>Method</span><span>[</span><span>]</span> methods <span>=</span> tagetClass<span>.</span><span>getDeclaredMethods</span><span>(</span><span>)</span><span>;</span>
-        <span>for</span> <span>(</span><span>Method</span> method <span>:</span> methods<span>)</span> <span>{</span>
-            <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>}</span>
-        <span>/**
-         * 获取指定方法并调用
-         */</span>
-        <span>Method</span> publicMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"publicMethod"</span><span>,</span>
-                <span>String</span><span>.</span><span>class</span><span>)</span><span>;</span>
-
-        publicMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
-        <span>/**
-         * 获取指定参数并对参数进行修改
-         */</span>
-        <span>Field</span> field <span>=</span> tagetClass<span>.</span><span>getDeclaredField</span><span>(</span><span>"value"</span><span>)</span><span>;</span>
-        <span>//为了对类中的参数进行修改我们取消安全检查</span>
-        field<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
-        field<span>.</span><span>set</span><span>(</span>targetObject<span>,</span> <span>"JavaGuide"</span><span>)</span><span>;</span>
-        <span>/**
-         * 调用 private 方法
-         */</span>
-        <span>Method</span> privateMethod <span>=</span> tagetClass<span>.</span><span>getDeclaredMethod</span><span>(</span><span>"privateMethod"</span><span>)</span><span>;</span>
-        <span>//为了调用private方法我们取消安全检查</span>
-        privateMethod<span>.</span><span>setAccessible</span><span>(</span><span>true</span><span>)</span><span>;</span>
-        privateMethod<span>.</span><span>invoke</span><span>(</span>targetObject<span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br></div></div><p><strong>3.输出结果</strong></p>
-<div><pre><code>publicMethod
-privateMethod
-<span>I</span> love <span>JavaGuide</span>
-value is <span>JavaGuide</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div>]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
@@ -1374,25 +1092,6 @@ value is <span>JavaGuide</span>
       <name>lllllan</name>
     </contributor>
     <published>2022-01-20T08:35:36.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">MySQL 笔记</title>
-    <id>https://vue-blog.lllllan.cn/2-mysql/</id>
-    <link href="https://vue-blog.lllllan.cn/2-mysql/"/>
-    <updated>2022-01-20T14:33:14.000Z</updated>
-    <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
-<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
-<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="MySQL"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
@@ -1719,6 +1418,353 @@ value is <span>JavaGuide</span>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
+    <title type="html">代理详解</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/"/>
+    <updated>2022-01-21T02:30:27.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/basis/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">代理详解！静态代理+JDK/CGLIB 动态代理实战 | JavaGuide</a>， 略有改动</p>
+</div>
+<h2 id="代理模式"> 代理模式</h2>
+<p>代理模式是一种比较好理解的设计模式。简单来说就是 <strong>我们使用代理对象来代替对真实对象(real object)的访问，这样就可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</strong></p>
+<p><strong>代理模式的主要作用是扩展目标对象的功能，比如说在目标对象的某个方法执行前后你可以增加一些自定义的操作。</strong></p>
+<p><img src="./README.assets/1DjWCgTFm-xqbhbNQVsaWQw.png" alt="Understanding the Proxy Design Pattern | by Mithun Sasidharan | Medium" /></p>
+<h2 id="静态代理"> 静态代理</h2>
+<p><strong>静态代理中，我们对目标对象的每个方法的增强都是手动完成的（<em>后面会具体演示代码</em>），非常不灵活（<em>比如接口一旦新增加方法，目标对象和代理对象都要进行修改</em>）且麻烦(<em>需要对每个目标类都单独写一个代理类</em>)。</strong> 实际应用场景非常非常少，日常开发几乎看不到使用静态代理的场景。</p>
+<p>上面我们是从实现和应用角度来说的静态代理，从 JVM 层面来说， <strong>静态代理在编译时就将接口、实现类、代理类这些都变成了一个个实际的 class 文件。</strong></p>
+<p>静态代理实现步骤:</p>
+<ol>
+<li>定义一个接口及其实现类；</li>
+<li>创建一个代理类同样实现这个接口</li>
+<li>将目标对象注入进代理类，然后在代理类的对应方法调用目标类中的对应方法。这样的话，我们就可以通过代理类屏蔽对目标对象的访问，并且可以在目标方法执行前后做一些自己想做的事情。</li>
+</ol>
+<p>下面通过代码展示！</p>
+<p><strong>1. 定义发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
+    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
+    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
+        <span>return</span> message<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.创建代理类并同样实现发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>SmsProxy</span> <span>implements</span> <span>SmsService</span> <span>{</span>
+
+    <span>private</span> <span>final</span> <span>SmsService</span> smsService<span>;</span>
+
+    <span>public</span> <span>SmsProxy</span><span>(</span><span>SmsService</span> smsService<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>smsService <span>=</span> smsService<span>;</span>
+    <span>}</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        <span>//调用方法之前，我们可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method send()"</span><span>)</span><span>;</span>
+        smsService<span>.</span><span>send</span><span>(</span>message<span>)</span><span>;</span>
+        <span>//调用方法之后，我们同样可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method send()"</span><span>)</span><span>;</span>
+        <span>return</span> <span>null</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><p><strong>4.实际使用</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>SmsService</span> smsService <span>=</span> <span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>;</span>
+        <span>SmsProxy</span> smsProxy <span>=</span> <span>new</span> <span>SmsProxy</span><span>(</span>smsService<span>)</span><span>;</span>
+        smsProxy<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
+<div><pre><code>before method send<span>(</span><span>)</span>
+send message:java
+after method send<span>(</span><span>)</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="动态代理"> 动态代理</h2>
+<p>相比于静态代理来说，动态代理更加灵活。我们不需要针对每个目标类都单独创建一个代理类，并且也不需要我们必须实现接口，我们可以直接代理实现类( <em>CGLIB 动态代理机制</em>)。</p>
+<blockquote>
+<p><strong>从 JVM 角度来说，动态代理是在运行时动态生成类字节码，并加载到 JVM 中的</strong></p>
+</blockquote>
+<p><strong>动态代理在我们日常开发中使用的相对较少，但是在框架中的几乎是必用的一门技术。学会了动态代理之后，对于我们理解和学习各种框架的原理也非常有帮助。</strong></p>
+<p>就 Java 来说，动态代理的实现方式有很多种，比如 <strong>JDK 动态代理</strong>、<strong>CGLIB 动态代理</strong>等等。</p>
+<h3 id="jdk-动态代理机制-没看懂"> JDK 动态代理机制（没看懂）</h3>
+<h4 id="介绍"> 介绍</h4>
+<p><strong>在 Java 动态代理机制中 <code>InvocationHandler</code> 接口和 <code>Proxy</code> 类是核心。</strong></p>
+<p><code>Proxy</code> 类中使用频率最高的方法是：<code>newProxyInstance()</code> ，这个方法主要用来生成一个代理对象。</p>
+<div><pre><code><span>public</span> <span>static</span> <span>Object</span> <span>newProxyInstance</span><span>(</span><span>ClassLoader</span> loader<span>,</span> <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span><span>[</span><span>]</span> interfaces<span>,</span>
+                                      <span>InvocationHandler</span> h<span>)</span>
+    <span>throws</span> <span>IllegalArgumentException</span> <span>{</span>
+    <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>这个方法一共有 3 个参数：</p>
+<ol>
+<li><strong>loader</strong> :类加载器，用于加载代理对象。</li>
+<li><strong>interfaces</strong> : 被代理类实现的一些接口；</li>
+<li><strong>h</strong> : 实现了 <code>InvocationHandler</code> 接口的对象；</li>
+</ol>
+<p>要实现动态代理的话，还必须需要实现<code>InvocationHandler</code> 来自定义处理逻辑。 当我们的动态代理对象调用一个方法时，这个方法的调用就会被转发到实现<code>InvocationHandler</code> 接口类的 <code>invoke</code> 方法来调用。</p>
+<div><pre><code><span>public</span> <span>interface</span> <span>InvocationHandler</span> <span>{</span>
+
+    <span>/**
+     * 当你使用代理对象调用方法的时候实际会调用到这个方法
+     */</span>
+    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span>
+        <span>throws</span> <span>Throwable</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p><code>invoke()</code> 方法有下面三个参数：</p>
+<ol>
+<li><strong>proxy</strong> :动态生成的代理类</li>
+<li><strong>method</strong> : 与代理类对象调用的方法相对应</li>
+<li><strong>args</strong> : 当前 method 方法的参数</li>
+</ol>
+<blockquote>
+<p>也就是说：<strong>你通过<code>Proxy</code> 类的 <code>newProxyInstance()</code> 创建的代理对象在调用方法的时候，实际会调用到实现<code>InvocationHandler</code> 接口的类的 <code>invoke()</code>方法。</strong> 你可以在 <code>invoke()</code> 方法中自定义处理逻辑，比如在方法执行前后做什么事情。</p>
+</blockquote>
+<h4 id="使用步骤"> 使用步骤</h4>
+<ol>
+<li>定义一个接口及其实现类；</li>
+<li>自定义 <code>InvocationHandler</code> 并重写<code>invoke</code>方法，在 <code>invoke</code> 方法中我们会调用原生方法（被代理类的方法）并自定义一些处理逻辑；</li>
+<li>通过 <code>Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)</code> 方法创建代理对象；</li>
+</ol>
+<h4 id="代码示例"> 代码示例</h4>
+<p><strong>1.定义发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
+    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
+    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
+        <span>return</span> message<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.定义一个 JDK 动态代理类</strong></p>
+<div><pre><code><span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationHandler</span><span>;</span>
+<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationTargetException</span><span>;</span>
+<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>Method</span><span>;</span>
+
+<span>/**
+ * @author shuang.kou
+ * @createTime 2020年05月11日 11:23:00
+ */</span>
+<span>public</span> <span>class</span> <span>DebugInvocationHandler</span> <span>implements</span> <span>InvocationHandler</span> <span>{</span>
+    <span>/**
+     * 代理类中的真实对象
+     */</span>
+    <span>private</span> <span>final</span> <span>Object</span> target<span>;</span>
+
+    <span>public</span> <span>DebugInvocationHandler</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>target <span>=</span> target<span>;</span>
+    <span>}</span>
+
+
+    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>InvocationTargetException</span><span>,</span> <span>IllegalAccessException</span> <span>{</span>
+        <span>//调用方法之前，我们可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>Object</span> result <span>=</span> method<span>.</span><span>invoke</span><span>(</span>target<span>,</span> args<span>)</span><span>;</span>
+        <span>//调用方法之后，我们同样可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>return</span> result<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br></div></div><p><code>invoke()</code> 方法: 当我们的动态代理对象调用原生方法的时候，最终实际上调用到的是 <code>invoke()</code> 方法，然后 <code>invoke()</code> 方法代替我们去调用了被代理对象的原生方法。</p>
+<p><strong>4.获取代理对象的工厂类</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>JdkProxyFactory</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>Object</span> <span>getProxy</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
+        <span>return</span> <span>Proxy</span><span>.</span><span>newProxyInstance</span><span>(</span>
+                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getClassLoader</span><span>(</span><span>)</span><span>,</span> <span>// 目标类的类加载</span>
+                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getInterfaces</span><span>(</span><span>)</span><span>,</span>  <span>// 代理需要实现的接口，可指定多个</span>
+                <span>new</span> <span>DebugInvocationHandler</span><span>(</span>target<span>)</span>   <span>// 代理对象对应的自定义 InvocationHandler</span>
+        <span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p><code>getProxy()</code> ：主要通过<code>Proxy.newProxyInstance（）</code>方法获取某个类的代理对象</p>
+<p><strong>5.实际使用</strong></p>
+<div><pre><code><span>SmsService</span> smsService <span>=</span> <span>(</span><span>SmsService</span><span>)</span> <span>JdkProxyFactory</span><span>.</span><span>getProxy</span><span>(</span><span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>)</span><span>;</span>
+smsService<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
+<div><pre><code>before method send
+send message:java
+after method send
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div>]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">Java 集合框架基础知识</title>
+    <id>https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/"/>
+    <updated>2022-01-21T02:30:27.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/collection/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86&amp;%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">Java集合框架基础知识&amp;面试题总结 | JavaGuide</a>，略有改动</p>
+</div>
+<h1 id="一、集合概述"> 一、集合概述</h1>
+<h2 id="_1-0-java集合概览"> 1.0 Java集合概览</h2>
+<p><img src="./README.assets/java-collection-hierarchy.71519bdb.png" alt="img" /></p>
+<h2 id="_1-1-集合框架底层数据结构"> 1.1 集合框架底层数据结构</h2>
+<ul>
+<li><code>Collection</code>
+<ul>
+<li><code>List</code>
+<ul>
+<li><code>ArrayList</code>: Object[] 数组</li>
+<li><code>Vector</code>: Object[] 数组</li>
+<li><code>LinkedList</code>: 双向链表</li>
+</ul>
+</li>
+<li><code>Set</code>
+<ul>
+<li><code>HashSet</code>（无序）: 基于 <code>HashMap</code> 实现</li>
+<li><code>LinkedHashSet</code>: <code>HashSet</code> 的子类，基于 <code>LinkedHashMap</code> 实现</li>
+<li><code>TreeSet</code>（有序）: 红黑树（自平衡的排序二叉树）</li>
+</ul>
+</li>
+<li><code>Queue</code>
+<ul>
+<li><code>PriorityQueue</code> : Object[] 数组实现二叉堆</li>
+<li><code>ArrayQueue</code> : Object[] 数组 + 双指针</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Map</code>
+<ul>
+<li><code>HashMap</code> : 数组 + 链表 + 红黑树（链表根据大小和阈值进行扩容，扩容到一定大小转换为红黑树）</li>
+<li><code>LinkedMap</code> : 继承自 <code>HashMap</code>，增加一条双向链表以保持插入顺序</li>
+<li><code>Hashtable</code> : 数组 + 链表</li>
+<li><code>TreeMap</code> : 红黑树</li>
+</ul>
+</li>
+</ul>
+<h2 id="_1-2-集合的选择"> 1.2 集合的选择</h2>
+<p><img src="./README.assets/image-20220118101609300.png" alt="image-20220118101609300" /></p>
+<h1 id="二、list"> 二、List</h1>
+<h2 id="_2-1-arraylist-和-vector-的区别"> 2.1 ArrayList 和 Vector 的区别</h2>
+<p><code>ArrayList</code> 是 <code>List</code> 的主要实现类，底层使用 <code>Object[]</code>存储，适用于频繁的查找工作，线程不安全 ；</p>
+<p><code>Vector</code> 是 <code>List</code> 的古老实现类，底层使用<code>Object[]</code> 存储，线程安全的（代价就是效率差一些）。</p>
+<h2 id="_2-2-arraylist-和-linkedlist-的区别"> 2.2 ArrayList  和 LinkedList 的区别</h2>
+<p><strong>是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</p>
+<p><strong>底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</p>
+<p><strong>插入和删除是否受元素位置的影响：</strong></p>
+<ul>
+<li><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。</li>
+<li><code>LinkedList</code> 采用链表存储，所以，如果是在头尾插入或者删除元素不受元素位置的影响（<code>add(E e)</code>、<code>addFirst(E e)</code>、<code>addLast(E e)</code>、<code>removeFirst()</code> 、 <code>removeLast()</code>），近似 O(1)，如果是要在指定位置 <code>i</code> 插入和删除元素的话（<code>add(int index, E element)</code>，<code>remove(Object o)</code>） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。</li>
+</ul>
+<p><strong>是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</p>
+<p><strong>内存空间占用：</strong> ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。</p>
+<h2 id="_2-3-randomaccess-接口"> 2.3 RandomAccess 接口</h2>
+<div><pre><code><span>public</span> <span>interface</span> <span>RandomAccess</span> <span>{</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p>查看源码我们发现实际上 <code>RandomAccess</code> 接口中什么都没有定义。所以，在我看来 <code>RandomAccess</code> 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p>
+<p>在 <code>binarySearch()</code>方法中，它要判断传入的 list 是否 <code>RamdomAccess</code>的实例，如果是，调用<code>indexedBinarySearch()</code>方法，如果不是，那么调用<code>iteratorBinarySearch()</code>方法</p>
+<div><pre><code><span>public</span> <span>static</span> <span><span>&lt;</span><span>T</span><span>></span></span>
+    <span>int</span> <span>binarySearch</span><span>(</span><span>List</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>Comparable</span><span>&lt;</span><span>?</span> <span>super</span> <span>T</span><span>></span><span>></span></span> list<span>,</span> <span>T</span> key<span>)</span> <span>{</span>
+    <span>if</span> <span>(</span>list <span>instanceof</span> <span>RandomAccess</span> <span>||</span> list<span>.</span><span>size</span><span>(</span><span>)</span><span>&lt;</span>BINARYSEARCH_THRESHOLD<span>)</span>
+        <span>return</span> <span>Collections</span><span>.</span><span>indexedBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
+    <span>else</span>
+        <span>return</span> <span>Collections</span><span>.</span><span>iteratorBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。为什么呢？我觉得还是和底层数据结构有关！<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O(n)，所以不支持快速随机访问。，<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。 <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的！</p>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">MySQL 笔记</title>
+    <id>https://vue-blog.lllllan.cn/2-mysql/</id>
+    <link href="https://vue-blog.lllllan.cn/2-mysql/"/>
+    <updated>2022-01-20T14:33:14.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
+<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
+<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="MySQL"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">第三章、从网线到网络设备</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/"/>
+    <updated>2022-01-21T02:30:27.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文作为 《网络是怎样连接的》 的笔记，绝大部分内容均抄自该书。</p>
+</div>
+<h2 id="一、信号在网线和集线器中传输"> 一、信号在网线和集线器中传输</h2>
+<h3 id="_1-1-每个包都是独立传输的"> 1.1 每个包都是独立传输的</h3>
+<p><img src="./README.assets/image-20220113145717884.png" alt="image-20220113145717884" /></p>
+<h3 id="_1-2-网线中的信号衰减"> 1.2 网线中的信号衰减</h3>
+<p>以太网信号的本质是正负变化的电压。</p>
+<p>信号在网线的传输过程中，能量会逐渐损失。网线越长，信号衰减就越严重。</p>
+<p>同时噪声也会进一步加剧信号的失真。</p>
+<h3 id="_1-3-双绞线抑制噪声"> 1.3 双绞线抑制噪声</h3>
+<blockquote>
+<p>产生噪声的原因是网线周围的电磁波，当电磁波接触到金属等导体时，在其中就会产生电流。信号和噪声的电流混杂在一起之后，导致信号的波形发生失真。</p>
+</blockquote>
+<p>影响网线的电磁波分为两种：</p>
+<h4 id="来自网线之外的其他设备"> 来自网线之外的其他设备：</h4>
+<p>当电磁波接触到信号线时，会沿电磁波传播的右旋方向产生电流。</p>
+<p>如果我们将信号线缠绕在一起，信号线就变成了螺旋形，其中两根信号线产生的噪声电流方向就会相反，从而使得噪声电流相互抵消。</p>
+<p><img src="./README.assets/image-20220113150630538.png" alt="image-20220113150630538" /></p>
+<p><img src="./README.assets/image-20220113150651814.png" alt="image-20220113150651814" /></p>
+<h4 id="相邻信号线泄露出来"> 相邻信号线泄露出来：</h4>
+<p>这种内部产生的噪声称为 <strong>串扰</strong></p>
+<p><img src="./README.assets/image-20220113151240119.png" alt="image-20220113151240119" /></p>
+<p><img src="./README.assets/image-20220113151203170.png" alt="image-20220113151203170" /></p>
+<h3 id="_1-4-集线器将信号发往所有线路"> 1.4 集线器将信号发往所有线路</h3>
+<blockquote>
+<p>集线器将信号发送给所有连接在它上面的线路。</p>
+</blockquote>
+<p><img src="./README.assets/image-20220113151435359.png" alt="image-20220113151435359" /></p>
+<p><img src="./README.assets/image-20220113151613603.png" alt="image-20220113151613603" /></p>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="计算机基础"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-21T02:30:27.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
     <title type="html">第一章、浏览器生成消息</title>
     <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/</id>
     <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/"/>
@@ -1958,6 +2004,122 @@ value is <span>JavaGuide</span>
 <blockquote>
 <p>协议栈</p>
 </blockquote>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="计算机基础"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-21T02:30:27.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">计算机网络-常见面试题</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/2-interview-questions/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/2-interview-questions/"/>
+    <updated>2022-01-21T02:30:27.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/cs-basics/network/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" target="_blank" rel="noopener noreferrer">计算机网络常见面试题 | JavaGuide</a>，略有改动。</p>
+</div>
+<h2 id="一、osi-与-tcp-ip-各层的结构与功能-都有哪些协议"> 一、OSI 与 TCP/ IP 各层的结构与功能，都有哪些协议？</h2>
+<blockquote>
+<p><strong>开放式系统互联通信参考模型</strong>（英语：Open System Interconnection Reference Model，缩写为 OSI），简称为<strong>OSI模型</strong>（OSI model），一种<a href="https://baike.baidu.com/item/%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B/3187025" target="_blank" rel="noopener noreferrer">概念模型</a>，由<a href="https://baike.baidu.com/item/%E5%9B%BD%E9%99%85%E6%A0%87%E5%87%86%E5%8C%96%E7%BB%84%E7%BB%87/779832" target="_blank" rel="noopener noreferrer">国际标准化组织</a>提出，一个试图使各种计算机在世界范围内互连为网络的标准框架。</p>
+<p>TCP/IP传输协议，即传输控制/网络协议，也叫作网络通讯协议。</p>
+</blockquote>
+<p><img src="./README.assets/五层体系结构.png" alt="五层体系结构" /></p>
+<h3 id="_1-1-应用层-进程之间"> 1.1 应用层 - 进程之间</h3>
+<p><strong>应用层(application-layer）的任务是通过应用进程间的交互来完成特定网络应用</strong>。应用层协议定义的是应用进程（进程：主机中正在运行的程序）间的通信和交互的规则。对于不同的网络应用需要不同的应用层协议。在互联网中应用层协议很多，如<strong>域名系统 DNS</strong>，支持万维网应用的 <strong>HTTP 协议</strong>，支持电子邮件的 <strong>SMTP 协议</strong>等等。我们把应用层交互的数据单元称为<strong>报文</strong>。</p>
+<h3 id="_1-2-运输层-主机之间"> 1.2 运输层 - 主机之间</h3>
+<p><strong>运输层(transport layer)的主要任务就是负责向两台主机进程之间的通信提供通用的数据传输服务</strong>。应用进程利用该服务传送应用层报文。“通用的”是指并不针对某一个特定的网络应用，而是多种应用可以使用同一个运输层服务。由于一台主机可同时运行多个线程，因此运输层有复用和分用的功能。所谓复用就是指多个应用层进程可同时使用下面运输层的服务，分用和复用相反，是运输层把收到的信息分别交付上面应用层中的相应进程。</p>
+<h4 id="运输层使用协议"> 运输层使用协议</h4>
+<ol>
+<li><strong>传输控制协议 TCP</strong>（Transmission Control Protocol）--提供<strong>面向连接</strong>的，<strong>可靠的</strong>数据传输服务。</li>
+<li><strong>用户数据协议 UDP</strong>（User Datagram Protocol）--提供<strong>无连接</strong>的，尽最大努力的数据传输服务（<strong>不保证数据传输的可靠性</strong>）。</li>
+</ol>
+<h3 id="_1-3-网络层"> 1.3 网络层</h3>
+<p><strong>在计算机网络中进行通信的两个计算机之间可能会经过很多个数据链路，也可能还要经过很多通信子网。网络层的任务就是选择合适的网间路由和交换结点， 确保数据及时传送。</strong> 在发送数据时，网络层把运输层产生的报文段或用户数据报封装成分组和包进行传送。在 TCP/IP 体系结构中，由于网络层使用 <strong>IP 协议</strong>，因此分组也叫 <strong>IP 数据报</strong> ，简称 <strong>数据报</strong>。</p>
+<p>互联网是由大量的异构（heterogeneous）网络通过路由器（router）相互连接起来的。互联网使用的网络层协议是无连接的网际协议（Internet Protocol）和许多路由选择协议，因此互联网的网络层也叫做<strong>网际层</strong>或<strong>IP 层</strong>。</p>
+<h3 id="_1-4-数据链路层"> 1.4 数据链路层</h3>
+<p><strong>数据链路层(data link layer)通常简称为链路层。两台主机之间的数据传输，总是在一段一段的链路上传送的，这就需要使用专门的链路层的协议。</strong> 在两个相邻节点之间传送数据时，<strong>数据链路层将网络层交下来的 IP 数据报组装成帧</strong>，在两个相邻节点间的链路上传送帧。每一帧包括数据和必要的控制信息（如同步信息，地址信息，差错控制等）。</p>
+<blockquote>
+<p>数据链路层不仅要查错，还要纠错。</p>
+</blockquote>
+<h3 id="_1-5-物理层"> 1.5 物理层</h3>
+<p><strong>物理层(physical layer)的作用是实现相邻计算机节点之间比特流的透明传送，尽可能屏蔽掉具体传输介质和物理设备的差异，</strong> 使其上面的数据链路层不必考虑网络的具体传输介质是什么。“透明传送比特流”表示经实际电路传送后的比特流没有发生变化，对传送的比特流来说，这个电路好像是看不见的。</p>
+<h3 id="总结-协议记不住"> 总结（协议记不住）</h3>
+<p><img src="./README.assets/七层体系结构图.png" alt="七层体系结构图" /></p>
+<h2 id="二、tcp-三次握手"> 二、TCP 三次握手</h2>
+<p>为了准确无误地把数据送达目标处，TCP 协议采用了三次握手策略。</p>
+<h3 id="_2-0-tcp-三次握手漫画图解"> 2.0 TCP 三次握手漫画图解</h3>
+<ul>
+<li>客户端–发送带有 SYN 标志的数据包–一次握手–服务端</li>
+<li>服务端–发送带有 SYN/ACK 标志的数据包–二次握手–客户端</li>
+<li>客户端–发送带有带有 ACK 标志的数据包–三次握手–服务端</li>
+</ul>
+<p><img src="./README.assets/三次握手.png" alt="TCP三次握手" /></p>
+<h3 id="_2-1-三次握手流程"> 2.1 三次握手流程</h3>
+<blockquote>
+<p><strong>最开始的时候客户端和服务器都是处于CLOSED状态。主动打开连接的为客户端，被动打开连接的是服务器。</strong></p>
+</blockquote>
+<ol>
+<li>TCP服务器进程先创建传输控制块TCB，时刻准备接受客户进程的连接请求，此时服务器就进入了LISTEN（监听）状态；</li>
+<li>TCP客户进程也是先创建传输控制块TCB，然后向服务器发出连接请求报文，这是报文首部中的同部位<strong>SYN=1</strong>，同时选择一个<strong>初始序列号 seq=x</strong> ，此时，TCP客户端进程进入了 SYN-SENT（同步已发送状态）状态。TCP规定，SYN报文段（SYN=1的报文段）不能携带数据，但需要消耗掉一个序号。</li>
+<li>TCP服务器收到请求报文后，如果同意连接，则发出确认报文。确认报文中应该 <strong>ACK=1，SYN=1</strong>，<strong>确认号是ack=x+1</strong>，同时也要为自己初始化一个<strong>序列号 seq=y</strong>，此时，TCP服务器进程进入了SYN-RCVD（同步收到）状态。这个报文也不能携带数据，但是同样要消耗一个序号。</li>
+<li>TCP客户进程收到确认后，还要向服务器给出确认。确认报文的<strong>ACK=1，ack=y+1</strong>，自己的<strong>序列号seq=x+1</strong>，此时，TCP连接建立，客户端进入ESTABLISHED（已建立连接）状态。TCP规定，ACK报文段可以携带数据，但是如果不携带数据则不消耗序号。</li>
+<li>当服务器收到客户端的确认后也进入ESTABLISHED状态，此后双方就可以开始通信了。</li>
+</ol>
+<p><img src="./README.assets/0c9f470819684156cfdc27c682db4def.png" alt="img" /></p>
+<h3 id="_2-2-为什么要三次握手"> 2.2 为什么要三次握手</h3>
+<p><strong>三次握手的目的是建立可靠的通信信道，就是双方确认自己与对方的发送与接收是正常的。</strong></p>
+<ol>
+<li>第一次握手：Client 什么都不能确认；Server 确认了对方发送正常，自己接收正常</li>
+<li>第二次握手：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：对方发送正常，自己接收正常</li>
+<li>第三次握手：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己发送、接收正常，对方发送、接收正常</li>
+</ol>
+<h3 id="_2-3-第二次握手传回了ack-为什么还要传syn"> 2.3 第二次握手传回了ACK，为什么还要传SYN？</h3>
+<blockquote>
+<p>接收端传回发送端所发送的 ACK 是为了告诉客户端，我接收到的信息确实就是你所发送的信号了，这表明从客户端到服务端的通信是正常的。而回传 SYN 则是为了建立并确认从服务端到客户端的通信。</p>
+</blockquote>
+<p>**SYN 同步序列编号(**Synchronize Sequence Numbers) 是 TCP/IP 建立连接时使用的握手信号。在客户机和服务器之间建立正常的 TCP 网络连接时，客户机首先发出一个 SYN 消息，服务器使用 SYN-ACK 应答表示接收到了这个消息，最后客户机再以 ACK(Acknowledgement）消息响应。这样在客户机和服务器之间才能建立起可靠的 TCP 连接，数据才可以在客户机和服务器之间传递</p>
+<h3 id="_2-4-为什么还需要第三次握手"> 2.4 为什么还需要第三次握手？</h3>
+<p><strong>主要防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误。</strong></p>
+<p>如果使用的是两次握手建立连接，假设有这样一种场景，客户端发送了第一个请求连接并且没有丢失，只是因为在网络结点中滞留的时间太长了，由于TCP的客户端迟迟没有收到确认报文，以为服务器没有收到，此时重新向服务器发送这条报文，此后客户端和服务器经过两次握手完成连接，传输数据，然后关闭连接。此时此前滞留的那一次请求连接，网络通畅了到达了服务器，这个报文本该是失效的，但是，两次握手的机制将会让客户端和服务器再次建立连接，这将导致不必要的错误和资源的浪费。</p>
+<p>如果采用的是三次握手，就算是那一次失效的报文传送过来了，服务端接受到了那条失效报文并且回复了确认报文，但是客户端不会再次发出确认。由于服务器收不到确认，就知道客户端并没有请求连接。</p>
+<h2 id="三、tcp四次挥手"> 三、TCP四次挥手</h2>
+<h3 id="_3-0-为什么要四次挥手"> 3.0 为什么要四次挥手</h3>
+<p>断开一个 TCP 连接则需要“四次挥手”：</p>
+<ul>
+<li>客户端-发送一个 FIN，用来关闭客户端到服务器的数据传送</li>
+<li>服务器-收到这个 FIN，它发回一 个 ACK，确认序号为收到的序号加 1 。和 SYN 一样，一个 FIN 将占用一个序号</li>
+<li>服务器-关闭与客户端的连接，发送一个 FIN 给客户端</li>
+<li>客户端-发回 ACK 报文确认，并将确认序号设置为收到序号加 1</li>
+</ul>
+<p><img src="./README.assets/TCP四次挥手.png" alt="TCP四次挥手" /></p>
+<p>任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后进入半关闭状态。当另一方也没有数据再发送的时候，则发出连接释放通知，对方确认后就完全关闭了 TCP 连接。</p>
+<p>举个例子：A 和 B 打电话，通话即将结束后，A 说“我没啥要说的了”，B 回答“我知道了”，但是 B 可能还会有要说的话，A 不能要求 B 跟着自己的节奏结束通话，于是 B 可能又巴拉巴拉说了一通，最后 B 说“我说完了”，A 回答“知道了”，这样通话才算结束。</p>
+<h3 id="_3-1-四次挥手流程"> 3.1 四次挥手流程</h3>
+<blockquote>
+<p>数据传输完毕后，双方都可释放连接。最开始的时候，客户端和服务器都是处于ESTABLISHED状态，<strong>然后客户端主动关闭，服务器被动关闭</strong>。</p>
+</blockquote>
+<ol>
+<li>客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，<strong>FIN=1，其序列号为seq=u</strong>（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。 TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。</li>
+<li>服务器收到连接释放报文，发出确认报文，<strong>ACK=1，ack=u+1，并且带上自己的序列号seq=v</strong>，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。TCP服务器通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个状态还要持续一段时间，也就是整个CLOSE-WAIT状态持续的时间。</li>
+<li>客户端收到服务器的确认请求后，此时，客户端就进入FIN-WAIT-2（终止等待2）状态，等待服务器发送连接释放报文（在这之前还需要接受服务器发送的最后的数据）。</li>
+<li>服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，<strong>FIN=1，ack=u+1</strong>，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的<strong>序列号为seq=w</strong>，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。</li>
+<li>客户端收到服务器的连接释放报文后，必须发出确认，<strong>ACK=1，ack=w+1，而自己的序列号是seq=u+1</strong>，此时，客户端就进入了TIME-WAIT（时间等待）状态。<span style="color:red"><strong>注意此时TCP连接还没有释放，必须经过2∗MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态</strong></span>。</li>
+<li>服务器只要收到了客户端发出的确认，立即进入CLOSED状态。同样，撤销TCB后，就结束了这次的TCP连接。可以看到，服务器结束TCP连接的时间要比客户端早一些。</li>
+</ol>
+<p><img src="./README.assets/format,png.png" alt="四次挥手" /></p>
+<h3 id="_3-2-为什么客户端最后还要等待2msl"> 3.2 为什么客户端最后还要等待2MSL？</h3>
+<p>MSL（Maximum Segment Lifetime）（最长报文段寿命），TCP允许不同的实现可以设置不同的MSL值。</p>
+<p>第一，保证客户端发送的最后一个ACK报文能够到达服务器，因为这个ACK报文可能丢失，站在服务器的角度看来，我已经发送了FIN+ACK报文请求断开了，客户端还没有给我回应，应该是我发送的请求断开报文它没有收到，于是服务器又会重新发送一次，而客户端就能在这个2MSL时间段内收到这个重传的报文，接着给出回应报文，并且会重启2MSL计时器。</p>
+<p>第二，防止类似与“三次握手”中提到了的“已经失效的连接请求报文段”出现在本连接中。客户端发送完最后一个确认报文后，在这个2MSL时间中，就可以使本连接持续的时间内所产生的所有报文段都从网络中消失。这样新的连接中不会出现旧连接的请求报文。</p>
+<h3 id="_3-3-为什么建立连接是三次握手-关闭连接确是四次挥手呢"> 3.3 为什么建立连接是三次握手，关闭连接确是四次挥手呢？</h3>
+<p>客户端和服务端未必能同时结束通信，存在一方发送完全部数据、而另一方还有数据要继续发送的情况。所以双方都必须分别发送连接释放报文和ACK</p>
+<h3 id="_3-4-如果已经建立了连接-但是客户端突然出现故障了怎么办"> 3.4 如果已经建立了连接，但是客户端突然出现故障了怎么办？</h3>
+<p>TCP还设有一个保活计时器，显然，客户端如果出现故障，服务器不能一直等下去，白白浪费资源。服务器每收到一次客户端的请求后都会重新复位这个计时器，时间通常是设置为2小时，若两小时还没有收到客户端的任何数据，服务器就会发送一个探测报文段，以后每隔75秒发送一次。若一连发送10个探测报文仍然没反应，服务器就认为客户端出了故障，接着就关闭连接。</p>
 ]]></content>
     <author>
       <name>lllllan</name>
@@ -2337,196 +2499,6 @@ value is <span>JavaGuide</span>
       <name>lllllan</name>
     </contributor>
     <published>2022-01-21T02:30:27.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">计算机网络-常见面试题</title>
-    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/2-interview-questions/</id>
-    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/2-interview-questions/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/cs-basics/network/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" target="_blank" rel="noopener noreferrer">计算机网络常见面试题 | JavaGuide</a>，略有改动。</p>
-</div>
-<h2 id="一、osi-与-tcp-ip-各层的结构与功能-都有哪些协议"> 一、OSI 与 TCP/ IP 各层的结构与功能，都有哪些协议？</h2>
-<blockquote>
-<p><strong>开放式系统互联通信参考模型</strong>（英语：Open System Interconnection Reference Model，缩写为 OSI），简称为<strong>OSI模型</strong>（OSI model），一种<a href="https://baike.baidu.com/item/%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B/3187025" target="_blank" rel="noopener noreferrer">概念模型</a>，由<a href="https://baike.baidu.com/item/%E5%9B%BD%E9%99%85%E6%A0%87%E5%87%86%E5%8C%96%E7%BB%84%E7%BB%87/779832" target="_blank" rel="noopener noreferrer">国际标准化组织</a>提出，一个试图使各种计算机在世界范围内互连为网络的标准框架。</p>
-<p>TCP/IP传输协议，即传输控制/网络协议，也叫作网络通讯协议。</p>
-</blockquote>
-<p><img src="./README.assets/五层体系结构.png" alt="五层体系结构" /></p>
-<h3 id="_1-1-应用层-进程之间"> 1.1 应用层 - 进程之间</h3>
-<p><strong>应用层(application-layer）的任务是通过应用进程间的交互来完成特定网络应用</strong>。应用层协议定义的是应用进程（进程：主机中正在运行的程序）间的通信和交互的规则。对于不同的网络应用需要不同的应用层协议。在互联网中应用层协议很多，如<strong>域名系统 DNS</strong>，支持万维网应用的 <strong>HTTP 协议</strong>，支持电子邮件的 <strong>SMTP 协议</strong>等等。我们把应用层交互的数据单元称为<strong>报文</strong>。</p>
-<h3 id="_1-2-运输层-主机之间"> 1.2 运输层 - 主机之间</h3>
-<p><strong>运输层(transport layer)的主要任务就是负责向两台主机进程之间的通信提供通用的数据传输服务</strong>。应用进程利用该服务传送应用层报文。“通用的”是指并不针对某一个特定的网络应用，而是多种应用可以使用同一个运输层服务。由于一台主机可同时运行多个线程，因此运输层有复用和分用的功能。所谓复用就是指多个应用层进程可同时使用下面运输层的服务，分用和复用相反，是运输层把收到的信息分别交付上面应用层中的相应进程。</p>
-<h4 id="运输层使用协议"> 运输层使用协议</h4>
-<ol>
-<li><strong>传输控制协议 TCP</strong>（Transmission Control Protocol）--提供<strong>面向连接</strong>的，<strong>可靠的</strong>数据传输服务。</li>
-<li><strong>用户数据协议 UDP</strong>（User Datagram Protocol）--提供<strong>无连接</strong>的，尽最大努力的数据传输服务（<strong>不保证数据传输的可靠性</strong>）。</li>
-</ol>
-<h3 id="_1-3-网络层"> 1.3 网络层</h3>
-<p><strong>在计算机网络中进行通信的两个计算机之间可能会经过很多个数据链路，也可能还要经过很多通信子网。网络层的任务就是选择合适的网间路由和交换结点， 确保数据及时传送。</strong> 在发送数据时，网络层把运输层产生的报文段或用户数据报封装成分组和包进行传送。在 TCP/IP 体系结构中，由于网络层使用 <strong>IP 协议</strong>，因此分组也叫 <strong>IP 数据报</strong> ，简称 <strong>数据报</strong>。</p>
-<p>互联网是由大量的异构（heterogeneous）网络通过路由器（router）相互连接起来的。互联网使用的网络层协议是无连接的网际协议（Internet Protocol）和许多路由选择协议，因此互联网的网络层也叫做<strong>网际层</strong>或<strong>IP 层</strong>。</p>
-<h3 id="_1-4-数据链路层"> 1.4 数据链路层</h3>
-<p><strong>数据链路层(data link layer)通常简称为链路层。两台主机之间的数据传输，总是在一段一段的链路上传送的，这就需要使用专门的链路层的协议。</strong> 在两个相邻节点之间传送数据时，<strong>数据链路层将网络层交下来的 IP 数据报组装成帧</strong>，在两个相邻节点间的链路上传送帧。每一帧包括数据和必要的控制信息（如同步信息，地址信息，差错控制等）。</p>
-<blockquote>
-<p>数据链路层不仅要查错，还要纠错。</p>
-</blockquote>
-<h3 id="_1-5-物理层"> 1.5 物理层</h3>
-<p><strong>物理层(physical layer)的作用是实现相邻计算机节点之间比特流的透明传送，尽可能屏蔽掉具体传输介质和物理设备的差异，</strong> 使其上面的数据链路层不必考虑网络的具体传输介质是什么。“透明传送比特流”表示经实际电路传送后的比特流没有发生变化，对传送的比特流来说，这个电路好像是看不见的。</p>
-<h3 id="总结-协议记不住"> 总结（协议记不住）</h3>
-<p><img src="./README.assets/七层体系结构图.png" alt="七层体系结构图" /></p>
-<h2 id="二、tcp-三次握手"> 二、TCP 三次握手</h2>
-<p>为了准确无误地把数据送达目标处，TCP 协议采用了三次握手策略。</p>
-<h3 id="_2-0-tcp-三次握手漫画图解"> 2.0 TCP 三次握手漫画图解</h3>
-<ul>
-<li>客户端–发送带有 SYN 标志的数据包–一次握手–服务端</li>
-<li>服务端–发送带有 SYN/ACK 标志的数据包–二次握手–客户端</li>
-<li>客户端–发送带有带有 ACK 标志的数据包–三次握手–服务端</li>
-</ul>
-<p><img src="./README.assets/三次握手.png" alt="TCP三次握手" /></p>
-<h3 id="_2-1-三次握手流程"> 2.1 三次握手流程</h3>
-<blockquote>
-<p><strong>最开始的时候客户端和服务器都是处于CLOSED状态。主动打开连接的为客户端，被动打开连接的是服务器。</strong></p>
-</blockquote>
-<ol>
-<li>TCP服务器进程先创建传输控制块TCB，时刻准备接受客户进程的连接请求，此时服务器就进入了LISTEN（监听）状态；</li>
-<li>TCP客户进程也是先创建传输控制块TCB，然后向服务器发出连接请求报文，这是报文首部中的同部位<strong>SYN=1</strong>，同时选择一个<strong>初始序列号 seq=x</strong> ，此时，TCP客户端进程进入了 SYN-SENT（同步已发送状态）状态。TCP规定，SYN报文段（SYN=1的报文段）不能携带数据，但需要消耗掉一个序号。</li>
-<li>TCP服务器收到请求报文后，如果同意连接，则发出确认报文。确认报文中应该 <strong>ACK=1，SYN=1</strong>，<strong>确认号是ack=x+1</strong>，同时也要为自己初始化一个<strong>序列号 seq=y</strong>，此时，TCP服务器进程进入了SYN-RCVD（同步收到）状态。这个报文也不能携带数据，但是同样要消耗一个序号。</li>
-<li>TCP客户进程收到确认后，还要向服务器给出确认。确认报文的<strong>ACK=1，ack=y+1</strong>，自己的<strong>序列号seq=x+1</strong>，此时，TCP连接建立，客户端进入ESTABLISHED（已建立连接）状态。TCP规定，ACK报文段可以携带数据，但是如果不携带数据则不消耗序号。</li>
-<li>当服务器收到客户端的确认后也进入ESTABLISHED状态，此后双方就可以开始通信了。</li>
-</ol>
-<p><img src="./README.assets/0c9f470819684156cfdc27c682db4def.png" alt="img" /></p>
-<h3 id="_2-2-为什么要三次握手"> 2.2 为什么要三次握手</h3>
-<p><strong>三次握手的目的是建立可靠的通信信道，就是双方确认自己与对方的发送与接收是正常的。</strong></p>
-<ol>
-<li>第一次握手：Client 什么都不能确认；Server 确认了对方发送正常，自己接收正常</li>
-<li>第二次握手：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：对方发送正常，自己接收正常</li>
-<li>第三次握手：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己发送、接收正常，对方发送、接收正常</li>
-</ol>
-<h3 id="_2-3-第二次握手传回了ack-为什么还要传syn"> 2.3 第二次握手传回了ACK，为什么还要传SYN？</h3>
-<blockquote>
-<p>接收端传回发送端所发送的 ACK 是为了告诉客户端，我接收到的信息确实就是你所发送的信号了，这表明从客户端到服务端的通信是正常的。而回传 SYN 则是为了建立并确认从服务端到客户端的通信。</p>
-</blockquote>
-<p>**SYN 同步序列编号(**Synchronize Sequence Numbers) 是 TCP/IP 建立连接时使用的握手信号。在客户机和服务器之间建立正常的 TCP 网络连接时，客户机首先发出一个 SYN 消息，服务器使用 SYN-ACK 应答表示接收到了这个消息，最后客户机再以 ACK(Acknowledgement）消息响应。这样在客户机和服务器之间才能建立起可靠的 TCP 连接，数据才可以在客户机和服务器之间传递</p>
-<h3 id="_2-4-为什么还需要第三次握手"> 2.4 为什么还需要第三次握手？</h3>
-<p><strong>主要防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误。</strong></p>
-<p>如果使用的是两次握手建立连接，假设有这样一种场景，客户端发送了第一个请求连接并且没有丢失，只是因为在网络结点中滞留的时间太长了，由于TCP的客户端迟迟没有收到确认报文，以为服务器没有收到，此时重新向服务器发送这条报文，此后客户端和服务器经过两次握手完成连接，传输数据，然后关闭连接。此时此前滞留的那一次请求连接，网络通畅了到达了服务器，这个报文本该是失效的，但是，两次握手的机制将会让客户端和服务器再次建立连接，这将导致不必要的错误和资源的浪费。</p>
-<p>如果采用的是三次握手，就算是那一次失效的报文传送过来了，服务端接受到了那条失效报文并且回复了确认报文，但是客户端不会再次发出确认。由于服务器收不到确认，就知道客户端并没有请求连接。</p>
-<h2 id="三、tcp四次挥手"> 三、TCP四次挥手</h2>
-<h3 id="_3-0-为什么要四次挥手"> 3.0 为什么要四次挥手</h3>
-<p>断开一个 TCP 连接则需要“四次挥手”：</p>
-<ul>
-<li>客户端-发送一个 FIN，用来关闭客户端到服务器的数据传送</li>
-<li>服务器-收到这个 FIN，它发回一 个 ACK，确认序号为收到的序号加 1 。和 SYN 一样，一个 FIN 将占用一个序号</li>
-<li>服务器-关闭与客户端的连接，发送一个 FIN 给客户端</li>
-<li>客户端-发回 ACK 报文确认，并将确认序号设置为收到序号加 1</li>
-</ul>
-<p><img src="./README.assets/TCP四次挥手.png" alt="TCP四次挥手" /></p>
-<p>任何一方都可以在数据传送结束后发出连接释放的通知，待对方确认后进入半关闭状态。当另一方也没有数据再发送的时候，则发出连接释放通知，对方确认后就完全关闭了 TCP 连接。</p>
-<p>举个例子：A 和 B 打电话，通话即将结束后，A 说“我没啥要说的了”，B 回答“我知道了”，但是 B 可能还会有要说的话，A 不能要求 B 跟着自己的节奏结束通话，于是 B 可能又巴拉巴拉说了一通，最后 B 说“我说完了”，A 回答“知道了”，这样通话才算结束。</p>
-<h3 id="_3-1-四次挥手流程"> 3.1 四次挥手流程</h3>
-<blockquote>
-<p>数据传输完毕后，双方都可释放连接。最开始的时候，客户端和服务器都是处于ESTABLISHED状态，<strong>然后客户端主动关闭，服务器被动关闭</strong>。</p>
-</blockquote>
-<ol>
-<li>客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，<strong>FIN=1，其序列号为seq=u</strong>（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。 TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。</li>
-<li>服务器收到连接释放报文，发出确认报文，<strong>ACK=1，ack=u+1，并且带上自己的序列号seq=v</strong>，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。TCP服务器通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个状态还要持续一段时间，也就是整个CLOSE-WAIT状态持续的时间。</li>
-<li>客户端收到服务器的确认请求后，此时，客户端就进入FIN-WAIT-2（终止等待2）状态，等待服务器发送连接释放报文（在这之前还需要接受服务器发送的最后的数据）。</li>
-<li>服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，<strong>FIN=1，ack=u+1</strong>，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的<strong>序列号为seq=w</strong>，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。</li>
-<li>客户端收到服务器的连接释放报文后，必须发出确认，<strong>ACK=1，ack=w+1，而自己的序列号是seq=u+1</strong>，此时，客户端就进入了TIME-WAIT（时间等待）状态。<span style="color:red"><strong>注意此时TCP连接还没有释放，必须经过2∗MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态</strong></span>。</li>
-<li>服务器只要收到了客户端发出的确认，立即进入CLOSED状态。同样，撤销TCB后，就结束了这次的TCP连接。可以看到，服务器结束TCP连接的时间要比客户端早一些。</li>
-</ol>
-<p><img src="./README.assets/format,png.png" alt="四次挥手" /></p>
-<h3 id="_3-2-为什么客户端最后还要等待2msl"> 3.2 为什么客户端最后还要等待2MSL？</h3>
-<p>MSL（Maximum Segment Lifetime）（最长报文段寿命），TCP允许不同的实现可以设置不同的MSL值。</p>
-<p>第一，保证客户端发送的最后一个ACK报文能够到达服务器，因为这个ACK报文可能丢失，站在服务器的角度看来，我已经发送了FIN+ACK报文请求断开了，客户端还没有给我回应，应该是我发送的请求断开报文它没有收到，于是服务器又会重新发送一次，而客户端就能在这个2MSL时间段内收到这个重传的报文，接着给出回应报文，并且会重启2MSL计时器。</p>
-<p>第二，防止类似与“三次握手”中提到了的“已经失效的连接请求报文段”出现在本连接中。客户端发送完最后一个确认报文后，在这个2MSL时间中，就可以使本连接持续的时间内所产生的所有报文段都从网络中消失。这样新的连接中不会出现旧连接的请求报文。</p>
-<h3 id="_3-3-为什么建立连接是三次握手-关闭连接确是四次挥手呢"> 3.3 为什么建立连接是三次握手，关闭连接确是四次挥手呢？</h3>
-<p>客户端和服务端未必能同时结束通信，存在一方发送完全部数据、而另一方还有数据要继续发送的情况。所以双方都必须分别发送连接释放报文和ACK</p>
-<h3 id="_3-4-如果已经建立了连接-但是客户端突然出现故障了怎么办"> 3.4 如果已经建立了连接，但是客户端突然出现故障了怎么办？</h3>
-<p>TCP还设有一个保活计时器，显然，客户端如果出现故障，服务器不能一直等下去，白白浪费资源。服务器每收到一次客户端的请求后都会重新复位这个计时器，时间通常是设置为2小时，若两小时还没有收到客户端的任何数据，服务器就会发送一个探测报文段，以后每隔75秒发送一次。若一连发送10个探测报文仍然没反应，服务器就认为客户端出了故障，接着就关闭连接。</p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="计算机基础"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-21T02:30:27.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">第三章、从网线到网络设备</title>
-    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</id>
-    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文作为 《网络是怎样连接的》 的笔记，绝大部分内容均抄自该书。</p>
-</div>
-<h2 id="一、信号在网线和集线器中传输"> 一、信号在网线和集线器中传输</h2>
-<h3 id="_1-1-每个包都是独立传输的"> 1.1 每个包都是独立传输的</h3>
-<p><img src="./README.assets/image-20220113145717884.png" alt="image-20220113145717884" /></p>
-<h3 id="_1-2-网线中的信号衰减"> 1.2 网线中的信号衰减</h3>
-<p>以太网信号的本质是正负变化的电压。</p>
-<p>信号在网线的传输过程中，能量会逐渐损失。网线越长，信号衰减就越严重。</p>
-<p>同时噪声也会进一步加剧信号的失真。</p>
-<h3 id="_1-3-双绞线抑制噪声"> 1.3 双绞线抑制噪声</h3>
-<blockquote>
-<p>产生噪声的原因是网线周围的电磁波，当电磁波接触到金属等导体时，在其中就会产生电流。信号和噪声的电流混杂在一起之后，导致信号的波形发生失真。</p>
-</blockquote>
-<p>影响网线的电磁波分为两种：</p>
-<h4 id="来自网线之外的其他设备"> 来自网线之外的其他设备：</h4>
-<p>当电磁波接触到信号线时，会沿电磁波传播的右旋方向产生电流。</p>
-<p>如果我们将信号线缠绕在一起，信号线就变成了螺旋形，其中两根信号线产生的噪声电流方向就会相反，从而使得噪声电流相互抵消。</p>
-<p><img src="./README.assets/image-20220113150630538.png" alt="image-20220113150630538" /></p>
-<p><img src="./README.assets/image-20220113150651814.png" alt="image-20220113150651814" /></p>
-<h4 id="相邻信号线泄露出来"> 相邻信号线泄露出来：</h4>
-<p>这种内部产生的噪声称为 <strong>串扰</strong></p>
-<p><img src="./README.assets/image-20220113151240119.png" alt="image-20220113151240119" /></p>
-<p><img src="./README.assets/image-20220113151203170.png" alt="image-20220113151203170" /></p>
-<h3 id="_1-4-集线器将信号发往所有线路"> 1.4 集线器将信号发往所有线路</h3>
-<blockquote>
-<p>集线器将信号发送给所有连接在它上面的线路。</p>
-</blockquote>
-<p><img src="./README.assets/image-20220113151435359.png" alt="image-20220113151435359" /></p>
-<p><img src="./README.assets/image-20220113151613603.png" alt="image-20220113151613603" /></p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="计算机基础"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-21T02:30:27.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">计算机基础</title>
-    <id>https://vue-blog.lllllan.cn/3-cs-basic/</id>
-    <link href="https://vue-blog.lllllan.cn/3-cs-basic/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>重要声明</p>
-<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
-</div>
-<h2 id="参考"> 参考</h2>
-<ul>
-<li>
-<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
-</li>
-<li>
-<p>《网络是怎样连接的》</p>
-</li>
-</ul>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="计算机基础"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
@@ -2933,6 +2905,47 @@ value is <span>JavaGuide</span>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
+    <title type="html">计算机基础</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/"/>
+    <updated>2022-01-21T02:30:27.000Z</updated>
+    <content type="html"><![CDATA[<div><p>重要声明</p>
+<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
+</div>
+<h2 id="参考"> 参考</h2>
+<ul>
+<li>
+<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
+</li>
+<li>
+<p>《网络是怎样连接的》</p>
+</li>
+</ul>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="计算机基础"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">项目主页</title>
+    <id>https://vue-blog.lllllan.cn/</id>
+    <link href="https://vue-blog.lllllan.cn/"/>
+    <updated>2022-01-22T07:57:16.857Z</updated>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
     <title type="html">刷题笔记</title>
     <id>https://vue-blog.lllllan.cn/4-practice/</id>
     <link href="https://vue-blog.lllllan.cn/4-practice/"/>
@@ -2945,19 +2958,6 @@ value is <span>JavaGuide</span>
       <name>lllllan</name>
     </contributor>
     <published>2022-01-20T14:33:14.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">项目主页</title>
-    <id>https://vue-blog.lllllan.cn/</id>
-    <link href="https://vue-blog.lllllan.cn/"/>
-    <updated>2022-01-21T11:55:00.319Z</updated>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
     <rights>Copyright by lllllan</rights>
   </entry>
 </feed>

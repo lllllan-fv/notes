@@ -50,14 +50,14 @@ module.exports = config({
         "1-java/",
         {
           title: "java 基础",
-          icon: "java",
+          icon: "",
           prefix: "1-java/1-basic/",
           children: [
             "1-java-basic-core-summary/",
             "2-java-guide-basic/",
             {
               title: "重要知识点",
-              icon: "tree",
+              icon: "",
               prefix: "3-important-points/",
               children: [
                 "1-java-value-passed/",
