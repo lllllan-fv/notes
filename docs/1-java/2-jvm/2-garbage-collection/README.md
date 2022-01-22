@@ -160,3 +160,113 @@ Hotspot 遍历所有对象时，按照年龄从小到大对其所占用的大小
 > JDK 6 Update 24 之前，在发生 Minor GC 之前，虚拟机必须先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，如果这个条件成立，那这一次 Minor GC 可以确保是安全的。如果不成立，则虚拟机会先查看 `-XX:HandlePromotionFailure` 参数的设置值是否允许担保失败(Handle Promotion Failure);如果允许，那会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试进行一次 Minor GC，尽管这次 Minor GC 是有风险的;如果小于，或者 `-XX: HandlePromotionFailure` 设置不允许冒险，那这时就要改为进行一次 Full GC。
 >
 > JDK 6 Update 24 之后的规则变为只要老年代的连续空间大于新生代对象总大小或者历次晋升的平均大小，就会进行 Minor GC，否则将进行 Full GC。
+
+
+
+## 二、对象死亡
+
+堆中几乎放着所有的对象实例，对堆垃圾回收前的第一步就是要判断哪些对象已经死亡（即不能再被任何途径使用的对象）。
+
+![img](README.assets/11034259.2dc6983d.png)
+
+
+
+### 2.1 引用计数法
+
+给对象中添加一个引用计数器，每当有一个地方引用它，计数器就加 1；当引用失效，计数器就减 1；任何时候计数器为 0 的对象就是不可能再被使用的。
+
+**这个方法实现简单，效率高，但是目前主流的虚拟机中并没有选择这个算法来管理内存，其最主要的原因是它很难解决对象之间相互循环引用的问题。** 所谓对象之间的相互引用问题，如下面代码所示：除了对象 objA 和 objB 相互引用着对方之外，这两个对象之间再无任何引用。但是他们因为互相引用对方，导致它们的引用计数器都不为 0，于是引用计数算法无法通知 GC 回收器回收他们。
+
+```java
+public class ReferenceCountingGc {
+    Object instance = null;
+	public static void main(String[] args) {
+		ReferenceCountingGc objA = new ReferenceCountingGc();
+		ReferenceCountingGc objB = new ReferenceCountingGc();
+		objA.instance = objB;
+		objB.instance = objA;
+		objA = null;
+		objB = null;
+
+	}
+}
+```
+
+
+
+### 2.2 可达性分析算法
+
+这个算法的基本思想就是通过一系列的称为 **“GC Roots”** 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的。
+
+可作为 GC Roots 的对象包括下面几种:
+
+- 虚拟机栈(栈帧中的本地变量表)中引用的对象
+- 本地方法栈(Native 方法)中引用的对象
+- 方法区中类静态属性引用的对象
+- 方法区中常量引用的对象
+- 所有被同步锁持有的对象
+
+![下载](README.assets/下载.png)
+
+
+
+### 2.3 引用
+
+无论是通过引用计数法判断对象引用数量，还是通过可达性分析法判断对象的引用链是否可达，判定对象的存活都与“引用”有关。
+
+JDK1.2 之前，Java 中引用的定义很传统：如果 reference 类型的数据存储的数值代表的是另一块内存的起始地址，就称这块内存代表一个引用。
+
+JDK1.2 以后，Java 对引用的概念进行了扩充，将引用分为强引用、软引用、弱引用、虚引用四种（引用强度逐渐减弱）
+
+```java
+String str=new String("abc");                                     // 强引用
+SoftReference<String> softRef=new SoftReference<String>(str);     // 软引用
+WeakReference<String> abcWeakRef = new WeakReference<String>(str);// 弱引用
+???                                                               // 虚引用
+```
+
+更多解释见 [JVM 垃圾回收详解 | JavaGuide](https://javaguide.cn/java/jvm/jvm-garbage-collection/#_2-3-再谈引用)
+
+![8vvr30i6ew](README.assets/8vvr30i6ew.png)
+
+![a3je2pxov](README.assets/a3je2pxov.png)
+
+
+
+### 2.4 不可达的对象并非“非死不可”
+
+即使在可达性分析法中不可达的对象，也并非是“非死不可”的，这时候它们暂时处于“缓刑阶段”，要真正宣告一个对象死亡，至少要经历两次标记过程；可达性分析法中不可达的对象被第一次标记并且进行一次筛选，筛选的条件是此对象是否有必要执行 `finalize` 方法。当对象没有覆盖 `finalize` 方法，或 `finalize` 方法已经被虚拟机调用过时，虚拟机将这两种情况视为没有必要执行。
+
+被判定为需要执行的对象将会被放在一个队列中进行第二次标记，除非这个对象与引用链上的任何一个对象建立关联，否则就会被真的回收。
+
+> `Object` 类中的 `finalize` 方法一直被认为是一个糟糕的设计，成为了 Java 语言的负担，影响了 Java 语言的安全和 GC 的性能。JDK9 版本及后续版本中各个类中的 `finalize` 方法会被逐渐弃用移除。忘掉它的存在吧！
+>
+> 参考：
+>
+> - [JEP 421: Deprecate Finalization for Removal  (opens new window)](https://openjdk.java.net/jeps/421)
+> - [是时候忘掉 finalize 方法了](https://mp.weixin.qq.com/s/LW-paZAMD08DP_3-XCUxmg)
+
+
+
+### 2.5 如何判断一个常量是废弃常量
+
+1. **JDK1.7 之前运行时常量池逻辑包含字符串常量池存放在方法区, 此时 hotspot 虚拟机对方法区的实现为永久代**
+2. **JDK1.7 字符串常量池被从方法区拿到了堆中, 这里没有提到运行时常量池,也就是说字符串常量池被单独拿到堆,运行时常量池剩下的东西还在方法区, 也就是 hotspot 中的永久代** 。
+3. **JDK1.8 hotspot 移除了永久代用元空间(Metaspace)取而代之, 这时候字符串常量池还在堆, 运行时常量池还在方法区, 只不过方法区的实现从永久代变成了元空间(Metaspace)**
+
+假如在字符串常量池中存在字符串 "abc"，如果当前没有任何 String 对象引用该字符串常量的话，就说明常量 "abc" 就是废弃常量，如果这时发生内存回收的话而且有必要的话，"abc" 就会被系统清理出常量池了
+
+
+
+### 2.6 如何判断一个类是无用的类
+
+方法区主要回收的是无用的类，那么如何判断一个类是无用的类的呢？
+
+判定一个常量是否是“废弃常量”比较简单，而要判定一个类是否是“无用的类”的条件则相对苛刻许多。类需要同时满足下面 3 个条件才能算是 **“无用的类”** ：
+
+- 该类所有的实例都已经被回收，也就是 Java 堆中不存在该类的任何实例。
+- 加载该类的 `ClassLoader` 已经被回收。
+- 该类对应的 `java.lang.Class` 对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。
+
+虚拟机可以对满足上述 3 个条件的无用类进行回收，这里说的仅仅是“可以”，而并不是和对象一样不使用了就会必然被回收。
+
