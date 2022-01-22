@@ -81,7 +81,15 @@ module.exports = config({
           icon: "",
           prefix: "1-java/3-container/",
           children: [
-            "1-collection-basic/"
+            "1-collection-basic/",
+            {
+              title: "源码解读",
+              icon: "",
+              prefix: "2-source-code/",
+              children: [
+                "1-arraylist/"
+              ]
+            },
           ],
         },
       ],

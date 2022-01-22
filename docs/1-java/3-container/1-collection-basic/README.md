@@ -38,17 +38,17 @@ star: true
 
 
 
-# 一、集合概述
+## 一、集合概述
 
 
 
-## 1.0 Java集合概览
+### 1.0 Java集合概览
 
 ![img](README.assets/java-collection-hierarchy.71519bdb.png)
 
 
 
-## 1.1 集合框架底层数据结构
+### 1.1 集合框架底层数据结构
 
 - `Collection`
   - `List`
@@ -70,17 +70,17 @@ star: true
 
 
 
-## 1.2 集合的选择
+### 1.2 集合的选择
 
 ![image-20220118101609300](README.assets/image-20220118101609300.png)
 
 
 
-# 二、List
+## 二、List
 
 
 
-## 2.1 ArrayList 和 Vector 的区别
+### 2.1 ArrayList 和 Vector 的区别
 
 `ArrayList` 是 `List` 的主要实现类，底层使用 `Object[]`存储，适用于频繁的查找工作，线程不安全 ；
 
@@ -88,7 +88,7 @@ star: true
 
 
 
-## 2.2 ArrayList  和 LinkedList 的区别
+### 2.2 ArrayList  和 LinkedList 的区别
 
 **是否保证线程安全：** `ArrayList` 和 `LinkedList` 都是不同步的，也就是不保证线程安全；
 
@@ -105,7 +105,7 @@ star: true
 
 
 
-## 2.3 RandomAccess 接口
+### 2.3 RandomAccess 接口
 
 ```java
 public interface RandomAccess {
@@ -131,4 +131,10 @@ public static <T>
 
 
 `ArrayList` 实现了 `RandomAccess` 接口， 而 `LinkedList` 没有实现。为什么呢？我觉得还是和底层数据结构有关！`ArrayList` 底层是数组，而 `LinkedList` 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O(n)，所以不支持快速随机访问。，`ArrayList` 实现了 `RandomAccess` 接口，就表明了他具有快速随机访问功能。 `RandomAccess` 接口只是标识，并不是说 `ArrayList` 实现 `RandomAccess` 接口才具有快速随机访问功能的！
+
+
+
+### 2.4 ArrayList 扩容机制
+
+详见另一篇 [ArrayList 源码解读](../2-source-code/1-arraylist)
 
