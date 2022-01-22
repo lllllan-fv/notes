@@ -14,7 +14,7 @@ echo 'vue-blog.lllllan.cn' > CNAME
 
 git init
 git add -A
-git commit -m '[config] 修改侧边栏'
+git commit -m '[docs] 补充《代理详解》，但是完全看不懂'
 
 # 如果你想要部署到 https://<USERNAME>.github.io
 git push -f git@github.com:lllllan-fv/lllllan-fv.github.io.git master
