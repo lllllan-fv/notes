@@ -55,6 +55,7 @@ module.exports = config({
           children: [
             "1-java-basic-core-summary/",
             "2-java-guide-basic/",
+            "4-interview-questions/",
             {
               title: "重要知识点",
               icon: "",
