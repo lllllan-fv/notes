@@ -33,7 +33,7 @@ star: true
 
 ::: warning
 
-本文转载自 [2. ArrayList 核心源码解读](https://snailclimb.gitee.io/javaguide/#/docs/java/collection/arraylist-source-code)，略有改动
+本文转载自 [ArrayList源码&扩容机制分析 | JavaGuide](https://javaguide.cn/java/collection/arraylist-source-code/)，略有改动
 
 :::
 
