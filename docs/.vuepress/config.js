@@ -249,9 +249,9 @@ module.exports = config({
         ],
         shortcuts: [
           {
-            name: "Guide",
-            short_name: "Guide",
-            url: "/guide/",
+            name: "",
+            short_name: "",
+            url: "/",
             icons: [
               {
                 src: "/assets/icon/guide-maskable.png",
