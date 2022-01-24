@@ -53,7 +53,7 @@ module.exports = config({
           icon: "",
           prefix: "1-java/1-basic/",
           children: [
-            "1-java-basic-core-summary/",
+            "1-r2coding-basic/",
             "2-java-guide-basic/",
             "4-interview-questions/",
             {

@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: R2Coding - Java 基础核心总结
+title: R2Coding - Java 基础知识
 
 # 设置作者
 author: lllllan

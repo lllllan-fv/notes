@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: JavaGuide - Java基础知识
+title: JavaGuide - Java 基础知识
 
 # 设置作者
 author: lllllan
