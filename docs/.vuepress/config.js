@@ -187,9 +187,10 @@ module.exports = config({
       content: '<a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021095794号</a>',
     },
 
-    copyright: {
-      status: "global",
-    },
+    copyright: true,
+    // copyright: {
+    //   status: "global",
+    // },
 
     git: {
       timezone: "Asia/Shanghai",
