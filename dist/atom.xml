@@ -5,7 +5,7 @@
   <author>
     <name>lllllan</name>
   </author>
-  <updated>2022-01-23T08:03:09.039Z</updated>
+  <updated>2022-01-24T02:18:55.678Z</updated>
   <generator>@mr-hope/vuepress-plugin-feed</generator>
   <link rel="self" href="https://vue-blog.lllllan.cn/atom.xml"/>
   <link rel="alternate" href="https://vue-blog.lllllan.cn/"/>
@@ -17,248 +17,6 @@
   <contributor>
     <name>lllllan</name>
   </contributor>
-  <entry>
-    <title type="html">R2Coding - Java 基础核心总结</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/"/>
-    <updated>2022-01-20T14:33:14.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>全部抄自<a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a>上提供资料</p>
-</div>
-<h2 id="一、-java语言的特点"> 一、 java语言的特点</h2>
-<ul>
-<li>面向对象</li>
-<li>平台无关性</li>
-</ul>
-<blockquote>
-<p>已编译的java程序可以在任何带 有jvm的平台上运行。</p>
-<p><code>java</code> 代码编译为 <code>.class</code> 文件，然后打包成 <code>.jar</code> 文件，这样就能够在不同系统下运行了。</p>
-</blockquote>
-<ul>
-<li>简单性</li>
-</ul>
-<blockquote>
-<p>摒弃了C++中难以理解的多继承、指针、内存管理等概念，不用手动管理对象的生命周期</p>
-</blockquote>
-<ul>
-<li>解释执行</li>
-</ul>
-<blockquote>
-<p>静态页面，在编译期间救恩那个直到数据类型的语言，在运行前就能检查类型的正确性。</p>
-<p>执行效率相比动态语言更高，速度更快</p>
-</blockquote>
-<ul>
-<li>多线程</li>
-</ul>
-<blockquote>
-<p>java <strong>应该</strong> 在 <code>用户空间</code> 实现的多线程，内核感知不到 java 存在多线程机制。</p>
-</blockquote>
-<ul>
-<li>分布式</li>
-</ul>
-<blockquote>
-<p><img src="./README.assets/image-20211213091134933.png" alt="image-20211213091134933" /></p>
-</blockquote>
-<ul>
-<li>健壮性</li>
-</ul>
-<blockquote>
-<p>强类型机制、异常处理、垃圾的自动收集</p>
-</blockquote>
-<ul>
-<li>高性能</li>
-</ul>
-<blockquote>
-<p><img src="./README.assets/image-20211213090952974.png" alt="image-20211213090952974" /></p>
-</blockquote>
-<ul>
-<li>安全性</li>
-</ul>
-<h2 id="二、面向对象"> 二、面向对象</h2>
-<h3 id="_2-1-初始化顺序"> 2.1 初始化顺序</h3>
-<blockquote>
-<ul>
-<li>静态属性</li>
-<li>静态方法快</li>
-<li>普通方法</li>
-<li>普通方法块</li>
-<li>构造函数</li>
-<li>方法</li>
-</ul>
-</blockquote>
-<div><pre><code><span>public</span> <span>class</span> <span>Solution</span> <span>{</span>
-
-    <span>private</span> <span>static</span> <span>String</span> staticField <span>=</span> <span>getStaticField</span><span>(</span><span>)</span><span>;</span>
-
-    <span>public</span> <span>static</span> <span>String</span> <span>getStaticField</span><span>(</span><span>)</span> <span>{</span>
-        <span>String</span> staticFiled <span>=</span> <span>"静态属性初始化"</span><span>;</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>staticFiled<span>)</span><span>;</span>
-        <span>return</span> staticFiled<span>;</span>
-    <span>}</span>
-
-    <span>static</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"静态方法块初始化"</span><span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>private</span> <span>String</span> field <span>=</span> <span>getField</span><span>(</span><span>)</span><span>;</span>
-
-    <span>public</span> <span>String</span> <span>getField</span><span>(</span><span>)</span> <span>{</span>
-        <span>String</span> field <span>=</span> <span>"普通属性初始化"</span><span>;</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>field<span>)</span><span>;</span>
-        <span>return</span> field<span>;</span>
-    <span>}</span>
-
-    <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"普通方法块初始化"</span><span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>public</span> <span>Solution</span><span>(</span><span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"构造函数"</span><span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-        <span>new</span> <span>Solution</span><span>(</span><span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br></div></div><div><pre><code>静态属性初始化
-静态方法块初始化
-普通属性初始化
-普通方法块初始化
-构造函数
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><hr>
-<h3 id="_2-2-三大特性"> 2.2 三大特性</h3>
-<ul>
-<li>封装</li>
-<li>继承</li>
-<li>多态</li>
-</ul>
-<h4 id="访问控制权限"> 访问控制权限</h4>
-<p><img src="./README.assets/image-20211217195521425.png" alt="image-20211217195521425" /></p>
-<hr>
-<h3 id="_2-3-接口"> 2.3 接口</h3>
-<ul>
-<li>interface、implements</li>
-<li>接口只能使用 <code>public</code> <code>default</code>  两种访问修饰符</li>
-<li>接口只提供方法的定义。</li>
-<li>接口不能被实例化，所以接口中不能有构造方法。</li>
-<li>接口的实现类必须实现接口的全部方法。</li>
-</ul>
-<hr>
-<h3 id="_2-4-抽象类"> 2.4 抽象类</h3>
-<ul>
-<li>abstract</li>
-<li>只有抽象类中能有抽象方法，抽象类中不只有抽象方法。</li>
-<li>抽象类不能被实例化。</li>
-</ul>
-<hr>
-<h3 id="_2-5-内部类"> 2.5 内部类</h3>
-<ul>
-<li>内部类拥有外部类的访问权限</li>
-</ul>
-<p><img src="./README.assets/image-20211217195726947.png" alt="image-20211217195726947" /></p>
-<h2 id="三、异常"> 三、异常</h2>
-<h3 id="_3-1-throwable"> 3.1 Throwable</h3>
-<p><code>Throable</code> 类是Java语言中所有 <code>错误(errors)</code> 和 <code>异常(exceptions)</code> 的父类。</p>
-<p><img src="./README.assets/image-20211217184906894.png" alt="image-20211217184906894" /></p>
-<h3 id="_3-2-常见异常"> 3.2 常见异常</h3>
-<p><img src="./README.assets/image-20211217193021056.png" alt="image-20211217193021056" /></p>
-<h3 id="_3-3-error"> 3.3 Error</h3>
-<p><img src="./README.assets/image-20211217194119016.png" alt="image-20211217194119016" /></p>
-<h2 id="四、集合"> 四、集合</h2>
-<p><img src="./README.assets/image-20211218142929505.png" alt="image-20211218142929505" /></p>
-<p><img src="./README.assets/image-20211218182136734.png" alt="image-20211218182136734" /></p>
-<h2 id="五、反射"> 五、反射</h2>
-<p>Java反射机制是在程序的运行过程中，对于任何一个类，都能知道它的所有属性和方法；对于任意一个对象，都能知道调用它的任意属性和方法。</p>
-<p>这种动态获取信息以及动态调用对象方法的功能称为Java语言的反射机制。</p>
-<ul>
-<li>在运行时判断任意一个对象所属的类</li>
-<li>在运行时判断任意一个类的对象</li>
-<li>在运行时判断任意一个类所有的成员变量和方法</li>
-<li>在运行时调用任意一个对象的方法</li>
-</ul>
-<h3 id="_5-1-class-类"> 5.1 Class 类</h3>
-<p>当我们编写一个类，在生产的<code>.class</code> 文件中，就会产生一个 Class 对象。这个 Class 对象用于标识这个类的类型信息。</p>
-<p>Class中没有公共的构造器，也就是说Class对象不能杯实例化。</p>
-<p>其中包含了很多方法，详见《Java基础核心总结》P54</p>
-<h3 id="_5-2-field-类"> 5.2 Field 类</h3>
-<p>Field 类提供类或接口中单独字段的信息，以及对单独字段的动态访问。</p>
-<h3 id="_5-3-method-类"> 5.3 Method 类</h3>
-<p>传递 Object 对象及参数调用该对象对应的方法</p>
-<h3 id="_5-4-classloader-类"> 5.4 ClassLoader 类</h3>
-<p>类装载器是用来把类装载进JVM的。ClassLoader使用的是双亲委托模型来搜索加载类的。</p>
-<p><img src="./README.assets/image-20211224112354940.png" alt="image-20211224112354940" /></p>
-<h2 id="六、枚举"> 六、枚举</h2>
-<p>枚举是一个特殊的类，一般表示一组常量</p>
-<div><pre><code><span>public</span> <span>enum</span> <span>Family</span> <span>{</span>
-    FATHER<span>,</span>
-    MOTHER<span>,</span>
-    SON<span>,</span>
-    <span>Daughter</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><img src="./README.assets/image-20211224185753390.png" alt="image-20211224185753390" /></p>
-<p>一般 switch 可以和 enum 一起连用，来构造一个小型的状态转换机</p>
-<div><pre><code><span>enum</span> <span>Signal</span> <span>{</span>
-    GREEN<span>,</span> YELLOW<span>,</span> RED
-<span>}</span>
-<span>public</span> <span>class</span> <span>TrafficLight</span> <span>{</span>
-    <span>Signal</span> color <span>=</span> <span>Signal</span><span>.</span>RED<span>;</span>
-    <span>public</span> <span>void</span> <span>change</span><span>(</span><span>)</span> <span>{</span>
-        <span>switch</span> <span>(</span>color<span>)</span> <span>{</span>
-            <span>case</span> RED<span>:</span>
-                color <span>=</span> <span>Signal</span><span>.</span>GREEN<span>;</span>
-                <span>break</span><span>;</span>
-            <span>case</span> YELLOW<span>:</span>
-                color <span>=</span> <span>Signal</span><span>.</span>RED<span>;</span>
-                <span>break</span><span>;</span>
-            <span>case</span> GREEN<span>:</span>
-                color <span>=</span> <span>Signal</span><span>.</span>YELLOW<span>;</span>
-                <span>break</span><span>;</span>
-        <span>}</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><h2 id="七、io"> 七、IO</h2>
-<p><img src="./README.assets/image-20211224191321306.png" alt="image-20211224191321306" /></p>
-<p><img src="./README.assets/image-20211224191353166.png" alt="image-20211224191353166" /></p>
-<h3 id="_7-1-file-类"> 7.1 File 类</h3>
-<p>主要涉及 <strong>文件创建、删除文件、获取文件描述</strong></p>
-<p><img src="./README.assets/image-20211224191614348.png" alt="image-20211224191614348" /></p>
-<h3 id="_7-2-inputstream"> 7.2 InputStream</h3>
-<p>字节输入模式的抽象类</p>
-<p><img src="./README.assets/image-20211224191724340.png" alt="image-20211224191724340" /></p>
-<h3 id="_7-3-outputstream"> 7.3 OutputStream</h3>
-<p>字节输出模式的抽象类</p>
-<p><img src="./README.assets/image-20211224191752947.png" alt="image-20211224191752947" /></p>
-<h3 id="_7-4-reader"> 7.4 Reader</h3>
-<p>字符输入模式的抽象类</p>
-<p><img src="./README.assets/image-20211224191816351.png" alt="image-20211224191816351" /></p>
-<h3 id="_7-5-writer"> 7.5 Writer</h3>
-<p>字符输出模式的抽象类</p>
-<p><img src="./README.assets/image-20211224191839037.png" alt="image-20211224191839037" /></p>
-<h3 id="_7-6-更多其他子类"> 7.6 更多其他子类</h3>
-<p>详见 《Java基础核心总结》 p67</p>
-<h2 id="插眼"> 插眼：</h2>
-<h3 id="jdk、jre、jvm"> JDK、JRE、JVM</h3>
-<h3 id="switch-实现原理"> switch 实现原理</h3>
-<h3 id="深浅拷贝"> 深浅拷贝</h3>
-<h3 id="代理-意义何在"> 代理，意义何在</h3>
-<h3 id="面向对象三大特性"> 面向对象三大特性</h3>
-<h3 id="修饰符"> 修饰符</h3>
-<h3 id="集合"> 集合</h3>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
   <entry>
     <title type="html">JavaGuide - Java基础知识</title>
     <id>https://vue-blog.lllllan.cn/1-java/1-basic/2-java-guide-basic/</id>
@@ -767,6 +525,248 @@ input<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
+    <title type="html">R2Coding - Java 基础核心总结</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/"/>
+    <updated>2022-01-20T14:33:14.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>全部抄自<a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a>上提供资料</p>
+</div>
+<h2 id="一、-java语言的特点"> 一、 java语言的特点</h2>
+<ul>
+<li>面向对象</li>
+<li>平台无关性</li>
+</ul>
+<blockquote>
+<p>已编译的java程序可以在任何带 有jvm的平台上运行。</p>
+<p><code>java</code> 代码编译为 <code>.class</code> 文件，然后打包成 <code>.jar</code> 文件，这样就能够在不同系统下运行了。</p>
+</blockquote>
+<ul>
+<li>简单性</li>
+</ul>
+<blockquote>
+<p>摒弃了C++中难以理解的多继承、指针、内存管理等概念，不用手动管理对象的生命周期</p>
+</blockquote>
+<ul>
+<li>解释执行</li>
+</ul>
+<blockquote>
+<p>静态页面，在编译期间救恩那个直到数据类型的语言，在运行前就能检查类型的正确性。</p>
+<p>执行效率相比动态语言更高，速度更快</p>
+</blockquote>
+<ul>
+<li>多线程</li>
+</ul>
+<blockquote>
+<p>java <strong>应该</strong> 在 <code>用户空间</code> 实现的多线程，内核感知不到 java 存在多线程机制。</p>
+</blockquote>
+<ul>
+<li>分布式</li>
+</ul>
+<blockquote>
+<p><img src="./README.assets/image-20211213091134933.png" alt="image-20211213091134933" /></p>
+</blockquote>
+<ul>
+<li>健壮性</li>
+</ul>
+<blockquote>
+<p>强类型机制、异常处理、垃圾的自动收集</p>
+</blockquote>
+<ul>
+<li>高性能</li>
+</ul>
+<blockquote>
+<p><img src="./README.assets/image-20211213090952974.png" alt="image-20211213090952974" /></p>
+</blockquote>
+<ul>
+<li>安全性</li>
+</ul>
+<h2 id="二、面向对象"> 二、面向对象</h2>
+<h3 id="_2-1-初始化顺序"> 2.1 初始化顺序</h3>
+<blockquote>
+<ul>
+<li>静态属性</li>
+<li>静态方法快</li>
+<li>普通方法</li>
+<li>普通方法块</li>
+<li>构造函数</li>
+<li>方法</li>
+</ul>
+</blockquote>
+<div><pre><code><span>public</span> <span>class</span> <span>Solution</span> <span>{</span>
+
+    <span>private</span> <span>static</span> <span>String</span> staticField <span>=</span> <span>getStaticField</span><span>(</span><span>)</span><span>;</span>
+
+    <span>public</span> <span>static</span> <span>String</span> <span>getStaticField</span><span>(</span><span>)</span> <span>{</span>
+        <span>String</span> staticFiled <span>=</span> <span>"静态属性初始化"</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>staticFiled<span>)</span><span>;</span>
+        <span>return</span> staticFiled<span>;</span>
+    <span>}</span>
+
+    <span>static</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"静态方法块初始化"</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>private</span> <span>String</span> field <span>=</span> <span>getField</span><span>(</span><span>)</span><span>;</span>
+
+    <span>public</span> <span>String</span> <span>getField</span><span>(</span><span>)</span> <span>{</span>
+        <span>String</span> field <span>=</span> <span>"普通属性初始化"</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>field<span>)</span><span>;</span>
+        <span>return</span> field<span>;</span>
+    <span>}</span>
+
+    <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"普通方法块初始化"</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>Solution</span><span>(</span><span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"构造函数"</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>new</span> <span>Solution</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br></div></div><div><pre><code>静态属性初始化
+静态方法块初始化
+普通属性初始化
+普通方法块初始化
+构造函数
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><hr>
+<h3 id="_2-2-三大特性"> 2.2 三大特性</h3>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h4 id="访问控制权限"> 访问控制权限</h4>
+<p><img src="./README.assets/image-20211217195521425.png" alt="image-20211217195521425" /></p>
+<hr>
+<h3 id="_2-3-接口"> 2.3 接口</h3>
+<ul>
+<li>interface、implements</li>
+<li>接口只能使用 <code>public</code> <code>default</code>  两种访问修饰符</li>
+<li>接口只提供方法的定义。</li>
+<li>接口不能被实例化，所以接口中不能有构造方法。</li>
+<li>接口的实现类必须实现接口的全部方法。</li>
+</ul>
+<hr>
+<h3 id="_2-4-抽象类"> 2.4 抽象类</h3>
+<ul>
+<li>abstract</li>
+<li>只有抽象类中能有抽象方法，抽象类中不只有抽象方法。</li>
+<li>抽象类不能被实例化。</li>
+</ul>
+<hr>
+<h3 id="_2-5-内部类"> 2.5 内部类</h3>
+<ul>
+<li>内部类拥有外部类的访问权限</li>
+</ul>
+<p><img src="./README.assets/image-20211217195726947.png" alt="image-20211217195726947" /></p>
+<h2 id="三、异常"> 三、异常</h2>
+<h3 id="_3-1-throwable"> 3.1 Throwable</h3>
+<p><code>Throable</code> 类是Java语言中所有 <code>错误(errors)</code> 和 <code>异常(exceptions)</code> 的父类。</p>
+<p><img src="./README.assets/image-20211217184906894.png" alt="image-20211217184906894" /></p>
+<h3 id="_3-2-常见异常"> 3.2 常见异常</h3>
+<p><img src="./README.assets/image-20211217193021056.png" alt="image-20211217193021056" /></p>
+<h3 id="_3-3-error"> 3.3 Error</h3>
+<p><img src="./README.assets/image-20211217194119016.png" alt="image-20211217194119016" /></p>
+<h2 id="四、集合"> 四、集合</h2>
+<p><img src="./README.assets/image-20211218142929505.png" alt="image-20211218142929505" /></p>
+<p><img src="./README.assets/image-20211218182136734.png" alt="image-20211218182136734" /></p>
+<h2 id="五、反射"> 五、反射</h2>
+<p>Java反射机制是在程序的运行过程中，对于任何一个类，都能知道它的所有属性和方法；对于任意一个对象，都能知道调用它的任意属性和方法。</p>
+<p>这种动态获取信息以及动态调用对象方法的功能称为Java语言的反射机制。</p>
+<ul>
+<li>在运行时判断任意一个对象所属的类</li>
+<li>在运行时判断任意一个类的对象</li>
+<li>在运行时判断任意一个类所有的成员变量和方法</li>
+<li>在运行时调用任意一个对象的方法</li>
+</ul>
+<h3 id="_5-1-class-类"> 5.1 Class 类</h3>
+<p>当我们编写一个类，在生产的<code>.class</code> 文件中，就会产生一个 Class 对象。这个 Class 对象用于标识这个类的类型信息。</p>
+<p>Class中没有公共的构造器，也就是说Class对象不能杯实例化。</p>
+<p>其中包含了很多方法，详见《Java基础核心总结》P54</p>
+<h3 id="_5-2-field-类"> 5.2 Field 类</h3>
+<p>Field 类提供类或接口中单独字段的信息，以及对单独字段的动态访问。</p>
+<h3 id="_5-3-method-类"> 5.3 Method 类</h3>
+<p>传递 Object 对象及参数调用该对象对应的方法</p>
+<h3 id="_5-4-classloader-类"> 5.4 ClassLoader 类</h3>
+<p>类装载器是用来把类装载进JVM的。ClassLoader使用的是双亲委托模型来搜索加载类的。</p>
+<p><img src="./README.assets/image-20211224112354940.png" alt="image-20211224112354940" /></p>
+<h2 id="六、枚举"> 六、枚举</h2>
+<p>枚举是一个特殊的类，一般表示一组常量</p>
+<div><pre><code><span>public</span> <span>enum</span> <span>Family</span> <span>{</span>
+    FATHER<span>,</span>
+    MOTHER<span>,</span>
+    SON<span>,</span>
+    <span>Daughter</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><img src="./README.assets/image-20211224185753390.png" alt="image-20211224185753390" /></p>
+<p>一般 switch 可以和 enum 一起连用，来构造一个小型的状态转换机</p>
+<div><pre><code><span>enum</span> <span>Signal</span> <span>{</span>
+    GREEN<span>,</span> YELLOW<span>,</span> RED
+<span>}</span>
+<span>public</span> <span>class</span> <span>TrafficLight</span> <span>{</span>
+    <span>Signal</span> color <span>=</span> <span>Signal</span><span>.</span>RED<span>;</span>
+    <span>public</span> <span>void</span> <span>change</span><span>(</span><span>)</span> <span>{</span>
+        <span>switch</span> <span>(</span>color<span>)</span> <span>{</span>
+            <span>case</span> RED<span>:</span>
+                color <span>=</span> <span>Signal</span><span>.</span>GREEN<span>;</span>
+                <span>break</span><span>;</span>
+            <span>case</span> YELLOW<span>:</span>
+                color <span>=</span> <span>Signal</span><span>.</span>RED<span>;</span>
+                <span>break</span><span>;</span>
+            <span>case</span> GREEN<span>:</span>
+                color <span>=</span> <span>Signal</span><span>.</span>YELLOW<span>;</span>
+                <span>break</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><h2 id="七、io"> 七、IO</h2>
+<p><img src="./README.assets/image-20211224191321306.png" alt="image-20211224191321306" /></p>
+<p><img src="./README.assets/image-20211224191353166.png" alt="image-20211224191353166" /></p>
+<h3 id="_7-1-file-类"> 7.1 File 类</h3>
+<p>主要涉及 <strong>文件创建、删除文件、获取文件描述</strong></p>
+<p><img src="./README.assets/image-20211224191614348.png" alt="image-20211224191614348" /></p>
+<h3 id="_7-2-inputstream"> 7.2 InputStream</h3>
+<p>字节输入模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191724340.png" alt="image-20211224191724340" /></p>
+<h3 id="_7-3-outputstream"> 7.3 OutputStream</h3>
+<p>字节输出模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191752947.png" alt="image-20211224191752947" /></p>
+<h3 id="_7-4-reader"> 7.4 Reader</h3>
+<p>字符输入模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191816351.png" alt="image-20211224191816351" /></p>
+<h3 id="_7-5-writer"> 7.5 Writer</h3>
+<p>字符输出模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191839037.png" alt="image-20211224191839037" /></p>
+<h3 id="_7-6-更多其他子类"> 7.6 更多其他子类</h3>
+<p>详见 《Java基础核心总结》 p67</p>
+<h2 id="插眼"> 插眼：</h2>
+<h3 id="jdk、jre、jvm"> JDK、JRE、JVM</h3>
+<h3 id="switch-实现原理"> switch 实现原理</h3>
+<h3 id="深浅拷贝"> 深浅拷贝</h3>
+<h3 id="代理-意义何在"> 代理，意义何在</h3>
+<h3 id="面向对象三大特性"> 面向对象三大特性</h3>
+<h3 id="修饰符"> 修饰符</h3>
+<h3 id="集合"> 集合</h3>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
     <title type="html">反射机制</title>
     <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</id>
     <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/"/>
@@ -992,6 +992,825 @@ xiaoLi<span>:</span>小李
 <li>如果参数是基本类型的话，很简单，传递的就是基本类型的字面量值的拷贝，会创建副本。</li>
 <li>如果参数是引用类型，传递的就是实参所引用的对象在堆中地址值的拷贝，同样也会创建副本。</li>
 </ul>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">代理详解</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/"/>
+    <updated>2022-01-22T08:09:21.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/basis/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">代理详解！静态代理+JDK/CGLIB 动态代理实战 | JavaGuide</a>， 略有改动</p>
+<p>（完全不懂）</p>
+</div>
+<h2 id="代理模式"> 代理模式</h2>
+<p>代理模式是一种比较好理解的设计模式。简单来说就是 <strong>我们使用代理对象来代替对真实对象(real object)的访问，这样就可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</strong></p>
+<p><strong>代理模式的主要作用是扩展目标对象的功能，比如说在目标对象的某个方法执行前后你可以增加一些自定义的操作。</strong></p>
+<p><img src="./README.assets/1DjWCgTFm-xqbhbNQVsaWQw.png" alt="Understanding the Proxy Design Pattern | by Mithun Sasidharan | Medium" /></p>
+<h2 id="静态代理"> 静态代理</h2>
+<p><strong>静态代理中，我们对目标对象的每个方法的增强都是手动完成的（<em>后面会具体演示代码</em>），非常不灵活（<em>比如接口一旦新增加方法，目标对象和代理对象都要进行修改</em>）且麻烦(<em>需要对每个目标类都单独写一个代理类</em>)。</strong> 实际应用场景非常非常少，日常开发几乎看不到使用静态代理的场景。</p>
+<p>上面我们是从实现和应用角度来说的静态代理，从 JVM 层面来说， <strong>静态代理在编译时就将接口、实现类、代理类这些都变成了一个个实际的 class 文件。</strong></p>
+<p>静态代理实现步骤:</p>
+<ol>
+<li>定义一个接口及其实现类；</li>
+<li>创建一个代理类同样实现这个接口</li>
+<li>将目标对象注入进代理类，然后在代理类的对应方法调用目标类中的对应方法。这样的话，我们就可以通过代理类屏蔽对目标对象的访问，并且可以在目标方法执行前后做一些自己想做的事情。</li>
+</ol>
+<p>下面通过代码展示！</p>
+<p><strong>1. 定义发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
+    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
+    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
+        <span>return</span> message<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.创建代理类并同样实现发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>SmsProxy</span> <span>implements</span> <span>SmsService</span> <span>{</span>
+
+    <span>private</span> <span>final</span> <span>SmsService</span> smsService<span>;</span>
+
+    <span>public</span> <span>SmsProxy</span><span>(</span><span>SmsService</span> smsService<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>smsService <span>=</span> smsService<span>;</span>
+    <span>}</span>
+
+    <span>@Override</span>
+    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        <span>//调用方法之前，我们可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method send()"</span><span>)</span><span>;</span>
+        smsService<span>.</span><span>send</span><span>(</span>message<span>)</span><span>;</span>
+        <span>//调用方法之后，我们同样可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method send()"</span><span>)</span><span>;</span>
+        <span>return</span> <span>null</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><p><strong>4.实际使用</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>SmsService</span> smsService <span>=</span> <span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>;</span>
+        <span>SmsProxy</span> smsProxy <span>=</span> <span>new</span> <span>SmsProxy</span><span>(</span>smsService<span>)</span><span>;</span>
+        smsProxy<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
+<div><pre><code>before method send<span>(</span><span>)</span>
+send message:java
+after method send<span>(</span><span>)</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="动态代理"> 动态代理</h2>
+<p>相比于静态代理来说，动态代理更加灵活。我们不需要针对每个目标类都单独创建一个代理类，并且也不需要我们必须实现接口，我们可以直接代理实现类( <em>CGLIB 动态代理机制</em>)。</p>
+<blockquote>
+<p><strong>从 JVM 角度来说，动态代理是在运行时动态生成类字节码，并加载到 JVM 中的</strong></p>
+</blockquote>
+<p><strong>动态代理在我们日常开发中使用的相对较少，但是在框架中的几乎是必用的一门技术。学会了动态代理之后，对于我们理解和学习各种框架的原理也非常有帮助。</strong></p>
+<p>就 Java 来说，动态代理的实现方式有很多种，比如 <strong>JDK 动态代理</strong>、<strong>CGLIB 动态代理</strong>等等。</p>
+<h3 id="jdk-动态代理机制"> JDK 动态代理机制</h3>
+<h4 id="介绍"> 介绍</h4>
+<p><strong>在 Java 动态代理机制中 <code>InvocationHandler</code> 接口和 <code>Proxy</code> 类是核心。</strong></p>
+<p><code>Proxy</code> 类中使用频率最高的方法是：<code>newProxyInstance()</code> ，这个方法主要用来生成一个代理对象。</p>
+<div><pre><code><span>public</span> <span>static</span> <span>Object</span> <span>newProxyInstance</span><span>(</span><span>ClassLoader</span> loader<span>,</span> <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span><span>[</span><span>]</span> interfaces<span>,</span>
+                                      <span>InvocationHandler</span> h<span>)</span>
+    <span>throws</span> <span>IllegalArgumentException</span> <span>{</span>
+    <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>这个方法一共有 3 个参数：</p>
+<ol>
+<li><strong>loader</strong> :类加载器，用于加载代理对象。</li>
+<li><strong>interfaces</strong> : 被代理类实现的一些接口；</li>
+<li><strong>h</strong> : 实现了 <code>InvocationHandler</code> 接口的对象；</li>
+</ol>
+<p>要实现动态代理的话，还必须需要实现<code>InvocationHandler</code> 来自定义处理逻辑。 当我们的动态代理对象调用一个方法时，这个方法的调用就会被转发到实现<code>InvocationHandler</code> 接口类的 <code>invoke</code> 方法来调用。</p>
+<div><pre><code><span>public</span> <span>interface</span> <span>InvocationHandler</span> <span>{</span>
+
+    <span>/**
+     * 当你使用代理对象调用方法的时候实际会调用到这个方法
+     */</span>
+    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span>
+        <span>throws</span> <span>Throwable</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p><code>invoke()</code> 方法有下面三个参数：</p>
+<ol>
+<li><strong>proxy</strong> :动态生成的代理类</li>
+<li><strong>method</strong> : 与代理类对象调用的方法相对应</li>
+<li><strong>args</strong> : 当前 method 方法的参数</li>
+</ol>
+<blockquote>
+<p>也就是说：<strong>你通过<code>Proxy</code> 类的 <code>newProxyInstance()</code> 创建的代理对象在调用方法的时候，实际会调用到实现<code>InvocationHandler</code> 接口的类的 <code>invoke()</code>方法。</strong> 你可以在 <code>invoke()</code> 方法中自定义处理逻辑，比如在方法执行前后做什么事情。</p>
+</blockquote>
+<h4 id="使用步骤"> 使用步骤</h4>
+<ol>
+<li>定义一个接口及其实现类；</li>
+<li>自定义 <code>InvocationHandler</code> 并重写<code>invoke</code>方法，在 <code>invoke</code> 方法中我们会调用原生方法（被代理类的方法）并自定义一些处理逻辑；</li>
+<li>通过 <code>Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)</code> 方法创建代理对象；</li>
+</ol>
+<h4 id="代码示例"> 代码示例</h4>
+<p><strong>1.定义发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
+    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
+    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
+        <span>return</span> message<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.定义一个 JDK 动态代理类</strong></p>
+<div><pre><code><span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationHandler</span><span>;</span>
+<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationTargetException</span><span>;</span>
+<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>Method</span><span>;</span>
+
+<span>/**
+ * @author shuang.kou
+ * @createTime 2020年05月11日 11:23:00
+ */</span>
+<span>public</span> <span>class</span> <span>DebugInvocationHandler</span> <span>implements</span> <span>InvocationHandler</span> <span>{</span>
+    <span>/**
+     * 代理类中的真实对象
+     */</span>
+    <span>private</span> <span>final</span> <span>Object</span> target<span>;</span>
+
+    <span>public</span> <span>DebugInvocationHandler</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
+        <span>this</span><span>.</span>target <span>=</span> target<span>;</span>
+    <span>}</span>
+
+
+    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>InvocationTargetException</span><span>,</span> <span>IllegalAccessException</span> <span>{</span>
+        <span>//调用方法之前，我们可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>Object</span> result <span>=</span> method<span>.</span><span>invoke</span><span>(</span>target<span>,</span> args<span>)</span><span>;</span>
+        <span>//调用方法之后，我们同样可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>return</span> result<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br></div></div><p><code>invoke()</code> 方法: 当我们的动态代理对象调用原生方法的时候，最终实际上调用到的是 <code>invoke()</code> 方法，然后 <code>invoke()</code> 方法代替我们去调用了被代理对象的原生方法。</p>
+<p><strong>4.获取代理对象的工厂类</strong></p>
+<div><pre><code><span>public</span> <span>class</span> <span>JdkProxyFactory</span> <span>{</span>
+    <span>public</span> <span>static</span> <span>Object</span> <span>getProxy</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
+        <span>return</span> <span>Proxy</span><span>.</span><span>newProxyInstance</span><span>(</span>
+                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getClassLoader</span><span>(</span><span>)</span><span>,</span> <span>// 目标类的类加载</span>
+                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getInterfaces</span><span>(</span><span>)</span><span>,</span>  <span>// 代理需要实现的接口，可指定多个</span>
+                <span>new</span> <span>DebugInvocationHandler</span><span>(</span>target<span>)</span>   <span>// 代理对象对应的自定义 InvocationHandler</span>
+        <span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p><code>getProxy()</code> ：主要通过<code>Proxy.newProxyInstance（）</code>方法获取某个类的代理对象</p>
+<p><strong>5.实际使用</strong></p>
+<div><pre><code><span>SmsService</span> smsService <span>=</span> <span>(</span><span>SmsService</span><span>)</span> <span>JdkProxyFactory</span><span>.</span><span>getProxy</span><span>(</span><span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>)</span><span>;</span>
+smsService<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
+<div><pre><code>before method send
+send message:java
+after method send
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h3 id="cglib-动态代理机制"> CGLIB 动态代理机制</h3>
+<h4 id="介绍-2"> 介绍</h4>
+<p><strong>JDK 动态代理有一个最致命的问题是其只能代理实现了接口的类。为了解决这个问题，我们可以用 CGLIB 动态代理机制来避免。</strong></p>
+<p><a href="https://github.com/cglib/cglib" target="_blank" rel="noopener noreferrer">CGLIB  (opens new window)</a>(<em>Code Generation Library</em>)是一个基于<a href="http://www.baeldung.com/java-asm" target="_blank" rel="noopener noreferrer">ASM  (opens new window)</a>的字节码生成库，它允许我们在运行时对字节码进行修改和动态生成。CGLIB 通过继承方式实现代理。很多知名的开源框架都使用到了<a href="https://github.com/cglib/cglib" target="_blank" rel="noopener noreferrer">CGLIB  (opens new window)</a>， 例如 Spring 中的 AOP 模块中：如果目标对象实现了接口，则默认采用 JDK 动态代理，否则采用 CGLIB 动态代理。</p>
+<p><strong>在 CGLIB 动态代理机制中 <code>MethodInterceptor</code> 接口和 <code>Enhancer</code> 类是核心。</strong></p>
+<p>你需要自定义 <code>MethodInterceptor</code> 并重写 <code>intercept</code> 方法，<code>intercept</code> 用于拦截增强被代理类的方法。</p>
+<div><pre><code><span>public</span> <span>interface</span> <span>MethodInterceptor</span>
+<span>extends</span> <span>Callback</span><span>{</span>
+    <span>// 拦截被代理类中的方法</span>
+    <span>public</span> <span>Object</span> <span>intercept</span><span>(</span><span>Object</span> obj<span>,</span> <span><span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>,</span>
+                               <span>MethodProxy</span> proxy<span>)</span> <span>throws</span> <span>Throwable</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><ol>
+<li><strong>obj</strong> :被代理的对象（需要增强的对象）</li>
+<li><strong>method</strong> :被拦截的方法（需要增强的方法）</li>
+<li><strong>args</strong> :方法入参</li>
+<li><strong>proxy</strong> :用于调用原始方法</li>
+</ol>
+<p>你可以通过 <code>Enhancer</code>类来动态获取被代理类，当代理类调用方法的时候，实际调用的是 <code>MethodInterceptor</code> 中的 <code>intercept</code> 方法。</p>
+<h4 id="使用步骤-2"> 使用步骤</h4>
+<ol>
+<li>定义一个类；</li>
+<li>自定义 <code>MethodInterceptor</code> 并重写 <code>intercept</code> 方法，<code>intercept</code> 用于拦截增强被代理类的方法，和 JDK 动态代理中的 <code>invoke</code> 方法类似；</li>
+<li>通过 <code>Enhancer</code> 类的 <code>create()</code>创建代理类；</li>
+</ol>
+<h4 id="代码示例-2"> 代码示例</h4>
+<p>不同于 JDK 动态代理不需要额外的依赖。<a href="https://github.com/cglib/cglib" target="_blank" rel="noopener noreferrer">CGLIB  (opens new window)</a>(<em>Code Generation Library</em>) 实际是属于一个开源项目，如果你要使用它的话，需要手动添加相关依赖。</p>
+<div><pre><code><span><span><span>&lt;</span>dependency</span><span>></span></span>
+  <span><span><span>&lt;</span>groupId</span><span>></span></span>cglib<span><span><span>&lt;/</span>groupId</span><span>></span></span>
+  <span><span><span>&lt;</span>artifactId</span><span>></span></span>cglib<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
+  <span><span><span>&lt;</span>version</span><span>></span></span>3.3.0<span><span><span>&lt;/</span>version</span><span>></span></span>
+<span><span><span>&lt;/</span>dependency</span><span>></span></span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p><strong>1.实现一个使用阿里云发送短信的类</strong></p>
+<div><pre><code><span>package</span> <span>github<span>.</span>javaguide<span>.</span>dynamicProxy<span>.</span>cglibDynamicProxy</span><span>;</span>
+
+<span>public</span> <span>class</span> <span>AliSmsService</span> <span>{</span>
+    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
+        <span>return</span> message<span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p><strong>2.自定义 <code>MethodInterceptor</code>（方法拦截器）</strong></p>
+<div><pre><code><span>import</span> <span>net<span>.</span>sf<span>.</span>cglib<span>.</span>proxy<span>.</span></span><span>MethodInterceptor</span><span>;</span>
+<span>import</span> <span>net<span>.</span>sf<span>.</span>cglib<span>.</span>proxy<span>.</span></span><span>MethodProxy</span><span>;</span>
+
+<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>Method</span><span>;</span>
+
+<span>/**
+ * 自定义MethodInterceptor
+ */</span>
+<span>public</span> <span>class</span> <span>DebugMethodInterceptor</span> <span>implements</span> <span>MethodInterceptor</span> <span>{</span>
+
+
+    <span>/**
+     * @param o           代理对象（增强的对象）
+     * @param method      被拦截的方法（需要增强的方法）
+     * @param args        方法入参
+     * @param methodProxy 用于调用原始方法
+     */</span>
+    <span>@Override</span>
+    <span>public</span> <span>Object</span> <span>intercept</span><span>(</span><span>Object</span> o<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>,</span> <span>MethodProxy</span> methodProxy<span>)</span> <span>throws</span> <span>Throwable</span> <span>{</span>
+        <span>//调用方法之前，我们可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>Object</span> object <span>=</span> methodProxy<span>.</span><span>invokeSuper</span><span>(</span>o<span>,</span> args<span>)</span><span>;</span>
+        <span>//调用方法之后，我们同样可以添加自己的操作</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>return</span> object<span>;</span>
+    <span>}</span>
+
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br></div></div><p><strong>3.获取代理类</strong></p>
+<div><pre><code><span>import</span> <span>net<span>.</span>sf<span>.</span>cglib<span>.</span>proxy<span>.</span></span><span>Enhancer</span><span>;</span>
+
+<span>public</span> <span>class</span> <span>CglibProxyFactory</span> <span>{</span>
+
+    <span>public</span> <span>static</span> <span>Object</span> <span>getProxy</span><span>(</span><span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> clazz<span>)</span> <span>{</span>
+        <span>// 创建动态代理增强类</span>
+        <span>Enhancer</span> enhancer <span>=</span> <span>new</span> <span>Enhancer</span><span>(</span><span>)</span><span>;</span>
+        <span>// 设置类加载器</span>
+        enhancer<span>.</span><span>setClassLoader</span><span>(</span>clazz<span>.</span><span>getClassLoader</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>// 设置被代理类</span>
+        enhancer<span>.</span><span>setSuperclass</span><span>(</span>clazz<span>)</span><span>;</span>
+        <span>// 设置方法拦截器</span>
+        enhancer<span>.</span><span>setCallback</span><span>(</span><span>new</span> <span>DebugMethodInterceptor</span><span>(</span><span>)</span><span>)</span><span>;</span>
+        <span>// 创建代理类</span>
+        <span>return</span> enhancer<span>.</span><span>create</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br></div></div><p><strong>4.实际使用</strong></p>
+<div><pre><code><span>AliSmsService</span> aliSmsService <span>=</span> <span>(</span><span>AliSmsService</span><span>)</span> <span>CglibProxyFactory</span><span>.</span><span>getProxy</span><span>(</span><span>AliSmsService</span><span>.</span><span>class</span><span>)</span><span>;</span>
+aliSmsService<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
+<div><pre><code>before method send
+send message:java
+after method send
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h3 id="对比"> 对比</h3>
+<ul>
+<li>
+<p><strong>JDK 动态代理只能代理实现了接口的类或者直接代理接口，而 CGLIB 可以代理未实现任何接口的类。</strong> 另外， CGLIB 动态代理是通过生成一个被代理类的子类来拦截被代理类的方法调用，因此不能代理声明为 final 类型的类和方法。</p>
+</li>
+<li>
+<p>就二者的效率来说，大部分情况都是 JDK 动态代理更优秀，随着 JDK 版本的升级，这个优势更加明显。</p>
+</li>
+</ul>
+<h2 id="静态代理和动态代理的对比"> 静态代理和动态代理的对比</h2>
+<ol>
+<li><strong>灵活性</strong> ：动态代理更加灵活，不需要必须实现接口，可以直接代理实现类，并且可以不需要针对每个目标类都创建一个代理类。另外，静态代理中，接口一旦新增加方法，目标对象和代理对象都要进行修改，这是非常麻烦的！</li>
+<li><strong>JVM 层面</strong> ：静态代理在编译时就将接口、实现类、代理类这些都变成了一个个实际的 class 文件。而动态代理是在运行时动态生成类字节码，并加载到 JVM 中的。</li>
+</ol>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">Java 基础面试题</title>
+    <id>https://vue-blog.lllllan.cn/1-java/1-basic/4-interview-questions/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/4-interview-questions/"/>
+    <updated>2022-01-24T01:15:50.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文所有题目整理及答案全部来自 <a href="https://www.iamshuaidi.com/" target="_blank" rel="noopener noreferrer">帅地玩编程-校招|面试|学习路线</a>，略有改动</p>
+</div>
+<h2 id="_1-面向对象和面向过程"> 1. 面向对象和面向过程</h2>
+<p><strong>面向过程：</strong></p>
+<p>面向过程的思想会将一件事情，拆分成一个个更具体的小任务，由一个个方法去完成他们。只要按顺序执行这些方法，就能完成这件事情。</p>
+<p><strong>面向对象：</strong></p>
+<p>面向对象的思想会把事物抽象成对象的概念，把一件事情拆分成一个个更具体的小问题，交由不同的对象分别完成以解决问题。</p>
+<p>更详细生动的说明详见 <a href="https://zhuanlan.zhihu.com/p/75265007" target="_blank" rel="noopener noreferrer">2分钟让你明白什么是面向对象编程</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">项目名称</th>
+<th style="text-align:center">面向对象程序设计</th>
+<th style="text-align:center">面向过程程序设计（也叫结构化编程）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">定义</td>
+<td style="text-align:center">面向对象顾名思义就是把现实中的事务都抽象成为程序设计中的“对象”，其基本思想是一切皆对象，是一种“自下而上”的设计语言，先设计组件，再完成拼装。</td>
+<td style="text-align:center">面向过程是“自上而下”的设计语言，先定好框架，再增砖添瓦。通俗点，就是先定好main()函数，然后再逐步实现main()函数中所要用到的其他方法。</td>
+</tr>
+<tr>
+<td style="text-align:center">特点</td>
+<td style="text-align:center">封装、继承、多态</td>
+<td style="text-align:center">算法+数据结构</td>
+</tr>
+<tr>
+<td style="text-align:center">优势</td>
+<td style="text-align:center">适用于大型复杂系统，方便复用、</td>
+<td style="text-align:center">适用于简单系统，容易理解</td>
+</tr>
+<tr>
+<td style="text-align:center">劣势</td>
+<td style="text-align:center">比较抽象、性能比面向过程低</td>
+<td style="text-align:center">难以应对复杂系统，难以复用，不易维护、不易扩展</td>
+</tr>
+<tr>
+<td style="text-align:center">对比</td>
+<td style="text-align:center">易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统 更加灵活、更加易于维护</td>
+<td style="text-align:center">性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、 Linux/Unix等一般采用面向过程开发，性能是最重要的因素</td>
+</tr>
+<tr>
+<td style="text-align:center">设计语言</td>
+<td style="text-align:center">Java、Smalltalk、EIFFEL、C++、Objective-、C#、Python等</td>
+<td style="text-align:center">C、Fortran</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2-面向对象三大特性"> 2. 面向对象三大特性</h2>
+<p>更多详见 <a href="./../2-java-guide-basic/#_4-6-面向对象三大特征">JavaGuide - Java基础知识 | lllllan</a></p>
+<h3 id="_2-1-封装"> 2.1 封装</h3>
+<p>封装是指把一个对象的状态信息（也就是属性）隐藏在对象内部，不允许外部对象直接访问对象的内部信息。但是可以提供一些可以被外界访问的方法来操作属性。</p>
+<div><p>封装的好处</p>
+<ul>
+<li>隐藏实现细节，提供公共的访问方式</li>
+<li>提高代码的复用性</li>
+<li>提高安全性（别人不能通过 变量名.属性名 的方式来修改私有的成员属性）</li>
+</ul>
+</div>
+<h3 id="_2-2-继承"> 2.2 继承</h3>
+<p>继承是使用已存在的类的定义作为基础建立新类的技术，新类的定义可以增加新的数据或新的功能，也可以用父类的功能，但不能选择性地继承父类。通过使用继承，可以快速地创建新的类，可以提高代码的重用，程序的可维护性，节省大量创建新类的时间 ，提高我们的开发效率。</p>
+<ol>
+<li>子类拥有父类对象所有的属性和方法（包括私有属性和私有方法），但是父类中的私有属性和方法子类是无法访问，<strong>只是拥有</strong>。</li>
+<li>子类可以拥有自己属性和方法，即子类可以对父类进行扩展。</li>
+<li>子类可以用自己的方式实现父类的方法。</li>
+</ol>
+<div><p>继承的优点</p>
+<ol>
+<li>提高代码的复用性</li>
+<li>提高代码的易维护性</li>
+<li>提高代码的可扩展性</li>
+<li>使代码结构清晰</li>
+</ol>
+</div>
+<div><p>继承的缺点</p>
+<ol>
+<li>高耦合性：父子类联系紧密，修改父类的同时，需要兼顾子类</li>
+<li>破坏封装性、降低灵活性</li>
+</ol>
+</div>
+<h3 id="_2-3-多态"> 2.3 多态</h3>
+<p>表示一个对象具有多种的状态，具体表现为父类的引用指向子类的实例。</p>
+<ul>
+<li>对象类型和引用类型之间具有继承（类）/实现（接口）的关系；</li>
+<li>引用类型变量发出的方法调用的到底是哪个类中的方法，必须在程序<strong>运行期间</strong>才能确定；</li>
+<li>多态不能调用“<strong>只在子类存在但在父类不存在</strong>”的方法；</li>
+<li>如果子类重写了父类的方法，真正执行的是<strong>子类覆盖</strong>的方法，如果子类没有覆盖父类的方法，执行的是父类的方法。</li>
+</ul>
+<div><p>多态存在的必要条件</p>
+<ol>
+<li>要有继承</li>
+<li>要有重写</li>
+<li><strong>父类引用指向子类对象</strong></li>
+</ol>
+</div>
+<div><p>多态的好处</p>
+<ol>
+<li>提高了代码的可扩展性</li>
+<li>可替换性</li>
+<li>接口性：向子类提供共同接口，由子类来完善或覆盖</li>
+<li>灵活性</li>
+<li>简化性</li>
+</ol>
+</div>
+<h2 id="_3-jdk、jre、jvm三者关系"> 3. JDK、JRE、JVM三者关系</h2>
+<p>JDK 是 Java 开发工具包、JRE 是 Java 运行环境、JVM 是 Java 虚拟机。</p>
+<div><p>JDK > JRE > JVM</p>
+<ol>
+<li>JVM不能单独执行class</li>
+<li>JRE = JVM + lib（jvm工作需要的类库）。可以执行class</li>
+<li>JDK包含JRE。可以开发、编译、执行</li>
+</ol>
+</div>
+<h2 id="_4-重载和重写"> 4. 重载和重写</h2>
+<ul>
+<li>重载：编译时多态，同一个类中同名的方法具有不同的参数列表、返回类型。</li>
+<li>重写：运行时多态，子类重写父类的方法实现不同的功能，具有相同的参数列表、返回类型。</li>
+</ul>
+<p>更多详见 <a href="./../2-java-guide-basic/#_2-1-静态方法为什么不能调用非静态方法">JavaGuide - Java基础知识 | lllllan</a></p>
+<p>​</p>
+<h2 id="_5-java-中是否可以重写一个-private-或者-static-方法"> 5. Java 中是否可以重写一个 private 或者 static 方法？</h2>
+<p>重写，又称覆盖，是在运行时绑定的。</p>
+<ul>
+<li>子类不能访问或使用父类中的 private 方法，因此不能实现重写</li>
+<li>static 方法是编译时静态绑定的，就算子类中再写了一个同名同参的相同方法，也只是两个毫不相干的方法，不能称为重写。</li>
+</ul>
+<h2 id="_6-构造器是否可以被重写"> 6. 构造器是否可以被重写？</h2>
+<p>父类的私有属性、方法以及构造器都是不能被重写的。</p>
+<h2 id="_7-构造方法有哪些特性"> 7. 构造⽅法有哪些特性</h2>
+<ol>
+<li>名字与类名相同</li>
+<li>没有返回值，但不能⽤ void 声明构造函数</li>
+<li>成类的对象时⾃动执⾏，⽆需调⽤</li>
+</ol>
+<h2 id="_8-无参构造函数的作用"> 8. 无参构造函数的作用</h2>
+<ol>
+<li>不写任何构造器，也会有一个默认的无参构造。但如果写了有参构造，就必须另写一个无参构造，否则就无法执行无参构造。</li>
+<li>子类的构造当中，如果没有指定 super() 来调用父类中某个构造方法，则会调用父类中的无参构。如果这个时候父类中存在有参构造而没有无参构造，就会出错。</li>
+</ol>
+<h2 id="_9-java-中创建对象的几种方式"> 9. Java 中创建对象的几种方式</h2>
+<ol>
+<li><code>new()</code></li>
+<li><code>Class.forName().newInstance()</code></li>
+<li><code>clone()</code></li>
+<li><code>ObjectInputStream.readObject()</code></li>
+</ol>
+<h2 id="_10-抽象类和接口的区别"> 10. 抽象类和接口的区别</h2>
+<ol>
+<li>抽象类中可以定义构造函数，接口不能定义构造函数</li>
+<li>抽象类中可以有抽象方法和具体方法，接口中只能有抽象方法</li>
+<li>抽象类中的成员权限可以是 <code>public</code>、默认、<code>protected</code>，<strong>抽象方法不能被 <code>private</code> 修饰</strong>，具体方法可以；接口中的成员只能是 <code>public</code></li>
+<li>抽象类中可以包含静态方法（<strong>具体方法可以是静态的，抽象方法不行</strong>），接口中不能包含静态方法（因为接口中定义的方法就是为了让实现类去实现，但是静态方法必须在编译时实现）</li>
+</ol>
+<h3 id="_10-1-jdk8-的改变"> 10.1 JDK8 的改变</h3>
+<ol>
+<li>允许在接口中包含具体实现的方法，使用 <code>default</code> 修饰</li>
+<li>因为允许具体实现的放，接口中也就允许有静态方法</li>
+</ol>
+<h2 id="_11-静态变量和实例变量的区别"> 11. 静态变量和实例变量的区别</h2>
+<ul>
+<li>静态变量：被 <code>static</code> 修饰，也称类变量。它属于类，因此不管创建多少个对象，该静态变量在内存中有且仅有一个拷贝。静态变量可以实现多个对象共享内存</li>
+<li>实例变量：属于某一实例，需要先创建对象，然后通过对象才能访问得到</li>
+</ul>
+<h2 id="_12-short-s1-1-s1-s1-1-为什么错-short-s1-1-s1-1-为什么没错"> 12. <code>short s1 = 1; s1 = s1 + 1</code> 为什么错？ <code>short s1 = 1; s1 += 1</code> 为什么没错？</h2>
+<p>运算中的 <code>1</code> 默认是 <code>int</code>类型，那么将 <code>int</code> 类型赋值给 <code>short</code> 类型时，会出现类型转换错误。</p>
+<p>而对于 <code>+=</code>，是 Java 语言规定的运算符， Java 编译器自己会进行特殊处理</p>
+<h2 id="_13-integer-和-int-的区别"> 13. Integer 和 int 的区别？</h2>
+<ol>
+<li>int 是 Java 的⼋种基本数据类型之⼀，⽽ <code>Integer</code> 是 Java 为 int 类型提供的封装类</li>
+<li>int 型变量的默认值是 0，Integer 变量的默认值是 null，这⼀点说明 Integer 可以区分出未赋值和值为 0 的 区分</li>
+<li>Integer 变量必须实例化后才可以使⽤，⽽ int 不需要。</li>
+</ol>
+<h3 id="_13-1-integer-之间的比较"> 13.1 Integer 之间的比较</h3>
+<ol>
+<li>两个 <code>new()</code> 出来的 <code>Integer</code> 进行比较：因为是两个对象，进行比较的其内存地址，结果均为 false</li>
+<li><code>Integer</code> 和 <code>int</code> 进行比较：包装类和基本数据类型进行比较时，会对包装类进行拆包装为基本数据类型，所以最后是两个 <code>int</code> 在比较。只要数值相等就为 true</li>
+<li>非new生成的 <code>Integer</code> 和 <code>new integer()</code> 进行比较：前者指向 Java 常量池中的对象、后者指向堆中的对象，内存地址不同，结果均为 false</li>
+<li>两个非new生成的 <code>Integer</code> 进行比较：如果数值相等并且变量值在 <code>[-128, 127]</code> 之间，比较结果为 true，否则为 false。</li>
+</ol>
+<div><pre><code><span>public</span> <span>static</span> <span>Integer</span> <span>valueOf</span><span>(</span><span>int</span> var0<span>)</span> <span>{</span> 
+    <span>return</span> var0 <span>>=</span> <span>-</span><span>128</span> <span>&amp;&amp;</span> var0 <span>&lt;=</span> <span>Integer<span>.</span>IntegerCache</span><span>.</span>high <span>?</span>
+		<span>Integer<span>.</span>IntegerCache</span><span>.</span>cache<span>[</span>var0 <span>+</span> <span>128</span><span>]</span> <span>:</span> <span>new</span> <span>Integer</span><span>(</span>var0<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h3 id="_13-2-包装类的缓存"> 13.2 包装类的缓存</h3>
+<ul>
+<li>Boolean：全部缓存</li>
+<li>Byte：全部缓存</li>
+<li>Character：&lt;= 127 缓存</li>
+<li>Short：-128 — 127 缓存</li>
+<li>Long：-128 — 127 缓存</li>
+<li>Integer：-128 — 127 缓存</li>
+<li>Float：没有缓存</li>
+<li>Doulbe：没有缓存</li>
+</ul>
+<h3 id="_14-装箱和拆箱"> 14 装箱和拆箱</h3>
+<p>⾃动装箱是 Java 编译器在基本数据类型和对应得包装类之间做的⼀个转化。⽐如：把 int 转化成 Integer，double 转化成 Double 等等。反之就是⾃动拆箱。</p>
+<p>原始类型：boolean、char、byte、short、int、long、float、double</p>
+<p>封装类型：Boolean、Character、Byte、Short、Integer、Long、Float、Double</p>
+<h2 id="_15-switch-能否作用在-byte、long、string上"> 15. switch 能否作用在  <code>byte</code>、<code>long</code>、<code>String</code>上？</h2>
+<p>switch 中放的只能是一个整数表达式或枚举常量。而整数表达式可以是 <code>int</code> 或 <code>Integer</code></p>
+<ul>
+<li>由于 <code>byte</code>、<code>short</code>、<code>char</code> 都可以隐式转换为 <code>int</code>，因此这些类型以及他们的包装类都是可以用的。</li>
+<li><code>long</code> 不可以</li>
+<li><code>String</code> 在 JDK1.7 之后可以使用</li>
+</ul>
+<h2 id="_16-object-的常用方法"> 16. Object 的常用方法</h2>
+<ul>
+<li><code>clone</code> ⽅法：⽤于创建并返回当前对象的⼀份拷⻉；</li>
+<li><code>getClass</code> ⽅法：⽤于返回当前<strong>运⾏时对象</strong>的 Class；</li>
+<li><code>toString</code> ⽅法：返回对象的字符串表示形式；</li>
+<li><code>finalize</code> ⽅法：实例被垃圾回收器回收时触发的⽅法；</li>
+<li><code>equals</code> ⽅法：⽤于⽐较两个对象的内存地址是否相等，⼀般需要重写；</li>
+<li><code>hashCode</code> ⽅法：⽤于返回对象的哈希值；</li>
+<li><code>notify</code> ⽅法：唤醒⼀个在此对象监视器上等待的线程。如果有多个线程在等待只会唤醒⼀个。</li>
+<li><code>notifyAll</code> ⽅法：作⽤跟 notify() ⼀样，只不过会唤醒在此对象监视器上等待的所有线程，⽽不是⼀个线程。</li>
+<li><code>wait</code> ⽅法：让当前对象等待</li>
+</ul>
+<h2 id="_16-final、finally、finalize-的区别"> 16. final、finally、finalize 的区别</h2>
+<ul>
+<li><code>final</code>：⽤于声明属性、⽅法和类，分别表示属性不可变、⽅法不可覆盖、被其修饰的类不可继承；</li>
+<li><code>finally</code>：异常处理语句结构的⼀部分，表示总是执⾏；</li>
+<li><code>finallize</code>：Object类的⼀个⽅法，在垃圾回收时会调⽤被回收对象的finalize</li>
+</ul>
+<h2 id="_17-和-equals-的区别"> 17. == 和 equals 的区别</h2>
+<p><strong><code>==</code></strong> 对于基本类型和引用类型的作用效果是不同的：</p>
+<ul>
+<li>对于基本数据类型来说，<code>==</code> 比较的是值。</li>
+<li>对于引用数据类型来说，<code>==</code> 比较的是对象的内存地址。</li>
+</ul>
+<div><p>Tips</p>
+<p>因为 Java 只有值传递，所以，对于 == 来说，不管是比较基本数据类型，还是引用数据类型的变量，其本质比较的都是值，只是引用类型变量存的值是对象的地址。</p>
+</div>
+<p><strong><code>equals()</code></strong> 作用不能用于判断基本数据类型的变量，只能用来判断两个对象是否相等。<code>equals()</code>方法存在于<code>Object</code>类中，而<code>Object</code>类是所有类的直接或间接父类。</p>
+<h2 id="_18-两个对象的-hashcode-相同-则-equals-也一定为-true-吗"> 18. 两个对象的 hashCode() 相同，则 equals() 也⼀定为 true 吗？</h2>
+<p>两个对象的 hashCode() 相同，equals() 不⼀定为 true。因为在散列表中，hashCode() 相等即两个键值对的哈希 值相等，然⽽哈希值相等，并不⼀定能得出键值对相等【散列冲突】</p>
+<p>更多详见 <a href="./../2-java-guide-basic/#_2-5-hashcode-与-equals">JavaGuide - Java基础知识 | lllllan</a></p>
+<h2 id="_19-为什么重写-equals-就一定要重写-hashcode-方法"> 19. 为什么重写 equals() 就⼀定要重写 hashCode() 方法</h2>
+<p>理解 hashCode 的作用👉 <a href="./../1-basic/2-java-guide-basic/#_2-5-hashcode-与-equals">JavaGuide - Java基础知识 | lllllan</a></p>
+<h2 id="_20-和-的区别"> 20. &amp; 和 &amp;&amp; 的区别</h2>
+<p>Java 中 &amp;&amp; 和 &amp; 都是表示与的逻辑运算符，都表示逻辑运输符 and，当两边的表达式都为 true 的时候，整个运算 结果才为 true，否则为 false。</p>
+<ul>
+<li>&amp;&amp;：有短路功能，当第⼀个表达式的值为 false 的时候，则不再计算第⼆个表达式；</li>
+<li>&amp;：不管第⼀个表达式结果是否为 true，第⼆个都会执⾏。除此之外，&amp; 还可以⽤作位运算符：当 &amp; 两边的表达式 不是 Boolean 类型的时候，&amp; 表示按位操作。</li>
+</ul>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-23T06:32:20.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">Java 垃圾回收</title>
+    <id>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/"/>
+    <updated>2022-01-22T10:25:05.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide</a>，略有改动</p>
+</div>
+<h2 id="写在前面"> 写在前面</h2>
+<h3 id="常见面试题"> 常见面试题</h3>
+<ul>
+<li>如何判断对象是否死亡（两种方法）。</li>
+<li>简单的介绍一下强引用、软引用、弱引用、虚引用（虚引用与软引用和弱引用的区别、使用软引用能带来的好处）。</li>
+<li>如何判断一个常量是废弃常量</li>
+<li>如何判断一个类是无用的类</li>
+<li>垃圾收集有哪些算法，各自的特点？</li>
+<li>HotSpot 为什么要分为新生代和老年代？</li>
+<li>常见的垃圾回收器有哪些？</li>
+<li>介绍一下 CMS,G1 收集器。</li>
+<li>Minor Gc 和 Full GC 有什么不同呢？</li>
+</ul>
+<h3 id="核心问题"> 核心问题</h3>
+<ol>
+<li>内存如何分配和回收</li>
+<li>哪些垃圾需要回收</li>
+<li>什么时候回收</li>
+<li>如何回收</li>
+</ol>
+<p><img src="./README.assets/image-20220118102736004.png" alt="image-20220118102736004" /></p>
+<h2 id="一、jvm内存分配与回收"> 一、JVM内存分配与回收</h2>
+<p>Java 的自动内存管理主要是针对<strong>对象内存</strong>的回收和对象内存的分配。同时，Java 自动内存管理最核心的功能是 <strong>堆</strong> 内存中对象的分配与回收。</p>
+<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>.从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：新生代和老年代：再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
+<p><img src="./README.assets/01d330d8-2710-4fad-a91c-7bbbfaaefc0e.fac41c8a.png" alt="img" /></p>
+<div><p>第一次理解</p>
+<p>如图所示，一般对象的创建，会先分配到图左1的 <code>Eden</code> 区域，随着垃圾回收的进行，仍然存活的对象会根据存活时间向老年代转移。</p>
+</div>
+<div><p>常见分配策略</p>
+<ol>
+<li>对象优先在 <code>Eden</code> 区域分配</li>
+<li>大对象直接进入老年代</li>
+<li>长期存活的对象将进入老年代</li>
+</ol>
+</div>
+<h3 id="_1-1-对象优先在-eden-区域分配"> 1.1 对象优先在 <code>Eden</code> 区域分配</h3>
+<p>目前主流的垃圾收集器都会采用<strong>分代回收算法</strong>，因此需要将堆内存分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。</p>
+<p>大多数情况下，对象在新生代中 eden 区分配。当 eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC.</p>
+<p>具体测试见 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/#_1-1-%E5%AF%B9%E8%B1%A1%E4%BC%98%E5%85%88%E5%9C%A8-eden-%E5%8C%BA%E5%88%86%E9%85%8D" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide | 1.1 对象优先在 <code>Eden</code> 区域分配</a></p>
+<h3 id="_1-2-大对象直接进入老年代"> 1.2 大对象直接进入老年代</h3>
+<p><strong>为什么要这样呢？</strong></p>
+<p>为了避免为大对象分配内存时由于分配担保机制带来的复制而降低效率。（我的理解是：eden中内存分配不足时，总有对象要被转移到老年代的，不如一开始就将比较大的对象直接分配在老年代）</p>
+<h3 id="_1-3-长期存活的对象将进入老年代"> 1.3 长期存活的对象将进入老年代</h3>
+<p>如果对象在 Eden 出生并经过第一次 Minor GC 后仍然能够存活，并且能被 Survivor 容纳的话，将被移动到 Survivor 空间中，并将对象年龄设为 1.对象在 Survivor 中每熬过一次 MinorGC,年龄就增加 1 岁，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置。</p>
+<h3 id="_1-4-动态对象年龄判断"> 1.4 动态对象年龄判断</h3>
+<p>大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s0 或者 s1，并且对象的年龄还会加 1(Eden 区-&gt;Survivor 区后对象的初始年龄变为 1)，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置</p>
+<div><p>晋升年龄阈值</p>
+<p>Hotspot 遍历所有对象时，按照年龄从小到大对其所占用的大小进行累积，当累积的某个年龄大小超过了 survivor 区的 50% 时（默认值是 50%，可以通过 <code>-XX:TargetSurvivorRatio=percent</code> 来设置，参见 <a href="https://github.com/Snailclimb/JavaGuide/issues/1199" target="_blank" rel="noopener noreferrer">issue1199  (opens new window)</a> ），取这个年龄和 MaxTenuringThreshold 中更小的一个值，作为新的晋升年龄阈值</p>
+</div>
+<div><p>默认晋升年龄</p>
+<p><strong>《深入理解 Java 虚拟机》</strong> 中说默认的晋升年龄是15，但是 Oracle 官网中说明这个晋升年龄并不都是15，这个是要区分垃圾收集器的，CMS 就是 6</p>
+</div>
+<h3 id="_1-5-主要进行gc的区域"> 1.5 主要进行GC的区域</h3>
+<p>针对 HotSpot VM 的实现，它里面的 GC 其实准确分类只有两大种：</p>
+<p>部分收集 (Partial GC)：</p>
+<ul>
+<li>新生代收集（Minor GC / Young GC）：只对新生代进行垃圾收集；</li>
+<li>老年代收集（Major GC / Old GC）：只对老年代进行垃圾收集。需要注意的是 Major GC 在有的语境中也用于指代整堆收集；</li>
+<li>混合收集（Mixed GC）：对整个新生代和部分老年代进行垃圾收集。</li>
+</ul>
+<p>整堆收集 (Full GC)：收集整个 Java 堆和方法区</p>
+<h3 id="_1-6-空间分配担保"> 1.6 空间分配担保</h3>
+<p>空间分配担保是为了确保在 Minor GC 之前老年代本身还有容纳新生代所有对象的剩余空间</p>
+<blockquote>
+<p>JDK 6 Update 24 之前，在发生 Minor GC 之前，虚拟机必须先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，如果这个条件成立，那这一次 Minor GC 可以确保是安全的。如果不成立，则虚拟机会先查看 <code>-XX:HandlePromotionFailure</code> 参数的设置值是否允许担保失败(Handle Promotion Failure);如果允许，那会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试进行一次 Minor GC，尽管这次 Minor GC 是有风险的;如果小于，或者 <code>-XX: HandlePromotionFailure</code> 设置不允许冒险，那这时就要改为进行一次 Full GC。</p>
+<p>JDK 6 Update 24 之后的规则变为只要老年代的连续空间大于新生代对象总大小或者历次晋升的平均大小，就会进行 Minor GC，否则将进行 Full GC。</p>
+</blockquote>
+<h2 id="二、对象死亡"> 二、对象死亡</h2>
+<p>堆中几乎放着所有的对象实例，对堆垃圾回收前的第一步就是要判断哪些对象已经死亡（即不能再被任何途径使用的对象）。</p>
+<p><img src="./README.assets/11034259.2dc6983d.png" alt="img" /></p>
+<h3 id="_2-1-引用计数法"> 2.1 引用计数法</h3>
+<p>给对象中添加一个引用计数器，每当有一个地方引用它，计数器就加 1；当引用失效，计数器就减 1；任何时候计数器为 0 的对象就是不可能再被使用的。</p>
+<p><strong>这个方法实现简单，效率高，但是目前主流的虚拟机中并没有选择这个算法来管理内存，其最主要的原因是它很难解决对象之间相互循环引用的问题。</strong> 所谓对象之间的相互引用问题，如下面代码所示：除了对象 objA 和 objB 相互引用着对方之外，这两个对象之间再无任何引用。但是他们因为互相引用对方，导致它们的引用计数器都不为 0，于是引用计数算法无法通知 GC 回收器回收他们。</p>
+<div><pre><code><span>public</span> <span>class</span> <span>ReferenceCountingGc</span> <span>{</span>
+    <span>Object</span> instance <span>=</span> <span>null</span><span>;</span>
+	<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+		<span>ReferenceCountingGc</span> objA <span>=</span> <span>new</span> <span>ReferenceCountingGc</span><span>(</span><span>)</span><span>;</span>
+		<span>ReferenceCountingGc</span> objB <span>=</span> <span>new</span> <span>ReferenceCountingGc</span><span>(</span><span>)</span><span>;</span>
+		objA<span>.</span>instance <span>=</span> objB<span>;</span>
+		objB<span>.</span>instance <span>=</span> objA<span>;</span>
+		objA <span>=</span> <span>null</span><span>;</span>
+		objB <span>=</span> <span>null</span><span>;</span>
+
+	<span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h3 id="_2-2-可达性分析算法"> 2.2 可达性分析算法</h3>
+<p>这个算法的基本思想就是通过一系列的称为 <strong>“GC Roots”</strong> 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的。</p>
+<p>可作为 GC Roots 的对象包括下面几种:</p>
+<ul>
+<li>虚拟机栈(栈帧中的本地变量表)中引用的对象</li>
+<li>本地方法栈(Native 方法)中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>所有被同步锁持有的对象</li>
+</ul>
+<p><img src="./README.assets/下载.png" alt="下载" /></p>
+<h3 id="_2-3-引用"> 2.3 引用</h3>
+<p>无论是通过引用计数法判断对象引用数量，还是通过可达性分析法判断对象的引用链是否可达，判定对象的存活都与“引用”有关。</p>
+<p>JDK1.2 之前，Java 中引用的定义很传统：如果 reference 类型的数据存储的数值代表的是另一块内存的起始地址，就称这块内存代表一个引用。</p>
+<p>JDK1.2 以后，Java 对引用的概念进行了扩充，将引用分为强引用、软引用、弱引用、虚引用四种（引用强度逐渐减弱）</p>
+<div><pre><code><span>String</span> str<span>=</span><span>new</span> <span>String</span><span>(</span><span>"abc"</span><span>)</span><span>;</span>                                     <span>// 强引用</span>
+<span>SoftReference</span><span><span>&lt;</span><span>String</span><span>></span></span> softRef<span>=</span><span>new</span> <span>SoftReference</span><span><span>&lt;</span><span>String</span><span>></span></span><span>(</span>str<span>)</span><span>;</span>     <span>// 软引用</span>
+<span>WeakReference</span><span><span>&lt;</span><span>String</span><span>></span></span> abcWeakRef <span>=</span> <span>new</span> <span>WeakReference</span><span><span>&lt;</span><span>String</span><span>></span></span><span>(</span>str<span>)</span><span>;</span><span>// 弱引用</span>
+<span>?</span><span>?</span><span>?</span>                                                               <span>// 虚引用</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>更多解释见 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/#_2-3-%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide</a></p>
+<p><img src="./README.assets/8vvr30i6ew.png" alt="8vvr30i6ew" /></p>
+<p><img src="./README.assets/a3je2pxov.png" alt="a3je2pxov" /></p>
+<h3 id="_2-4-不可达的对象并非-非死不可"> 2.4 不可达的对象并非“非死不可”</h3>
+<p>即使在可达性分析法中不可达的对象，也并非是“非死不可”的，这时候它们暂时处于“缓刑阶段”，要真正宣告一个对象死亡，至少要经历两次标记过程；可达性分析法中不可达的对象被第一次标记并且进行一次筛选，筛选的条件是此对象是否有必要执行 <code>finalize</code> 方法。当对象没有覆盖 <code>finalize</code> 方法，或 <code>finalize</code> 方法已经被虚拟机调用过时，虚拟机将这两种情况视为没有必要执行。</p>
+<p>被判定为需要执行的对象将会被放在一个队列中进行第二次标记，除非这个对象与引用链上的任何一个对象建立关联，否则就会被真的回收。</p>
+<blockquote>
+<p><code>Object</code> 类中的 <code>finalize</code> 方法一直被认为是一个糟糕的设计，成为了 Java 语言的负担，影响了 Java 语言的安全和 GC 的性能。JDK9 版本及后续版本中各个类中的 <code>finalize</code> 方法会被逐渐弃用移除。忘掉它的存在吧！</p>
+<p>参考：</p>
+<ul>
+<li><a href="https://openjdk.java.net/jeps/421" target="_blank" rel="noopener noreferrer">JEP 421: Deprecate Finalization for Removal  (opens new window)</a></li>
+<li><a href="https://mp.weixin.qq.com/s/LW-paZAMD08DP_3-XCUxmg" target="_blank" rel="noopener noreferrer">是时候忘掉 finalize 方法了</a></li>
+</ul>
+</blockquote>
+<h3 id="_2-5-如何判断一个常量是废弃常量"> 2.5 如何判断一个常量是废弃常量</h3>
+<ol>
+<li><strong>JDK1.7 之前运行时常量池逻辑包含字符串常量池存放在方法区, 此时 hotspot 虚拟机对方法区的实现为永久代</strong></li>
+<li><strong>JDK1.7 字符串常量池被从方法区拿到了堆中, 这里没有提到运行时常量池,也就是说字符串常量池被单独拿到堆,运行时常量池剩下的东西还在方法区, 也就是 hotspot 中的永久代</strong> 。</li>
+<li><strong>JDK1.8 hotspot 移除了永久代用元空间(Metaspace)取而代之, 这时候字符串常量池还在堆, 运行时常量池还在方法区, 只不过方法区的实现从永久代变成了元空间(Metaspace)</strong></li>
+</ol>
+<p>假如在字符串常量池中存在字符串 &quot;abc&quot;，如果当前没有任何 String 对象引用该字符串常量的话，就说明常量 &quot;abc&quot; 就是废弃常量，如果这时发生内存回收的话而且有必要的话，&quot;abc&quot; 就会被系统清理出常量池了</p>
+<h3 id="_2-6-如何判断一个类是无用的类"> 2.6 如何判断一个类是无用的类</h3>
+<p>方法区主要回收的是无用的类，那么如何判断一个类是无用的类的呢？</p>
+<p>判定一个常量是否是“废弃常量”比较简单，而要判定一个类是否是“无用的类”的条件则相对苛刻许多。类需要同时满足下面 3 个条件才能算是 <strong>“无用的类”</strong> ：</p>
+<ul>
+<li>该类所有的实例都已经被回收，也就是 Java 堆中不存在该类的任何实例。</li>
+<li>加载该类的 <code>ClassLoader</code> 已经被回收。</li>
+<li>该类对应的 <code>java.lang.Class</code> 对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
+</ul>
+<p>虚拟机可以对满足上述 3 个条件的无用类进行回收，这里说的仅仅是“可以”，而并不是和对象一样不使用了就会必然被回收。</p>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="Java"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T08:35:36.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
+    <title type="html">Java 集合框架基础知识</title>
+    <id>https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/</id>
+    <link href="https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/"/>
+    <updated>2022-01-22T11:37:26.000Z</updated>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/collection/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86&amp;%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">Java集合框架基础知识&amp;面试题总结 | JavaGuide</a>，略有改动</p>
+</div>
+<h2 id="一、集合概述"> 一、集合概述</h2>
+<h3 id="_1-0-java集合概览"> 1.0 Java集合概览</h3>
+<p><img src="./README.assets/java-collection-hierarchy.71519bdb.png" alt="img" /></p>
+<h3 id="_1-1-集合框架底层数据结构"> 1.1 集合框架底层数据结构</h3>
+<ul>
+<li><code>Collection</code>
+<ul>
+<li><code>List</code>
+<ul>
+<li><code>ArrayList</code>: Object[] 数组</li>
+<li><code>Vector</code>: Object[] 数组</li>
+<li><code>LinkedList</code>: 双向链表</li>
+</ul>
+</li>
+<li><code>Set</code>
+<ul>
+<li><code>HashSet</code>（无序）: 基于 <code>HashMap</code> 实现</li>
+<li><code>LinkedHashSet</code>: <code>HashSet</code> 的子类，基于 <code>LinkedHashMap</code> 实现</li>
+<li><code>TreeSet</code>（有序）: 红黑树（自平衡的排序二叉树）</li>
+</ul>
+</li>
+<li><code>Queue</code>
+<ul>
+<li><code>PriorityQueue</code> : Object[] 数组实现二叉堆</li>
+<li><code>ArrayQueue</code> : Object[] 数组 + 双指针</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Map</code>
+<ul>
+<li><code>HashMap</code> : 数组 + 链表 + 红黑树（链表根据大小和阈值进行扩容，扩容到一定大小转换为红黑树）</li>
+<li><code>LinkedMap</code> : 继承自 <code>HashMap</code>，增加一条双向链表以保持插入顺序</li>
+<li><code>Hashtable</code> : 数组 + 链表</li>
+<li><code>TreeMap</code> : 红黑树</li>
+</ul>
+</li>
+</ul>
+<h3 id="_1-2-集合的选择"> 1.2 集合的选择</h3>
+<p><img src="./README.assets/image-20220118101609300.png" alt="image-20220118101609300" /></p>
+<h2 id="二、list"> 二、List</h2>
+<h3 id="_2-1-arraylist-和-vector-的区别"> 2.1 ArrayList 和 Vector 的区别</h3>
+<p><code>ArrayList</code> 是 <code>List</code> 的主要实现类，底层使用 <code>Object[]</code>存储，适用于频繁的查找工作，线程不安全 ；</p>
+<p><code>Vector</code> 是 <code>List</code> 的古老实现类，底层使用<code>Object[]</code> 存储，线程安全的（代价就是效率差一些）。</p>
+<h3 id="_2-2-arraylist-和-linkedlist-的区别"> 2.2 ArrayList  和 LinkedList 的区别</h3>
+<p><strong>是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</p>
+<p><strong>底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</p>
+<p><strong>插入和删除是否受元素位置的影响：</strong></p>
+<ul>
+<li><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。</li>
+<li><code>LinkedList</code> 采用链表存储，所以，如果是在头尾插入或者删除元素不受元素位置的影响（<code>add(E e)</code>、<code>addFirst(E e)</code>、<code>addLast(E e)</code>、<code>removeFirst()</code> 、 <code>removeLast()</code>），近似 O(1)，如果是要在指定位置 <code>i</code> 插入和删除元素的话（<code>add(int index, E element)</code>，<code>remove(Object o)</code>） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。</li>
+</ul>
+<p><strong>是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</p>
+<p><strong>内存空间占用：</strong> ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。</p>
+<h3 id="_2-3-randomaccess-接口"> 2.3 RandomAccess 接口</h3>
+<div><pre><code><span>public</span> <span>interface</span> <span>RandomAccess</span> <span>{</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p>查看源码我们发现实际上 <code>RandomAccess</code> 接口中什么都没有定义。所以，在我看来 <code>RandomAccess</code> 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p>
+<p>在 <code>binarySearch()</code>方法中，它要判断传入的 list 是否 <code>RamdomAccess</code>的实例，如果是，调用<code>indexedBinarySearch()</code>方法，如果不是，那么调用<code>iteratorBinarySearch()</code>方法</p>
+<div><pre><code><span>public</span> <span>static</span> <span><span>&lt;</span><span>T</span><span>></span></span>
+    <span>int</span> <span>binarySearch</span><span>(</span><span>List</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>Comparable</span><span>&lt;</span><span>?</span> <span>super</span> <span>T</span><span>></span><span>></span></span> list<span>,</span> <span>T</span> key<span>)</span> <span>{</span>
+    <span>if</span> <span>(</span>list <span>instanceof</span> <span>RandomAccess</span> <span>||</span> list<span>.</span><span>size</span><span>(</span><span>)</span><span>&lt;</span>BINARYSEARCH_THRESHOLD<span>)</span>
+        <span>return</span> <span>Collections</span><span>.</span><span>indexedBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
+    <span>else</span>
+        <span>return</span> <span>Collections</span><span>.</span><span>iteratorBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。为什么呢？我觉得还是和底层数据结构有关！<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O(n)，所以不支持快速随机访问。，<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。 <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的！</p>
+<h3 id="_2-4-arraylist-扩容机制"> 2.4 ArrayList 扩容机制</h3>
+<p>详见另一篇 <a href="../2-source-code/1-arraylist">ArrayList 源码解读</a></p>
 ]]></content>
     <author>
       <name>lllllan</name>
@@ -1327,708 +2146,18 @@ xiaoLi<span>:</span>小李
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">代理详解</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/3-agent/"/>
-    <updated>2022-01-22T08:09:21.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/basis/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E8%AF%A6%E8%A7%A3/" target="_blank" rel="noopener noreferrer">代理详解！静态代理+JDK/CGLIB 动态代理实战 | JavaGuide</a>， 略有改动</p>
-<p>（完全不懂）</p>
-</div>
-<h2 id="代理模式"> 代理模式</h2>
-<p>代理模式是一种比较好理解的设计模式。简单来说就是 <strong>我们使用代理对象来代替对真实对象(real object)的访问，这样就可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</strong></p>
-<p><strong>代理模式的主要作用是扩展目标对象的功能，比如说在目标对象的某个方法执行前后你可以增加一些自定义的操作。</strong></p>
-<p><img src="./README.assets/1DjWCgTFm-xqbhbNQVsaWQw.png" alt="Understanding the Proxy Design Pattern | by Mithun Sasidharan | Medium" /></p>
-<h2 id="静态代理"> 静态代理</h2>
-<p><strong>静态代理中，我们对目标对象的每个方法的增强都是手动完成的（<em>后面会具体演示代码</em>），非常不灵活（<em>比如接口一旦新增加方法，目标对象和代理对象都要进行修改</em>）且麻烦(<em>需要对每个目标类都单独写一个代理类</em>)。</strong> 实际应用场景非常非常少，日常开发几乎看不到使用静态代理的场景。</p>
-<p>上面我们是从实现和应用角度来说的静态代理，从 JVM 层面来说， <strong>静态代理在编译时就将接口、实现类、代理类这些都变成了一个个实际的 class 文件。</strong></p>
-<p>静态代理实现步骤:</p>
-<ol>
-<li>定义一个接口及其实现类；</li>
-<li>创建一个代理类同样实现这个接口</li>
-<li>将目标对象注入进代理类，然后在代理类的对应方法调用目标类中的对应方法。这样的话，我们就可以通过代理类屏蔽对目标对象的访问，并且可以在目标方法执行前后做一些自己想做的事情。</li>
-</ol>
-<p>下面通过代码展示！</p>
-<p><strong>1. 定义发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
-    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
-    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
-        <span>return</span> message<span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.创建代理类并同样实现发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>SmsProxy</span> <span>implements</span> <span>SmsService</span> <span>{</span>
-
-    <span>private</span> <span>final</span> <span>SmsService</span> smsService<span>;</span>
-
-    <span>public</span> <span>SmsProxy</span><span>(</span><span>SmsService</span> smsService<span>)</span> <span>{</span>
-        <span>this</span><span>.</span>smsService <span>=</span> smsService<span>;</span>
-    <span>}</span>
-
-    <span>@Override</span>
-    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
-        <span>//调用方法之前，我们可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method send()"</span><span>)</span><span>;</span>
-        smsService<span>.</span><span>send</span><span>(</span>message<span>)</span><span>;</span>
-        <span>//调用方法之后，我们同样可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method send()"</span><span>)</span><span>;</span>
-        <span>return</span> <span>null</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br></div></div><p><strong>4.实际使用</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>Main</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-        <span>SmsService</span> smsService <span>=</span> <span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>;</span>
-        <span>SmsProxy</span> smsProxy <span>=</span> <span>new</span> <span>SmsProxy</span><span>(</span>smsService<span>)</span><span>;</span>
-        smsProxy<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
-<div><pre><code>before method send<span>(</span><span>)</span>
-send message:java
-after method send<span>(</span><span>)</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h2 id="动态代理"> 动态代理</h2>
-<p>相比于静态代理来说，动态代理更加灵活。我们不需要针对每个目标类都单独创建一个代理类，并且也不需要我们必须实现接口，我们可以直接代理实现类( <em>CGLIB 动态代理机制</em>)。</p>
-<blockquote>
-<p><strong>从 JVM 角度来说，动态代理是在运行时动态生成类字节码，并加载到 JVM 中的</strong></p>
-</blockquote>
-<p><strong>动态代理在我们日常开发中使用的相对较少，但是在框架中的几乎是必用的一门技术。学会了动态代理之后，对于我们理解和学习各种框架的原理也非常有帮助。</strong></p>
-<p>就 Java 来说，动态代理的实现方式有很多种，比如 <strong>JDK 动态代理</strong>、<strong>CGLIB 动态代理</strong>等等。</p>
-<h3 id="jdk-动态代理机制"> JDK 动态代理机制</h3>
-<h4 id="介绍"> 介绍</h4>
-<p><strong>在 Java 动态代理机制中 <code>InvocationHandler</code> 接口和 <code>Proxy</code> 类是核心。</strong></p>
-<p><code>Proxy</code> 类中使用频率最高的方法是：<code>newProxyInstance()</code> ，这个方法主要用来生成一个代理对象。</p>
-<div><pre><code><span>public</span> <span>static</span> <span>Object</span> <span>newProxyInstance</span><span>(</span><span>ClassLoader</span> loader<span>,</span> <span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span><span>[</span><span>]</span> interfaces<span>,</span>
-                                      <span>InvocationHandler</span> h<span>)</span>
-    <span>throws</span> <span>IllegalArgumentException</span> <span>{</span>
-    <span>.</span><span>.</span><span>.</span><span>.</span><span>.</span><span>.</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p>这个方法一共有 3 个参数：</p>
-<ol>
-<li><strong>loader</strong> :类加载器，用于加载代理对象。</li>
-<li><strong>interfaces</strong> : 被代理类实现的一些接口；</li>
-<li><strong>h</strong> : 实现了 <code>InvocationHandler</code> 接口的对象；</li>
-</ol>
-<p>要实现动态代理的话，还必须需要实现<code>InvocationHandler</code> 来自定义处理逻辑。 当我们的动态代理对象调用一个方法时，这个方法的调用就会被转发到实现<code>InvocationHandler</code> 接口类的 <code>invoke</code> 方法来调用。</p>
-<div><pre><code><span>public</span> <span>interface</span> <span>InvocationHandler</span> <span>{</span>
-
-    <span>/**
-     * 当你使用代理对象调用方法的时候实际会调用到这个方法
-     */</span>
-    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span>
-        <span>throws</span> <span>Throwable</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p><code>invoke()</code> 方法有下面三个参数：</p>
-<ol>
-<li><strong>proxy</strong> :动态生成的代理类</li>
-<li><strong>method</strong> : 与代理类对象调用的方法相对应</li>
-<li><strong>args</strong> : 当前 method 方法的参数</li>
-</ol>
-<blockquote>
-<p>也就是说：<strong>你通过<code>Proxy</code> 类的 <code>newProxyInstance()</code> 创建的代理对象在调用方法的时候，实际会调用到实现<code>InvocationHandler</code> 接口的类的 <code>invoke()</code>方法。</strong> 你可以在 <code>invoke()</code> 方法中自定义处理逻辑，比如在方法执行前后做什么事情。</p>
-</blockquote>
-<h4 id="使用步骤"> 使用步骤</h4>
-<ol>
-<li>定义一个接口及其实现类；</li>
-<li>自定义 <code>InvocationHandler</code> 并重写<code>invoke</code>方法，在 <code>invoke</code> 方法中我们会调用原生方法（被代理类的方法）并自定义一些处理逻辑；</li>
-<li>通过 <code>Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)</code> 方法创建代理对象；</li>
-</ol>
-<h4 id="代码示例"> 代码示例</h4>
-<p><strong>1.定义发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>interface</span> <span>SmsService</span> <span>{</span>
-    <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>2.实现发送短信的接口</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>SmsServiceImpl</span> <span>implements</span> <span>SmsService</span> <span>{</span>
-    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
-        <span>return</span> message<span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><strong>3.定义一个 JDK 动态代理类</strong></p>
-<div><pre><code><span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationHandler</span><span>;</span>
-<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>InvocationTargetException</span><span>;</span>
-<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>Method</span><span>;</span>
-
-<span>/**
- * @author shuang.kou
- * @createTime 2020年05月11日 11:23:00
- */</span>
-<span>public</span> <span>class</span> <span>DebugInvocationHandler</span> <span>implements</span> <span>InvocationHandler</span> <span>{</span>
-    <span>/**
-     * 代理类中的真实对象
-     */</span>
-    <span>private</span> <span>final</span> <span>Object</span> target<span>;</span>
-
-    <span>public</span> <span>DebugInvocationHandler</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
-        <span>this</span><span>.</span>target <span>=</span> target<span>;</span>
-    <span>}</span>
-
-
-    <span>public</span> <span>Object</span> <span>invoke</span><span>(</span><span>Object</span> proxy<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>)</span> <span>throws</span> <span>InvocationTargetException</span><span>,</span> <span>IllegalAccessException</span> <span>{</span>
-        <span>//调用方法之前，我们可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>Object</span> result <span>=</span> method<span>.</span><span>invoke</span><span>(</span>target<span>,</span> args<span>)</span><span>;</span>
-        <span>//调用方法之后，我们同样可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>return</span> result<span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br></div></div><p><code>invoke()</code> 方法: 当我们的动态代理对象调用原生方法的时候，最终实际上调用到的是 <code>invoke()</code> 方法，然后 <code>invoke()</code> 方法代替我们去调用了被代理对象的原生方法。</p>
-<p><strong>4.获取代理对象的工厂类</strong></p>
-<div><pre><code><span>public</span> <span>class</span> <span>JdkProxyFactory</span> <span>{</span>
-    <span>public</span> <span>static</span> <span>Object</span> <span>getProxy</span><span>(</span><span>Object</span> target<span>)</span> <span>{</span>
-        <span>return</span> <span>Proxy</span><span>.</span><span>newProxyInstance</span><span>(</span>
-                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getClassLoader</span><span>(</span><span>)</span><span>,</span> <span>// 目标类的类加载</span>
-                target<span>.</span><span>getClass</span><span>(</span><span>)</span><span>.</span><span>getInterfaces</span><span>(</span><span>)</span><span>,</span>  <span>// 代理需要实现的接口，可指定多个</span>
-                <span>new</span> <span>DebugInvocationHandler</span><span>(</span>target<span>)</span>   <span>// 代理对象对应的自定义 InvocationHandler</span>
-        <span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><p><code>getProxy()</code> ：主要通过<code>Proxy.newProxyInstance（）</code>方法获取某个类的代理对象</p>
-<p><strong>5.实际使用</strong></p>
-<div><pre><code><span>SmsService</span> smsService <span>=</span> <span>(</span><span>SmsService</span><span>)</span> <span>JdkProxyFactory</span><span>.</span><span>getProxy</span><span>(</span><span>new</span> <span>SmsServiceImpl</span><span>(</span><span>)</span><span>)</span><span>;</span>
-smsService<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
-<div><pre><code>before method send
-send message:java
-after method send
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h3 id="cglib-动态代理机制"> CGLIB 动态代理机制</h3>
-<h4 id="介绍-2"> 介绍</h4>
-<p><strong>JDK 动态代理有一个最致命的问题是其只能代理实现了接口的类。为了解决这个问题，我们可以用 CGLIB 动态代理机制来避免。</strong></p>
-<p><a href="https://github.com/cglib/cglib" target="_blank" rel="noopener noreferrer">CGLIB  (opens new window)</a>(<em>Code Generation Library</em>)是一个基于<a href="http://www.baeldung.com/java-asm" target="_blank" rel="noopener noreferrer">ASM  (opens new window)</a>的字节码生成库，它允许我们在运行时对字节码进行修改和动态生成。CGLIB 通过继承方式实现代理。很多知名的开源框架都使用到了<a href="https://github.com/cglib/cglib" target="_blank" rel="noopener noreferrer">CGLIB  (opens new window)</a>， 例如 Spring 中的 AOP 模块中：如果目标对象实现了接口，则默认采用 JDK 动态代理，否则采用 CGLIB 动态代理。</p>
-<p><strong>在 CGLIB 动态代理机制中 <code>MethodInterceptor</code> 接口和 <code>Enhancer</code> 类是核心。</strong></p>
-<p>你需要自定义 <code>MethodInterceptor</code> 并重写 <code>intercept</code> 方法，<code>intercept</code> 用于拦截增强被代理类的方法。</p>
-<div><pre><code><span>public</span> <span>interface</span> <span>MethodInterceptor</span>
-<span>extends</span> <span>Callback</span><span>{</span>
-    <span>// 拦截被代理类中的方法</span>
-    <span>public</span> <span>Object</span> <span>intercept</span><span>(</span><span>Object</span> obj<span>,</span> <span><span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>,</span>
-                               <span>MethodProxy</span> proxy<span>)</span> <span>throws</span> <span>Throwable</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><ol>
-<li><strong>obj</strong> :被代理的对象（需要增强的对象）</li>
-<li><strong>method</strong> :被拦截的方法（需要增强的方法）</li>
-<li><strong>args</strong> :方法入参</li>
-<li><strong>proxy</strong> :用于调用原始方法</li>
-</ol>
-<p>你可以通过 <code>Enhancer</code>类来动态获取被代理类，当代理类调用方法的时候，实际调用的是 <code>MethodInterceptor</code> 中的 <code>intercept</code> 方法。</p>
-<h4 id="使用步骤-2"> 使用步骤</h4>
-<ol>
-<li>定义一个类；</li>
-<li>自定义 <code>MethodInterceptor</code> 并重写 <code>intercept</code> 方法，<code>intercept</code> 用于拦截增强被代理类的方法，和 JDK 动态代理中的 <code>invoke</code> 方法类似；</li>
-<li>通过 <code>Enhancer</code> 类的 <code>create()</code>创建代理类；</li>
-</ol>
-<h4 id="代码示例-2"> 代码示例</h4>
-<p>不同于 JDK 动态代理不需要额外的依赖。<a href="https://github.com/cglib/cglib" target="_blank" rel="noopener noreferrer">CGLIB  (opens new window)</a>(<em>Code Generation Library</em>) 实际是属于一个开源项目，如果你要使用它的话，需要手动添加相关依赖。</p>
-<div><pre><code><span><span><span>&lt;</span>dependency</span><span>></span></span>
-  <span><span><span>&lt;</span>groupId</span><span>></span></span>cglib<span><span><span>&lt;/</span>groupId</span><span>></span></span>
-  <span><span><span>&lt;</span>artifactId</span><span>></span></span>cglib<span><span><span>&lt;/</span>artifactId</span><span>></span></span>
-  <span><span><span>&lt;</span>version</span><span>></span></span>3.3.0<span><span><span>&lt;/</span>version</span><span>></span></span>
-<span><span><span>&lt;/</span>dependency</span><span>></span></span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><p><strong>1.实现一个使用阿里云发送短信的类</strong></p>
-<div><pre><code><span>package</span> <span>github<span>.</span>javaguide<span>.</span>dynamicProxy<span>.</span>cglibDynamicProxy</span><span>;</span>
-
-<span>public</span> <span>class</span> <span>AliSmsService</span> <span>{</span>
-    <span>public</span> <span>String</span> <span>send</span><span>(</span><span>String</span> message<span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"send message:"</span> <span>+</span> message<span>)</span><span>;</span>
-        <span>return</span> message<span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br></div></div><p><strong>2.自定义 <code>MethodInterceptor</code>（方法拦截器）</strong></p>
-<div><pre><code><span>import</span> <span>net<span>.</span>sf<span>.</span>cglib<span>.</span>proxy<span>.</span></span><span>MethodInterceptor</span><span>;</span>
-<span>import</span> <span>net<span>.</span>sf<span>.</span>cglib<span>.</span>proxy<span>.</span></span><span>MethodProxy</span><span>;</span>
-
-<span>import</span> <span>java<span>.</span>lang<span>.</span>reflect<span>.</span></span><span>Method</span><span>;</span>
-
-<span>/**
- * 自定义MethodInterceptor
- */</span>
-<span>public</span> <span>class</span> <span>DebugMethodInterceptor</span> <span>implements</span> <span>MethodInterceptor</span> <span>{</span>
-
-
-    <span>/**
-     * @param o           代理对象（增强的对象）
-     * @param method      被拦截的方法（需要增强的方法）
-     * @param args        方法入参
-     * @param methodProxy 用于调用原始方法
-     */</span>
-    <span>@Override</span>
-    <span>public</span> <span>Object</span> <span>intercept</span><span>(</span><span>Object</span> o<span>,</span> <span>Method</span> method<span>,</span> <span>Object</span><span>[</span><span>]</span> args<span>,</span> <span>MethodProxy</span> methodProxy<span>)</span> <span>throws</span> <span>Throwable</span> <span>{</span>
-        <span>//调用方法之前，我们可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"before method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>Object</span> object <span>=</span> methodProxy<span>.</span><span>invokeSuper</span><span>(</span>o<span>,</span> args<span>)</span><span>;</span>
-        <span>//调用方法之后，我们同样可以添加自己的操作</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"after method "</span> <span>+</span> method<span>.</span><span>getName</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>return</span> object<span>;</span>
-    <span>}</span>
-
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br></div></div><p><strong>3.获取代理类</strong></p>
-<div><pre><code><span>import</span> <span>net<span>.</span>sf<span>.</span>cglib<span>.</span>proxy<span>.</span></span><span>Enhancer</span><span>;</span>
-
-<span>public</span> <span>class</span> <span>CglibProxyFactory</span> <span>{</span>
-
-    <span>public</span> <span>static</span> <span>Object</span> <span>getProxy</span><span>(</span><span>Class</span><span><span>&lt;</span><span>?</span><span>></span></span> clazz<span>)</span> <span>{</span>
-        <span>// 创建动态代理增强类</span>
-        <span>Enhancer</span> enhancer <span>=</span> <span>new</span> <span>Enhancer</span><span>(</span><span>)</span><span>;</span>
-        <span>// 设置类加载器</span>
-        enhancer<span>.</span><span>setClassLoader</span><span>(</span>clazz<span>.</span><span>getClassLoader</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>// 设置被代理类</span>
-        enhancer<span>.</span><span>setSuperclass</span><span>(</span>clazz<span>)</span><span>;</span>
-        <span>// 设置方法拦截器</span>
-        enhancer<span>.</span><span>setCallback</span><span>(</span><span>new</span> <span>DebugMethodInterceptor</span><span>(</span><span>)</span><span>)</span><span>;</span>
-        <span>// 创建代理类</span>
-        <span>return</span> enhancer<span>.</span><span>create</span><span>(</span><span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br></div></div><p><strong>4.实际使用</strong></p>
-<div><pre><code><span>AliSmsService</span> aliSmsService <span>=</span> <span>(</span><span>AliSmsService</span><span>)</span> <span>CglibProxyFactory</span><span>.</span><span>getProxy</span><span>(</span><span>AliSmsService</span><span>.</span><span>class</span><span>)</span><span>;</span>
-aliSmsService<span>.</span><span>send</span><span>(</span><span>"java"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p>运行上述代码之后，控制台打印出：</p>
-<div><pre><code>before method send
-send message:java
-after method send
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><h3 id="对比"> 对比</h3>
-<ul>
-<li>
-<p><strong>JDK 动态代理只能代理实现了接口的类或者直接代理接口，而 CGLIB 可以代理未实现任何接口的类。</strong> 另外， CGLIB 动态代理是通过生成一个被代理类的子类来拦截被代理类的方法调用，因此不能代理声明为 final 类型的类和方法。</p>
-</li>
-<li>
-<p>就二者的效率来说，大部分情况都是 JDK 动态代理更优秀，随着 JDK 版本的升级，这个优势更加明显。</p>
-</li>
-</ul>
-<h2 id="静态代理和动态代理的对比"> 静态代理和动态代理的对比</h2>
-<ol>
-<li><strong>灵活性</strong> ：动态代理更加灵活，不需要必须实现接口，可以直接代理实现类，并且可以不需要针对每个目标类都创建一个代理类。另外，静态代理中，接口一旦新增加方法，目标对象和代理对象都要进行修改，这是非常麻烦的！</li>
-<li><strong>JVM 层面</strong> ：静态代理在编译时就将接口、实现类、代理类这些都变成了一个个实际的 class 文件。而动态代理是在运行时动态生成类字节码，并加载到 JVM 中的。</li>
-</ol>
+    <title type="html">MySQL 笔记</title>
+    <id>https://vue-blog.lllllan.cn/2-mysql/</id>
+    <link href="https://vue-blog.lllllan.cn/2-mysql/"/>
+    <updated>2022-01-20T14:33:14.000Z</updated>
+    <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
+<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
+<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
 ]]></content>
     <author>
       <name>lllllan</name>
     </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">Java 基础面试题</title>
-    <id>https://vue-blog.lllllan.cn/1-java/1-basic/4-interview-questions/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/1-basic/4-interview-questions/"/>
-    <updated>2022-01-23T06:32:20.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文所有题目整理及答案全部来自 <a href="https://www.iamshuaidi.com/" target="_blank" rel="noopener noreferrer">帅地玩编程-校招|面试|学习路线</a>，略有改动</p>
-</div>
-<h2 id="_1-面向对象和面向过程"> 1. 面向对象和面向过程</h2>
-<p><strong>面向过程：</strong></p>
-<p>面向过程的思想会将一件事情，拆分成一个个更具体的小任务，由一个个方法去完成他们。只要按顺序执行这些方法，就能完成这件事情。</p>
-<p><strong>面向对象：</strong></p>
-<p>面向对象的思想会把事物抽象成对象的概念，把一件事情拆分成一个个更具体的小问题，交由不同的对象分别完成以解决问题。</p>
-<p>更详细生动的说明详见 <a href="https://zhuanlan.zhihu.com/p/75265007" target="_blank" rel="noopener noreferrer">2分钟让你明白什么是面向对象编程</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">项目名称</th>
-<th style="text-align:center">面向对象程序设计</th>
-<th style="text-align:center">面向过程程序设计（也叫结构化编程）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">定义</td>
-<td style="text-align:center">面向对象顾名思义就是把现实中的事务都抽象成为程序设计中的“对象”，其基本思想是一切皆对象，是一种“自下而上”的设计语言，先设计组件，再完成拼装。</td>
-<td style="text-align:center">面向过程是“自上而下”的设计语言，先定好框架，再增砖添瓦。通俗点，就是先定好main()函数，然后再逐步实现main()函数中所要用到的其他方法。</td>
-</tr>
-<tr>
-<td style="text-align:center">特点</td>
-<td style="text-align:center">封装、继承、多态</td>
-<td style="text-align:center">算法+数据结构</td>
-</tr>
-<tr>
-<td style="text-align:center">优势</td>
-<td style="text-align:center">适用于大型复杂系统，方便复用、</td>
-<td style="text-align:center">适用于简单系统，容易理解</td>
-</tr>
-<tr>
-<td style="text-align:center">劣势</td>
-<td style="text-align:center">比较抽象、性能比面向过程低</td>
-<td style="text-align:center">难以应对复杂系统，难以复用，不易维护、不易扩展</td>
-</tr>
-<tr>
-<td style="text-align:center">对比</td>
-<td style="text-align:center">易维护、易复用、易扩展，由于面向对象有封装、继承、多态性的特性，可以设计出低耦合的系统，使系统 更加灵活、更加易于维护</td>
-<td style="text-align:center">性能比面向对象高，因为类调用时需要实例化，开销比较大，比较消耗资源;比如单片机、嵌入式开发、 Linux/Unix等一般采用面向过程开发，性能是最重要的因素</td>
-</tr>
-<tr>
-<td style="text-align:center">设计语言</td>
-<td style="text-align:center">Java、Smalltalk、EIFFEL、C++、Objective-、C#、Python等</td>
-<td style="text-align:center">C、Fortran</td>
-</tr>
-</tbody>
-</table>
-<h2 id="_2-面向对象三大特性"> 2. 面向对象三大特性</h2>
-<p>更多详见 <a href="./../2-java-guide-basic/#_4-6-面向对象三大特征">JavaGuide - Java基础知识 | lllllan</a></p>
-<h3 id="_2-1-封装"> 2.1 封装</h3>
-<p>封装是指把一个对象的状态信息（也就是属性）隐藏在对象内部，不允许外部对象直接访问对象的内部信息。但是可以提供一些可以被外界访问的方法来操作属性。</p>
-<div><p>封装的好处</p>
-<ul>
-<li>隐藏实现细节，提供公共的访问方式</li>
-<li>提高代码的复用性</li>
-<li>提高安全性（别人不能通过 变量名.属性名 的方式来修改私有的成员属性）</li>
-</ul>
-</div>
-<h3 id="_2-2-继承"> 2.2 继承</h3>
-<p>继承是使用已存在的类的定义作为基础建立新类的技术，新类的定义可以增加新的数据或新的功能，也可以用父类的功能，但不能选择性地继承父类。通过使用继承，可以快速地创建新的类，可以提高代码的重用，程序的可维护性，节省大量创建新类的时间 ，提高我们的开发效率。</p>
-<ol>
-<li>子类拥有父类对象所有的属性和方法（包括私有属性和私有方法），但是父类中的私有属性和方法子类是无法访问，<strong>只是拥有</strong>。</li>
-<li>子类可以拥有自己属性和方法，即子类可以对父类进行扩展。</li>
-<li>子类可以用自己的方式实现父类的方法。</li>
-</ol>
-<div><p>继承的优点</p>
-<ol>
-<li>提高代码的复用性</li>
-<li>提高代码的易维护性</li>
-<li>提高代码的可扩展性</li>
-<li>使代码结构清晰</li>
-</ol>
-</div>
-<div><p>继承的缺点</p>
-<ol>
-<li>高耦合性：父子类联系紧密，修改父类的同时，需要兼顾子类</li>
-<li>破坏封装性、降低灵活性</li>
-</ol>
-</div>
-<h3 id="_2-3-多态"> 2.3 多态</h3>
-<p>表示一个对象具有多种的状态，具体表现为父类的引用指向子类的实例。</p>
-<ul>
-<li>对象类型和引用类型之间具有继承（类）/实现（接口）的关系；</li>
-<li>引用类型变量发出的方法调用的到底是哪个类中的方法，必须在程序<strong>运行期间</strong>才能确定；</li>
-<li>多态不能调用“<strong>只在子类存在但在父类不存在</strong>”的方法；</li>
-<li>如果子类重写了父类的方法，真正执行的是<strong>子类覆盖</strong>的方法，如果子类没有覆盖父类的方法，执行的是父类的方法。</li>
-</ul>
-<div><p>多态存在的必要条件</p>
-<ol>
-<li>要有继承</li>
-<li>要有重写</li>
-<li><strong>父类引用指向子类对象</strong></li>
-</ol>
-</div>
-<div><p>多态的好处</p>
-<ol>
-<li>提高了代码的可扩展性</li>
-<li>可替换性</li>
-<li>接口性：向子类提供共同接口，由子类来完善或覆盖</li>
-<li>灵活性</li>
-<li>简化性</li>
-</ol>
-</div>
-<h2 id="_3-jdk、jre、jvm三者关系"> 3. JDK、JRE、JVM三者关系</h2>
-<p>JDK 是 Java 开发工具包、JRE 是 Java 运行环境、JVM 是 Java 虚拟机。</p>
-<div><p>JDK > JRE > JVM</p>
-<ol>
-<li>JVM不能单独执行class</li>
-<li>JRE = JVM + lib（jvm工作需要的类库）。可以执行class</li>
-<li>JDK包含JRE。可以开发、编译、执行</li>
-</ol>
-</div>
-<h2 id="_4-重载和重写"> 4. 重载和重写</h2>
-<ul>
-<li>重载：编译时多态，同一个类中同名的方法具有不同的参数列表、返回类型。</li>
-<li>重写：运行时多态，子类重写父类的方法实现不同的功能，具有相同的参数列表、返回类型。</li>
-</ul>
-<p>更多详见 <a href="./../2-java-guide-basic/#_2-1-静态方法为什么不能调用非静态方法">JavaGuide - Java基础知识 | lllllan</a></p>
-<p>​</p>
-<h2 id="_5-java-中是否可以重写一个-private-或者-static-方法"> 5. Java 中是否可以重写一个 private 或者 static 方法？</h2>
-<p>重写，又称覆盖，是在运行时绑定的。</p>
-<ul>
-<li>子类不能访问或使用父类中的 private 方法，因此不能实现重写</li>
-<li>static 方法是编译时静态绑定的，就算子类中再写了一个同名同参的相同方法，也只是两个毫不相干的方法，不能称为重写。</li>
-</ul>
-<h2 id="_6-构造器是否可以被重写"> 6. 构造器是否可以被重写？</h2>
-<p>父类的私有属性、方法以及构造器都是不能被重写的。</p>
-<h2 id="_7-构造方法有哪些特性"> 7. 构造⽅法有哪些特性</h2>
-<ol>
-<li>名字与类名相同</li>
-<li>没有返回值，但不能⽤ void 声明构造函数</li>
-<li>成类的对象时⾃动执⾏，⽆需调⽤</li>
-</ol>
-<h2 id="_8-无参构造函数的作用"> 8. 无参构造函数的作用</h2>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-23T06:32:20.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">Java 垃圾回收</title>
-    <id>https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/2-jvm/2-garbage-collection/"/>
-    <updated>2022-01-22T10:25:05.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide</a>，略有改动</p>
-</div>
-<h2 id="写在前面"> 写在前面</h2>
-<h3 id="常见面试题"> 常见面试题</h3>
-<ul>
-<li>如何判断对象是否死亡（两种方法）。</li>
-<li>简单的介绍一下强引用、软引用、弱引用、虚引用（虚引用与软引用和弱引用的区别、使用软引用能带来的好处）。</li>
-<li>如何判断一个常量是废弃常量</li>
-<li>如何判断一个类是无用的类</li>
-<li>垃圾收集有哪些算法，各自的特点？</li>
-<li>HotSpot 为什么要分为新生代和老年代？</li>
-<li>常见的垃圾回收器有哪些？</li>
-<li>介绍一下 CMS,G1 收集器。</li>
-<li>Minor Gc 和 Full GC 有什么不同呢？</li>
-</ul>
-<h3 id="核心问题"> 核心问题</h3>
-<ol>
-<li>内存如何分配和回收</li>
-<li>哪些垃圾需要回收</li>
-<li>什么时候回收</li>
-<li>如何回收</li>
-</ol>
-<p><img src="./README.assets/image-20220118102736004.png" alt="image-20220118102736004" /></p>
-<h2 id="一、jvm内存分配与回收"> 一、JVM内存分配与回收</h2>
-<p>Java 的自动内存管理主要是针对<strong>对象内存</strong>的回收和对象内存的分配。同时，Java 自动内存管理最核心的功能是 <strong>堆</strong> 内存中对象的分配与回收。</p>
-<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>.从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：新生代和老年代：再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
-<p><img src="./README.assets/01d330d8-2710-4fad-a91c-7bbbfaaefc0e.fac41c8a.png" alt="img" /></p>
-<div><p>第一次理解</p>
-<p>如图所示，一般对象的创建，会先分配到图左1的 <code>Eden</code> 区域，随着垃圾回收的进行，仍然存活的对象会根据存活时间向老年代转移。</p>
-</div>
-<div><p>常见分配策略</p>
-<ol>
-<li>对象优先在 <code>Eden</code> 区域分配</li>
-<li>大对象直接进入老年代</li>
-<li>长期存活的对象将进入老年代</li>
-</ol>
-</div>
-<h3 id="_1-1-对象优先在-eden-区域分配"> 1.1 对象优先在 <code>Eden</code> 区域分配</h3>
-<p>目前主流的垃圾收集器都会采用<strong>分代回收算法</strong>，因此需要将堆内存分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。</p>
-<p>大多数情况下，对象在新生代中 eden 区分配。当 eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC.</p>
-<p>具体测试见 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/#_1-1-%E5%AF%B9%E8%B1%A1%E4%BC%98%E5%85%88%E5%9C%A8-eden-%E5%8C%BA%E5%88%86%E9%85%8D" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide | 1.1 对象优先在 <code>Eden</code> 区域分配</a></p>
-<h3 id="_1-2-大对象直接进入老年代"> 1.2 大对象直接进入老年代</h3>
-<p><strong>为什么要这样呢？</strong></p>
-<p>为了避免为大对象分配内存时由于分配担保机制带来的复制而降低效率。（我的理解是：eden中内存分配不足时，总有对象要被转移到老年代的，不如一开始就将比较大的对象直接分配在老年代）</p>
-<h3 id="_1-3-长期存活的对象将进入老年代"> 1.3 长期存活的对象将进入老年代</h3>
-<p>如果对象在 Eden 出生并经过第一次 Minor GC 后仍然能够存活，并且能被 Survivor 容纳的话，将被移动到 Survivor 空间中，并将对象年龄设为 1.对象在 Survivor 中每熬过一次 MinorGC,年龄就增加 1 岁，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置。</p>
-<h3 id="_1-4-动态对象年龄判断"> 1.4 动态对象年龄判断</h3>
-<p>大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s0 或者 s1，并且对象的年龄还会加 1(Eden 区-&gt;Survivor 区后对象的初始年龄变为 1)，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置</p>
-<div><p>晋升年龄阈值</p>
-<p>Hotspot 遍历所有对象时，按照年龄从小到大对其所占用的大小进行累积，当累积的某个年龄大小超过了 survivor 区的 50% 时（默认值是 50%，可以通过 <code>-XX:TargetSurvivorRatio=percent</code> 来设置，参见 <a href="https://github.com/Snailclimb/JavaGuide/issues/1199" target="_blank" rel="noopener noreferrer">issue1199  (opens new window)</a> ），取这个年龄和 MaxTenuringThreshold 中更小的一个值，作为新的晋升年龄阈值</p>
-</div>
-<div><p>默认晋升年龄</p>
-<p><strong>《深入理解 Java 虚拟机》</strong> 中说默认的晋升年龄是15，但是 Oracle 官网中说明这个晋升年龄并不都是15，这个是要区分垃圾收集器的，CMS 就是 6</p>
-</div>
-<h3 id="_1-5-主要进行gc的区域"> 1.5 主要进行GC的区域</h3>
-<p>针对 HotSpot VM 的实现，它里面的 GC 其实准确分类只有两大种：</p>
-<p>部分收集 (Partial GC)：</p>
-<ul>
-<li>新生代收集（Minor GC / Young GC）：只对新生代进行垃圾收集；</li>
-<li>老年代收集（Major GC / Old GC）：只对老年代进行垃圾收集。需要注意的是 Major GC 在有的语境中也用于指代整堆收集；</li>
-<li>混合收集（Mixed GC）：对整个新生代和部分老年代进行垃圾收集。</li>
-</ul>
-<p>整堆收集 (Full GC)：收集整个 Java 堆和方法区</p>
-<h3 id="_1-6-空间分配担保"> 1.6 空间分配担保</h3>
-<p>空间分配担保是为了确保在 Minor GC 之前老年代本身还有容纳新生代所有对象的剩余空间</p>
-<blockquote>
-<p>JDK 6 Update 24 之前，在发生 Minor GC 之前，虚拟机必须先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，如果这个条件成立，那这一次 Minor GC 可以确保是安全的。如果不成立，则虚拟机会先查看 <code>-XX:HandlePromotionFailure</code> 参数的设置值是否允许担保失败(Handle Promotion Failure);如果允许，那会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试进行一次 Minor GC，尽管这次 Minor GC 是有风险的;如果小于，或者 <code>-XX: HandlePromotionFailure</code> 设置不允许冒险，那这时就要改为进行一次 Full GC。</p>
-<p>JDK 6 Update 24 之后的规则变为只要老年代的连续空间大于新生代对象总大小或者历次晋升的平均大小，就会进行 Minor GC，否则将进行 Full GC。</p>
-</blockquote>
-<h2 id="二、对象死亡"> 二、对象死亡</h2>
-<p>堆中几乎放着所有的对象实例，对堆垃圾回收前的第一步就是要判断哪些对象已经死亡（即不能再被任何途径使用的对象）。</p>
-<p><img src="./README.assets/11034259.2dc6983d.png" alt="img" /></p>
-<h3 id="_2-1-引用计数法"> 2.1 引用计数法</h3>
-<p>给对象中添加一个引用计数器，每当有一个地方引用它，计数器就加 1；当引用失效，计数器就减 1；任何时候计数器为 0 的对象就是不可能再被使用的。</p>
-<p><strong>这个方法实现简单，效率高，但是目前主流的虚拟机中并没有选择这个算法来管理内存，其最主要的原因是它很难解决对象之间相互循环引用的问题。</strong> 所谓对象之间的相互引用问题，如下面代码所示：除了对象 objA 和 objB 相互引用着对方之外，这两个对象之间再无任何引用。但是他们因为互相引用对方，导致它们的引用计数器都不为 0，于是引用计数算法无法通知 GC 回收器回收他们。</p>
-<div><pre><code><span>public</span> <span>class</span> <span>ReferenceCountingGc</span> <span>{</span>
-    <span>Object</span> instance <span>=</span> <span>null</span><span>;</span>
-	<span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-		<span>ReferenceCountingGc</span> objA <span>=</span> <span>new</span> <span>ReferenceCountingGc</span><span>(</span><span>)</span><span>;</span>
-		<span>ReferenceCountingGc</span> objB <span>=</span> <span>new</span> <span>ReferenceCountingGc</span><span>(</span><span>)</span><span>;</span>
-		objA<span>.</span>instance <span>=</span> objB<span>;</span>
-		objB<span>.</span>instance <span>=</span> objA<span>;</span>
-		objA <span>=</span> <span>null</span><span>;</span>
-		objB <span>=</span> <span>null</span><span>;</span>
-
-	<span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br></div></div><h3 id="_2-2-可达性分析算法"> 2.2 可达性分析算法</h3>
-<p>这个算法的基本思想就是通过一系列的称为 <strong>“GC Roots”</strong> 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的。</p>
-<p>可作为 GC Roots 的对象包括下面几种:</p>
-<ul>
-<li>虚拟机栈(栈帧中的本地变量表)中引用的对象</li>
-<li>本地方法栈(Native 方法)中引用的对象</li>
-<li>方法区中类静态属性引用的对象</li>
-<li>方法区中常量引用的对象</li>
-<li>所有被同步锁持有的对象</li>
-</ul>
-<p><img src="./README.assets/下载.png" alt="下载" /></p>
-<h3 id="_2-3-引用"> 2.3 引用</h3>
-<p>无论是通过引用计数法判断对象引用数量，还是通过可达性分析法判断对象的引用链是否可达，判定对象的存活都与“引用”有关。</p>
-<p>JDK1.2 之前，Java 中引用的定义很传统：如果 reference 类型的数据存储的数值代表的是另一块内存的起始地址，就称这块内存代表一个引用。</p>
-<p>JDK1.2 以后，Java 对引用的概念进行了扩充，将引用分为强引用、软引用、弱引用、虚引用四种（引用强度逐渐减弱）</p>
-<div><pre><code><span>String</span> str<span>=</span><span>new</span> <span>String</span><span>(</span><span>"abc"</span><span>)</span><span>;</span>                                     <span>// 强引用</span>
-<span>SoftReference</span><span><span>&lt;</span><span>String</span><span>></span></span> softRef<span>=</span><span>new</span> <span>SoftReference</span><span><span>&lt;</span><span>String</span><span>></span></span><span>(</span>str<span>)</span><span>;</span>     <span>// 软引用</span>
-<span>WeakReference</span><span><span>&lt;</span><span>String</span><span>></span></span> abcWeakRef <span>=</span> <span>new</span> <span>WeakReference</span><span><span>&lt;</span><span>String</span><span>></span></span><span>(</span>str<span>)</span><span>;</span><span>// 弱引用</span>
-<span>?</span><span>?</span><span>?</span>                                                               <span>// 虚引用</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><p>更多解释见 <a href="https://javaguide.cn/java/jvm/jvm-garbage-collection/#_2-3-%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8" target="_blank" rel="noopener noreferrer">JVM 垃圾回收详解 | JavaGuide</a></p>
-<p><img src="./README.assets/8vvr30i6ew.png" alt="8vvr30i6ew" /></p>
-<p><img src="./README.assets/a3je2pxov.png" alt="a3je2pxov" /></p>
-<h3 id="_2-4-不可达的对象并非-非死不可"> 2.4 不可达的对象并非“非死不可”</h3>
-<p>即使在可达性分析法中不可达的对象，也并非是“非死不可”的，这时候它们暂时处于“缓刑阶段”，要真正宣告一个对象死亡，至少要经历两次标记过程；可达性分析法中不可达的对象被第一次标记并且进行一次筛选，筛选的条件是此对象是否有必要执行 <code>finalize</code> 方法。当对象没有覆盖 <code>finalize</code> 方法，或 <code>finalize</code> 方法已经被虚拟机调用过时，虚拟机将这两种情况视为没有必要执行。</p>
-<p>被判定为需要执行的对象将会被放在一个队列中进行第二次标记，除非这个对象与引用链上的任何一个对象建立关联，否则就会被真的回收。</p>
-<blockquote>
-<p><code>Object</code> 类中的 <code>finalize</code> 方法一直被认为是一个糟糕的设计，成为了 Java 语言的负担，影响了 Java 语言的安全和 GC 的性能。JDK9 版本及后续版本中各个类中的 <code>finalize</code> 方法会被逐渐弃用移除。忘掉它的存在吧！</p>
-<p>参考：</p>
-<ul>
-<li><a href="https://openjdk.java.net/jeps/421" target="_blank" rel="noopener noreferrer">JEP 421: Deprecate Finalization for Removal  (opens new window)</a></li>
-<li><a href="https://mp.weixin.qq.com/s/LW-paZAMD08DP_3-XCUxmg" target="_blank" rel="noopener noreferrer">是时候忘掉 finalize 方法了</a></li>
-</ul>
-</blockquote>
-<h3 id="_2-5-如何判断一个常量是废弃常量"> 2.5 如何判断一个常量是废弃常量</h3>
-<ol>
-<li><strong>JDK1.7 之前运行时常量池逻辑包含字符串常量池存放在方法区, 此时 hotspot 虚拟机对方法区的实现为永久代</strong></li>
-<li><strong>JDK1.7 字符串常量池被从方法区拿到了堆中, 这里没有提到运行时常量池,也就是说字符串常量池被单独拿到堆,运行时常量池剩下的东西还在方法区, 也就是 hotspot 中的永久代</strong> 。</li>
-<li><strong>JDK1.8 hotspot 移除了永久代用元空间(Metaspace)取而代之, 这时候字符串常量池还在堆, 运行时常量池还在方法区, 只不过方法区的实现从永久代变成了元空间(Metaspace)</strong></li>
-</ol>
-<p>假如在字符串常量池中存在字符串 &quot;abc&quot;，如果当前没有任何 String 对象引用该字符串常量的话，就说明常量 &quot;abc&quot; 就是废弃常量，如果这时发生内存回收的话而且有必要的话，&quot;abc&quot; 就会被系统清理出常量池了</p>
-<h3 id="_2-6-如何判断一个类是无用的类"> 2.6 如何判断一个类是无用的类</h3>
-<p>方法区主要回收的是无用的类，那么如何判断一个类是无用的类的呢？</p>
-<p>判定一个常量是否是“废弃常量”比较简单，而要判定一个类是否是“无用的类”的条件则相对苛刻许多。类需要同时满足下面 3 个条件才能算是 <strong>“无用的类”</strong> ：</p>
-<ul>
-<li>该类所有的实例都已经被回收，也就是 Java 堆中不存在该类的任何实例。</li>
-<li>加载该类的 <code>ClassLoader</code> 已经被回收。</li>
-<li>该类对应的 <code>java.lang.Class</code> 对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
-</ul>
-<p>虚拟机可以对满足上述 3 个条件的无用类进行回收，这里说的仅仅是“可以”，而并不是和对象一样不使用了就会必然被回收。</p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T08:35:36.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">Java 集合框架基础知识</title>
-    <id>https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/</id>
-    <link href="https://vue-blog.lllllan.cn/1-java/3-container/1-collection-basic/"/>
-    <updated>2022-01-22T11:37:26.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/collection/java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86&amp;%E9%9D%A2%E8%AF%95%E9%A2%98%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">Java集合框架基础知识&amp;面试题总结 | JavaGuide</a>，略有改动</p>
-</div>
-<h2 id="一、集合概述"> 一、集合概述</h2>
-<h3 id="_1-0-java集合概览"> 1.0 Java集合概览</h3>
-<p><img src="./README.assets/java-collection-hierarchy.71519bdb.png" alt="img" /></p>
-<h3 id="_1-1-集合框架底层数据结构"> 1.1 集合框架底层数据结构</h3>
-<ul>
-<li><code>Collection</code>
-<ul>
-<li><code>List</code>
-<ul>
-<li><code>ArrayList</code>: Object[] 数组</li>
-<li><code>Vector</code>: Object[] 数组</li>
-<li><code>LinkedList</code>: 双向链表</li>
-</ul>
-</li>
-<li><code>Set</code>
-<ul>
-<li><code>HashSet</code>（无序）: 基于 <code>HashMap</code> 实现</li>
-<li><code>LinkedHashSet</code>: <code>HashSet</code> 的子类，基于 <code>LinkedHashMap</code> 实现</li>
-<li><code>TreeSet</code>（有序）: 红黑树（自平衡的排序二叉树）</li>
-</ul>
-</li>
-<li><code>Queue</code>
-<ul>
-<li><code>PriorityQueue</code> : Object[] 数组实现二叉堆</li>
-<li><code>ArrayQueue</code> : Object[] 数组 + 双指针</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><code>Map</code>
-<ul>
-<li><code>HashMap</code> : 数组 + 链表 + 红黑树（链表根据大小和阈值进行扩容，扩容到一定大小转换为红黑树）</li>
-<li><code>LinkedMap</code> : 继承自 <code>HashMap</code>，增加一条双向链表以保持插入顺序</li>
-<li><code>Hashtable</code> : 数组 + 链表</li>
-<li><code>TreeMap</code> : 红黑树</li>
-</ul>
-</li>
-</ul>
-<h3 id="_1-2-集合的选择"> 1.2 集合的选择</h3>
-<p><img src="./README.assets/image-20220118101609300.png" alt="image-20220118101609300" /></p>
-<h2 id="二、list"> 二、List</h2>
-<h3 id="_2-1-arraylist-和-vector-的区别"> 2.1 ArrayList 和 Vector 的区别</h3>
-<p><code>ArrayList</code> 是 <code>List</code> 的主要实现类，底层使用 <code>Object[]</code>存储，适用于频繁的查找工作，线程不安全 ；</p>
-<p><code>Vector</code> 是 <code>List</code> 的古老实现类，底层使用<code>Object[]</code> 存储，线程安全的（代价就是效率差一些）。</p>
-<h3 id="_2-2-arraylist-和-linkedlist-的区别"> 2.2 ArrayList  和 LinkedList 的区别</h3>
-<p><strong>是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</p>
-<p><strong>底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</p>
-<p><strong>插入和删除是否受元素位置的影响：</strong></p>
-<ul>
-<li><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。</li>
-<li><code>LinkedList</code> 采用链表存储，所以，如果是在头尾插入或者删除元素不受元素位置的影响（<code>add(E e)</code>、<code>addFirst(E e)</code>、<code>addLast(E e)</code>、<code>removeFirst()</code> 、 <code>removeLast()</code>），近似 O(1)，如果是要在指定位置 <code>i</code> 插入和删除元素的话（<code>add(int index, E element)</code>，<code>remove(Object o)</code>） 时间复杂度近似为 O(n) ，因为需要先移动到指定位置再插入。</li>
-</ul>
-<p><strong>是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</p>
-<p><strong>内存空间占用：</strong> ArrayList 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。</p>
-<h3 id="_2-3-randomaccess-接口"> 2.3 RandomAccess 接口</h3>
-<div><pre><code><span>public</span> <span>interface</span> <span>RandomAccess</span> <span>{</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p>查看源码我们发现实际上 <code>RandomAccess</code> 接口中什么都没有定义。所以，在我看来 <code>RandomAccess</code> 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p>
-<p>在 <code>binarySearch()</code>方法中，它要判断传入的 list 是否 <code>RamdomAccess</code>的实例，如果是，调用<code>indexedBinarySearch()</code>方法，如果不是，那么调用<code>iteratorBinarySearch()</code>方法</p>
-<div><pre><code><span>public</span> <span>static</span> <span><span>&lt;</span><span>T</span><span>></span></span>
-    <span>int</span> <span>binarySearch</span><span>(</span><span>List</span><span><span>&lt;</span><span>?</span> <span>extends</span> <span>Comparable</span><span>&lt;</span><span>?</span> <span>super</span> <span>T</span><span>></span><span>></span></span> list<span>,</span> <span>T</span> key<span>)</span> <span>{</span>
-    <span>if</span> <span>(</span>list <span>instanceof</span> <span>RandomAccess</span> <span>||</span> list<span>.</span><span>size</span><span>(</span><span>)</span><span>&lt;</span>BINARYSEARCH_THRESHOLD<span>)</span>
-        <span>return</span> <span>Collections</span><span>.</span><span>indexedBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
-    <span>else</span>
-        <span>return</span> <span>Collections</span><span>.</span><span>iteratorBinarySearch</span><span>(</span>list<span>,</span> key<span>)</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。为什么呢？我觉得还是和底层数据结构有关！<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O(n)，所以不支持快速随机访问。，<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。 <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的！</p>
-<h3 id="_2-4-arraylist-扩容机制"> 2.4 ArrayList 扩容机制</h3>
-<p>详见另一篇 <a href="../2-source-code/1-arraylist">ArrayList 源码解读</a></p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="Java"/>
+    <category term="MySQL"/>
     <contributor>
       <name>lllllan</name>
     </contributor>
@@ -2061,25 +2190,6 @@ after method send
       <name>lllllan</name>
     </contributor>
     <published>2022-01-20T09:33:02.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
-    <title type="html">MySQL 笔记</title>
-    <id>https://vue-blog.lllllan.cn/2-mysql/</id>
-    <link href="https://vue-blog.lllllan.cn/2-mysql/"/>
-    <updated>2022-01-20T14:33:14.000Z</updated>
-    <content type="html"><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
-<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
-<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="MySQL"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
@@ -2555,40 +2665,245 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">第三章、从网线到网络设备</title>
-    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</id>
-    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/"/>
+    <title type="html">第一章、浏览器生成消息</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/"/>
     <updated>2022-01-21T02:30:27.000Z</updated>
     <content type="html"><![CDATA[<div><p>Note</p>
 <p>本文作为 《网络是怎样连接的》 的笔记，绝大部分内容均抄自该书。</p>
 </div>
-<h2 id="一、信号在网线和集线器中传输"> 一、信号在网线和集线器中传输</h2>
-<h3 id="_1-1-每个包都是独立传输的"> 1.1 每个包都是独立传输的</h3>
-<p><img src="./README.assets/image-20220113145717884.png" alt="image-20220113145717884" /></p>
-<h3 id="_1-2-网线中的信号衰减"> 1.2 网线中的信号衰减</h3>
-<p>以太网信号的本质是正负变化的电压。</p>
-<p>信号在网线的传输过程中，能量会逐渐损失。网线越长，信号衰减就越严重。</p>
-<p>同时噪声也会进一步加剧信号的失真。</p>
-<h3 id="_1-3-双绞线抑制噪声"> 1.3 双绞线抑制噪声</h3>
+<h2 id="一、生成-http-请求消息"> 一、生成 HTTP 请求消息</h2>
+<h3 id="_1-1-网址-url-uniform-resource-locator"> 1.1 网址（URL, Uniform Resource Locator）</h3>
+<p><img src="./README.assets/image-20211217214228466.png" alt="image-20211217214228466" /></p>
+<h3 id="_1-2-解析-url"> 1.2 解析 URL</h3>
+<p><img src="./README.assets/image-20211217214541708.png" alt="image-20211217214541708" /></p>
+<p><img src="./README.assets/image-20211217214555087.png" alt="image-20211217214555087" /></p>
+<h3 id="_1-3-文件名省略"> 1.3 文件名省略</h3>
+<ul>
+<li>当 URL 以 <code>/</code> 结尾时，服务器会默认访问该路径下的 <code>index.html</code> 或 <code>default.html</code> 文件</li>
+<li>当 URL 连 <code>/</code> 和文件类型都省略的时候：</li>
+</ul>
+<p><img src="./README.assets/image-20211217215354653.png" alt="image-20211217215354653" /></p>
+<p>（实测：当一个文件没有文件类型的时候，不允许和一个同名文件夹同时存在。而当这个文件有后缀时，应该会访问同名文件夹）</p>
+<h3 id="_1-4-http-基本思路"> 1.4 HTTP 基本思路</h3>
+<ul>
+<li>对什么 + 进行怎样的操作</li>
+</ul>
+<p><img src="./README.assets/image-20211217215856796.png" alt="image-20211217215856796" /></p>
+<p><img src="./README.assets/image-20211217215922575.png" alt="image-20211217215922575" /></p>
+<h3 id="_1-5-生成-http-请求信息"> 1.5 生成 HTTP 请求信息</h3>
 <blockquote>
-<p>产生噪声的原因是网线周围的电磁波，当电磁波接触到金属等导体时，在其中就会产生电流。信号和噪声的电流混杂在一起之后，导致信号的波形发生失真。</p>
+<p><strong>一条请求消息中只能写一个URI</strong>。如果需要获取多个文件，必须对每个文件单独发送一条请求</p>
 </blockquote>
-<p>影响网线的电磁波分为两种：</p>
-<h4 id="来自网线之外的其他设备"> 来自网线之外的其他设备：</h4>
-<p>当电磁波接触到信号线时，会沿电磁波传播的右旋方向产生电流。</p>
-<p>如果我们将信号线缠绕在一起，信号线就变成了螺旋形，其中两根信号线产生的噪声电流方向就会相反，从而使得噪声电流相互抵消。</p>
-<p><img src="./README.assets/image-20220113150630538.png" alt="image-20220113150630538" /></p>
-<p><img src="./README.assets/image-20220113150651814.png" alt="image-20220113150651814" /></p>
-<h4 id="相邻信号线泄露出来"> 相邻信号线泄露出来：</h4>
-<p>这种内部产生的噪声称为 <strong>串扰</strong></p>
-<p><img src="./README.assets/image-20220113151240119.png" alt="image-20220113151240119" /></p>
-<p><img src="./README.assets/image-20220113151203170.png" alt="image-20220113151203170" /></p>
-<h3 id="_1-4-集线器将信号发往所有线路"> 1.4 集线器将信号发往所有线路</h3>
+<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
+<p><img src="./../../../../../../data/r2coding/4.计算机基础/1.计算机网络/1.网络是怎样连接的/网络是怎样连接的.assets/image-20211217223351942.png" alt="image-20211217223351942" /></p>
+<p>更多字段信息见文档 44 页。</p>
+<h3 id="_1-6-服务器响应"> 1.6 服务器响应</h3>
+<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
 <blockquote>
-<p>集线器将信号发送给所有连接在它上面的线路。</p>
+<p>状态码时一个数字，主要用来向程序告知执行的结果</p>
+<p>响应短语是一段文字，用来向人们告知执行的结果</p>
 </blockquote>
-<p><img src="./README.assets/image-20220113151435359.png" alt="image-20220113151435359" /></p>
-<p><img src="./README.assets/image-20220113151613603.png" alt="image-20220113151613603" /></p>
+<p><img src="./README.assets/image-20211217224050584.png" alt="image-20211217224050584" /></p>
+<p><img src="./README.assets/image-20211217224916808.png" alt="image-20211217224916808" /></p>
+<h2 id="二、向-dns-服务器查询-web-服务器的-ip-地址"> 二、向 DNS 服务器查询 Web 服务器的 IP 地址</h2>
+<h3 id="_2-1-ip-地址的基本知识"> 2.1 IP 地址的基本知识</h3>
+<p><img src="./README.assets/image-20211219221243726.png" alt="image-20211219221243726" /></p>
+<p><img src="./README.assets/image-20211219221343432.png" alt="image-20211219221343432" /></p>
+<ul>
+<li>IP 地址是 32 比特的数字，被分成了4组</li>
+<li>子网掩码也是 32 比特的数字
+<ul>
+<li><strong>左边全1的部分表示网络号</strong></li>
+<li><strong>右边全0的部分表示主机号</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="./README.assets/image-20211219222137630.png" alt="image-20211219222137630" /></p>
+<p><img src="./README.assets/image-20211219222245701.png" alt="image-20211219222245701" /></p>
+<h3 id="_2-2-域名和ip地址并用的理由"> 2.2 域名和IP地址并用的理由</h3>
+<ul>
+<li>域名比IP地址更容易记忆</li>
+<li>IP地址的传输比域名更高效（IP地址只是4字节的数字，域名最长可以是255字节的字符）</li>
+</ul>
+<p>于是让人来使用域名，让路由器来使用IP地址，这个机制就是<strong>DNS</strong>。</p>
+<h3 id="_2-3-socket-库提供查询-ip-地址的功能"> 2.3 Socket 库提供查询 IP 地址的功能</h3>
+<blockquote>
+<p><strong>域名解析</strong>：通过DNS查询IP地址的操作。</p>
+</blockquote>
+<blockquote>
+<p><strong>解析器</strong>：负责执行域名解析的DNS客户端。（解析器实际上是一段程序。）</p>
+</blockquote>
+<p>​	库是一堆通用程序组件的集合，他们具有诸多好处：</p>
+<ul>
+<li>节省编程工作量</li>
+<li>实现程序的标准化</li>
+<li>等等</li>
+</ul>
+<p>​	Socket库也是一种库，其中包含的程序组件可以让其他的应用程序调用操作系统的网络功能，而解析器就是这个库中的其中一种程序组件。</p>
+<h3 id="_2-4-通过解析器向dns服务器发出查询"> 2.4 通过解析器向DNS服务器发出查询</h3>
+<ul>
+<li>调用解析器</li>
+<li>解析器向DNS服务器发送查询消息</li>
+<li>DNS服务器返回响应消息</li>
+<li>解析器从响应消息中取出IP地址并写入内存</li>
+</ul>
+<p><img src="./README.assets/image-20211223215500444.png" alt="image-20211223215500444" /></p>
+<p>根据域名查询IP地址时，浏览器会使用Socket库中的解析器。</p>
+<h3 id="_2-5-解析器的内部原理"> 2.5 解析器的内部原理</h3>
+<blockquote>
+<p><strong>控制流程转移</strong>：由于调用了其他程序，原本运行的程序进入暂停状态，而被调用的程序开始运行。</p>
+</blockquote>
+<ul>
+<li>从上往下顺序执行应用程序编写的操作内容，当到达需要调用解析器的部分时</li>
+<li>控制流程转移到解析器，解析器会生成要发送给DNS服务器的查询消息</li>
+<li>委托操作系统内部的协议栈来发送这个消息（因为解析器本身并不具备使用网络收发数据的功能</li>
+</ul>
+<p><img src="./README.assets/image-20211224205322811.png" alt="image-20211224205322811" /></p>
+<p>向DNS服务器发送消息时，也需要知道DNS服务器的IP地址。这是这个地址实现设置好了，不需要再查询。</p>
+<p><img src="./README.assets/image-20211224213701480.png" alt="image-20211224213701480" /></p>
+<h2 id="三、dns-服务器"> 三、DNS 服务器</h2>
+<h3 id="_3-1-dns-服务器的基本工作"> 3.1 DNS 服务器的基本工作</h3>
+<p>DNS 服务器的基本工作就是根据需要查询的域名和记录类型查找相关的记录，并向客户端返回响应消息。</p>
+<ul>
+<li>域名：服务器、邮件服务器（邮件地址@后面的部分）的名称</li>
+<li>Class：代表互联网的IN</li>
+<li>记录类型：表示域名对应何种类型的记录。</li>
+</ul>
+<p><img src="./README.assets/image-20211224215024279.png" alt="image-20211224215024279" /></p>
+<h3 id="_3-2-域名的层次结构"> 3.2 域名的层次结构</h3>
+<p>由于存在着不计其数的服务器，不可能将所有服务器的信息保存在一台DNS服务器中，只能是将这些信息分布保存在多台DNS服务器中。</p>
+<ul>
+<li>按域名以分层次的结构来保存</li>
+<li>域名中越靠右的位置表示气层级越高</li>
+<li>每个域都是作为一个整体存放在DNS服务器中的</li>
+</ul>
+<h3 id="_3-3-寻找相应的-dns-服务器并获取-ip-地址"> 3.3 寻找相应的 DNS 服务器并获取 IP 地址</h3>
+<ul>
+<li>负责管理下级域的 DNS 服务器的 IP 地址注册到他们的上级 DNS 服务器中</li>
+<li>com和jp 的上面存在一个 根域</li>
+<li>所有 DNS 服务器中都保存有根域的 DNS 服务器信息</li>
+</ul>
+<p><img src="./README.assets/image-20211224220739596.png" alt="image-20211224220739596" /></p>
+<p><img src="./README.assets/image-20211224220802400.png" alt="image-20211224220802400" /></p>
+<h3 id="_3-4-通过缓存加快-dns-服务器的响应"> 3.4 通过缓存加快 DNS 服务器的响应</h3>
+<p>DNS 服务器有一个缓存功能，可以记住之前查询过的域名</p>
+<ul>
+<li>如果要查询的域名和相关信息已经在缓存中，那么就可以直接返回响应。</li>
+<li>当查询的域名不存在时，“不存在”这一响应结果也会被缓存</li>
+<li>缓存信息设置有一个有效期，当信息超过有效期后，数据会从缓存中删除</li>
+<li>DNS服务器返回响应时，会告知这一响应结果是来自缓存还是来自负责管理该域名的DNS服务器</li>
+</ul>
+<h2 id="四、委托协议栈发送消息"> 四、委托协议栈发送消息</h2>
+<h3 id="_4-1-数据收发操作概览"> 4.1 数据收发操作概览</h3>
+<blockquote>
+<p>委托操作系统内部的协议栈发送HTTP消息，适用于<strong>任何</strong>网络应用程序。</p>
+</blockquote>
+<p><img src="./README.assets/image-20211225120920801.png" alt="image-20211225120920801" /></p>
+<ul>
+<li>创建套接字（出入口） —— <strong>创建套接字阶段</strong></li>
+<li>【客户端】向【服务器端】套接字连接管道 —— <strong>连接阶段</strong></li>
+<li>收发数据 —— <strong>通信阶段</strong></li>
+<li>断开管道并删除套接字 —— <strong>断开阶段</strong></li>
+</ul>
+<blockquote>
+<p>这个管道中，<em>数据流动是<strong>双向</strong>的</em></p>
+</blockquote>
+<h3 id="_4-2-创建套接字阶段"> 4.2 创建套接字阶段</h3>
+<blockquote>
+<p>创建套接字需要调用 Socket 库中的 <strong>socket 程序组件</strong></p>
+</blockquote>
+<p>客户端创建套接字：</p>
+<ul>
+<li>调用 Socket 库中的 socket 程序组件</li>
+<li>控制流程转移到 socket 内部并执行创建套接字操作</li>
+<li>控制流程交回应用程序</li>
+</ul>
+<p><img src="./README.assets/image-20211225122553775.png" alt="image-20211225122553775" /></p>
+<blockquote>
+<p>套接字创建完成以后，协议栈返回一个<strong>描述符</strong>，用来标识该套接字</p>
+</blockquote>
+<h3 id="_4-3-连接阶段"> 4.3 连接阶段</h3>
+<blockquote>
+<p>连接阶段需要调用 Socket 库中的 <strong>connect 程序组件</strong></p>
+</blockquote>
+<p>调用 connect 时需要指定三个参数：描述符、服务器IP地址、端口号</p>
+<p><img src="./README.assets/image-20211225130205613.png" alt="image-20211225130205613" /></p>
+<h3 id="_4-4-通信阶段"> 4.4 通信阶段</h3>
+<blockquote>
+<p>通信阶段需要调用 Socket 库中的 <strong>write 程序组件</strong>、<strong>read 程序组件</strong></p>
+</blockquote>
+<p>发送数据：</p>
+<ul>
+<li>生成 HTTP 请求消息</li>
+<li>指定描述符和要发送的数据，由协议栈将数据发送到服务器</li>
+</ul>
+<p>接收数据：</p>
+<ul>
+<li>指定存放响应消息的内存地址（称为接收缓冲区）</li>
+<li>read 将接收到的响应消息存放到接收缓冲区中</li>
+</ul>
+<h3 id="_4-5-断开阶段"> 4.5 断开阶段</h3>
+<blockquote>
+<p>断开阶段需要调用 Socket 库中的 <strong>close 程序组件</strong></p>
+</blockquote>
+<ul>
+<li>Web服务器在发送完响应消息之后，会首先调用 close 来断开连接</li>
+<li>客户端中 read 执行接收数据时，会告知浏览器通信阶段已结束</li>
+<li>浏览器调用 close 进入断开阶段</li>
+</ul>
+<h3 id="_4-6-各阶段功能和调用组件"> 4.6 各阶段功能和调用组件</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">阶段</th>
+<th style="text-align:center">组件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">创建套接字</td>
+<td style="text-align:center">socket</td>
+</tr>
+<tr>
+<td style="text-align:center">连接</td>
+<td style="text-align:center">connect</td>
+</tr>
+<tr>
+<td style="text-align:center">通信</td>
+<td style="text-align:center">发送：write<br>接收：read</td>
+</tr>
+<tr>
+<td style="text-align:center">断开</td>
+<td style="text-align:center">close</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五、本章回顾"> 五、本章回顾</h2>
+<ul>
+<li>网址前的 <code>http</code> 代表什么意思</li>
+</ul>
+<blockquote>
+<p>HTTP，即超文本传输协议，是 HyperText Transfer Protocol的缩写。</p>
+</blockquote>
+<ul>
+<li>用来识别连接在互联网上的计算机和服务器的地址叫什么</li>
+</ul>
+<blockquote>
+<p>IP 地址</p>
+</blockquote>
+<ul>
+<li>根据Web服务器的域名来查询IP地址时所用的服务器叫什么</li>
+</ul>
+<blockquote>
+<p>DNS 服务器</p>
+</blockquote>
+<ul>
+<li>向DNS服务器发送请求消息的程序叫什么</li>
+</ul>
+<blockquote>
+<p>协议栈</p>
+</blockquote>
 ]]></content>
     <author>
       <name>lllllan</name>
@@ -3087,245 +3402,40 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">第一章、浏览器生成消息</title>
-    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/</id>
-    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/"/>
+    <title type="html">第三章、从网线到网络设备</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/"/>
     <updated>2022-01-21T02:30:27.000Z</updated>
     <content type="html"><![CDATA[<div><p>Note</p>
 <p>本文作为 《网络是怎样连接的》 的笔记，绝大部分内容均抄自该书。</p>
 </div>
-<h2 id="一、生成-http-请求消息"> 一、生成 HTTP 请求消息</h2>
-<h3 id="_1-1-网址-url-uniform-resource-locator"> 1.1 网址（URL, Uniform Resource Locator）</h3>
-<p><img src="./README.assets/image-20211217214228466.png" alt="image-20211217214228466" /></p>
-<h3 id="_1-2-解析-url"> 1.2 解析 URL</h3>
-<p><img src="./README.assets/image-20211217214541708.png" alt="image-20211217214541708" /></p>
-<p><img src="./README.assets/image-20211217214555087.png" alt="image-20211217214555087" /></p>
-<h3 id="_1-3-文件名省略"> 1.3 文件名省略</h3>
-<ul>
-<li>当 URL 以 <code>/</code> 结尾时，服务器会默认访问该路径下的 <code>index.html</code> 或 <code>default.html</code> 文件</li>
-<li>当 URL 连 <code>/</code> 和文件类型都省略的时候：</li>
-</ul>
-<p><img src="./README.assets/image-20211217215354653.png" alt="image-20211217215354653" /></p>
-<p>（实测：当一个文件没有文件类型的时候，不允许和一个同名文件夹同时存在。而当这个文件有后缀时，应该会访问同名文件夹）</p>
-<h3 id="_1-4-http-基本思路"> 1.4 HTTP 基本思路</h3>
-<ul>
-<li>对什么 + 进行怎样的操作</li>
-</ul>
-<p><img src="./README.assets/image-20211217215856796.png" alt="image-20211217215856796" /></p>
-<p><img src="./README.assets/image-20211217215922575.png" alt="image-20211217215922575" /></p>
-<h3 id="_1-5-生成-http-请求信息"> 1.5 生成 HTTP 请求信息</h3>
+<h2 id="一、信号在网线和集线器中传输"> 一、信号在网线和集线器中传输</h2>
+<h3 id="_1-1-每个包都是独立传输的"> 1.1 每个包都是独立传输的</h3>
+<p><img src="./README.assets/image-20220113145717884.png" alt="image-20220113145717884" /></p>
+<h3 id="_1-2-网线中的信号衰减"> 1.2 网线中的信号衰减</h3>
+<p>以太网信号的本质是正负变化的电压。</p>
+<p>信号在网线的传输过程中，能量会逐渐损失。网线越长，信号衰减就越严重。</p>
+<p>同时噪声也会进一步加剧信号的失真。</p>
+<h3 id="_1-3-双绞线抑制噪声"> 1.3 双绞线抑制噪声</h3>
 <blockquote>
-<p><strong>一条请求消息中只能写一个URI</strong>。如果需要获取多个文件，必须对每个文件单独发送一条请求</p>
+<p>产生噪声的原因是网线周围的电磁波，当电磁波接触到金属等导体时，在其中就会产生电流。信号和噪声的电流混杂在一起之后，导致信号的波形发生失真。</p>
 </blockquote>
-<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
-<p><img src="./../../../../../../data/r2coding/4.计算机基础/1.计算机网络/1.网络是怎样连接的/网络是怎样连接的.assets/image-20211217223351942.png" alt="image-20211217223351942" /></p>
-<p>更多字段信息见文档 44 页。</p>
-<h3 id="_1-6-服务器响应"> 1.6 服务器响应</h3>
-<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
+<p>影响网线的电磁波分为两种：</p>
+<h4 id="来自网线之外的其他设备"> 来自网线之外的其他设备：</h4>
+<p>当电磁波接触到信号线时，会沿电磁波传播的右旋方向产生电流。</p>
+<p>如果我们将信号线缠绕在一起，信号线就变成了螺旋形，其中两根信号线产生的噪声电流方向就会相反，从而使得噪声电流相互抵消。</p>
+<p><img src="./README.assets/image-20220113150630538.png" alt="image-20220113150630538" /></p>
+<p><img src="./README.assets/image-20220113150651814.png" alt="image-20220113150651814" /></p>
+<h4 id="相邻信号线泄露出来"> 相邻信号线泄露出来：</h4>
+<p>这种内部产生的噪声称为 <strong>串扰</strong></p>
+<p><img src="./README.assets/image-20220113151240119.png" alt="image-20220113151240119" /></p>
+<p><img src="./README.assets/image-20220113151203170.png" alt="image-20220113151203170" /></p>
+<h3 id="_1-4-集线器将信号发往所有线路"> 1.4 集线器将信号发往所有线路</h3>
 <blockquote>
-<p>状态码时一个数字，主要用来向程序告知执行的结果</p>
-<p>响应短语是一段文字，用来向人们告知执行的结果</p>
+<p>集线器将信号发送给所有连接在它上面的线路。</p>
 </blockquote>
-<p><img src="./README.assets/image-20211217224050584.png" alt="image-20211217224050584" /></p>
-<p><img src="./README.assets/image-20211217224916808.png" alt="image-20211217224916808" /></p>
-<h2 id="二、向-dns-服务器查询-web-服务器的-ip-地址"> 二、向 DNS 服务器查询 Web 服务器的 IP 地址</h2>
-<h3 id="_2-1-ip-地址的基本知识"> 2.1 IP 地址的基本知识</h3>
-<p><img src="./README.assets/image-20211219221243726.png" alt="image-20211219221243726" /></p>
-<p><img src="./README.assets/image-20211219221343432.png" alt="image-20211219221343432" /></p>
-<ul>
-<li>IP 地址是 32 比特的数字，被分成了4组</li>
-<li>子网掩码也是 32 比特的数字
-<ul>
-<li><strong>左边全1的部分表示网络号</strong></li>
-<li><strong>右边全0的部分表示主机号</strong></li>
-</ul>
-</li>
-</ul>
-<p><img src="./README.assets/image-20211219222137630.png" alt="image-20211219222137630" /></p>
-<p><img src="./README.assets/image-20211219222245701.png" alt="image-20211219222245701" /></p>
-<h3 id="_2-2-域名和ip地址并用的理由"> 2.2 域名和IP地址并用的理由</h3>
-<ul>
-<li>域名比IP地址更容易记忆</li>
-<li>IP地址的传输比域名更高效（IP地址只是4字节的数字，域名最长可以是255字节的字符）</li>
-</ul>
-<p>于是让人来使用域名，让路由器来使用IP地址，这个机制就是<strong>DNS</strong>。</p>
-<h3 id="_2-3-socket-库提供查询-ip-地址的功能"> 2.3 Socket 库提供查询 IP 地址的功能</h3>
-<blockquote>
-<p><strong>域名解析</strong>：通过DNS查询IP地址的操作。</p>
-</blockquote>
-<blockquote>
-<p><strong>解析器</strong>：负责执行域名解析的DNS客户端。（解析器实际上是一段程序。）</p>
-</blockquote>
-<p>​	库是一堆通用程序组件的集合，他们具有诸多好处：</p>
-<ul>
-<li>节省编程工作量</li>
-<li>实现程序的标准化</li>
-<li>等等</li>
-</ul>
-<p>​	Socket库也是一种库，其中包含的程序组件可以让其他的应用程序调用操作系统的网络功能，而解析器就是这个库中的其中一种程序组件。</p>
-<h3 id="_2-4-通过解析器向dns服务器发出查询"> 2.4 通过解析器向DNS服务器发出查询</h3>
-<ul>
-<li>调用解析器</li>
-<li>解析器向DNS服务器发送查询消息</li>
-<li>DNS服务器返回响应消息</li>
-<li>解析器从响应消息中取出IP地址并写入内存</li>
-</ul>
-<p><img src="./README.assets/image-20211223215500444.png" alt="image-20211223215500444" /></p>
-<p>根据域名查询IP地址时，浏览器会使用Socket库中的解析器。</p>
-<h3 id="_2-5-解析器的内部原理"> 2.5 解析器的内部原理</h3>
-<blockquote>
-<p><strong>控制流程转移</strong>：由于调用了其他程序，原本运行的程序进入暂停状态，而被调用的程序开始运行。</p>
-</blockquote>
-<ul>
-<li>从上往下顺序执行应用程序编写的操作内容，当到达需要调用解析器的部分时</li>
-<li>控制流程转移到解析器，解析器会生成要发送给DNS服务器的查询消息</li>
-<li>委托操作系统内部的协议栈来发送这个消息（因为解析器本身并不具备使用网络收发数据的功能</li>
-</ul>
-<p><img src="./README.assets/image-20211224205322811.png" alt="image-20211224205322811" /></p>
-<p>向DNS服务器发送消息时，也需要知道DNS服务器的IP地址。这是这个地址实现设置好了，不需要再查询。</p>
-<p><img src="./README.assets/image-20211224213701480.png" alt="image-20211224213701480" /></p>
-<h2 id="三、dns-服务器"> 三、DNS 服务器</h2>
-<h3 id="_3-1-dns-服务器的基本工作"> 3.1 DNS 服务器的基本工作</h3>
-<p>DNS 服务器的基本工作就是根据需要查询的域名和记录类型查找相关的记录，并向客户端返回响应消息。</p>
-<ul>
-<li>域名：服务器、邮件服务器（邮件地址@后面的部分）的名称</li>
-<li>Class：代表互联网的IN</li>
-<li>记录类型：表示域名对应何种类型的记录。</li>
-</ul>
-<p><img src="./README.assets/image-20211224215024279.png" alt="image-20211224215024279" /></p>
-<h3 id="_3-2-域名的层次结构"> 3.2 域名的层次结构</h3>
-<p>由于存在着不计其数的服务器，不可能将所有服务器的信息保存在一台DNS服务器中，只能是将这些信息分布保存在多台DNS服务器中。</p>
-<ul>
-<li>按域名以分层次的结构来保存</li>
-<li>域名中越靠右的位置表示气层级越高</li>
-<li>每个域都是作为一个整体存放在DNS服务器中的</li>
-</ul>
-<h3 id="_3-3-寻找相应的-dns-服务器并获取-ip-地址"> 3.3 寻找相应的 DNS 服务器并获取 IP 地址</h3>
-<ul>
-<li>负责管理下级域的 DNS 服务器的 IP 地址注册到他们的上级 DNS 服务器中</li>
-<li>com和jp 的上面存在一个 根域</li>
-<li>所有 DNS 服务器中都保存有根域的 DNS 服务器信息</li>
-</ul>
-<p><img src="./README.assets/image-20211224220739596.png" alt="image-20211224220739596" /></p>
-<p><img src="./README.assets/image-20211224220802400.png" alt="image-20211224220802400" /></p>
-<h3 id="_3-4-通过缓存加快-dns-服务器的响应"> 3.4 通过缓存加快 DNS 服务器的响应</h3>
-<p>DNS 服务器有一个缓存功能，可以记住之前查询过的域名</p>
-<ul>
-<li>如果要查询的域名和相关信息已经在缓存中，那么就可以直接返回响应。</li>
-<li>当查询的域名不存在时，“不存在”这一响应结果也会被缓存</li>
-<li>缓存信息设置有一个有效期，当信息超过有效期后，数据会从缓存中删除</li>
-<li>DNS服务器返回响应时，会告知这一响应结果是来自缓存还是来自负责管理该域名的DNS服务器</li>
-</ul>
-<h2 id="四、委托协议栈发送消息"> 四、委托协议栈发送消息</h2>
-<h3 id="_4-1-数据收发操作概览"> 4.1 数据收发操作概览</h3>
-<blockquote>
-<p>委托操作系统内部的协议栈发送HTTP消息，适用于<strong>任何</strong>网络应用程序。</p>
-</blockquote>
-<p><img src="./README.assets/image-20211225120920801.png" alt="image-20211225120920801" /></p>
-<ul>
-<li>创建套接字（出入口） —— <strong>创建套接字阶段</strong></li>
-<li>【客户端】向【服务器端】套接字连接管道 —— <strong>连接阶段</strong></li>
-<li>收发数据 —— <strong>通信阶段</strong></li>
-<li>断开管道并删除套接字 —— <strong>断开阶段</strong></li>
-</ul>
-<blockquote>
-<p>这个管道中，<em>数据流动是<strong>双向</strong>的</em></p>
-</blockquote>
-<h3 id="_4-2-创建套接字阶段"> 4.2 创建套接字阶段</h3>
-<blockquote>
-<p>创建套接字需要调用 Socket 库中的 <strong>socket 程序组件</strong></p>
-</blockquote>
-<p>客户端创建套接字：</p>
-<ul>
-<li>调用 Socket 库中的 socket 程序组件</li>
-<li>控制流程转移到 socket 内部并执行创建套接字操作</li>
-<li>控制流程交回应用程序</li>
-</ul>
-<p><img src="./README.assets/image-20211225122553775.png" alt="image-20211225122553775" /></p>
-<blockquote>
-<p>套接字创建完成以后，协议栈返回一个<strong>描述符</strong>，用来标识该套接字</p>
-</blockquote>
-<h3 id="_4-3-连接阶段"> 4.3 连接阶段</h3>
-<blockquote>
-<p>连接阶段需要调用 Socket 库中的 <strong>connect 程序组件</strong></p>
-</blockquote>
-<p>调用 connect 时需要指定三个参数：描述符、服务器IP地址、端口号</p>
-<p><img src="./README.assets/image-20211225130205613.png" alt="image-20211225130205613" /></p>
-<h3 id="_4-4-通信阶段"> 4.4 通信阶段</h3>
-<blockquote>
-<p>通信阶段需要调用 Socket 库中的 <strong>write 程序组件</strong>、<strong>read 程序组件</strong></p>
-</blockquote>
-<p>发送数据：</p>
-<ul>
-<li>生成 HTTP 请求消息</li>
-<li>指定描述符和要发送的数据，由协议栈将数据发送到服务器</li>
-</ul>
-<p>接收数据：</p>
-<ul>
-<li>指定存放响应消息的内存地址（称为接收缓冲区）</li>
-<li>read 将接收到的响应消息存放到接收缓冲区中</li>
-</ul>
-<h3 id="_4-5-断开阶段"> 4.5 断开阶段</h3>
-<blockquote>
-<p>断开阶段需要调用 Socket 库中的 <strong>close 程序组件</strong></p>
-</blockquote>
-<ul>
-<li>Web服务器在发送完响应消息之后，会首先调用 close 来断开连接</li>
-<li>客户端中 read 执行接收数据时，会告知浏览器通信阶段已结束</li>
-<li>浏览器调用 close 进入断开阶段</li>
-</ul>
-<h3 id="_4-6-各阶段功能和调用组件"> 4.6 各阶段功能和调用组件</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">阶段</th>
-<th style="text-align:center">组件</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">创建套接字</td>
-<td style="text-align:center">socket</td>
-</tr>
-<tr>
-<td style="text-align:center">连接</td>
-<td style="text-align:center">connect</td>
-</tr>
-<tr>
-<td style="text-align:center">通信</td>
-<td style="text-align:center">发送：write<br>接收：read</td>
-</tr>
-<tr>
-<td style="text-align:center">断开</td>
-<td style="text-align:center">close</td>
-</tr>
-</tbody>
-</table>
-<h2 id="五、本章回顾"> 五、本章回顾</h2>
-<ul>
-<li>网址前的 <code>http</code> 代表什么意思</li>
-</ul>
-<blockquote>
-<p>HTTP，即超文本传输协议，是 HyperText Transfer Protocol的缩写。</p>
-</blockquote>
-<ul>
-<li>用来识别连接在互联网上的计算机和服务器的地址叫什么</li>
-</ul>
-<blockquote>
-<p>IP 地址</p>
-</blockquote>
-<ul>
-<li>根据Web服务器的域名来查询IP地址时所用的服务器叫什么</li>
-</ul>
-<blockquote>
-<p>DNS 服务器</p>
-</blockquote>
-<ul>
-<li>向DNS服务器发送请求消息的程序叫什么</li>
-</ul>
-<blockquote>
-<p>协议栈</p>
-</blockquote>
+<p><img src="./README.assets/image-20220113151435359.png" alt="image-20220113151435359" /></p>
+<p><img src="./README.assets/image-20220113151613603.png" alt="image-20220113151613603" /></p>
 ]]></content>
     <author>
       <name>lllllan</name>
@@ -3338,21 +3448,40 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">计算机基础</title>
-    <id>https://vue-blog.lllllan.cn/3-cs-basic/</id>
-    <link href="https://vue-blog.lllllan.cn/3-cs-basic/"/>
+    <title type="html">操作系统-常见面试题</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/"/>
     <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>重要声明</p>
-<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
+    <content type="html"><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/cs-basics/operating-system/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98&amp;%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">操作系统常见面试题总结 | JavaGuide</a></p>
 </div>
-<h2 id="参考"> 参考</h2>
+<h2 id="一、操作系统基础"> 一、操作系统基础</h2>
+<h3 id="_1-1-操作系统"> 1.1 操作系统</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/105945721" target="_blank" rel="noopener noreferrer">什么是操作系统？ - 知乎 (zhihu.com)</a></p>
+<p>操作系统(Operation System, OS) 是指控制和管理整个计算机系统的硬件和软件资源，并合理的组织和调度计算机的工作和资源的分配，以提供给用户和其它软件方便的接口和环境，它是计算机系统中最基本的系统软件。</p>
+<img src="README.assets/v2-9e3753e45963e8de97ec5af05aa4f6e9_720w.jpg" alt="img" style="zoom: 33%;" />
+<p><strong>操作系统说明：</strong></p>
+<ol>
+<li>负责管理协调硬件、软件等计算机资源的工作</li>
+<li>为上层的应用程序、用户提供简单易用的服务</li>
+<li>操作系统是系统软件，而不是硬件</li>
+</ol>
+<p><img src="./README.assets/v2-80e382880632b6067b9c1b7c679de331_720w.jpg" alt="img" /></p>
+<h3 id="_1-2-系统调用"> 1.2 系统调用</h3>
+<p>根据进程访问资源的特点，我们可以把进程在系统上的运行分为两个级别：</p>
+<ol>
+<li>用户态(user mode)：用户态运行的进程可以直接读取用户程序的数据。</li>
+<li>内核态(kernel mode)：可以简单的理解系统态运行的进程或程序几乎可以访问计算机的任何资源，不受限制。</li>
+</ol>
+<p>我们运行的程序基本都是运行在用户态，如果我们调用操作系统提供的系统态级别的子功能咋办呢？那就需要系统调用了！</p>
+<p>也就是说在我们运行的用户程序中，凡是与系统态级别的资源有关的操作（如文件管理、进程控制、内存管理等)，都必须通过系统调用方式向操作系统提出服务请求，并由操作系统代为完成。</p>
+<p>这些系统调用按功能大致可分为如下几类：</p>
 <ul>
-<li>
-<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
-</li>
-<li>
-<p>《网络是怎样连接的》</p>
-</li>
+<li>设备管理。完成设备的请求或释放，以及设备启动等功能。</li>
+<li>文件管理。完成文件的读、写、创建及删除等功能。</li>
+<li>进程控制。完成进程的创建、撤销、阻塞及唤醒等功能。</li>
+<li>进程通信。完成进程之间的消息传递或信号传递等功能。</li>
+<li>内存管理。完成内存的分配、回收以及获取作业占用内存区大小及地址等功能。</li>
 </ul>
 ]]></content>
     <author>
@@ -3362,7 +3491,7 @@ after method send
     <contributor>
       <name>lllllan</name>
     </contributor>
-    <published>2022-01-20T14:33:14.000Z</published>
+    <published>2022-01-21T02:30:27.000Z</published>
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
@@ -3722,53 +3851,6 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
-    <title type="html">操作系统-常见面试题</title>
-    <id>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</id>
-    <link href="https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/"/>
-    <updated>2022-01-21T02:30:27.000Z</updated>
-    <content type="html"><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/cs-basics/operating-system/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98&amp;%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">操作系统常见面试题总结 | JavaGuide</a></p>
-</div>
-<h2 id="一、操作系统基础"> 一、操作系统基础</h2>
-<h3 id="_1-1-操作系统"> 1.1 操作系统</h3>
-<p><a href="https://zhuanlan.zhihu.com/p/105945721" target="_blank" rel="noopener noreferrer">什么是操作系统？ - 知乎 (zhihu.com)</a></p>
-<p>操作系统(Operation System, OS) 是指控制和管理整个计算机系统的硬件和软件资源，并合理的组织和调度计算机的工作和资源的分配，以提供给用户和其它软件方便的接口和环境，它是计算机系统中最基本的系统软件。</p>
-<img src="README.assets/v2-9e3753e45963e8de97ec5af05aa4f6e9_720w.jpg" alt="img" style="zoom: 33%;" />
-<p><strong>操作系统说明：</strong></p>
-<ol>
-<li>负责管理协调硬件、软件等计算机资源的工作</li>
-<li>为上层的应用程序、用户提供简单易用的服务</li>
-<li>操作系统是系统软件，而不是硬件</li>
-</ol>
-<p><img src="./README.assets/v2-80e382880632b6067b9c1b7c679de331_720w.jpg" alt="img" /></p>
-<h3 id="_1-2-系统调用"> 1.2 系统调用</h3>
-<p>根据进程访问资源的特点，我们可以把进程在系统上的运行分为两个级别：</p>
-<ol>
-<li>用户态(user mode)：用户态运行的进程可以直接读取用户程序的数据。</li>
-<li>内核态(kernel mode)：可以简单的理解系统态运行的进程或程序几乎可以访问计算机的任何资源，不受限制。</li>
-</ol>
-<p>我们运行的程序基本都是运行在用户态，如果我们调用操作系统提供的系统态级别的子功能咋办呢？那就需要系统调用了！</p>
-<p>也就是说在我们运行的用户程序中，凡是与系统态级别的资源有关的操作（如文件管理、进程控制、内存管理等)，都必须通过系统调用方式向操作系统提出服务请求，并由操作系统代为完成。</p>
-<p>这些系统调用按功能大致可分为如下几类：</p>
-<ul>
-<li>设备管理。完成设备的请求或释放，以及设备启动等功能。</li>
-<li>文件管理。完成文件的读、写、创建及删除等功能。</li>
-<li>进程控制。完成进程的创建、撤销、阻塞及唤醒等功能。</li>
-<li>进程通信。完成进程之间的消息传递或信号传递等功能。</li>
-<li>内存管理。完成内存的分配、回收以及获取作业占用内存区大小及地址等功能。</li>
-</ul>
-]]></content>
-    <author>
-      <name>lllllan</name>
-    </author>
-    <category term="计算机基础"/>
-    <contributor>
-      <name>lllllan</name>
-    </contributor>
-    <published>2022-01-21T02:30:27.000Z</published>
-    <rights>Copyright by lllllan</rights>
-  </entry>
-  <entry>
     <title type="html">刷题笔记</title>
     <id>https://vue-blog.lllllan.cn/4-practice/</id>
     <link href="https://vue-blog.lllllan.cn/4-practice/"/>
@@ -3784,10 +3866,38 @@ after method send
     <rights>Copyright by lllllan</rights>
   </entry>
   <entry>
+    <title type="html">计算机基础</title>
+    <id>https://vue-blog.lllllan.cn/3-cs-basic/</id>
+    <link href="https://vue-blog.lllllan.cn/3-cs-basic/"/>
+    <updated>2022-01-21T02:30:27.000Z</updated>
+    <content type="html"><![CDATA[<div><p>重要声明</p>
+<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
+</div>
+<h2 id="参考"> 参考</h2>
+<ul>
+<li>
+<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
+</li>
+<li>
+<p>《网络是怎样连接的》</p>
+</li>
+</ul>
+]]></content>
+    <author>
+      <name>lllllan</name>
+    </author>
+    <category term="计算机基础"/>
+    <contributor>
+      <name>lllllan</name>
+    </contributor>
+    <published>2022-01-20T14:33:14.000Z</published>
+    <rights>Copyright by lllllan</rights>
+  </entry>
+  <entry>
     <title type="html">项目主页</title>
     <id>https://vue-blog.lllllan.cn/</id>
     <link href="https://vue-blog.lllllan.cn/"/>
-    <updated>2022-01-23T08:03:31.911Z</updated>
+    <updated>2022-01-24T02:19:25.899Z</updated>
     <author>
       <name>lllllan</name>
     </author>

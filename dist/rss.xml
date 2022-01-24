@@ -6,8 +6,8 @@
     <link>https://vue-blog.lllllan.cn/</link>
     <description></description>
     <language>en-US</language>
-    <pubDate>Sun, 23 Jan 2022 08:03:09 GMT</pubDate>
-    <lastBuildDate>Sun, 23 Jan 2022 08:03:09 GMT</lastBuildDate>
+    <pubDate>Mon, 24 Jan 2022 02:18:55 GMT</pubDate>
+    <lastBuildDate>Mon, 24 Jan 2022 02:18:55 GMT</lastBuildDate>
     <generator>@mr-hope/vuepress-plugin-feed</generator>
     <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
     <copyright>Copyright by lllllan</copyright>
@@ -15,241 +15,6 @@
     <category>MySQL</category>
     <category>计算机基础</category>
     <category>刷题</category>
-    <item>
-      <title>R2Coding - Java 基础核心总结</title>
-      <link>https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/</link>
-      <guid>https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">R2Coding - Java 基础核心总结</source>
-      <category>Java</category>
-      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
-      <content:encoded><![CDATA[<div><p>Note</p>
-<p>全部抄自<a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a>上提供资料</p>
-</div>
-<h2 id="一、-java语言的特点"> 一、 java语言的特点</h2>
-<ul>
-<li>面向对象</li>
-<li>平台无关性</li>
-</ul>
-<blockquote>
-<p>已编译的java程序可以在任何带 有jvm的平台上运行。</p>
-<p><code>java</code> 代码编译为 <code>.class</code> 文件，然后打包成 <code>.jar</code> 文件，这样就能够在不同系统下运行了。</p>
-</blockquote>
-<ul>
-<li>简单性</li>
-</ul>
-<blockquote>
-<p>摒弃了C++中难以理解的多继承、指针、内存管理等概念，不用手动管理对象的生命周期</p>
-</blockquote>
-<ul>
-<li>解释执行</li>
-</ul>
-<blockquote>
-<p>静态页面，在编译期间救恩那个直到数据类型的语言，在运行前就能检查类型的正确性。</p>
-<p>执行效率相比动态语言更高，速度更快</p>
-</blockquote>
-<ul>
-<li>多线程</li>
-</ul>
-<blockquote>
-<p>java <strong>应该</strong> 在 <code>用户空间</code> 实现的多线程，内核感知不到 java 存在多线程机制。</p>
-</blockquote>
-<ul>
-<li>分布式</li>
-</ul>
-<blockquote>
-<p><img src="./README.assets/image-20211213091134933.png" alt="image-20211213091134933" /></p>
-</blockquote>
-<ul>
-<li>健壮性</li>
-</ul>
-<blockquote>
-<p>强类型机制、异常处理、垃圾的自动收集</p>
-</blockquote>
-<ul>
-<li>高性能</li>
-</ul>
-<blockquote>
-<p><img src="./README.assets/image-20211213090952974.png" alt="image-20211213090952974" /></p>
-</blockquote>
-<ul>
-<li>安全性</li>
-</ul>
-<h2 id="二、面向对象"> 二、面向对象</h2>
-<h3 id="_2-1-初始化顺序"> 2.1 初始化顺序</h3>
-<blockquote>
-<ul>
-<li>静态属性</li>
-<li>静态方法快</li>
-<li>普通方法</li>
-<li>普通方法块</li>
-<li>构造函数</li>
-<li>方法</li>
-</ul>
-</blockquote>
-<div><pre><code><span>public</span> <span>class</span> <span>Solution</span> <span>{</span>
-
-    <span>private</span> <span>static</span> <span>String</span> staticField <span>=</span> <span>getStaticField</span><span>(</span><span>)</span><span>;</span>
-
-    <span>public</span> <span>static</span> <span>String</span> <span>getStaticField</span><span>(</span><span>)</span> <span>{</span>
-        <span>String</span> staticFiled <span>=</span> <span>"静态属性初始化"</span><span>;</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>staticFiled<span>)</span><span>;</span>
-        <span>return</span> staticFiled<span>;</span>
-    <span>}</span>
-
-    <span>static</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"静态方法块初始化"</span><span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>private</span> <span>String</span> field <span>=</span> <span>getField</span><span>(</span><span>)</span><span>;</span>
-
-    <span>public</span> <span>String</span> <span>getField</span><span>(</span><span>)</span> <span>{</span>
-        <span>String</span> field <span>=</span> <span>"普通属性初始化"</span><span>;</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>field<span>)</span><span>;</span>
-        <span>return</span> field<span>;</span>
-    <span>}</span>
-
-    <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"普通方法块初始化"</span><span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>public</span> <span>Solution</span><span>(</span><span>)</span> <span>{</span>
-        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"构造函数"</span><span>)</span><span>;</span>
-    <span>}</span>
-
-    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
-        <span>new</span> <span>Solution</span><span>(</span><span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br></div></div><div><pre><code>静态属性初始化
-静态方法块初始化
-普通属性初始化
-普通方法块初始化
-构造函数
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><hr>
-<h3 id="_2-2-三大特性"> 2.2 三大特性</h3>
-<ul>
-<li>封装</li>
-<li>继承</li>
-<li>多态</li>
-</ul>
-<h4 id="访问控制权限"> 访问控制权限</h4>
-<p><img src="./README.assets/image-20211217195521425.png" alt="image-20211217195521425" /></p>
-<hr>
-<h3 id="_2-3-接口"> 2.3 接口</h3>
-<ul>
-<li>interface、implements</li>
-<li>接口只能使用 <code>public</code> <code>default</code>  两种访问修饰符</li>
-<li>接口只提供方法的定义。</li>
-<li>接口不能被实例化，所以接口中不能有构造方法。</li>
-<li>接口的实现类必须实现接口的全部方法。</li>
-</ul>
-<hr>
-<h3 id="_2-4-抽象类"> 2.4 抽象类</h3>
-<ul>
-<li>abstract</li>
-<li>只有抽象类中能有抽象方法，抽象类中不只有抽象方法。</li>
-<li>抽象类不能被实例化。</li>
-</ul>
-<hr>
-<h3 id="_2-5-内部类"> 2.5 内部类</h3>
-<ul>
-<li>内部类拥有外部类的访问权限</li>
-</ul>
-<p><img src="./README.assets/image-20211217195726947.png" alt="image-20211217195726947" /></p>
-<h2 id="三、异常"> 三、异常</h2>
-<h3 id="_3-1-throwable"> 3.1 Throwable</h3>
-<p><code>Throable</code> 类是Java语言中所有 <code>错误(errors)</code> 和 <code>异常(exceptions)</code> 的父类。</p>
-<p><img src="./README.assets/image-20211217184906894.png" alt="image-20211217184906894" /></p>
-<h3 id="_3-2-常见异常"> 3.2 常见异常</h3>
-<p><img src="./README.assets/image-20211217193021056.png" alt="image-20211217193021056" /></p>
-<h3 id="_3-3-error"> 3.3 Error</h3>
-<p><img src="./README.assets/image-20211217194119016.png" alt="image-20211217194119016" /></p>
-<h2 id="四、集合"> 四、集合</h2>
-<p><img src="./README.assets/image-20211218142929505.png" alt="image-20211218142929505" /></p>
-<p><img src="./README.assets/image-20211218182136734.png" alt="image-20211218182136734" /></p>
-<h2 id="五、反射"> 五、反射</h2>
-<p>Java反射机制是在程序的运行过程中，对于任何一个类，都能知道它的所有属性和方法；对于任意一个对象，都能知道调用它的任意属性和方法。</p>
-<p>这种动态获取信息以及动态调用对象方法的功能称为Java语言的反射机制。</p>
-<ul>
-<li>在运行时判断任意一个对象所属的类</li>
-<li>在运行时判断任意一个类的对象</li>
-<li>在运行时判断任意一个类所有的成员变量和方法</li>
-<li>在运行时调用任意一个对象的方法</li>
-</ul>
-<h3 id="_5-1-class-类"> 5.1 Class 类</h3>
-<p>当我们编写一个类，在生产的<code>.class</code> 文件中，就会产生一个 Class 对象。这个 Class 对象用于标识这个类的类型信息。</p>
-<p>Class中没有公共的构造器，也就是说Class对象不能杯实例化。</p>
-<p>其中包含了很多方法，详见《Java基础核心总结》P54</p>
-<h3 id="_5-2-field-类"> 5.2 Field 类</h3>
-<p>Field 类提供类或接口中单独字段的信息，以及对单独字段的动态访问。</p>
-<h3 id="_5-3-method-类"> 5.3 Method 类</h3>
-<p>传递 Object 对象及参数调用该对象对应的方法</p>
-<h3 id="_5-4-classloader-类"> 5.4 ClassLoader 类</h3>
-<p>类装载器是用来把类装载进JVM的。ClassLoader使用的是双亲委托模型来搜索加载类的。</p>
-<p><img src="./README.assets/image-20211224112354940.png" alt="image-20211224112354940" /></p>
-<h2 id="六、枚举"> 六、枚举</h2>
-<p>枚举是一个特殊的类，一般表示一组常量</p>
-<div><pre><code><span>public</span> <span>enum</span> <span>Family</span> <span>{</span>
-    FATHER<span>,</span>
-    MOTHER<span>,</span>
-    SON<span>,</span>
-    <span>Daughter</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><img src="./README.assets/image-20211224185753390.png" alt="image-20211224185753390" /></p>
-<p>一般 switch 可以和 enum 一起连用，来构造一个小型的状态转换机</p>
-<div><pre><code><span>enum</span> <span>Signal</span> <span>{</span>
-    GREEN<span>,</span> YELLOW<span>,</span> RED
-<span>}</span>
-<span>public</span> <span>class</span> <span>TrafficLight</span> <span>{</span>
-    <span>Signal</span> color <span>=</span> <span>Signal</span><span>.</span>RED<span>;</span>
-    <span>public</span> <span>void</span> <span>change</span><span>(</span><span>)</span> <span>{</span>
-        <span>switch</span> <span>(</span>color<span>)</span> <span>{</span>
-            <span>case</span> RED<span>:</span>
-                color <span>=</span> <span>Signal</span><span>.</span>GREEN<span>;</span>
-                <span>break</span><span>;</span>
-            <span>case</span> YELLOW<span>:</span>
-                color <span>=</span> <span>Signal</span><span>.</span>RED<span>;</span>
-                <span>break</span><span>;</span>
-            <span>case</span> GREEN<span>:</span>
-                color <span>=</span> <span>Signal</span><span>.</span>YELLOW<span>;</span>
-                <span>break</span><span>;</span>
-        <span>}</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><h2 id="七、io"> 七、IO</h2>
-<p><img src="./README.assets/image-20211224191321306.png" alt="image-20211224191321306" /></p>
-<p><img src="./README.assets/image-20211224191353166.png" alt="image-20211224191353166" /></p>
-<h3 id="_7-1-file-类"> 7.1 File 类</h3>
-<p>主要涉及 <strong>文件创建、删除文件、获取文件描述</strong></p>
-<p><img src="./README.assets/image-20211224191614348.png" alt="image-20211224191614348" /></p>
-<h3 id="_7-2-inputstream"> 7.2 InputStream</h3>
-<p>字节输入模式的抽象类</p>
-<p><img src="./README.assets/image-20211224191724340.png" alt="image-20211224191724340" /></p>
-<h3 id="_7-3-outputstream"> 7.3 OutputStream</h3>
-<p>字节输出模式的抽象类</p>
-<p><img src="./README.assets/image-20211224191752947.png" alt="image-20211224191752947" /></p>
-<h3 id="_7-4-reader"> 7.4 Reader</h3>
-<p>字符输入模式的抽象类</p>
-<p><img src="./README.assets/image-20211224191816351.png" alt="image-20211224191816351" /></p>
-<h3 id="_7-5-writer"> 7.5 Writer</h3>
-<p>字符输出模式的抽象类</p>
-<p><img src="./README.assets/image-20211224191839037.png" alt="image-20211224191839037" /></p>
-<h3 id="_7-6-更多其他子类"> 7.6 更多其他子类</h3>
-<p>详见 《Java基础核心总结》 p67</p>
-<h2 id="插眼"> 插眼：</h2>
-<h3 id="jdk、jre、jvm"> JDK、JRE、JVM</h3>
-<h3 id="switch-实现原理"> switch 实现原理</h3>
-<h3 id="深浅拷贝"> 深浅拷贝</h3>
-<h3 id="代理-意义何在"> 代理，意义何在</h3>
-<h3 id="面向对象三大特性"> 面向对象三大特性</h3>
-<h3 id="修饰符"> 修饰符</h3>
-<h3 id="集合"> 集合</h3>
-]]></content:encoded>
-    </item>
     <item>
       <title>JavaGuide - Java基础知识</title>
       <link>https://vue-blog.lllllan.cn/1-java/1-basic/2-java-guide-basic/</link>
@@ -751,6 +516,241 @@ input<span>.</span><span>close</span><span>(</span><span>)</span><span>;</span>
 ]]></content:encoded>
     </item>
     <item>
+      <title>R2Coding - Java 基础核心总结</title>
+      <link>https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/</link>
+      <guid>https://vue-blog.lllllan.cn/1-java/1-basic/1-java-basic-core-summary/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">R2Coding - Java 基础核心总结</source>
+      <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>Note</p>
+<p>全部抄自<a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a>上提供资料</p>
+</div>
+<h2 id="一、-java语言的特点"> 一、 java语言的特点</h2>
+<ul>
+<li>面向对象</li>
+<li>平台无关性</li>
+</ul>
+<blockquote>
+<p>已编译的java程序可以在任何带 有jvm的平台上运行。</p>
+<p><code>java</code> 代码编译为 <code>.class</code> 文件，然后打包成 <code>.jar</code> 文件，这样就能够在不同系统下运行了。</p>
+</blockquote>
+<ul>
+<li>简单性</li>
+</ul>
+<blockquote>
+<p>摒弃了C++中难以理解的多继承、指针、内存管理等概念，不用手动管理对象的生命周期</p>
+</blockquote>
+<ul>
+<li>解释执行</li>
+</ul>
+<blockquote>
+<p>静态页面，在编译期间救恩那个直到数据类型的语言，在运行前就能检查类型的正确性。</p>
+<p>执行效率相比动态语言更高，速度更快</p>
+</blockquote>
+<ul>
+<li>多线程</li>
+</ul>
+<blockquote>
+<p>java <strong>应该</strong> 在 <code>用户空间</code> 实现的多线程，内核感知不到 java 存在多线程机制。</p>
+</blockquote>
+<ul>
+<li>分布式</li>
+</ul>
+<blockquote>
+<p><img src="./README.assets/image-20211213091134933.png" alt="image-20211213091134933" /></p>
+</blockquote>
+<ul>
+<li>健壮性</li>
+</ul>
+<blockquote>
+<p>强类型机制、异常处理、垃圾的自动收集</p>
+</blockquote>
+<ul>
+<li>高性能</li>
+</ul>
+<blockquote>
+<p><img src="./README.assets/image-20211213090952974.png" alt="image-20211213090952974" /></p>
+</blockquote>
+<ul>
+<li>安全性</li>
+</ul>
+<h2 id="二、面向对象"> 二、面向对象</h2>
+<h3 id="_2-1-初始化顺序"> 2.1 初始化顺序</h3>
+<blockquote>
+<ul>
+<li>静态属性</li>
+<li>静态方法快</li>
+<li>普通方法</li>
+<li>普通方法块</li>
+<li>构造函数</li>
+<li>方法</li>
+</ul>
+</blockquote>
+<div><pre><code><span>public</span> <span>class</span> <span>Solution</span> <span>{</span>
+
+    <span>private</span> <span>static</span> <span>String</span> staticField <span>=</span> <span>getStaticField</span><span>(</span><span>)</span><span>;</span>
+
+    <span>public</span> <span>static</span> <span>String</span> <span>getStaticField</span><span>(</span><span>)</span> <span>{</span>
+        <span>String</span> staticFiled <span>=</span> <span>"静态属性初始化"</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>staticFiled<span>)</span><span>;</span>
+        <span>return</span> staticFiled<span>;</span>
+    <span>}</span>
+
+    <span>static</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"静态方法块初始化"</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>private</span> <span>String</span> field <span>=</span> <span>getField</span><span>(</span><span>)</span><span>;</span>
+
+    <span>public</span> <span>String</span> <span>getField</span><span>(</span><span>)</span> <span>{</span>
+        <span>String</span> field <span>=</span> <span>"普通属性初始化"</span><span>;</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>field<span>)</span><span>;</span>
+        <span>return</span> field<span>;</span>
+    <span>}</span>
+
+    <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"普通方法块初始化"</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>Solution</span><span>(</span><span>)</span> <span>{</span>
+        <span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span><span>"构造函数"</span><span>)</span><span>;</span>
+    <span>}</span>
+
+    <span>public</span> <span>static</span> <span>void</span> <span>main</span><span>(</span><span>String</span><span>[</span><span>]</span> args<span>)</span> <span>{</span>
+        <span>new</span> <span>Solution</span><span>(</span><span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br></div></div><div><pre><code>静态属性初始化
+静态方法块初始化
+普通属性初始化
+普通方法块初始化
+构造函数
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></div></div><hr>
+<h3 id="_2-2-三大特性"> 2.2 三大特性</h3>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h4 id="访问控制权限"> 访问控制权限</h4>
+<p><img src="./README.assets/image-20211217195521425.png" alt="image-20211217195521425" /></p>
+<hr>
+<h3 id="_2-3-接口"> 2.3 接口</h3>
+<ul>
+<li>interface、implements</li>
+<li>接口只能使用 <code>public</code> <code>default</code>  两种访问修饰符</li>
+<li>接口只提供方法的定义。</li>
+<li>接口不能被实例化，所以接口中不能有构造方法。</li>
+<li>接口的实现类必须实现接口的全部方法。</li>
+</ul>
+<hr>
+<h3 id="_2-4-抽象类"> 2.4 抽象类</h3>
+<ul>
+<li>abstract</li>
+<li>只有抽象类中能有抽象方法，抽象类中不只有抽象方法。</li>
+<li>抽象类不能被实例化。</li>
+</ul>
+<hr>
+<h3 id="_2-5-内部类"> 2.5 内部类</h3>
+<ul>
+<li>内部类拥有外部类的访问权限</li>
+</ul>
+<p><img src="./README.assets/image-20211217195726947.png" alt="image-20211217195726947" /></p>
+<h2 id="三、异常"> 三、异常</h2>
+<h3 id="_3-1-throwable"> 3.1 Throwable</h3>
+<p><code>Throable</code> 类是Java语言中所有 <code>错误(errors)</code> 和 <code>异常(exceptions)</code> 的父类。</p>
+<p><img src="./README.assets/image-20211217184906894.png" alt="image-20211217184906894" /></p>
+<h3 id="_3-2-常见异常"> 3.2 常见异常</h3>
+<p><img src="./README.assets/image-20211217193021056.png" alt="image-20211217193021056" /></p>
+<h3 id="_3-3-error"> 3.3 Error</h3>
+<p><img src="./README.assets/image-20211217194119016.png" alt="image-20211217194119016" /></p>
+<h2 id="四、集合"> 四、集合</h2>
+<p><img src="./README.assets/image-20211218142929505.png" alt="image-20211218142929505" /></p>
+<p><img src="./README.assets/image-20211218182136734.png" alt="image-20211218182136734" /></p>
+<h2 id="五、反射"> 五、反射</h2>
+<p>Java反射机制是在程序的运行过程中，对于任何一个类，都能知道它的所有属性和方法；对于任意一个对象，都能知道调用它的任意属性和方法。</p>
+<p>这种动态获取信息以及动态调用对象方法的功能称为Java语言的反射机制。</p>
+<ul>
+<li>在运行时判断任意一个对象所属的类</li>
+<li>在运行时判断任意一个类的对象</li>
+<li>在运行时判断任意一个类所有的成员变量和方法</li>
+<li>在运行时调用任意一个对象的方法</li>
+</ul>
+<h3 id="_5-1-class-类"> 5.1 Class 类</h3>
+<p>当我们编写一个类，在生产的<code>.class</code> 文件中，就会产生一个 Class 对象。这个 Class 对象用于标识这个类的类型信息。</p>
+<p>Class中没有公共的构造器，也就是说Class对象不能杯实例化。</p>
+<p>其中包含了很多方法，详见《Java基础核心总结》P54</p>
+<h3 id="_5-2-field-类"> 5.2 Field 类</h3>
+<p>Field 类提供类或接口中单独字段的信息，以及对单独字段的动态访问。</p>
+<h3 id="_5-3-method-类"> 5.3 Method 类</h3>
+<p>传递 Object 对象及参数调用该对象对应的方法</p>
+<h3 id="_5-4-classloader-类"> 5.4 ClassLoader 类</h3>
+<p>类装载器是用来把类装载进JVM的。ClassLoader使用的是双亲委托模型来搜索加载类的。</p>
+<p><img src="./README.assets/image-20211224112354940.png" alt="image-20211224112354940" /></p>
+<h2 id="六、枚举"> 六、枚举</h2>
+<p>枚举是一个特殊的类，一般表示一组常量</p>
+<div><pre><code><span>public</span> <span>enum</span> <span>Family</span> <span>{</span>
+    FATHER<span>,</span>
+    MOTHER<span>,</span>
+    SON<span>,</span>
+    <span>Daughter</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><p><img src="./README.assets/image-20211224185753390.png" alt="image-20211224185753390" /></p>
+<p>一般 switch 可以和 enum 一起连用，来构造一个小型的状态转换机</p>
+<div><pre><code><span>enum</span> <span>Signal</span> <span>{</span>
+    GREEN<span>,</span> YELLOW<span>,</span> RED
+<span>}</span>
+<span>public</span> <span>class</span> <span>TrafficLight</span> <span>{</span>
+    <span>Signal</span> color <span>=</span> <span>Signal</span><span>.</span>RED<span>;</span>
+    <span>public</span> <span>void</span> <span>change</span><span>(</span><span>)</span> <span>{</span>
+        <span>switch</span> <span>(</span>color<span>)</span> <span>{</span>
+            <span>case</span> RED<span>:</span>
+                color <span>=</span> <span>Signal</span><span>.</span>GREEN<span>;</span>
+                <span>break</span><span>;</span>
+            <span>case</span> YELLOW<span>:</span>
+                color <span>=</span> <span>Signal</span><span>.</span>RED<span>;</span>
+                <span>break</span><span>;</span>
+            <span>case</span> GREEN<span>:</span>
+                color <span>=</span> <span>Signal</span><span>.</span>YELLOW<span>;</span>
+                <span>break</span><span>;</span>
+        <span>}</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br></div></div><h2 id="七、io"> 七、IO</h2>
+<p><img src="./README.assets/image-20211224191321306.png" alt="image-20211224191321306" /></p>
+<p><img src="./README.assets/image-20211224191353166.png" alt="image-20211224191353166" /></p>
+<h3 id="_7-1-file-类"> 7.1 File 类</h3>
+<p>主要涉及 <strong>文件创建、删除文件、获取文件描述</strong></p>
+<p><img src="./README.assets/image-20211224191614348.png" alt="image-20211224191614348" /></p>
+<h3 id="_7-2-inputstream"> 7.2 InputStream</h3>
+<p>字节输入模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191724340.png" alt="image-20211224191724340" /></p>
+<h3 id="_7-3-outputstream"> 7.3 OutputStream</h3>
+<p>字节输出模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191752947.png" alt="image-20211224191752947" /></p>
+<h3 id="_7-4-reader"> 7.4 Reader</h3>
+<p>字符输入模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191816351.png" alt="image-20211224191816351" /></p>
+<h3 id="_7-5-writer"> 7.5 Writer</h3>
+<p>字符输出模式的抽象类</p>
+<p><img src="./README.assets/image-20211224191839037.png" alt="image-20211224191839037" /></p>
+<h3 id="_7-6-更多其他子类"> 7.6 更多其他子类</h3>
+<p>详见 《Java基础核心总结》 p67</p>
+<h2 id="插眼"> 插眼：</h2>
+<h3 id="jdk、jre、jvm"> JDK、JRE、JVM</h3>
+<h3 id="switch-实现原理"> switch 实现原理</h3>
+<h3 id="深浅拷贝"> 深浅拷贝</h3>
+<h3 id="代理-意义何在"> 代理，意义何在</h3>
+<h3 id="面向对象三大特性"> 面向对象三大特性</h3>
+<h3 id="修饰符"> 修饰符</h3>
+<h3 id="集合"> 集合</h3>
+]]></content:encoded>
+    </item>
+    <item>
       <title>反射机制</title>
       <link>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</link>
       <guid>https://vue-blog.lllllan.cn/1-java/1-basic/3-important-points/2-reflection/</guid>
@@ -972,322 +972,6 @@ xiaoLi<span>:</span>小李
 <li>如果参数是引用类型，传递的就是实参所引用的对象在堆中地址值的拷贝，同样也会创建副本。</li>
 </ul>
 ]]></content:encoded>
-    </item>
-    <item>
-      <title>java 内存区域详解</title>
-      <link>https://vue-blog.lllllan.cn/1-java/2-jvm/1-memory-area-details/</link>
-      <guid>https://vue-blog.lllllan.cn/1-java/2-jvm/1-memory-area-details/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">java 内存区域详解</source>
-      <category>Java</category>
-      <pubDate>Thu, 20 Jan 2022 08:35:36 GMT</pubDate>
-      <content:encoded><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/java/jvm/memory-area/" target="_blank" rel="noopener noreferrer">Java 内存区域详解 | JavaGuide Java 内存区域详解</a></p>
-<p>这部分内容未免有些太过抽象，这次作为 <strong>泛读</strong>，大概看一眼有一个印象，<s>（因为实在是看不懂）</s></p>
-</div>
-<h1 id="一-概述"> 一 概述</h1>
-<p>对于 Java 程序员来说，在虚拟机自动内存管理机制下，不再需要像 C/C++程序开发程序员这样为每一个 new 操作去写对应的 delete/free 操作，不容易出现内存泄漏和内存溢出问题。正是因为 Java 程序员把内存控制权利交给 Java 虚拟机，一旦出现内存泄漏和溢出方面的问题，如果不了解虚拟机是怎样使用内存的，那么排查错误将会是一个非常艰巨的任务</p>
-<h1 id="二-运行时数据区域"> 二 运行时数据区域</h1>
-<p><strong>JDK 1.8 之前：</strong></p>
-<p><img src="./README.assets/JVM运行时数据区域.150c33e1.png" alt="img" /></p>
-<p><strong>JDK 1.8 ：</strong></p>
-<p><img src="./README.assets/Java运行时数据区域JDK1.8.37016205.png" alt="img" /></p>
-<p><strong>线程私有的：</strong></p>
-<ul>
-<li>程序计数器</li>
-<li>虚拟机栈</li>
-<li>本地方法栈</li>
-</ul>
-<p><strong>线程共享的：</strong></p>
-<ul>
-<li>堆</li>
-<li>方法区</li>
-<li>直接内存 (非运行时数据区的一部分)</li>
-</ul>
-<h2 id="_2-1-程序计数器"> 2.1 程序计数器</h2>
-<p>程序计数器是一块较小的内存空间，可以看作是当前线程所执行的字节码的行号指示器。<strong>字节码解释器工作时通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等功能都需要依赖这个计数器来完成。</strong></p>
-<p>另外，<strong>为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各线程之间计数器互不影响，独立存储，我们称这类内存区域为“线程私有”的内存。</strong></p>
-<p><strong>从上面的介绍中我们知道程序计数器主要有两个作用：</strong></p>
-<ol>
-<li>字节码解释器通过改变程序计数器来依次读取指令，从而实现代码的流程控制，如：顺序执行、选择、循环、异常处理。</li>
-<li>在多线程的情况下，程序计数器用于记录当前线程执行的位置，从而当线程被切换回来的时候能够知道该线程上次运行到哪儿了。</li>
-</ol>
-<p><strong>注意：程序计数器是唯一一个不会出现 <code>OutOfMemoryError</code> 的内存区域，它的生命周期随着线程的创建而创建，随着线程的结束而死亡</strong></p>
-<h2 id="_2-2-java-虚拟机栈"> 2.2 Java 虚拟机栈</h2>
-<p><strong>与程序计数器一样，<u>Java 虚拟机栈也是线程私有的</u>，它的生命周期和线程相同，描述的是 Java 方法执行的内存模型，每次方法调用的数据都是通过栈传递的。</strong></p>
-<p><strong>Java 内存可以粗糙的区分为堆内存（Heap）和栈内存 (Stack)，其中栈就是现在说的虚拟机栈，或者说是虚拟机栈中局部变量表部分。</strong> （实际上，Java 虚拟机栈是由一个个栈帧组成，而每个栈帧中都拥有：局部变量表、操作数栈、动态链接、方法出口信息。）</p>
-<p><strong>局部变量表主要存放了编译期可知的各种数据类型</strong>（boolean、byte、char、short、int、float、long、double）、<strong>对象引用</strong>（reference 类型，它不同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）。</p>
-<p><strong>Java 虚拟机栈会出现两种错误：<code>StackOverFlowError</code> 和 <code>OutOfMemoryError</code>。</strong></p>
-<ul>
-<li><strong><code>StackOverFlowError</code>：</strong> 若 Java 虚拟机栈的内存大小不允许动态扩展，那么当线程请求栈的深度超过当前 Java 虚拟机栈的最大深度的时候，就抛出 StackOverFlowError 错误。</li>
-<li><strong><code>OutOfMemoryError</code>：</strong> Java 虚拟机栈的内存大小可以动态扩展， 如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出<code>OutOfMemoryError</code>异常。</li>
-</ul>
-<p><img src="./README.assets/《深入理解虚拟机》第三版的第2章-虚拟机栈.5cc9c70c.png" alt="img" /></p>
-<p>Java 虚拟机栈也是线程私有的，每个线程都有各自的 Java 虚拟机栈，而且随着线程的创建而创建，随着线程的死亡而死亡。</p>
-<p><strong>扩展：那么方法/函数如何调用？</strong></p>
-<p>Java 栈可以类比数据结构中栈，Java 栈中保存的主要内容是栈帧，每一次函数调用都会有一个对应的栈帧被压入 Java 栈，每一个函数调用结束后，都会有一个栈帧被弹出。</p>
-<p>Java 方法有两种返回方式：</p>
-<ol>
-<li>return 语句。</li>
-<li>抛出异常。</li>
-</ol>
-<p>不管哪种返回方式都会导致栈帧被弹出。</p>
-<h2 id="_2-3-本地方法栈"> 2.3 本地方法栈</h2>
-<p>和虚拟机栈所发挥的作用非常相似，区别是： <strong>虚拟机栈为虚拟机执行 Java 方法 （也就是字节码）服务，而本地方法栈则为虚拟机使用到的 Native 方法服务。</strong> 在 HotSpot 虚拟机中和 Java 虚拟机栈合二为一。</p>
-<p>本地方法被执行的时候，在本地方法栈也会创建一个栈帧，用于存放该本地方法的局部变量表、操作数栈、动态链接、出口信息。</p>
-<p>方法执行完毕后相应的栈帧也会出栈并释放内存空间，也会出现 <code>StackOverFlowError</code> 和 <code>OutOfMemoryError</code> 两种错误</p>
-<h2 id="_2-4-堆"> 2.4 堆</h2>
-<p>Java 虚拟机所管理的内存中最大的一块，Java 堆是所有线程共享的一块内存区域，在虚拟机启动时创建。<strong>此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例以及数组都在这里分配内存。</strong></p>
-<p>Java 世界中“几乎”所有的对象都在堆中分配，但是，随着 JIT 编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将会导致一些微妙的变化，所有的对象都分配到堆上也渐渐变得不那么“绝对”了。从 JDK 1.7 开始已经默认开启逃逸分析，如果某些方法中的对象引用没有被返回或者未被外面使用（也就是未逃逸出去），那么对象可以直接在栈上分配内存。</p>
-<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>。从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：新生代和老年代；再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
-<p>在 JDK 7 版本及 JDK 7 版本之前，堆内存被通常分为下面三部分：</p>
-<ol>
-<li>新生代内存(Young Generation)</li>
-<li>老生代(Old Generation)</li>
-<li>永生代(Permanent Generation)</li>
-</ol>
-<p><img src="./README.assets/JVM堆内存结构-JDK7.7d9166eb.png" alt="JVM堆内存结构-JDK7" /></p>
-<p>JDK 8 版本之后方法区（HotSpot 的永久代）被彻底移除了（JDK1.7 就已经开始了），取而代之是元空间，元空间使用的是直接内存。</p>
-<p><img src="./README.assets/JVM堆内存结构-jdk8.919b9959.png" alt="JVM堆内存结构-JDK8" /></p>
-<p><strong>上图所示的 Eden 区、两个 Survivor 区都属于新生代（为了区分，这两个 Survivor 区域按照顺序被命名为 from 和 to），中间一层属于老年代。</strong></p>
-<p>大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s0 或者 s1，并且对象的年龄还会加 1(Eden 区-&gt;Survivor 区后对象的初始年龄变为 1)，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置。</p>
-<p>堆这里最容易出现的就是 OutOfMemoryError 错误，并且出现这种错误之后的表现形式还会有几种，比如：</p>
-<ol>
-<li><strong><code>java.lang.OutOfMemoryError: GC Overhead Limit Exceeded</code></strong> ： 当 JVM 花太多时间执行垃圾回收并且只能回收很少的堆空间时，就会发生此错误。</li>
-<li><strong><code>java.lang.OutOfMemoryError: Java heap space</code></strong> :假如在创建新的对象时, 堆内存中的空间不足以存放新创建的对象, 就会引发此错误。(和配置的最大堆内存有关，且受制于物理内存大小。最大堆内存可通过<code>-Xmx</code>参数配置，若没有特别配置，将会使用默认值，详见：<a href="https://stackoverflow.com/questions/28272923/default-xmxsize-in-java-8-max-heap-size" target="_blank" rel="noopener noreferrer">Default Java 8 max heap size  (opens new window)</a>)</li>
-<li>......</li>
-</ol>
-<h2 id="_2-5-方法区"> 2.5 方法区</h2>
-<p>方法区与 Java 堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。虽然 <strong>Java 虚拟机规范把方法区描述为堆的一个逻辑部分</strong>，但是它却有一个别名叫做 <strong>Non-Heap（非堆）</strong>，目的应该是与 Java 堆区分开来。</p>
-<p>方法区也被称为永久代。很多人都会分不清方法区和永久代的关系，为此我也查阅了文献。</p>
-<h3 id="_2-5-1-方法区和永久代的关系"> 2.5.1 方法区和永久代的关系</h3>
-<p>《Java 虚拟机规范》只是规定了有方法区这么个概念和它的作用，并没有规定如何去实现它。那么，在不同的 JVM 上方法区的实现肯定是不同的了。 <strong>方法区和永久代的关系很像 Java 中接口和类的关系，类实现了接口，而永久代就是 HotSpot 虚拟机对虚拟机规范中方法区的一种实现方式。</strong> 也就是说，永久代是 HotSpot 的概念，方法区是 Java 虚拟机规范中的定义，是一种规范，而永久代是一种实现，一个是标准一个是实现，其他的虚拟机实现并没有永久代这一说法。</p>
-<h3 id="_2-5-2-常用参数"> 2.5.2 常用参数</h3>
-<p>JDK 1.8 之前永久代还没被彻底移除的时候通常通过下面这些参数来调节方法区大小</p>
-<div><pre><code><span>-</span>XX<span>:</span><span>PermSize</span><span>=</span><span>N</span> <span>//方法区 (永久代) 初始大小</span>
-<span>-</span>XX<span>:</span><span>MaxPermSize</span><span>=</span><span>N</span> <span>//方法区 (永久代) 最大大小,超过这个值将会抛出 OutOfMemoryError 异常:java.lang.OutOfMemoryError: PermGen</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p>相对而言，垃圾收集行为在这个区域是比较少出现的，但并非数据进入方法区后就“永久存在”了。</p>
-<p>JDK 1.8 的时候，方法区（HotSpot 的永久代）被彻底移除了（JDK1.7 就已经开始了），取而代之是元空间，元空间使用的是直接内存。</p>
-<p>下面是一些常用参数：</p>
-<div><pre><code><span>-</span>XX<span>:</span><span>MetaspaceSize</span><span>=</span><span>N</span> <span>//设置 Metaspace 的初始（和最小大小）</span>
-<span>-</span>XX<span>:</span><span>MaxMetaspaceSize</span><span>=</span><span>N</span> <span>//设置 Metaspace 的最大大小</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><p>与永久代很大的不同就是，如果不指定大小的话，随着更多类的创建，虚拟机会耗尽所有可用的系统内存。</p>
-<h3 id="_2-5-3-为什么要将永久代-permgen-替换为元空间-metaspace-呢"> 2.5.3 为什么要将永久代 (PermGen) 替换为元空间 (MetaSpace) 呢?</h3>
-<p><img src="./README.assets/20210425134508117.png" alt="img" /></p>
-<ol>
-<li>
-<p>整个永久代有一个 JVM 本身设置的固定大小上限，无法进行调整，而元空间使用的是直接内存，受本机可用内存的限制，虽然元空间仍旧可能溢出，但是比原来出现的几率会更小。</p>
-<blockquote>
-<p>当元空间溢出时会得到如下错误： <code>java.lang.OutOfMemoryError: MetaSpace</code></p>
-</blockquote>
-<p>你可以使用 <code>-XX：MaxMetaspaceSize</code> 标志设置最大元空间大小，默认值为 unlimited，这意味着它只受系统内存的限制。<code>-XX：MetaspaceSize</code> 调整标志定义元空间的初始大小如果未指定此标志，则 Metaspace 将根据运行时的应用程序需求动态地重新调整大小。</p>
-</li>
-<li>
-<p>元空间里面存放的是类的元数据，这样加载多少类的元数据就不由 <code>MaxPermSize</code> 控制了, 而由系统的实际可用空间来控制，这样能加载的类就更多了。</p>
-</li>
-<li>
-<p>在 JDK8，合并 HotSpot 和 JRockit 的代码时, JRockit 从来没有一个叫永久代的东西, 合并之后就没有必要额外的设置这么一个永久代的地方了。</p>
-</li>
-</ol>
-<h2 id="_2-6-运行时常量池"> 2.6 运行时常量池</h2>
-<p>运行时常量池是方法区的一部分。Class 文件中除了有类的版本、字段、方法、接口等描述信息外，还有常量池表（用于存放编译期生成的各种字面量和符号引用）</p>
-<p>既然运行时常量池是方法区的一部分，自然受到方法区内存的限制，当常量池无法再申请到内存时会抛出 OutOfMemoryError 错误。</p>
-<blockquote>
-<ol>
-<li>
-<p><strong>JDK1.7 之前运行时常量池逻辑包含字符串常量池存放在方法区, 此时 hotspot 虚拟机对方法区的实现为永久代</strong></p>
-</li>
-<li>
-<p><strong>JDK1.7 字符串常量池被从方法区拿到了堆中, 这里没有提到运行时常量池,也就是说字符串常量池被单独拿到堆,运行时常量池剩下的东西还在方法区, 也就是 hotspot 中的永久代</strong> 。</p>
-</li>
-<li>
-<p><strong>JDK1.8 hotspot 移除了永久代用元空间(Metaspace)取而代之, 这时候字符串常量池还在堆, 运行时常量池还在方法区, 只不过方法区的实现从永久代变成了元空间(Metaspace)</strong></p>
-</li>
-</ol>
-</blockquote>
-<h2 id="_2-7-直接内存"> 2.7 直接内存</h2>
-<p><strong>直接内存并不是虚拟机运行时数据区的一部分，也不是虚拟机规范中定义的内存区域，但是这部分内存也被频繁地使用。而且也可能导致 OutOfMemoryError 错误出现。</strong></p>
-<p>JDK1.4 中新加入的 <strong>NIO(New Input/Output) 类</strong>，引入了一种基于**通道（Channel）**与**缓存区（Buffer）*<em>的 I/O 方式，它可以直接使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆中的 DirectByteBuffer 对象作为这块内存的引用进行操作。这样就能在一些场景中显著提高性能，因为*<em>避免了在 Java 堆和 Native 堆之间来回复制数据</em></em>。</p>
-<p>本机直接内存的分配不会受到 Java 堆的限制，但是，既然是内存就会受到本机总内存大小以及处理器寻址空间的限制。</p>
-<h1 id="三-hotspot-虚拟机对象"> 三 HotSpot 虚拟机对象</h1>
-<h2 id="_3-1-对象的创建"> 3.1 对象的创建</h2>
-<p><img src="./README.assets/Java创建对象的过程.dbe33c41.png" alt="Java创建对象的过程" /></p>
-<h3 id="_3-1-1-类加载检查"> 3.1.1 类加载检查</h3>
-<p>虚拟机遇到一条 new 指令时，首先将去检查这个指令的参数是否能在常量池中定位到这个类的符号引用，并且检查这个符号引用代表的类是否已被加载过、解析和初始化过。如果没有，那必须先执行相应的类加载过程。</p>
-<h3 id="_3-1-2-分配内存"> 3.1.2 分配内存</h3>
-<p>在<strong>类加载检查</strong>通过后，接下来虚拟机将为新生对象<strong>分配内存</strong>。对象所需的内存大小在类加载完成后便可确定，为对象分配空间的任务等同于把一块确定大小的内存从 Java 堆中划分出来。<strong>分配方式</strong>有 <strong>“指针碰撞”</strong> 和 <strong>“空闲列表”</strong> 两种，<strong>选择哪种分配方式由 Java 堆是否规整决定，而 Java 堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定</strong>。</p>
-<p><img src="./README.assets/内存分配的两种方式.9ecae4c9.png" alt="" /></p>
-<p>在创建对象的时候有一个很重要的问题，就是线程安全，因为在实际开发过程中，创建对象是很频繁的事情，作为虚拟机来说，必须要保证线程是安全的，通常来讲，虚拟机采用两种方式来保证线程安全：</p>
-<ul>
-<li><strong>CAS+失败重试：</strong> CAS 是乐观锁的一种实现方式。所谓乐观锁就是，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直到成功为止。<strong>虚拟机采用 CAS 配上失败重试的方式保证更新操作的原子性。</strong></li>
-<li><strong>TLAB：</strong> 为每一个线程预先在 Eden 区分配一块儿内存，JVM 在给线程中的对象分配内存时，首先在 TLAB 分配，当对象大于 TLAB 中的剩余内存或 TLAB 的内存已用尽时，再采用上述的 CAS 进行内存分配</li>
-</ul>
-<h3 id="_3-1-3-初始化零值"> 3.1.3 初始化零值</h3>
-<p>内存分配完成后，虚拟机需要将分配到的内存空间都初始化为零值（不包括对象头），这一步操作保证了对象的实例字段在 Java 代码中可以不赋初始值就直接使用，程序能访问到这些字段的数据类型所对应的零值。</p>
-<h3 id="_3-1-4-设置对象头"> 3.1.4 设置对象头</h3>
-<p>初始化零值完成之后，<strong>虚拟机要对对象进行必要的设置</strong>，例如这个对象是哪个类的实例、如何才能找到类的元数据信息、对象的哈希码、对象的 GC 分代年龄等信息。 <strong>这些信息存放在对象头中。</strong> 另外，根据虚拟机当前运行状态的不同，如是否启用偏向锁等，对象头会有不同的设置方式。</p>
-<h3 id="_3-1-5-执行-init-方法"> 3.1.5 执行 init 方法</h3>
-<p>在上面工作都完成之后，从虚拟机的视角来看，一个新的对象已经产生了，但从 Java 程序的视角来看，对象创建才刚开始，<code>&lt;init&gt;</code> 方法还没有执行，所有的字段都还为零。所以一般来说，执行 new 指令之后会接着执行 <code>&lt;init&gt;</code> 方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。</p>
-<h2 id="_3-2-对象的内存布局"> 3.2 对象的内存布局</h2>
-<blockquote>
-<p>在 Hotspot 虚拟机中，对象在内存中的布局可以分为 3 块区域：<strong>对象头</strong>、<strong>实例数据</strong>和<strong>对齐填充</strong>。</p>
-</blockquote>
-<p><strong>Hotspot 虚拟机的对象头包括两部分信息</strong>，<strong>第一部分用于存储对象自身的运行时数据</strong>（哈希码、GC 分代年龄、锁状态标志等等），<strong>另一部分是类型指针</strong>，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是那个类的实例。</p>
-<p><strong>实例数据部分是对象真正存储的有效信息</strong>，也是在程序中所定义的各种类型的字段内容。</p>
-<p><strong>对齐填充部分不是必然存在的，也没有什么特别的含义，仅仅起占位作用。</strong> 因为 Hotspot 虚拟机的自动内存管理系统要求对象起始地址必须是 8 字节的整数倍，换句话说就是对象的大小必须是 8 字节的整数倍。而对象头部分正好是 8 字节的倍数（1 倍或 2 倍），因此，当对象实例数据部分没有对齐时，就需要通过对齐填充来补全。</p>
-<h2 id="_3-3-对象的访问定位"> 3.3 对象的访问定位</h2>
-<p>建立对象就是为了使用对象，我们的 Java 程序通过栈上的 reference 数据来操作堆上的具体对象。对象的访问方式由虚拟机实现而定，目前主流的访问方式有<strong>① 使用句柄</strong>和<strong>② 直接指针</strong>两种：</p>
-<blockquote>
-<p>使用句柄来访问的最大好处是 reference 中存储的是稳定的句柄地址，在对象被移动时只会改变句柄中的实例数据指针，而 reference 本身不需要修改。使用直接指针访问方式最大的好处就是速度快，它节省了一次指针定位的时间开销。</p>
-</blockquote>
-<ol>
-<li><strong>句柄：</strong> 如果使用句柄的话，那么 Java 堆中将会划分出一块内存来作为句柄池，reference 中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息；</li>
-</ol>
-<p><img src="./README.assets/对象的访问定位-使用句柄.53859387.png" alt="对象的访问定位-使用句柄" /></p>
-<ol start="2">
-<li><strong>直接指针：</strong> 如果使用直接指针访问，那么 Java 堆对象的布局中就必须考虑如何放置访问类型数据的相关信息，而 reference 中存储的直接就是对象的地址</li>
-</ol>
-<p><img src="./README.assets/对象的访问定位-直接指针.c3bbe790.png" alt="对象的访问定位-直接指针" /></p>
-<h1 id="四-重点补充内容"> 四 重点补充内容</h1>
-<h2 id="_4-1-字符串常量池常见问题"> 4.1 字符串常量池常见问题</h2>
-<h3 id="_4-1-1-和-equals"> 4.1.1 <code>==</code> 和 <code>equals</code></h3>
-<blockquote>
-<p><strong>注意</strong> ：比较 String 字符串的值是否相等，可以使用 <code>equals()</code> 方法。 <code>String</code> 中的 <code>equals</code> 方法是被重写过的。 <code>Object</code> 的 <code>equals</code> 方法是比较的对象的内存地址，而 <code>String</code> 的 <code>equals</code> 方法比较的是字符串的值是否相等。如果你使用 <code>==</code> 比较两个字符串是否相等的话，IDEA 还是提示你使用 <code>equals()</code> 方法替换。</p>
-</blockquote>
-<p><img src="./README.assets/image-20210817123252441.png" alt="img" /></p>
-<blockquote>
-<p>对于基本数据类型来说，== 比较的是值。对于引用数据类型来说，==比较的是对象的内存地址。</p>
-</blockquote>
-<h3 id="_4-1-2-存入常量池"> 4.1.2 存入常量池</h3>
-<p><strong>对于编译期可以确定值的字符串，也就是常量字符串 ，jvm 会将其存入字符串常量池。</strong></p>
-<blockquote>
-<p><strong>字符串常量池</strong> 是 JVM 为了提升性能和减少内存消耗针为字符串（String 类）专门开辟的一块区域，主要目的是为了避免字符串的重复创建。</p>
-<div><pre><code><span>String</span> aa <span>=</span> <span>"ab"</span><span>;</span> <span>// 放在常量池中</span>
-<span>String</span> bb <span>=</span> <span>"ab"</span><span>;</span> <span>// 从常量池中查找</span>
-<span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>aa<span>==</span>bb<span>)</span><span>;</span><span>// true</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>JDK1.7 之前运行时常量池逻辑包含字符串常量池存放在方法区。JDK1.7 的时候，字符串常量池被从方法区拿到了堆中。</p>
-</blockquote>
-<p>并且，字符串常量拼接得到的字符串常量在编译阶段就已经被存放字符串常量池，这个得益于编译器的优化。</p>
-<p>并不是所有的常量都会进行折叠，只有编译器在程序编译期就可以确定值的常量才可以：</p>
-<ol>
-<li>基本数据类型(byte、boolean、short、char、int、float、long、double)以及字符串常量</li>
-<li><code>final</code> 修饰的基本数据类型和字符串变量</li>
-<li>字符串通过 “+”拼接得到的字符串、基本数据类型之间算数运算（加减乘除）、基本数据类型的位运算（&lt;&lt;、&gt;&gt;、&gt;&gt;&gt; ）</li>
-</ol>
-<h3 id="_4-1-3-字符串拼接"> 4.1.3 字符串拼接</h3>
-<p>对象引用和“+”的字符串拼接方式，实际上是通过 <code>StringBuilder</code> 调用 <code>append()</code> 方法实现的，拼接完成之后调用 <code>toString()</code> 得到一个 <code>String</code> 对象 。</p>
-<div><pre><code><span>String</span> str1 <span>=</span> <span>"str"</span><span>;</span>
-<span>String</span> str2 <span>=</span> <span>"ing"</span><span>;</span>
-<span>String</span> str3 <span>=</span> <span>"str"</span> <span>+</span> <span>"ing"</span><span>;</span><span>//常量池中的对象</span>
-<span>String</span> str4 <span>=</span> str1 <span>+</span> str2<span>;</span> <span>//在堆上创建的新的对象</span>
-<span>String</span> str5 <span>=</span> <span>"string"</span><span>;</span><span>//常量池中的对象</span>
-
-<span>String</span> str4 <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>.</span><span>append</span><span>(</span>str1<span>)</span><span>.</span><span>append</span><span>(</span>str2<span>)</span><span>.</span><span>toString</span><span>(</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p><img src="./README.assets/字符串拼接-常量池.png" alt="img" /></p>
-<p>我们在平时写代码的时候，尽量避免多个字符串对象拼接，因为这样会重新创建对象。如果需要改变字符串的话，可以使用 <code>StringBuilder</code> 或者 <code>StringBuffer</code>。</p>
-<p>不过，字符串使用 <code>final</code> 关键字声明之后，可以让编译器当做常量来处理。</p>
-<div><pre><code><span>final</span> <span>String</span> str1 <span>=</span> <span>"str"</span><span>;</span>
-<span>final</span> <span>String</span> str2 <span>=</span> <span>"ing"</span><span>;</span>
-<span>// 下面两个表达式其实是等价的</span>
-<span>String</span> c <span>=</span> <span>"str"</span> <span>+</span> <span>"ing"</span><span>;</span><span>// 常量池中的对象</span>
-<span>String</span> d <span>=</span> str1 <span>+</span> str2<span>;</span> <span>// 常量池中的对象</span>
-<span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>c <span>==</span> d<span>)</span><span>;</span><span>// true</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><h3 id="_4-1-4-创建字符串对象的方式"> 4.1.4 创建字符串对象的方式</h3>
-<div><pre><code><span>// 从字符串常量池中拿对象</span>
-<span>String</span> str1 <span>=</span> <span>"abcd"</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br></div></div><div><pre><code><span>// 直接在堆内存空间创建一个新的对象。</span>
-<span>String</span> str2 <span>=</span> <span>new</span> <span>String</span><span>(</span><span>"abcd"</span><span>)</span><span>;</span>
-<span>String</span> str3 <span>=</span> <span>new</span> <span>String</span><span>(</span><span>"abcd"</span><span>)</span><span>;</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>只要使用 new 的方式创建对象，便需要创建新的对象</strong> 。</p>
-<p>使用 new 的方式创建对象的方式如下，可以简单概括为 3 步：</p>
-<ol>
-<li>在堆中创建一个字符串对象</li>
-<li>检查字符串常量池中是否有和 new 的字符串值相等的字符串常量</li>
-<li>如果没有的话需要在字符串常量池中也创建一个值相等的字符串常量，如果有的话，就直接返回堆中的字符串实例对象地址。</li>
-</ol>
-<h3 id="_4-1-5-总结"> 4.1.5 总结</h3>
-<ol>
-<li>对于基本数据类型来说，==比较的是值。对于引用数据类型来说，==比较的是对象的内存地址。</li>
-<li>在编译过程中，Javac 编译器（下文中统称为编译器）会进行一个叫做 <strong>常量折叠(Constant Folding)</strong> 的代码优化。常量折叠会把常量表达式的值求出来作为常量嵌在最终生成的代码中，这是 Javac 编译器会对源代码做的极少量优化措施之一(代码优化几乎都在即时编译器中进行)。</li>
-<li>一般来说，我们要尽量避免通过 new 的方式创建字符串。使用双引号声明的 <code>String</code> 对象（ <code>String s1 = &quot;java&quot;</code> ）更利于让编译器有机会优化我们的代码，同时也更易于阅读。</li>
-<li>被 <code>final</code> 关键字修改之后的 <code>String</code> 会被编译器当做常量来处理，编译器程序编译期就可以确定它的值，其效果就想到于访问常量。</li>
-</ol>
-<h2 id="_4-2-string-s1-new-string-abc-这句话创建了几个字符串对象"> 4.2 String s1 = new String(&quot;abc&quot;);这句话创建了几个字符串对象？</h2>
-<p><strong>会创建 1 或 2 个字符串：</strong></p>
-<ul>
-<li>如果字符串常量池中已存在字符串常量“abc”，则只会在堆空间创建一个字符串常量“abc”。</li>
-<li>如果字符串常量池中没有字符串常量“abc”，<strong>那么它将首先在字符串常量池中创建</strong>，然后在堆空间中创建，因此将创建总共 2 个字符串对象。</li>
-</ul>
-<h2 id="_4-3-8-种基本类型的包装类和常量池"> 4.3 8 种基本类型的包装类和常量池</h2>
-<p>Java 基本类型的包装类的大部分都实现了常量池技术。</p>
-<p><code>Byte</code>,<code>Short</code>,<code>Integer</code>,<code>Long</code> 这 4 种包装类默认创建了数值 <strong>[-128，127]</strong> 的相应类型的缓存数据，<code>Character</code> 创建了数值在 <strong>[0,127]</strong> 范围的缓存数据，<code>Boolean</code> 直接返回 <code>True</code> Or <code>False</code>。</p>
-<p>两种浮点数类型的包装类 <code>Float</code>,<code>Double</code> 并没有实现常量池技术。</p>
-<blockquote>
-<h2 id="常量池技术的作用"> 常量池技术的作用</h2>
-<p>常量池是为了避免频繁的创建和销毁对象而影响系统性能，其实现了对象的共享。
-例如字符串常量池，在编译阶段就把所有的字符串文字放到一个常量池中。</p>
-<ol>
-<li>节省内存空间：常量池中所有相同的字符串常量被合并，只占用一个空间。</li>
-<li>节省运行时间：比较字符串时，==比equals()快。对于两个引用变量，只用==判断引用是否相等，也就可以判断实际值是否相等。</li>
-</ol>
-</blockquote>
-<div><pre><code><span>Integer</span> i1 <span>=</span> <span>33</span><span>;</span>
-<span>Integer</span> i2 <span>=</span> <span>33</span><span>;</span>
-<span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>i1 <span>==</span> i2<span>)</span><span>;</span><span>// 输出 true</span>
-<span>Integer</span> i11 <span>=</span> <span>333</span><span>;</span>
-<span>Integer</span> i22 <span>=</span> <span>333</span><span>;</span>
-<span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>i11 <span>==</span> i22<span>)</span><span>;</span><span>// 输出 false</span>
-<span>Double</span> i3 <span>=</span> <span>1.2</span><span>;</span>
-<span>Double</span> i4 <span>=</span> <span>1.2</span><span>;</span>
-<span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>i3 <span>==</span> i4<span>)</span><span>;</span><span>// 输出 false</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><h3 id="_4-3-0-整型包装类对象之间的比较"> 4.3.0 整型包装类对象之间的比较</h3>
-<p><img src="./README.assets/20210313164740893.png" alt="img" /></p>
-<h3 id="_4-3-1-integer-缓存源代码"> 4.3.1 <code>Integer</code> 缓存源代码</h3>
-<div><pre><code><span>/**
-*此方法将始终缓存-128 到 127（包括端点）范围内的值，并可以缓存此范围之外的其他值。
-*/</span>
-<span>public</span> <span>static</span> <span>Integer</span> <span>valueOf</span><span>(</span><span>int</span> i<span>)</span> <span>{</span>
-    <span>if</span> <span>(</span>i <span>>=</span> <span>IntegerCache</span><span>.</span>low <span>&amp;&amp;</span> i <span>&lt;=</span> <span>IntegerCache</span><span>.</span>high<span>)</span>
-      <span>return</span> <span>IntegerCache</span><span>.</span>cache<span>[</span>i <span>+</span> <span>(</span><span>-</span><span>IntegerCache</span><span>.</span>low<span>)</span><span>]</span><span>;</span>
-    <span>return</span> <span>new</span> <span>Integer</span><span>(</span>i<span>)</span><span>;</span>
-<span>}</span>
-<span>private</span> <span>static</span> <span>class</span> <span>IntegerCache</span> <span>{</span>
-    <span>static</span> <span>final</span> <span>int</span> low <span>=</span> <span>-</span><span>128</span><span>;</span>
-    <span>static</span> <span>final</span> <span>int</span> high<span>;</span>
-    <span>static</span> <span>final</span> <span>Integer</span> cache<span>[</span><span>]</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br></div></div><h3 id="_4-3-2-character-缓存源码"> 4.3.2 <code>Character</code> 缓存源码</h3>
-<div><pre><code><span>public</span> <span>static</span> <span>Character</span> <span>valueOf</span><span>(</span><span>char</span> c<span>)</span> <span>{</span>
-    <span>if</span> <span>(</span>c <span>&lt;=</span> <span>127</span><span>)</span> <span>{</span> <span>// must cache</span>
-      <span>return</span> <span>CharacterCache</span><span>.</span>cache<span>[</span><span>(</span><span>int</span><span>)</span>c<span>]</span><span>;</span>
-    <span>}</span>
-    <span>return</span> <span>new</span> <span>Character</span><span>(</span>c<span>)</span><span>;</span>
-<span>}</span>
-
-<span>private</span> <span>static</span> <span>class</span> <span>CharacterCache</span> <span>{</span>
-    <span>private</span> <span>CharacterCache</span><span>(</span><span>)</span><span>{</span><span>}</span>
-
-    <span>static</span> <span>final</span> <span>Character</span> cache<span>[</span><span>]</span> <span>=</span> <span>new</span> <span>Character</span><span>[</span><span>127</span> <span>+</span> <span>1</span><span>]</span><span>;</span>
-    <span>static</span> <span>{</span>
-        <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> cache<span>.</span>length<span>;</span> i<span>++</span><span>)</span>
-            cache<span>[</span>i<span>]</span> <span>=</span> <span>new</span> <span>Character</span><span>(</span><span>(</span><span>char</span><span>)</span>i<span>)</span><span>;</span>
-    <span>}</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><h3 id="_4-3-3-boolean-缓存源码"> 4.3.3 <code>Boolean</code> 缓存源码</h3>
-<div><pre><code><span>public</span> <span>static</span> <span>Boolean</span> <span>valueOf</span><span>(</span><span>boolean</span> b<span>)</span> <span>{</span>
-    <span>return</span> <span>(</span>b <span>?</span> TRUE <span>:</span> FALSE<span>)</span><span>;</span>
-<span>}</span>
-</code></pre>
-<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div>]]></content:encoded>
     </item>
     <item>
       <title>代理详解</title>
@@ -1737,6 +1421,116 @@ after method send
 <li>成类的对象时⾃动执⾏，⽆需调⽤</li>
 </ol>
 <h2 id="_8-无参构造函数的作用"> 8. 无参构造函数的作用</h2>
+<ol>
+<li>不写任何构造器，也会有一个默认的无参构造。但如果写了有参构造，就必须另写一个无参构造，否则就无法执行无参构造。</li>
+<li>子类的构造当中，如果没有指定 super() 来调用父类中某个构造方法，则会调用父类中的无参构。如果这个时候父类中存在有参构造而没有无参构造，就会出错。</li>
+</ol>
+<h2 id="_9-java-中创建对象的几种方式"> 9. Java 中创建对象的几种方式</h2>
+<ol>
+<li><code>new()</code></li>
+<li><code>Class.forName().newInstance()</code></li>
+<li><code>clone()</code></li>
+<li><code>ObjectInputStream.readObject()</code></li>
+</ol>
+<h2 id="_10-抽象类和接口的区别"> 10. 抽象类和接口的区别</h2>
+<ol>
+<li>抽象类中可以定义构造函数，接口不能定义构造函数</li>
+<li>抽象类中可以有抽象方法和具体方法，接口中只能有抽象方法</li>
+<li>抽象类中的成员权限可以是 <code>public</code>、默认、<code>protected</code>，<strong>抽象方法不能被 <code>private</code> 修饰</strong>，具体方法可以；接口中的成员只能是 <code>public</code></li>
+<li>抽象类中可以包含静态方法（<strong>具体方法可以是静态的，抽象方法不行</strong>），接口中不能包含静态方法（因为接口中定义的方法就是为了让实现类去实现，但是静态方法必须在编译时实现）</li>
+</ol>
+<h3 id="_10-1-jdk8-的改变"> 10.1 JDK8 的改变</h3>
+<ol>
+<li>允许在接口中包含具体实现的方法，使用 <code>default</code> 修饰</li>
+<li>因为允许具体实现的放，接口中也就允许有静态方法</li>
+</ol>
+<h2 id="_11-静态变量和实例变量的区别"> 11. 静态变量和实例变量的区别</h2>
+<ul>
+<li>静态变量：被 <code>static</code> 修饰，也称类变量。它属于类，因此不管创建多少个对象，该静态变量在内存中有且仅有一个拷贝。静态变量可以实现多个对象共享内存</li>
+<li>实例变量：属于某一实例，需要先创建对象，然后通过对象才能访问得到</li>
+</ul>
+<h2 id="_12-short-s1-1-s1-s1-1-为什么错-short-s1-1-s1-1-为什么没错"> 12. <code>short s1 = 1; s1 = s1 + 1</code> 为什么错？ <code>short s1 = 1; s1 += 1</code> 为什么没错？</h2>
+<p>运算中的 <code>1</code> 默认是 <code>int</code>类型，那么将 <code>int</code> 类型赋值给 <code>short</code> 类型时，会出现类型转换错误。</p>
+<p>而对于 <code>+=</code>，是 Java 语言规定的运算符， Java 编译器自己会进行特殊处理</p>
+<h2 id="_13-integer-和-int-的区别"> 13. Integer 和 int 的区别？</h2>
+<ol>
+<li>int 是 Java 的⼋种基本数据类型之⼀，⽽ <code>Integer</code> 是 Java 为 int 类型提供的封装类</li>
+<li>int 型变量的默认值是 0，Integer 变量的默认值是 null，这⼀点说明 Integer 可以区分出未赋值和值为 0 的 区分</li>
+<li>Integer 变量必须实例化后才可以使⽤，⽽ int 不需要。</li>
+</ol>
+<h3 id="_13-1-integer-之间的比较"> 13.1 Integer 之间的比较</h3>
+<ol>
+<li>两个 <code>new()</code> 出来的 <code>Integer</code> 进行比较：因为是两个对象，进行比较的其内存地址，结果均为 false</li>
+<li><code>Integer</code> 和 <code>int</code> 进行比较：包装类和基本数据类型进行比较时，会对包装类进行拆包装为基本数据类型，所以最后是两个 <code>int</code> 在比较。只要数值相等就为 true</li>
+<li>非new生成的 <code>Integer</code> 和 <code>new integer()</code> 进行比较：前者指向 Java 常量池中的对象、后者指向堆中的对象，内存地址不同，结果均为 false</li>
+<li>两个非new生成的 <code>Integer</code> 进行比较：如果数值相等并且变量值在 <code>[-128, 127]</code> 之间，比较结果为 true，否则为 false。</li>
+</ol>
+<div><pre><code><span>public</span> <span>static</span> <span>Integer</span> <span>valueOf</span><span>(</span><span>int</span> var0<span>)</span> <span>{</span> 
+    <span>return</span> var0 <span>>=</span> <span>-</span><span>128</span> <span>&amp;&amp;</span> var0 <span>&lt;=</span> <span>Integer<span>.</span>IntegerCache</span><span>.</span>high <span>?</span>
+		<span>Integer<span>.</span>IntegerCache</span><span>.</span>cache<span>[</span>var0 <span>+</span> <span>128</span><span>]</span> <span>:</span> <span>new</span> <span>Integer</span><span>(</span>var0<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></div></div><h3 id="_13-2-包装类的缓存"> 13.2 包装类的缓存</h3>
+<ul>
+<li>Boolean：全部缓存</li>
+<li>Byte：全部缓存</li>
+<li>Character：&lt;= 127 缓存</li>
+<li>Short：-128 — 127 缓存</li>
+<li>Long：-128 — 127 缓存</li>
+<li>Integer：-128 — 127 缓存</li>
+<li>Float：没有缓存</li>
+<li>Doulbe：没有缓存</li>
+</ul>
+<h3 id="_14-装箱和拆箱"> 14 装箱和拆箱</h3>
+<p>⾃动装箱是 Java 编译器在基本数据类型和对应得包装类之间做的⼀个转化。⽐如：把 int 转化成 Integer，double 转化成 Double 等等。反之就是⾃动拆箱。</p>
+<p>原始类型：boolean、char、byte、short、int、long、float、double</p>
+<p>封装类型：Boolean、Character、Byte、Short、Integer、Long、Float、Double</p>
+<h2 id="_15-switch-能否作用在-byte、long、string上"> 15. switch 能否作用在  <code>byte</code>、<code>long</code>、<code>String</code>上？</h2>
+<p>switch 中放的只能是一个整数表达式或枚举常量。而整数表达式可以是 <code>int</code> 或 <code>Integer</code></p>
+<ul>
+<li>由于 <code>byte</code>、<code>short</code>、<code>char</code> 都可以隐式转换为 <code>int</code>，因此这些类型以及他们的包装类都是可以用的。</li>
+<li><code>long</code> 不可以</li>
+<li><code>String</code> 在 JDK1.7 之后可以使用</li>
+</ul>
+<h2 id="_16-object-的常用方法"> 16. Object 的常用方法</h2>
+<ul>
+<li><code>clone</code> ⽅法：⽤于创建并返回当前对象的⼀份拷⻉；</li>
+<li><code>getClass</code> ⽅法：⽤于返回当前<strong>运⾏时对象</strong>的 Class；</li>
+<li><code>toString</code> ⽅法：返回对象的字符串表示形式；</li>
+<li><code>finalize</code> ⽅法：实例被垃圾回收器回收时触发的⽅法；</li>
+<li><code>equals</code> ⽅法：⽤于⽐较两个对象的内存地址是否相等，⼀般需要重写；</li>
+<li><code>hashCode</code> ⽅法：⽤于返回对象的哈希值；</li>
+<li><code>notify</code> ⽅法：唤醒⼀个在此对象监视器上等待的线程。如果有多个线程在等待只会唤醒⼀个。</li>
+<li><code>notifyAll</code> ⽅法：作⽤跟 notify() ⼀样，只不过会唤醒在此对象监视器上等待的所有线程，⽽不是⼀个线程。</li>
+<li><code>wait</code> ⽅法：让当前对象等待</li>
+</ul>
+<h2 id="_16-final、finally、finalize-的区别"> 16. final、finally、finalize 的区别</h2>
+<ul>
+<li><code>final</code>：⽤于声明属性、⽅法和类，分别表示属性不可变、⽅法不可覆盖、被其修饰的类不可继承；</li>
+<li><code>finally</code>：异常处理语句结构的⼀部分，表示总是执⾏；</li>
+<li><code>finallize</code>：Object类的⼀个⽅法，在垃圾回收时会调⽤被回收对象的finalize</li>
+</ul>
+<h2 id="_17-和-equals-的区别"> 17. == 和 equals 的区别</h2>
+<p><strong><code>==</code></strong> 对于基本类型和引用类型的作用效果是不同的：</p>
+<ul>
+<li>对于基本数据类型来说，<code>==</code> 比较的是值。</li>
+<li>对于引用数据类型来说，<code>==</code> 比较的是对象的内存地址。</li>
+</ul>
+<div><p>Tips</p>
+<p>因为 Java 只有值传递，所以，对于 == 来说，不管是比较基本数据类型，还是引用数据类型的变量，其本质比较的都是值，只是引用类型变量存的值是对象的地址。</p>
+</div>
+<p><strong><code>equals()</code></strong> 作用不能用于判断基本数据类型的变量，只能用来判断两个对象是否相等。<code>equals()</code>方法存在于<code>Object</code>类中，而<code>Object</code>类是所有类的直接或间接父类。</p>
+<h2 id="_18-两个对象的-hashcode-相同-则-equals-也一定为-true-吗"> 18. 两个对象的 hashCode() 相同，则 equals() 也⼀定为 true 吗？</h2>
+<p>两个对象的 hashCode() 相同，equals() 不⼀定为 true。因为在散列表中，hashCode() 相等即两个键值对的哈希 值相等，然⽽哈希值相等，并不⼀定能得出键值对相等【散列冲突】</p>
+<p>更多详见 <a href="./../2-java-guide-basic/#_2-5-hashcode-与-equals">JavaGuide - Java基础知识 | lllllan</a></p>
+<h2 id="_19-为什么重写-equals-就一定要重写-hashcode-方法"> 19. 为什么重写 equals() 就⼀定要重写 hashCode() 方法</h2>
+<p>理解 hashCode 的作用👉 <a href="./../1-basic/2-java-guide-basic/#_2-5-hashcode-与-equals">JavaGuide - Java基础知识 | lllllan</a></p>
+<h2 id="_20-和-的区别"> 20. &amp; 和 &amp;&amp; 的区别</h2>
+<p>Java 中 &amp;&amp; 和 &amp; 都是表示与的逻辑运算符，都表示逻辑运输符 and，当两边的表达式都为 true 的时候，整个运算 结果才为 true，否则为 false。</p>
+<ul>
+<li>&amp;&amp;：有短路功能，当第⼀个表达式的值为 false 的时候，则不再计算第⼆个表达式；</li>
+<li>&amp;：不管第⼀个表达式结果是否为 true，第⼆个都会执⾏。除此之外，&amp; 还可以⽤作位运算符：当 &amp; 两边的表达式 不是 Boolean 类型的时候，&amp; 表示按位操作。</li>
+</ul>
 ]]></content:encoded>
     </item>
     <item>
@@ -1971,6 +1765,334 @@ after method send
 ]]></content:encoded>
     </item>
     <item>
+      <title>java 内存区域详解</title>
+      <link>https://vue-blog.lllllan.cn/1-java/2-jvm/1-memory-area-details/</link>
+      <guid>https://vue-blog.lllllan.cn/1-java/2-jvm/1-memory-area-details/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">java 内存区域详解</source>
+      <category>Java</category>
+      <pubDate>Thu, 20 Jan 2022 08:35:36 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/java/jvm/memory-area/" target="_blank" rel="noopener noreferrer">Java 内存区域详解 | JavaGuide Java 内存区域详解</a></p>
+<p>这部分内容未免有些太过抽象，这次作为 <strong>泛读</strong>，大概看一眼有一个印象，<s>（因为实在是看不懂）</s></p>
+</div>
+<h1 id="一-概述"> 一 概述</h1>
+<p>对于 Java 程序员来说，在虚拟机自动内存管理机制下，不再需要像 C/C++程序开发程序员这样为每一个 new 操作去写对应的 delete/free 操作，不容易出现内存泄漏和内存溢出问题。正是因为 Java 程序员把内存控制权利交给 Java 虚拟机，一旦出现内存泄漏和溢出方面的问题，如果不了解虚拟机是怎样使用内存的，那么排查错误将会是一个非常艰巨的任务</p>
+<h1 id="二-运行时数据区域"> 二 运行时数据区域</h1>
+<p><strong>JDK 1.8 之前：</strong></p>
+<p><img src="./README.assets/JVM运行时数据区域.150c33e1.png" alt="img" /></p>
+<p><strong>JDK 1.8 ：</strong></p>
+<p><img src="./README.assets/Java运行时数据区域JDK1.8.37016205.png" alt="img" /></p>
+<p><strong>线程私有的：</strong></p>
+<ul>
+<li>程序计数器</li>
+<li>虚拟机栈</li>
+<li>本地方法栈</li>
+</ul>
+<p><strong>线程共享的：</strong></p>
+<ul>
+<li>堆</li>
+<li>方法区</li>
+<li>直接内存 (非运行时数据区的一部分)</li>
+</ul>
+<h2 id="_2-1-程序计数器"> 2.1 程序计数器</h2>
+<p>程序计数器是一块较小的内存空间，可以看作是当前线程所执行的字节码的行号指示器。<strong>字节码解释器工作时通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、跳转、异常处理、线程恢复等功能都需要依赖这个计数器来完成。</strong></p>
+<p>另外，<strong>为了线程切换后能恢复到正确的执行位置，每条线程都需要有一个独立的程序计数器，各线程之间计数器互不影响，独立存储，我们称这类内存区域为“线程私有”的内存。</strong></p>
+<p><strong>从上面的介绍中我们知道程序计数器主要有两个作用：</strong></p>
+<ol>
+<li>字节码解释器通过改变程序计数器来依次读取指令，从而实现代码的流程控制，如：顺序执行、选择、循环、异常处理。</li>
+<li>在多线程的情况下，程序计数器用于记录当前线程执行的位置，从而当线程被切换回来的时候能够知道该线程上次运行到哪儿了。</li>
+</ol>
+<p><strong>注意：程序计数器是唯一一个不会出现 <code>OutOfMemoryError</code> 的内存区域，它的生命周期随着线程的创建而创建，随着线程的结束而死亡</strong></p>
+<h2 id="_2-2-java-虚拟机栈"> 2.2 Java 虚拟机栈</h2>
+<p><strong>与程序计数器一样，<u>Java 虚拟机栈也是线程私有的</u>，它的生命周期和线程相同，描述的是 Java 方法执行的内存模型，每次方法调用的数据都是通过栈传递的。</strong></p>
+<p><strong>Java 内存可以粗糙的区分为堆内存（Heap）和栈内存 (Stack)，其中栈就是现在说的虚拟机栈，或者说是虚拟机栈中局部变量表部分。</strong> （实际上，Java 虚拟机栈是由一个个栈帧组成，而每个栈帧中都拥有：局部变量表、操作数栈、动态链接、方法出口信息。）</p>
+<p><strong>局部变量表主要存放了编译期可知的各种数据类型</strong>（boolean、byte、char、short、int、float、long、double）、<strong>对象引用</strong>（reference 类型，它不同于对象本身，可能是一个指向对象起始地址的引用指针，也可能是指向一个代表对象的句柄或其他与此对象相关的位置）。</p>
+<p><strong>Java 虚拟机栈会出现两种错误：<code>StackOverFlowError</code> 和 <code>OutOfMemoryError</code>。</strong></p>
+<ul>
+<li><strong><code>StackOverFlowError</code>：</strong> 若 Java 虚拟机栈的内存大小不允许动态扩展，那么当线程请求栈的深度超过当前 Java 虚拟机栈的最大深度的时候，就抛出 StackOverFlowError 错误。</li>
+<li><strong><code>OutOfMemoryError</code>：</strong> Java 虚拟机栈的内存大小可以动态扩展， 如果虚拟机在动态扩展栈时无法申请到足够的内存空间，则抛出<code>OutOfMemoryError</code>异常。</li>
+</ul>
+<p><img src="./README.assets/《深入理解虚拟机》第三版的第2章-虚拟机栈.5cc9c70c.png" alt="img" /></p>
+<p>Java 虚拟机栈也是线程私有的，每个线程都有各自的 Java 虚拟机栈，而且随着线程的创建而创建，随着线程的死亡而死亡。</p>
+<p><strong>扩展：那么方法/函数如何调用？</strong></p>
+<p>Java 栈可以类比数据结构中栈，Java 栈中保存的主要内容是栈帧，每一次函数调用都会有一个对应的栈帧被压入 Java 栈，每一个函数调用结束后，都会有一个栈帧被弹出。</p>
+<p>Java 方法有两种返回方式：</p>
+<ol>
+<li>return 语句。</li>
+<li>抛出异常。</li>
+</ol>
+<p>不管哪种返回方式都会导致栈帧被弹出。</p>
+<h2 id="_2-3-本地方法栈"> 2.3 本地方法栈</h2>
+<p>和虚拟机栈所发挥的作用非常相似，区别是： <strong>虚拟机栈为虚拟机执行 Java 方法 （也就是字节码）服务，而本地方法栈则为虚拟机使用到的 Native 方法服务。</strong> 在 HotSpot 虚拟机中和 Java 虚拟机栈合二为一。</p>
+<p>本地方法被执行的时候，在本地方法栈也会创建一个栈帧，用于存放该本地方法的局部变量表、操作数栈、动态链接、出口信息。</p>
+<p>方法执行完毕后相应的栈帧也会出栈并释放内存空间，也会出现 <code>StackOverFlowError</code> 和 <code>OutOfMemoryError</code> 两种错误</p>
+<h2 id="_2-4-堆"> 2.4 堆</h2>
+<p>Java 虚拟机所管理的内存中最大的一块，Java 堆是所有线程共享的一块内存区域，在虚拟机启动时创建。<strong>此内存区域的唯一目的就是存放对象实例，几乎所有的对象实例以及数组都在这里分配内存。</strong></p>
+<p>Java 世界中“几乎”所有的对象都在堆中分配，但是，随着 JIT 编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将会导致一些微妙的变化，所有的对象都分配到堆上也渐渐变得不那么“绝对”了。从 JDK 1.7 开始已经默认开启逃逸分析，如果某些方法中的对象引用没有被返回或者未被外面使用（也就是未逃逸出去），那么对象可以直接在栈上分配内存。</p>
+<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>。从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：新生代和老年代；再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
+<p>在 JDK 7 版本及 JDK 7 版本之前，堆内存被通常分为下面三部分：</p>
+<ol>
+<li>新生代内存(Young Generation)</li>
+<li>老生代(Old Generation)</li>
+<li>永生代(Permanent Generation)</li>
+</ol>
+<p><img src="./README.assets/JVM堆内存结构-JDK7.7d9166eb.png" alt="JVM堆内存结构-JDK7" /></p>
+<p>JDK 8 版本之后方法区（HotSpot 的永久代）被彻底移除了（JDK1.7 就已经开始了），取而代之是元空间，元空间使用的是直接内存。</p>
+<p><img src="./README.assets/JVM堆内存结构-jdk8.919b9959.png" alt="JVM堆内存结构-JDK8" /></p>
+<p><strong>上图所示的 Eden 区、两个 Survivor 区都属于新生代（为了区分，这两个 Survivor 区域按照顺序被命名为 from 和 to），中间一层属于老年代。</strong></p>
+<p>大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s0 或者 s1，并且对象的年龄还会加 1(Eden 区-&gt;Survivor 区后对象的初始年龄变为 1)，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置。</p>
+<p>堆这里最容易出现的就是 OutOfMemoryError 错误，并且出现这种错误之后的表现形式还会有几种，比如：</p>
+<ol>
+<li><strong><code>java.lang.OutOfMemoryError: GC Overhead Limit Exceeded</code></strong> ： 当 JVM 花太多时间执行垃圾回收并且只能回收很少的堆空间时，就会发生此错误。</li>
+<li><strong><code>java.lang.OutOfMemoryError: Java heap space</code></strong> :假如在创建新的对象时, 堆内存中的空间不足以存放新创建的对象, 就会引发此错误。(和配置的最大堆内存有关，且受制于物理内存大小。最大堆内存可通过<code>-Xmx</code>参数配置，若没有特别配置，将会使用默认值，详见：<a href="https://stackoverflow.com/questions/28272923/default-xmxsize-in-java-8-max-heap-size" target="_blank" rel="noopener noreferrer">Default Java 8 max heap size  (opens new window)</a>)</li>
+<li>......</li>
+</ol>
+<h2 id="_2-5-方法区"> 2.5 方法区</h2>
+<p>方法区与 Java 堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。虽然 <strong>Java 虚拟机规范把方法区描述为堆的一个逻辑部分</strong>，但是它却有一个别名叫做 <strong>Non-Heap（非堆）</strong>，目的应该是与 Java 堆区分开来。</p>
+<p>方法区也被称为永久代。很多人都会分不清方法区和永久代的关系，为此我也查阅了文献。</p>
+<h3 id="_2-5-1-方法区和永久代的关系"> 2.5.1 方法区和永久代的关系</h3>
+<p>《Java 虚拟机规范》只是规定了有方法区这么个概念和它的作用，并没有规定如何去实现它。那么，在不同的 JVM 上方法区的实现肯定是不同的了。 <strong>方法区和永久代的关系很像 Java 中接口和类的关系，类实现了接口，而永久代就是 HotSpot 虚拟机对虚拟机规范中方法区的一种实现方式。</strong> 也就是说，永久代是 HotSpot 的概念，方法区是 Java 虚拟机规范中的定义，是一种规范，而永久代是一种实现，一个是标准一个是实现，其他的虚拟机实现并没有永久代这一说法。</p>
+<h3 id="_2-5-2-常用参数"> 2.5.2 常用参数</h3>
+<p>JDK 1.8 之前永久代还没被彻底移除的时候通常通过下面这些参数来调节方法区大小</p>
+<div><pre><code><span>-</span>XX<span>:</span><span>PermSize</span><span>=</span><span>N</span> <span>//方法区 (永久代) 初始大小</span>
+<span>-</span>XX<span>:</span><span>MaxPermSize</span><span>=</span><span>N</span> <span>//方法区 (永久代) 最大大小,超过这个值将会抛出 OutOfMemoryError 异常:java.lang.OutOfMemoryError: PermGen</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p>相对而言，垃圾收集行为在这个区域是比较少出现的，但并非数据进入方法区后就“永久存在”了。</p>
+<p>JDK 1.8 的时候，方法区（HotSpot 的永久代）被彻底移除了（JDK1.7 就已经开始了），取而代之是元空间，元空间使用的是直接内存。</p>
+<p>下面是一些常用参数：</p>
+<div><pre><code><span>-</span>XX<span>:</span><span>MetaspaceSize</span><span>=</span><span>N</span> <span>//设置 Metaspace 的初始（和最小大小）</span>
+<span>-</span>XX<span>:</span><span>MaxMetaspaceSize</span><span>=</span><span>N</span> <span>//设置 Metaspace 的最大大小</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><p>与永久代很大的不同就是，如果不指定大小的话，随着更多类的创建，虚拟机会耗尽所有可用的系统内存。</p>
+<h3 id="_2-5-3-为什么要将永久代-permgen-替换为元空间-metaspace-呢"> 2.5.3 为什么要将永久代 (PermGen) 替换为元空间 (MetaSpace) 呢?</h3>
+<p><img src="./README.assets/20210425134508117.png" alt="img" /></p>
+<ol>
+<li>
+<p>整个永久代有一个 JVM 本身设置的固定大小上限，无法进行调整，而元空间使用的是直接内存，受本机可用内存的限制，虽然元空间仍旧可能溢出，但是比原来出现的几率会更小。</p>
+<blockquote>
+<p>当元空间溢出时会得到如下错误： <code>java.lang.OutOfMemoryError: MetaSpace</code></p>
+</blockquote>
+<p>你可以使用 <code>-XX：MaxMetaspaceSize</code> 标志设置最大元空间大小，默认值为 unlimited，这意味着它只受系统内存的限制。<code>-XX：MetaspaceSize</code> 调整标志定义元空间的初始大小如果未指定此标志，则 Metaspace 将根据运行时的应用程序需求动态地重新调整大小。</p>
+</li>
+<li>
+<p>元空间里面存放的是类的元数据，这样加载多少类的元数据就不由 <code>MaxPermSize</code> 控制了, 而由系统的实际可用空间来控制，这样能加载的类就更多了。</p>
+</li>
+<li>
+<p>在 JDK8，合并 HotSpot 和 JRockit 的代码时, JRockit 从来没有一个叫永久代的东西, 合并之后就没有必要额外的设置这么一个永久代的地方了。</p>
+</li>
+</ol>
+<h2 id="_2-6-运行时常量池"> 2.6 运行时常量池</h2>
+<p>运行时常量池是方法区的一部分。Class 文件中除了有类的版本、字段、方法、接口等描述信息外，还有常量池表（用于存放编译期生成的各种字面量和符号引用）</p>
+<p>既然运行时常量池是方法区的一部分，自然受到方法区内存的限制，当常量池无法再申请到内存时会抛出 OutOfMemoryError 错误。</p>
+<blockquote>
+<ol>
+<li>
+<p><strong>JDK1.7 之前运行时常量池逻辑包含字符串常量池存放在方法区, 此时 hotspot 虚拟机对方法区的实现为永久代</strong></p>
+</li>
+<li>
+<p><strong>JDK1.7 字符串常量池被从方法区拿到了堆中, 这里没有提到运行时常量池,也就是说字符串常量池被单独拿到堆,运行时常量池剩下的东西还在方法区, 也就是 hotspot 中的永久代</strong> 。</p>
+</li>
+<li>
+<p><strong>JDK1.8 hotspot 移除了永久代用元空间(Metaspace)取而代之, 这时候字符串常量池还在堆, 运行时常量池还在方法区, 只不过方法区的实现从永久代变成了元空间(Metaspace)</strong></p>
+</li>
+</ol>
+</blockquote>
+<h2 id="_2-7-直接内存"> 2.7 直接内存</h2>
+<p><strong>直接内存并不是虚拟机运行时数据区的一部分，也不是虚拟机规范中定义的内存区域，但是这部分内存也被频繁地使用。而且也可能导致 OutOfMemoryError 错误出现。</strong></p>
+<p>JDK1.4 中新加入的 <strong>NIO(New Input/Output) 类</strong>，引入了一种基于**通道（Channel）**与**缓存区（Buffer）*<em>的 I/O 方式，它可以直接使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆中的 DirectByteBuffer 对象作为这块内存的引用进行操作。这样就能在一些场景中显著提高性能，因为*<em>避免了在 Java 堆和 Native 堆之间来回复制数据</em></em>。</p>
+<p>本机直接内存的分配不会受到 Java 堆的限制，但是，既然是内存就会受到本机总内存大小以及处理器寻址空间的限制。</p>
+<h1 id="三-hotspot-虚拟机对象"> 三 HotSpot 虚拟机对象</h1>
+<h2 id="_3-1-对象的创建"> 3.1 对象的创建</h2>
+<p><img src="./README.assets/Java创建对象的过程.dbe33c41.png" alt="Java创建对象的过程" /></p>
+<h3 id="_3-1-1-类加载检查"> 3.1.1 类加载检查</h3>
+<p>虚拟机遇到一条 new 指令时，首先将去检查这个指令的参数是否能在常量池中定位到这个类的符号引用，并且检查这个符号引用代表的类是否已被加载过、解析和初始化过。如果没有，那必须先执行相应的类加载过程。</p>
+<h3 id="_3-1-2-分配内存"> 3.1.2 分配内存</h3>
+<p>在<strong>类加载检查</strong>通过后，接下来虚拟机将为新生对象<strong>分配内存</strong>。对象所需的内存大小在类加载完成后便可确定，为对象分配空间的任务等同于把一块确定大小的内存从 Java 堆中划分出来。<strong>分配方式</strong>有 <strong>“指针碰撞”</strong> 和 <strong>“空闲列表”</strong> 两种，<strong>选择哪种分配方式由 Java 堆是否规整决定，而 Java 堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定</strong>。</p>
+<p><img src="./README.assets/内存分配的两种方式.9ecae4c9.png" alt="" /></p>
+<p>在创建对象的时候有一个很重要的问题，就是线程安全，因为在实际开发过程中，创建对象是很频繁的事情，作为虚拟机来说，必须要保证线程是安全的，通常来讲，虚拟机采用两种方式来保证线程安全：</p>
+<ul>
+<li><strong>CAS+失败重试：</strong> CAS 是乐观锁的一种实现方式。所谓乐观锁就是，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直到成功为止。<strong>虚拟机采用 CAS 配上失败重试的方式保证更新操作的原子性。</strong></li>
+<li><strong>TLAB：</strong> 为每一个线程预先在 Eden 区分配一块儿内存，JVM 在给线程中的对象分配内存时，首先在 TLAB 分配，当对象大于 TLAB 中的剩余内存或 TLAB 的内存已用尽时，再采用上述的 CAS 进行内存分配</li>
+</ul>
+<h3 id="_3-1-3-初始化零值"> 3.1.3 初始化零值</h3>
+<p>内存分配完成后，虚拟机需要将分配到的内存空间都初始化为零值（不包括对象头），这一步操作保证了对象的实例字段在 Java 代码中可以不赋初始值就直接使用，程序能访问到这些字段的数据类型所对应的零值。</p>
+<h3 id="_3-1-4-设置对象头"> 3.1.4 设置对象头</h3>
+<p>初始化零值完成之后，<strong>虚拟机要对对象进行必要的设置</strong>，例如这个对象是哪个类的实例、如何才能找到类的元数据信息、对象的哈希码、对象的 GC 分代年龄等信息。 <strong>这些信息存放在对象头中。</strong> 另外，根据虚拟机当前运行状态的不同，如是否启用偏向锁等，对象头会有不同的设置方式。</p>
+<h3 id="_3-1-5-执行-init-方法"> 3.1.5 执行 init 方法</h3>
+<p>在上面工作都完成之后，从虚拟机的视角来看，一个新的对象已经产生了，但从 Java 程序的视角来看，对象创建才刚开始，<code>&lt;init&gt;</code> 方法还没有执行，所有的字段都还为零。所以一般来说，执行 new 指令之后会接着执行 <code>&lt;init&gt;</code> 方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。</p>
+<h2 id="_3-2-对象的内存布局"> 3.2 对象的内存布局</h2>
+<blockquote>
+<p>在 Hotspot 虚拟机中，对象在内存中的布局可以分为 3 块区域：<strong>对象头</strong>、<strong>实例数据</strong>和<strong>对齐填充</strong>。</p>
+</blockquote>
+<p><strong>Hotspot 虚拟机的对象头包括两部分信息</strong>，<strong>第一部分用于存储对象自身的运行时数据</strong>（哈希码、GC 分代年龄、锁状态标志等等），<strong>另一部分是类型指针</strong>，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是那个类的实例。</p>
+<p><strong>实例数据部分是对象真正存储的有效信息</strong>，也是在程序中所定义的各种类型的字段内容。</p>
+<p><strong>对齐填充部分不是必然存在的，也没有什么特别的含义，仅仅起占位作用。</strong> 因为 Hotspot 虚拟机的自动内存管理系统要求对象起始地址必须是 8 字节的整数倍，换句话说就是对象的大小必须是 8 字节的整数倍。而对象头部分正好是 8 字节的倍数（1 倍或 2 倍），因此，当对象实例数据部分没有对齐时，就需要通过对齐填充来补全。</p>
+<h2 id="_3-3-对象的访问定位"> 3.3 对象的访问定位</h2>
+<p>建立对象就是为了使用对象，我们的 Java 程序通过栈上的 reference 数据来操作堆上的具体对象。对象的访问方式由虚拟机实现而定，目前主流的访问方式有<strong>① 使用句柄</strong>和<strong>② 直接指针</strong>两种：</p>
+<blockquote>
+<p>使用句柄来访问的最大好处是 reference 中存储的是稳定的句柄地址，在对象被移动时只会改变句柄中的实例数据指针，而 reference 本身不需要修改。使用直接指针访问方式最大的好处就是速度快，它节省了一次指针定位的时间开销。</p>
+</blockquote>
+<ol>
+<li><strong>句柄：</strong> 如果使用句柄的话，那么 Java 堆中将会划分出一块内存来作为句柄池，reference 中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息；</li>
+</ol>
+<p><img src="./README.assets/对象的访问定位-使用句柄.53859387.png" alt="对象的访问定位-使用句柄" /></p>
+<ol start="2">
+<li><strong>直接指针：</strong> 如果使用直接指针访问，那么 Java 堆对象的布局中就必须考虑如何放置访问类型数据的相关信息，而 reference 中存储的直接就是对象的地址</li>
+</ol>
+<p><img src="./README.assets/对象的访问定位-直接指针.c3bbe790.png" alt="对象的访问定位-直接指针" /></p>
+<h1 id="四-重点补充内容"> 四 重点补充内容</h1>
+<h2 id="_4-1-字符串常量池常见问题"> 4.1 字符串常量池常见问题</h2>
+<h3 id="_4-1-1-和-equals"> 4.1.1 <code>==</code> 和 <code>equals</code></h3>
+<blockquote>
+<p><strong>注意</strong> ：比较 String 字符串的值是否相等，可以使用 <code>equals()</code> 方法。 <code>String</code> 中的 <code>equals</code> 方法是被重写过的。 <code>Object</code> 的 <code>equals</code> 方法是比较的对象的内存地址，而 <code>String</code> 的 <code>equals</code> 方法比较的是字符串的值是否相等。如果你使用 <code>==</code> 比较两个字符串是否相等的话，IDEA 还是提示你使用 <code>equals()</code> 方法替换。</p>
+</blockquote>
+<p><img src="./README.assets/image-20210817123252441.png" alt="img" /></p>
+<blockquote>
+<p>对于基本数据类型来说，== 比较的是值。对于引用数据类型来说，==比较的是对象的内存地址。</p>
+</blockquote>
+<h3 id="_4-1-2-存入常量池"> 4.1.2 存入常量池</h3>
+<p><strong>对于编译期可以确定值的字符串，也就是常量字符串 ，jvm 会将其存入字符串常量池。</strong></p>
+<blockquote>
+<p><strong>字符串常量池</strong> 是 JVM 为了提升性能和减少内存消耗针为字符串（String 类）专门开辟的一块区域，主要目的是为了避免字符串的重复创建。</p>
+<div><pre><code><span>String</span> aa <span>=</span> <span>"ab"</span><span>;</span> <span>// 放在常量池中</span>
+<span>String</span> bb <span>=</span> <span>"ab"</span><span>;</span> <span>// 从常量池中查找</span>
+<span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>aa<span>==</span>bb<span>)</span><span>;</span><span>// true</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p>JDK1.7 之前运行时常量池逻辑包含字符串常量池存放在方法区。JDK1.7 的时候，字符串常量池被从方法区拿到了堆中。</p>
+</blockquote>
+<p>并且，字符串常量拼接得到的字符串常量在编译阶段就已经被存放字符串常量池，这个得益于编译器的优化。</p>
+<p>并不是所有的常量都会进行折叠，只有编译器在程序编译期就可以确定值的常量才可以：</p>
+<ol>
+<li>基本数据类型(byte、boolean、short、char、int、float、long、double)以及字符串常量</li>
+<li><code>final</code> 修饰的基本数据类型和字符串变量</li>
+<li>字符串通过 “+”拼接得到的字符串、基本数据类型之间算数运算（加减乘除）、基本数据类型的位运算（&lt;&lt;、&gt;&gt;、&gt;&gt;&gt; ）</li>
+</ol>
+<h3 id="_4-1-3-字符串拼接"> 4.1.3 字符串拼接</h3>
+<p>对象引用和“+”的字符串拼接方式，实际上是通过 <code>StringBuilder</code> 调用 <code>append()</code> 方法实现的，拼接完成之后调用 <code>toString()</code> 得到一个 <code>String</code> 对象 。</p>
+<div><pre><code><span>String</span> str1 <span>=</span> <span>"str"</span><span>;</span>
+<span>String</span> str2 <span>=</span> <span>"ing"</span><span>;</span>
+<span>String</span> str3 <span>=</span> <span>"str"</span> <span>+</span> <span>"ing"</span><span>;</span><span>//常量池中的对象</span>
+<span>String</span> str4 <span>=</span> str1 <span>+</span> str2<span>;</span> <span>//在堆上创建的新的对象</span>
+<span>String</span> str5 <span>=</span> <span>"string"</span><span>;</span><span>//常量池中的对象</span>
+
+<span>String</span> str4 <span>=</span> <span>new</span> <span>StringBuilder</span><span>(</span><span>)</span><span>.</span><span>append</span><span>(</span>str1<span>)</span><span>.</span><span>append</span><span>(</span>str2<span>)</span><span>.</span><span>toString</span><span>(</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br></div></div><p><img src="./README.assets/字符串拼接-常量池.png" alt="img" /></p>
+<p>我们在平时写代码的时候，尽量避免多个字符串对象拼接，因为这样会重新创建对象。如果需要改变字符串的话，可以使用 <code>StringBuilder</code> 或者 <code>StringBuffer</code>。</p>
+<p>不过，字符串使用 <code>final</code> 关键字声明之后，可以让编译器当做常量来处理。</p>
+<div><pre><code><span>final</span> <span>String</span> str1 <span>=</span> <span>"str"</span><span>;</span>
+<span>final</span> <span>String</span> str2 <span>=</span> <span>"ing"</span><span>;</span>
+<span>// 下面两个表达式其实是等价的</span>
+<span>String</span> c <span>=</span> <span>"str"</span> <span>+</span> <span>"ing"</span><span>;</span><span>// 常量池中的对象</span>
+<span>String</span> d <span>=</span> str1 <span>+</span> str2<span>;</span> <span>// 常量池中的对象</span>
+<span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>c <span>==</span> d<span>)</span><span>;</span><span>// true</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br></div></div><h3 id="_4-1-4-创建字符串对象的方式"> 4.1.4 创建字符串对象的方式</h3>
+<div><pre><code><span>// 从字符串常量池中拿对象</span>
+<span>String</span> str1 <span>=</span> <span>"abcd"</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br></div></div><div><pre><code><span>// 直接在堆内存空间创建一个新的对象。</span>
+<span>String</span> str2 <span>=</span> <span>new</span> <span>String</span><span>(</span><span>"abcd"</span><span>)</span><span>;</span>
+<span>String</span> str3 <span>=</span> <span>new</span> <span>String</span><span>(</span><span>"abcd"</span><span>)</span><span>;</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div><p><strong>只要使用 new 的方式创建对象，便需要创建新的对象</strong> 。</p>
+<p>使用 new 的方式创建对象的方式如下，可以简单概括为 3 步：</p>
+<ol>
+<li>在堆中创建一个字符串对象</li>
+<li>检查字符串常量池中是否有和 new 的字符串值相等的字符串常量</li>
+<li>如果没有的话需要在字符串常量池中也创建一个值相等的字符串常量，如果有的话，就直接返回堆中的字符串实例对象地址。</li>
+</ol>
+<h3 id="_4-1-5-总结"> 4.1.5 总结</h3>
+<ol>
+<li>对于基本数据类型来说，==比较的是值。对于引用数据类型来说，==比较的是对象的内存地址。</li>
+<li>在编译过程中，Javac 编译器（下文中统称为编译器）会进行一个叫做 <strong>常量折叠(Constant Folding)</strong> 的代码优化。常量折叠会把常量表达式的值求出来作为常量嵌在最终生成的代码中，这是 Javac 编译器会对源代码做的极少量优化措施之一(代码优化几乎都在即时编译器中进行)。</li>
+<li>一般来说，我们要尽量避免通过 new 的方式创建字符串。使用双引号声明的 <code>String</code> 对象（ <code>String s1 = &quot;java&quot;</code> ）更利于让编译器有机会优化我们的代码，同时也更易于阅读。</li>
+<li>被 <code>final</code> 关键字修改之后的 <code>String</code> 会被编译器当做常量来处理，编译器程序编译期就可以确定它的值，其效果就想到于访问常量。</li>
+</ol>
+<h2 id="_4-2-string-s1-new-string-abc-这句话创建了几个字符串对象"> 4.2 String s1 = new String(&quot;abc&quot;);这句话创建了几个字符串对象？</h2>
+<p><strong>会创建 1 或 2 个字符串：</strong></p>
+<ul>
+<li>如果字符串常量池中已存在字符串常量“abc”，则只会在堆空间创建一个字符串常量“abc”。</li>
+<li>如果字符串常量池中没有字符串常量“abc”，<strong>那么它将首先在字符串常量池中创建</strong>，然后在堆空间中创建，因此将创建总共 2 个字符串对象。</li>
+</ul>
+<h2 id="_4-3-8-种基本类型的包装类和常量池"> 4.3 8 种基本类型的包装类和常量池</h2>
+<p>Java 基本类型的包装类的大部分都实现了常量池技术。</p>
+<p><code>Byte</code>,<code>Short</code>,<code>Integer</code>,<code>Long</code> 这 4 种包装类默认创建了数值 <strong>[-128，127]</strong> 的相应类型的缓存数据，<code>Character</code> 创建了数值在 <strong>[0,127]</strong> 范围的缓存数据，<code>Boolean</code> 直接返回 <code>True</code> Or <code>False</code>。</p>
+<p>两种浮点数类型的包装类 <code>Float</code>,<code>Double</code> 并没有实现常量池技术。</p>
+<blockquote>
+<h2 id="常量池技术的作用"> 常量池技术的作用</h2>
+<p>常量池是为了避免频繁的创建和销毁对象而影响系统性能，其实现了对象的共享。
+例如字符串常量池，在编译阶段就把所有的字符串文字放到一个常量池中。</p>
+<ol>
+<li>节省内存空间：常量池中所有相同的字符串常量被合并，只占用一个空间。</li>
+<li>节省运行时间：比较字符串时，==比equals()快。对于两个引用变量，只用==判断引用是否相等，也就可以判断实际值是否相等。</li>
+</ol>
+</blockquote>
+<div><pre><code><span>Integer</span> i1 <span>=</span> <span>33</span><span>;</span>
+<span>Integer</span> i2 <span>=</span> <span>33</span><span>;</span>
+<span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>i1 <span>==</span> i2<span>)</span><span>;</span><span>// 输出 true</span>
+<span>Integer</span> i11 <span>=</span> <span>333</span><span>;</span>
+<span>Integer</span> i22 <span>=</span> <span>333</span><span>;</span>
+<span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>i11 <span>==</span> i22<span>)</span><span>;</span><span>// 输出 false</span>
+<span>Double</span> i3 <span>=</span> <span>1.2</span><span>;</span>
+<span>Double</span> i4 <span>=</span> <span>1.2</span><span>;</span>
+<span>System</span><span>.</span>out<span>.</span><span>println</span><span>(</span>i3 <span>==</span> i4<span>)</span><span>;</span><span>// 输出 false</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br></div></div><h3 id="_4-3-0-整型包装类对象之间的比较"> 4.3.0 整型包装类对象之间的比较</h3>
+<p><img src="./README.assets/20210313164740893.png" alt="img" /></p>
+<h3 id="_4-3-1-integer-缓存源代码"> 4.3.1 <code>Integer</code> 缓存源代码</h3>
+<div><pre><code><span>/**
+*此方法将始终缓存-128 到 127（包括端点）范围内的值，并可以缓存此范围之外的其他值。
+*/</span>
+<span>public</span> <span>static</span> <span>Integer</span> <span>valueOf</span><span>(</span><span>int</span> i<span>)</span> <span>{</span>
+    <span>if</span> <span>(</span>i <span>>=</span> <span>IntegerCache</span><span>.</span>low <span>&amp;&amp;</span> i <span>&lt;=</span> <span>IntegerCache</span><span>.</span>high<span>)</span>
+      <span>return</span> <span>IntegerCache</span><span>.</span>cache<span>[</span>i <span>+</span> <span>(</span><span>-</span><span>IntegerCache</span><span>.</span>low<span>)</span><span>]</span><span>;</span>
+    <span>return</span> <span>new</span> <span>Integer</span><span>(</span>i<span>)</span><span>;</span>
+<span>}</span>
+<span>private</span> <span>static</span> <span>class</span> <span>IntegerCache</span> <span>{</span>
+    <span>static</span> <span>final</span> <span>int</span> low <span>=</span> <span>-</span><span>128</span><span>;</span>
+    <span>static</span> <span>final</span> <span>int</span> high<span>;</span>
+    <span>static</span> <span>final</span> <span>Integer</span> cache<span>[</span><span>]</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br></div></div><h3 id="_4-3-2-character-缓存源码"> 4.3.2 <code>Character</code> 缓存源码</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>Character</span> <span>valueOf</span><span>(</span><span>char</span> c<span>)</span> <span>{</span>
+    <span>if</span> <span>(</span>c <span>&lt;=</span> <span>127</span><span>)</span> <span>{</span> <span>// must cache</span>
+      <span>return</span> <span>CharacterCache</span><span>.</span>cache<span>[</span><span>(</span><span>int</span><span>)</span>c<span>]</span><span>;</span>
+    <span>}</span>
+    <span>return</span> <span>new</span> <span>Character</span><span>(</span>c<span>)</span><span>;</span>
+<span>}</span>
+
+<span>private</span> <span>static</span> <span>class</span> <span>CharacterCache</span> <span>{</span>
+    <span>private</span> <span>CharacterCache</span><span>(</span><span>)</span><span>{</span><span>}</span>
+
+    <span>static</span> <span>final</span> <span>Character</span> cache<span>[</span><span>]</span> <span>=</span> <span>new</span> <span>Character</span><span>[</span><span>127</span> <span>+</span> <span>1</span><span>]</span><span>;</span>
+    <span>static</span> <span>{</span>
+        <span>for</span> <span>(</span><span>int</span> i <span>=</span> <span>0</span><span>;</span> i <span>&lt;</span> cache<span>.</span>length<span>;</span> i<span>++</span><span>)</span>
+            cache<span>[</span>i<span>]</span> <span>=</span> <span>new</span> <span>Character</span><span>(</span><span>(</span><span>char</span><span>)</span>i<span>)</span><span>;</span>
+    <span>}</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br></div></div><h3 id="_4-3-3-boolean-缓存源码"> 4.3.3 <code>Boolean</code> 缓存源码</h3>
+<div><pre><code><span>public</span> <span>static</span> <span>Boolean</span> <span>valueOf</span><span>(</span><span>boolean</span> b<span>)</span> <span>{</span>
+    <span>return</span> <span>(</span>b <span>?</span> TRUE <span>:</span> FALSE<span>)</span><span>;</span>
+<span>}</span>
+</code></pre>
+<div><span>1</span><br><span>2</span><br><span>3</span><br></div></div>]]></content:encoded>
+    </item>
+    <item>
+      <title>MySQL 笔记</title>
+      <link>https://vue-blog.lllllan.cn/2-mysql/</link>
+      <guid>https://vue-blog.lllllan.cn/2-mysql/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">MySQL 笔记</source>
+      <category>MySQL</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+      <content:encoded><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
+<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
+<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
+]]></content:encoded>
+    </item>
+    <item>
       <title>Java 笔记</title>
       <link>https://vue-blog.lllllan.cn/1-java/</link>
       <guid>https://vue-blog.lllllan.cn/1-java/</guid>
@@ -1989,18 +2111,6 @@ after method send
 <p><a href="https://www.r2coding.com/#/" target="_blank" rel="noopener noreferrer">Road 2 Coding</a></p>
 </li>
 </ul>
-]]></content:encoded>
-    </item>
-    <item>
-      <title>MySQL 笔记</title>
-      <link>https://vue-blog.lllllan.cn/2-mysql/</link>
-      <guid>https://vue-blog.lllllan.cn/2-mysql/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">MySQL 笔记</source>
-      <category>MySQL</category>
-      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
-      <content:encoded><![CDATA[<p><a href="https://www.bilibili.com/video/BV1iq4y1u7vj" target="_blank" rel="noopener noreferrer">【宋红康】MySQL数据库（安装/基础/高级/优化）_哔哩哔哩_bilibili</a></p>
-<p>MySQL上过一个学期，可以说啥也没听，啥也没学，基本的语句全靠临时百度。</p>
-<p>现在跟着这个视频，重新学一遍MySQL，希望能加深理解。</p>
 ]]></content:encoded>
     </item>
     <item>
@@ -2469,42 +2579,247 @@ after method send
 <div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br><span>47</span><br><span>48</span><br><span>49</span><br><span>50</span><br><span>51</span><br><span>52</span><br><span>53</span><br><span>54</span><br><span>55</span><br><span>56</span><br><span>57</span><br><span>58</span><br><span>59</span><br><span>60</span><br><span>61</span><br><span>62</span><br><span>63</span><br><span>64</span><br><span>65</span><br><span>66</span><br><span>67</span><br><span>68</span><br><span>69</span><br><span>70</span><br><span>71</span><br><span>72</span><br><span>73</span><br><span>74</span><br><span>75</span><br><span>76</span><br><span>77</span><br><span>78</span><br><span>79</span><br><span>80</span><br><span>81</span><br><span>82</span><br><span>83</span><br><span>84</span><br><span>85</span><br><span>86</span><br><span>87</span><br><span>88</span><br><span>89</span><br><span>90</span><br><span>91</span><br><span>92</span><br><span>93</span><br><span>94</span><br><span>95</span><br><span>96</span><br><span>97</span><br><span>98</span><br><span>99</span><br><span>100</span><br><span>101</span><br><span>102</span><br><span>103</span><br><span>104</span><br><span>105</span><br><span>106</span><br><span>107</span><br><span>108</span><br><span>109</span><br><span>110</span><br><span>111</span><br><span>112</span><br><span>113</span><br><span>114</span><br><span>115</span><br><span>116</span><br><span>117</span><br><span>118</span><br><span>119</span><br><span>120</span><br><span>121</span><br><span>122</span><br><span>123</span><br><span>124</span><br><span>125</span><br><span>126</span><br><span>127</span><br><span>128</span><br><span>129</span><br><span>130</span><br><span>131</span><br><span>132</span><br><span>133</span><br><span>134</span><br><span>135</span><br><span>136</span><br><span>137</span><br><span>138</span><br><span>139</span><br><span>140</span><br><span>141</span><br><span>142</span><br><span>143</span><br><span>144</span><br><span>145</span><br><span>146</span><br><span>147</span><br><span>148</span><br><span>149</span><br><span>150</span><br><span>151</span><br><span>152</span><br><span>153</span><br><span>154</span><br><span>155</span><br><span>156</span><br><span>157</span><br><span>158</span><br><span>159</span><br><span>160</span><br><span>161</span><br><span>162</span><br><span>163</span><br><span>164</span><br><span>165</span><br><span>166</span><br><span>167</span><br><span>168</span><br><span>169</span><br><span>170</span><br><span>171</span><br><span>172</span><br><span>173</span><br><span>174</span><br><span>175</span><br><span>176</span><br><span>177</span><br><span>178</span><br><span>179</span><br><span>180</span><br><span>181</span><br><span>182</span><br><span>183</span><br><span>184</span><br><span>185</span><br><span>186</span><br><span>187</span><br><span>188</span><br><span>189</span><br><span>190</span><br><span>191</span><br><span>192</span><br><span>193</span><br><span>194</span><br><span>195</span><br><span>196</span><br><span>197</span><br><span>198</span><br><span>199</span><br><span>200</span><br><span>201</span><br><span>202</span><br><span>203</span><br><span>204</span><br><span>205</span><br><span>206</span><br><span>207</span><br><span>208</span><br><span>209</span><br><span>210</span><br><span>211</span><br><span>212</span><br><span>213</span><br><span>214</span><br><span>215</span><br><span>216</span><br><span>217</span><br><span>218</span><br><span>219</span><br><span>220</span><br><span>221</span><br><span>222</span><br><span>223</span><br><span>224</span><br><span>225</span><br><span>226</span><br><span>227</span><br><span>228</span><br><span>229</span><br><span>230</span><br><span>231</span><br><span>232</span><br><span>233</span><br><span>234</span><br><span>235</span><br><span>236</span><br><span>237</span><br><span>238</span><br><span>239</span><br><span>240</span><br><span>241</span><br><span>242</span><br><span>243</span><br><span>244</span><br><span>245</span><br><span>246</span><br><span>247</span><br><span>248</span><br><span>249</span><br><span>250</span><br><span>251</span><br><span>252</span><br><span>253</span><br><span>254</span><br><span>255</span><br><span>256</span><br><span>257</span><br><span>258</span><br><span>259</span><br><span>260</span><br><span>261</span><br><span>262</span><br><span>263</span><br><span>264</span><br><span>265</span><br><span>266</span><br><span>267</span><br><span>268</span><br><span>269</span><br><span>270</span><br><span>271</span><br><span>272</span><br><span>273</span><br><span>274</span><br><span>275</span><br><span>276</span><br><span>277</span><br><span>278</span><br><span>279</span><br><span>280</span><br><span>281</span><br><span>282</span><br><span>283</span><br><span>284</span><br><span>285</span><br><span>286</span><br><span>287</span><br><span>288</span><br><span>289</span><br><span>290</span><br><span>291</span><br><span>292</span><br><span>293</span><br><span>294</span><br><span>295</span><br><span>296</span><br><span>297</span><br><span>298</span><br><span>299</span><br><span>300</span><br><span>301</span><br><span>302</span><br><span>303</span><br><span>304</span><br><span>305</span><br><span>306</span><br><span>307</span><br><span>308</span><br><span>309</span><br><span>310</span><br><span>311</span><br><span>312</span><br><span>313</span><br><span>314</span><br><span>315</span><br><span>316</span><br><span>317</span><br><span>318</span><br><span>319</span><br><span>320</span><br><span>321</span><br><span>322</span><br><span>323</span><br><span>324</span><br><span>325</span><br><span>326</span><br><span>327</span><br><span>328</span><br><span>329</span><br><span>330</span><br><span>331</span><br><span>332</span><br><span>333</span><br><span>334</span><br><span>335</span><br><span>336</span><br><span>337</span><br><span>338</span><br><span>339</span><br><span>340</span><br><span>341</span><br><span>342</span><br><span>343</span><br><span>344</span><br><span>345</span><br><span>346</span><br><span>347</span><br><span>348</span><br><span>349</span><br><span>350</span><br><span>351</span><br><span>352</span><br><span>353</span><br><span>354</span><br><span>355</span><br><span>356</span><br><span>357</span><br><span>358</span><br><span>359</span><br><span>360</span><br><span>361</span><br><span>362</span><br><span>363</span><br><span>364</span><br><span>365</span><br><span>366</span><br><span>367</span><br><span>368</span><br><span>369</span><br><span>370</span><br><span>371</span><br><span>372</span><br><span>373</span><br><span>374</span><br><span>375</span><br><span>376</span><br><span>377</span><br><span>378</span><br><span>379</span><br><span>380</span><br><span>381</span><br><span>382</span><br><span>383</span><br><span>384</span><br><span>385</span><br><span>386</span><br><span>387</span><br><span>388</span><br><span>389</span><br><span>390</span><br><span>391</span><br><span>392</span><br><span>393</span><br><span>394</span><br><span>395</span><br><span>396</span><br><span>397</span><br><span>398</span><br><span>399</span><br><span>400</span><br><span>401</span><br><span>402</span><br><span>403</span><br><span>404</span><br><span>405</span><br><span>406</span><br><span>407</span><br><span>408</span><br><span>409</span><br><span>410</span><br><span>411</span><br><span>412</span><br><span>413</span><br><span>414</span><br><span>415</span><br><span>416</span><br><span>417</span><br><span>418</span><br><span>419</span><br><span>420</span><br><span>421</span><br><span>422</span><br><span>423</span><br><span>424</span><br><span>425</span><br></div></div>]]></content:encoded>
     </item>
     <item>
-      <title>第三章、从网线到网络设备</title>
-      <link>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</link>
-      <guid>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">第三章、从网线到网络设备</source>
+      <title>第一章、浏览器生成消息</title>
+      <link>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/</link>
+      <guid>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">第一章、浏览器生成消息</source>
       <category>计算机基础</category>
       <pubDate>Fri, 21 Jan 2022 02:30:27 GMT</pubDate>
       <content:encoded><![CDATA[<div><p>Note</p>
 <p>本文作为 《网络是怎样连接的》 的笔记，绝大部分内容均抄自该书。</p>
 </div>
-<h2 id="一、信号在网线和集线器中传输"> 一、信号在网线和集线器中传输</h2>
-<h3 id="_1-1-每个包都是独立传输的"> 1.1 每个包都是独立传输的</h3>
-<p><img src="./README.assets/image-20220113145717884.png" alt="image-20220113145717884" /></p>
-<h3 id="_1-2-网线中的信号衰减"> 1.2 网线中的信号衰减</h3>
-<p>以太网信号的本质是正负变化的电压。</p>
-<p>信号在网线的传输过程中，能量会逐渐损失。网线越长，信号衰减就越严重。</p>
-<p>同时噪声也会进一步加剧信号的失真。</p>
-<h3 id="_1-3-双绞线抑制噪声"> 1.3 双绞线抑制噪声</h3>
+<h2 id="一、生成-http-请求消息"> 一、生成 HTTP 请求消息</h2>
+<h3 id="_1-1-网址-url-uniform-resource-locator"> 1.1 网址（URL, Uniform Resource Locator）</h3>
+<p><img src="./README.assets/image-20211217214228466.png" alt="image-20211217214228466" /></p>
+<h3 id="_1-2-解析-url"> 1.2 解析 URL</h3>
+<p><img src="./README.assets/image-20211217214541708.png" alt="image-20211217214541708" /></p>
+<p><img src="./README.assets/image-20211217214555087.png" alt="image-20211217214555087" /></p>
+<h3 id="_1-3-文件名省略"> 1.3 文件名省略</h3>
+<ul>
+<li>当 URL 以 <code>/</code> 结尾时，服务器会默认访问该路径下的 <code>index.html</code> 或 <code>default.html</code> 文件</li>
+<li>当 URL 连 <code>/</code> 和文件类型都省略的时候：</li>
+</ul>
+<p><img src="./README.assets/image-20211217215354653.png" alt="image-20211217215354653" /></p>
+<p>（实测：当一个文件没有文件类型的时候，不允许和一个同名文件夹同时存在。而当这个文件有后缀时，应该会访问同名文件夹）</p>
+<h3 id="_1-4-http-基本思路"> 1.4 HTTP 基本思路</h3>
+<ul>
+<li>对什么 + 进行怎样的操作</li>
+</ul>
+<p><img src="./README.assets/image-20211217215856796.png" alt="image-20211217215856796" /></p>
+<p><img src="./README.assets/image-20211217215922575.png" alt="image-20211217215922575" /></p>
+<h3 id="_1-5-生成-http-请求信息"> 1.5 生成 HTTP 请求信息</h3>
 <blockquote>
-<p>产生噪声的原因是网线周围的电磁波，当电磁波接触到金属等导体时，在其中就会产生电流。信号和噪声的电流混杂在一起之后，导致信号的波形发生失真。</p>
+<p><strong>一条请求消息中只能写一个URI</strong>。如果需要获取多个文件，必须对每个文件单独发送一条请求</p>
 </blockquote>
-<p>影响网线的电磁波分为两种：</p>
-<h4 id="来自网线之外的其他设备"> 来自网线之外的其他设备：</h4>
-<p>当电磁波接触到信号线时，会沿电磁波传播的右旋方向产生电流。</p>
-<p>如果我们将信号线缠绕在一起，信号线就变成了螺旋形，其中两根信号线产生的噪声电流方向就会相反，从而使得噪声电流相互抵消。</p>
-<p><img src="./README.assets/image-20220113150630538.png" alt="image-20220113150630538" /></p>
-<p><img src="./README.assets/image-20220113150651814.png" alt="image-20220113150651814" /></p>
-<h4 id="相邻信号线泄露出来"> 相邻信号线泄露出来：</h4>
-<p>这种内部产生的噪声称为 <strong>串扰</strong></p>
-<p><img src="./README.assets/image-20220113151240119.png" alt="image-20220113151240119" /></p>
-<p><img src="./README.assets/image-20220113151203170.png" alt="image-20220113151203170" /></p>
-<h3 id="_1-4-集线器将信号发往所有线路"> 1.4 集线器将信号发往所有线路</h3>
+<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
+<p><img src="./../../../../../../data/r2coding/4.计算机基础/1.计算机网络/1.网络是怎样连接的/网络是怎样连接的.assets/image-20211217223351942.png" alt="image-20211217223351942" /></p>
+<p>更多字段信息见文档 44 页。</p>
+<h3 id="_1-6-服务器响应"> 1.6 服务器响应</h3>
+<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
 <blockquote>
-<p>集线器将信号发送给所有连接在它上面的线路。</p>
+<p>状态码时一个数字，主要用来向程序告知执行的结果</p>
+<p>响应短语是一段文字，用来向人们告知执行的结果</p>
 </blockquote>
-<p><img src="./README.assets/image-20220113151435359.png" alt="image-20220113151435359" /></p>
-<p><img src="./README.assets/image-20220113151613603.png" alt="image-20220113151613603" /></p>
+<p><img src="./README.assets/image-20211217224050584.png" alt="image-20211217224050584" /></p>
+<p><img src="./README.assets/image-20211217224916808.png" alt="image-20211217224916808" /></p>
+<h2 id="二、向-dns-服务器查询-web-服务器的-ip-地址"> 二、向 DNS 服务器查询 Web 服务器的 IP 地址</h2>
+<h3 id="_2-1-ip-地址的基本知识"> 2.1 IP 地址的基本知识</h3>
+<p><img src="./README.assets/image-20211219221243726.png" alt="image-20211219221243726" /></p>
+<p><img src="./README.assets/image-20211219221343432.png" alt="image-20211219221343432" /></p>
+<ul>
+<li>IP 地址是 32 比特的数字，被分成了4组</li>
+<li>子网掩码也是 32 比特的数字
+<ul>
+<li><strong>左边全1的部分表示网络号</strong></li>
+<li><strong>右边全0的部分表示主机号</strong></li>
+</ul>
+</li>
+</ul>
+<p><img src="./README.assets/image-20211219222137630.png" alt="image-20211219222137630" /></p>
+<p><img src="./README.assets/image-20211219222245701.png" alt="image-20211219222245701" /></p>
+<h3 id="_2-2-域名和ip地址并用的理由"> 2.2 域名和IP地址并用的理由</h3>
+<ul>
+<li>域名比IP地址更容易记忆</li>
+<li>IP地址的传输比域名更高效（IP地址只是4字节的数字，域名最长可以是255字节的字符）</li>
+</ul>
+<p>于是让人来使用域名，让路由器来使用IP地址，这个机制就是<strong>DNS</strong>。</p>
+<h3 id="_2-3-socket-库提供查询-ip-地址的功能"> 2.3 Socket 库提供查询 IP 地址的功能</h3>
+<blockquote>
+<p><strong>域名解析</strong>：通过DNS查询IP地址的操作。</p>
+</blockquote>
+<blockquote>
+<p><strong>解析器</strong>：负责执行域名解析的DNS客户端。（解析器实际上是一段程序。）</p>
+</blockquote>
+<p>​	库是一堆通用程序组件的集合，他们具有诸多好处：</p>
+<ul>
+<li>节省编程工作量</li>
+<li>实现程序的标准化</li>
+<li>等等</li>
+</ul>
+<p>​	Socket库也是一种库，其中包含的程序组件可以让其他的应用程序调用操作系统的网络功能，而解析器就是这个库中的其中一种程序组件。</p>
+<h3 id="_2-4-通过解析器向dns服务器发出查询"> 2.4 通过解析器向DNS服务器发出查询</h3>
+<ul>
+<li>调用解析器</li>
+<li>解析器向DNS服务器发送查询消息</li>
+<li>DNS服务器返回响应消息</li>
+<li>解析器从响应消息中取出IP地址并写入内存</li>
+</ul>
+<p><img src="./README.assets/image-20211223215500444.png" alt="image-20211223215500444" /></p>
+<p>根据域名查询IP地址时，浏览器会使用Socket库中的解析器。</p>
+<h3 id="_2-5-解析器的内部原理"> 2.5 解析器的内部原理</h3>
+<blockquote>
+<p><strong>控制流程转移</strong>：由于调用了其他程序，原本运行的程序进入暂停状态，而被调用的程序开始运行。</p>
+</blockquote>
+<ul>
+<li>从上往下顺序执行应用程序编写的操作内容，当到达需要调用解析器的部分时</li>
+<li>控制流程转移到解析器，解析器会生成要发送给DNS服务器的查询消息</li>
+<li>委托操作系统内部的协议栈来发送这个消息（因为解析器本身并不具备使用网络收发数据的功能</li>
+</ul>
+<p><img src="./README.assets/image-20211224205322811.png" alt="image-20211224205322811" /></p>
+<p>向DNS服务器发送消息时，也需要知道DNS服务器的IP地址。这是这个地址实现设置好了，不需要再查询。</p>
+<p><img src="./README.assets/image-20211224213701480.png" alt="image-20211224213701480" /></p>
+<h2 id="三、dns-服务器"> 三、DNS 服务器</h2>
+<h3 id="_3-1-dns-服务器的基本工作"> 3.1 DNS 服务器的基本工作</h3>
+<p>DNS 服务器的基本工作就是根据需要查询的域名和记录类型查找相关的记录，并向客户端返回响应消息。</p>
+<ul>
+<li>域名：服务器、邮件服务器（邮件地址@后面的部分）的名称</li>
+<li>Class：代表互联网的IN</li>
+<li>记录类型：表示域名对应何种类型的记录。</li>
+</ul>
+<p><img src="./README.assets/image-20211224215024279.png" alt="image-20211224215024279" /></p>
+<h3 id="_3-2-域名的层次结构"> 3.2 域名的层次结构</h3>
+<p>由于存在着不计其数的服务器，不可能将所有服务器的信息保存在一台DNS服务器中，只能是将这些信息分布保存在多台DNS服务器中。</p>
+<ul>
+<li>按域名以分层次的结构来保存</li>
+<li>域名中越靠右的位置表示气层级越高</li>
+<li>每个域都是作为一个整体存放在DNS服务器中的</li>
+</ul>
+<h3 id="_3-3-寻找相应的-dns-服务器并获取-ip-地址"> 3.3 寻找相应的 DNS 服务器并获取 IP 地址</h3>
+<ul>
+<li>负责管理下级域的 DNS 服务器的 IP 地址注册到他们的上级 DNS 服务器中</li>
+<li>com和jp 的上面存在一个 根域</li>
+<li>所有 DNS 服务器中都保存有根域的 DNS 服务器信息</li>
+</ul>
+<p><img src="./README.assets/image-20211224220739596.png" alt="image-20211224220739596" /></p>
+<p><img src="./README.assets/image-20211224220802400.png" alt="image-20211224220802400" /></p>
+<h3 id="_3-4-通过缓存加快-dns-服务器的响应"> 3.4 通过缓存加快 DNS 服务器的响应</h3>
+<p>DNS 服务器有一个缓存功能，可以记住之前查询过的域名</p>
+<ul>
+<li>如果要查询的域名和相关信息已经在缓存中，那么就可以直接返回响应。</li>
+<li>当查询的域名不存在时，“不存在”这一响应结果也会被缓存</li>
+<li>缓存信息设置有一个有效期，当信息超过有效期后，数据会从缓存中删除</li>
+<li>DNS服务器返回响应时，会告知这一响应结果是来自缓存还是来自负责管理该域名的DNS服务器</li>
+</ul>
+<h2 id="四、委托协议栈发送消息"> 四、委托协议栈发送消息</h2>
+<h3 id="_4-1-数据收发操作概览"> 4.1 数据收发操作概览</h3>
+<blockquote>
+<p>委托操作系统内部的协议栈发送HTTP消息，适用于<strong>任何</strong>网络应用程序。</p>
+</blockquote>
+<p><img src="./README.assets/image-20211225120920801.png" alt="image-20211225120920801" /></p>
+<ul>
+<li>创建套接字（出入口） —— <strong>创建套接字阶段</strong></li>
+<li>【客户端】向【服务器端】套接字连接管道 —— <strong>连接阶段</strong></li>
+<li>收发数据 —— <strong>通信阶段</strong></li>
+<li>断开管道并删除套接字 —— <strong>断开阶段</strong></li>
+</ul>
+<blockquote>
+<p>这个管道中，<em>数据流动是<strong>双向</strong>的</em></p>
+</blockquote>
+<h3 id="_4-2-创建套接字阶段"> 4.2 创建套接字阶段</h3>
+<blockquote>
+<p>创建套接字需要调用 Socket 库中的 <strong>socket 程序组件</strong></p>
+</blockquote>
+<p>客户端创建套接字：</p>
+<ul>
+<li>调用 Socket 库中的 socket 程序组件</li>
+<li>控制流程转移到 socket 内部并执行创建套接字操作</li>
+<li>控制流程交回应用程序</li>
+</ul>
+<p><img src="./README.assets/image-20211225122553775.png" alt="image-20211225122553775" /></p>
+<blockquote>
+<p>套接字创建完成以后，协议栈返回一个<strong>描述符</strong>，用来标识该套接字</p>
+</blockquote>
+<h3 id="_4-3-连接阶段"> 4.3 连接阶段</h3>
+<blockquote>
+<p>连接阶段需要调用 Socket 库中的 <strong>connect 程序组件</strong></p>
+</blockquote>
+<p>调用 connect 时需要指定三个参数：描述符、服务器IP地址、端口号</p>
+<p><img src="./README.assets/image-20211225130205613.png" alt="image-20211225130205613" /></p>
+<h3 id="_4-4-通信阶段"> 4.4 通信阶段</h3>
+<blockquote>
+<p>通信阶段需要调用 Socket 库中的 <strong>write 程序组件</strong>、<strong>read 程序组件</strong></p>
+</blockquote>
+<p>发送数据：</p>
+<ul>
+<li>生成 HTTP 请求消息</li>
+<li>指定描述符和要发送的数据，由协议栈将数据发送到服务器</li>
+</ul>
+<p>接收数据：</p>
+<ul>
+<li>指定存放响应消息的内存地址（称为接收缓冲区）</li>
+<li>read 将接收到的响应消息存放到接收缓冲区中</li>
+</ul>
+<h3 id="_4-5-断开阶段"> 4.5 断开阶段</h3>
+<blockquote>
+<p>断开阶段需要调用 Socket 库中的 <strong>close 程序组件</strong></p>
+</blockquote>
+<ul>
+<li>Web服务器在发送完响应消息之后，会首先调用 close 来断开连接</li>
+<li>客户端中 read 执行接收数据时，会告知浏览器通信阶段已结束</li>
+<li>浏览器调用 close 进入断开阶段</li>
+</ul>
+<h3 id="_4-6-各阶段功能和调用组件"> 4.6 各阶段功能和调用组件</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">阶段</th>
+<th style="text-align:center">组件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">创建套接字</td>
+<td style="text-align:center">socket</td>
+</tr>
+<tr>
+<td style="text-align:center">连接</td>
+<td style="text-align:center">connect</td>
+</tr>
+<tr>
+<td style="text-align:center">通信</td>
+<td style="text-align:center">发送：write<br>接收：read</td>
+</tr>
+<tr>
+<td style="text-align:center">断开</td>
+<td style="text-align:center">close</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五、本章回顾"> 五、本章回顾</h2>
+<ul>
+<li>网址前的 <code>http</code> 代表什么意思</li>
+</ul>
+<blockquote>
+<p>HTTP，即超文本传输协议，是 HyperText Transfer Protocol的缩写。</p>
+</blockquote>
+<ul>
+<li>用来识别连接在互联网上的计算机和服务器的地址叫什么</li>
+</ul>
+<blockquote>
+<p>IP 地址</p>
+</blockquote>
+<ul>
+<li>根据Web服务器的域名来查询IP地址时所用的服务器叫什么</li>
+</ul>
+<blockquote>
+<p>DNS 服务器</p>
+</blockquote>
+<ul>
+<li>向DNS服务器发送请求消息的程序叫什么</li>
+</ul>
+<blockquote>
+<p>协议栈</p>
+</blockquote>
 ]]></content:encoded>
     </item>
     <item>
@@ -2980,267 +3295,81 @@ after method send
 ]]></content:encoded>
     </item>
     <item>
-      <title>第一章、浏览器生成消息</title>
-      <link>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/</link>
-      <guid>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/1-browser-generated-messages/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">第一章、浏览器生成消息</source>
+      <title>第三章、从网线到网络设备</title>
+      <link>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</link>
+      <guid>https://vue-blog.lllllan.cn/3-cs-basic/1-network/1-how-is-the-network-connected/3-network-cables-to-network-devices/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">第三章、从网线到网络设备</source>
       <category>计算机基础</category>
       <pubDate>Fri, 21 Jan 2022 02:30:27 GMT</pubDate>
       <content:encoded><![CDATA[<div><p>Note</p>
 <p>本文作为 《网络是怎样连接的》 的笔记，绝大部分内容均抄自该书。</p>
 </div>
-<h2 id="一、生成-http-请求消息"> 一、生成 HTTP 请求消息</h2>
-<h3 id="_1-1-网址-url-uniform-resource-locator"> 1.1 网址（URL, Uniform Resource Locator）</h3>
-<p><img src="./README.assets/image-20211217214228466.png" alt="image-20211217214228466" /></p>
-<h3 id="_1-2-解析-url"> 1.2 解析 URL</h3>
-<p><img src="./README.assets/image-20211217214541708.png" alt="image-20211217214541708" /></p>
-<p><img src="./README.assets/image-20211217214555087.png" alt="image-20211217214555087" /></p>
-<h3 id="_1-3-文件名省略"> 1.3 文件名省略</h3>
-<ul>
-<li>当 URL 以 <code>/</code> 结尾时，服务器会默认访问该路径下的 <code>index.html</code> 或 <code>default.html</code> 文件</li>
-<li>当 URL 连 <code>/</code> 和文件类型都省略的时候：</li>
-</ul>
-<p><img src="./README.assets/image-20211217215354653.png" alt="image-20211217215354653" /></p>
-<p>（实测：当一个文件没有文件类型的时候，不允许和一个同名文件夹同时存在。而当这个文件有后缀时，应该会访问同名文件夹）</p>
-<h3 id="_1-4-http-基本思路"> 1.4 HTTP 基本思路</h3>
-<ul>
-<li>对什么 + 进行怎样的操作</li>
-</ul>
-<p><img src="./README.assets/image-20211217215856796.png" alt="image-20211217215856796" /></p>
-<p><img src="./README.assets/image-20211217215922575.png" alt="image-20211217215922575" /></p>
-<h3 id="_1-5-生成-http-请求信息"> 1.5 生成 HTTP 请求信息</h3>
+<h2 id="一、信号在网线和集线器中传输"> 一、信号在网线和集线器中传输</h2>
+<h3 id="_1-1-每个包都是独立传输的"> 1.1 每个包都是独立传输的</h3>
+<p><img src="./README.assets/image-20220113145717884.png" alt="image-20220113145717884" /></p>
+<h3 id="_1-2-网线中的信号衰减"> 1.2 网线中的信号衰减</h3>
+<p>以太网信号的本质是正负变化的电压。</p>
+<p>信号在网线的传输过程中，能量会逐渐损失。网线越长，信号衰减就越严重。</p>
+<p>同时噪声也会进一步加剧信号的失真。</p>
+<h3 id="_1-3-双绞线抑制噪声"> 1.3 双绞线抑制噪声</h3>
 <blockquote>
-<p><strong>一条请求消息中只能写一个URI</strong>。如果需要获取多个文件，必须对每个文件单独发送一条请求</p>
+<p>产生噪声的原因是网线周围的电磁波，当电磁波接触到金属等导体时，在其中就会产生电流。信号和噪声的电流混杂在一起之后，导致信号的波形发生失真。</p>
 </blockquote>
-<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
-<p><img src="./../../../../../../data/r2coding/4.计算机基础/1.计算机网络/1.网络是怎样连接的/网络是怎样连接的.assets/image-20211217223351942.png" alt="image-20211217223351942" /></p>
-<p>更多字段信息见文档 44 页。</p>
-<h3 id="_1-6-服务器响应"> 1.6 服务器响应</h3>
-<p><img src="./README.assets/image-20211217223257489.png" alt="image-20211217223257489" /></p>
+<p>影响网线的电磁波分为两种：</p>
+<h4 id="来自网线之外的其他设备"> 来自网线之外的其他设备：</h4>
+<p>当电磁波接触到信号线时，会沿电磁波传播的右旋方向产生电流。</p>
+<p>如果我们将信号线缠绕在一起，信号线就变成了螺旋形，其中两根信号线产生的噪声电流方向就会相反，从而使得噪声电流相互抵消。</p>
+<p><img src="./README.assets/image-20220113150630538.png" alt="image-20220113150630538" /></p>
+<p><img src="./README.assets/image-20220113150651814.png" alt="image-20220113150651814" /></p>
+<h4 id="相邻信号线泄露出来"> 相邻信号线泄露出来：</h4>
+<p>这种内部产生的噪声称为 <strong>串扰</strong></p>
+<p><img src="./README.assets/image-20220113151240119.png" alt="image-20220113151240119" /></p>
+<p><img src="./README.assets/image-20220113151203170.png" alt="image-20220113151203170" /></p>
+<h3 id="_1-4-集线器将信号发往所有线路"> 1.4 集线器将信号发往所有线路</h3>
 <blockquote>
-<p>状态码时一个数字，主要用来向程序告知执行的结果</p>
-<p>响应短语是一段文字，用来向人们告知执行的结果</p>
+<p>集线器将信号发送给所有连接在它上面的线路。</p>
 </blockquote>
-<p><img src="./README.assets/image-20211217224050584.png" alt="image-20211217224050584" /></p>
-<p><img src="./README.assets/image-20211217224916808.png" alt="image-20211217224916808" /></p>
-<h2 id="二、向-dns-服务器查询-web-服务器的-ip-地址"> 二、向 DNS 服务器查询 Web 服务器的 IP 地址</h2>
-<h3 id="_2-1-ip-地址的基本知识"> 2.1 IP 地址的基本知识</h3>
-<p><img src="./README.assets/image-20211219221243726.png" alt="image-20211219221243726" /></p>
-<p><img src="./README.assets/image-20211219221343432.png" alt="image-20211219221343432" /></p>
-<ul>
-<li>IP 地址是 32 比特的数字，被分成了4组</li>
-<li>子网掩码也是 32 比特的数字
-<ul>
-<li><strong>左边全1的部分表示网络号</strong></li>
-<li><strong>右边全0的部分表示主机号</strong></li>
-</ul>
-</li>
-</ul>
-<p><img src="./README.assets/image-20211219222137630.png" alt="image-20211219222137630" /></p>
-<p><img src="./README.assets/image-20211219222245701.png" alt="image-20211219222245701" /></p>
-<h3 id="_2-2-域名和ip地址并用的理由"> 2.2 域名和IP地址并用的理由</h3>
-<ul>
-<li>域名比IP地址更容易记忆</li>
-<li>IP地址的传输比域名更高效（IP地址只是4字节的数字，域名最长可以是255字节的字符）</li>
-</ul>
-<p>于是让人来使用域名，让路由器来使用IP地址，这个机制就是<strong>DNS</strong>。</p>
-<h3 id="_2-3-socket-库提供查询-ip-地址的功能"> 2.3 Socket 库提供查询 IP 地址的功能</h3>
-<blockquote>
-<p><strong>域名解析</strong>：通过DNS查询IP地址的操作。</p>
-</blockquote>
-<blockquote>
-<p><strong>解析器</strong>：负责执行域名解析的DNS客户端。（解析器实际上是一段程序。）</p>
-</blockquote>
-<p>​	库是一堆通用程序组件的集合，他们具有诸多好处：</p>
-<ul>
-<li>节省编程工作量</li>
-<li>实现程序的标准化</li>
-<li>等等</li>
-</ul>
-<p>​	Socket库也是一种库，其中包含的程序组件可以让其他的应用程序调用操作系统的网络功能，而解析器就是这个库中的其中一种程序组件。</p>
-<h3 id="_2-4-通过解析器向dns服务器发出查询"> 2.4 通过解析器向DNS服务器发出查询</h3>
-<ul>
-<li>调用解析器</li>
-<li>解析器向DNS服务器发送查询消息</li>
-<li>DNS服务器返回响应消息</li>
-<li>解析器从响应消息中取出IP地址并写入内存</li>
-</ul>
-<p><img src="./README.assets/image-20211223215500444.png" alt="image-20211223215500444" /></p>
-<p>根据域名查询IP地址时，浏览器会使用Socket库中的解析器。</p>
-<h3 id="_2-5-解析器的内部原理"> 2.5 解析器的内部原理</h3>
-<blockquote>
-<p><strong>控制流程转移</strong>：由于调用了其他程序，原本运行的程序进入暂停状态，而被调用的程序开始运行。</p>
-</blockquote>
-<ul>
-<li>从上往下顺序执行应用程序编写的操作内容，当到达需要调用解析器的部分时</li>
-<li>控制流程转移到解析器，解析器会生成要发送给DNS服务器的查询消息</li>
-<li>委托操作系统内部的协议栈来发送这个消息（因为解析器本身并不具备使用网络收发数据的功能</li>
-</ul>
-<p><img src="./README.assets/image-20211224205322811.png" alt="image-20211224205322811" /></p>
-<p>向DNS服务器发送消息时，也需要知道DNS服务器的IP地址。这是这个地址实现设置好了，不需要再查询。</p>
-<p><img src="./README.assets/image-20211224213701480.png" alt="image-20211224213701480" /></p>
-<h2 id="三、dns-服务器"> 三、DNS 服务器</h2>
-<h3 id="_3-1-dns-服务器的基本工作"> 3.1 DNS 服务器的基本工作</h3>
-<p>DNS 服务器的基本工作就是根据需要查询的域名和记录类型查找相关的记录，并向客户端返回响应消息。</p>
-<ul>
-<li>域名：服务器、邮件服务器（邮件地址@后面的部分）的名称</li>
-<li>Class：代表互联网的IN</li>
-<li>记录类型：表示域名对应何种类型的记录。</li>
-</ul>
-<p><img src="./README.assets/image-20211224215024279.png" alt="image-20211224215024279" /></p>
-<h3 id="_3-2-域名的层次结构"> 3.2 域名的层次结构</h3>
-<p>由于存在着不计其数的服务器，不可能将所有服务器的信息保存在一台DNS服务器中，只能是将这些信息分布保存在多台DNS服务器中。</p>
-<ul>
-<li>按域名以分层次的结构来保存</li>
-<li>域名中越靠右的位置表示气层级越高</li>
-<li>每个域都是作为一个整体存放在DNS服务器中的</li>
-</ul>
-<h3 id="_3-3-寻找相应的-dns-服务器并获取-ip-地址"> 3.3 寻找相应的 DNS 服务器并获取 IP 地址</h3>
-<ul>
-<li>负责管理下级域的 DNS 服务器的 IP 地址注册到他们的上级 DNS 服务器中</li>
-<li>com和jp 的上面存在一个 根域</li>
-<li>所有 DNS 服务器中都保存有根域的 DNS 服务器信息</li>
-</ul>
-<p><img src="./README.assets/image-20211224220739596.png" alt="image-20211224220739596" /></p>
-<p><img src="./README.assets/image-20211224220802400.png" alt="image-20211224220802400" /></p>
-<h3 id="_3-4-通过缓存加快-dns-服务器的响应"> 3.4 通过缓存加快 DNS 服务器的响应</h3>
-<p>DNS 服务器有一个缓存功能，可以记住之前查询过的域名</p>
-<ul>
-<li>如果要查询的域名和相关信息已经在缓存中，那么就可以直接返回响应。</li>
-<li>当查询的域名不存在时，“不存在”这一响应结果也会被缓存</li>
-<li>缓存信息设置有一个有效期，当信息超过有效期后，数据会从缓存中删除</li>
-<li>DNS服务器返回响应时，会告知这一响应结果是来自缓存还是来自负责管理该域名的DNS服务器</li>
-</ul>
-<h2 id="四、委托协议栈发送消息"> 四、委托协议栈发送消息</h2>
-<h3 id="_4-1-数据收发操作概览"> 4.1 数据收发操作概览</h3>
-<blockquote>
-<p>委托操作系统内部的协议栈发送HTTP消息，适用于<strong>任何</strong>网络应用程序。</p>
-</blockquote>
-<p><img src="./README.assets/image-20211225120920801.png" alt="image-20211225120920801" /></p>
-<ul>
-<li>创建套接字（出入口） —— <strong>创建套接字阶段</strong></li>
-<li>【客户端】向【服务器端】套接字连接管道 —— <strong>连接阶段</strong></li>
-<li>收发数据 —— <strong>通信阶段</strong></li>
-<li>断开管道并删除套接字 —— <strong>断开阶段</strong></li>
-</ul>
-<blockquote>
-<p>这个管道中，<em>数据流动是<strong>双向</strong>的</em></p>
-</blockquote>
-<h3 id="_4-2-创建套接字阶段"> 4.2 创建套接字阶段</h3>
-<blockquote>
-<p>创建套接字需要调用 Socket 库中的 <strong>socket 程序组件</strong></p>
-</blockquote>
-<p>客户端创建套接字：</p>
-<ul>
-<li>调用 Socket 库中的 socket 程序组件</li>
-<li>控制流程转移到 socket 内部并执行创建套接字操作</li>
-<li>控制流程交回应用程序</li>
-</ul>
-<p><img src="./README.assets/image-20211225122553775.png" alt="image-20211225122553775" /></p>
-<blockquote>
-<p>套接字创建完成以后，协议栈返回一个<strong>描述符</strong>，用来标识该套接字</p>
-</blockquote>
-<h3 id="_4-3-连接阶段"> 4.3 连接阶段</h3>
-<blockquote>
-<p>连接阶段需要调用 Socket 库中的 <strong>connect 程序组件</strong></p>
-</blockquote>
-<p>调用 connect 时需要指定三个参数：描述符、服务器IP地址、端口号</p>
-<p><img src="./README.assets/image-20211225130205613.png" alt="image-20211225130205613" /></p>
-<h3 id="_4-4-通信阶段"> 4.4 通信阶段</h3>
-<blockquote>
-<p>通信阶段需要调用 Socket 库中的 <strong>write 程序组件</strong>、<strong>read 程序组件</strong></p>
-</blockquote>
-<p>发送数据：</p>
-<ul>
-<li>生成 HTTP 请求消息</li>
-<li>指定描述符和要发送的数据，由协议栈将数据发送到服务器</li>
-</ul>
-<p>接收数据：</p>
-<ul>
-<li>指定存放响应消息的内存地址（称为接收缓冲区）</li>
-<li>read 将接收到的响应消息存放到接收缓冲区中</li>
-</ul>
-<h3 id="_4-5-断开阶段"> 4.5 断开阶段</h3>
-<blockquote>
-<p>断开阶段需要调用 Socket 库中的 <strong>close 程序组件</strong></p>
-</blockquote>
-<ul>
-<li>Web服务器在发送完响应消息之后，会首先调用 close 来断开连接</li>
-<li>客户端中 read 执行接收数据时，会告知浏览器通信阶段已结束</li>
-<li>浏览器调用 close 进入断开阶段</li>
-</ul>
-<h3 id="_4-6-各阶段功能和调用组件"> 4.6 各阶段功能和调用组件</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">阶段</th>
-<th style="text-align:center">组件</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">创建套接字</td>
-<td style="text-align:center">socket</td>
-</tr>
-<tr>
-<td style="text-align:center">连接</td>
-<td style="text-align:center">connect</td>
-</tr>
-<tr>
-<td style="text-align:center">通信</td>
-<td style="text-align:center">发送：write<br>接收：read</td>
-</tr>
-<tr>
-<td style="text-align:center">断开</td>
-<td style="text-align:center">close</td>
-</tr>
-</tbody>
-</table>
-<h2 id="五、本章回顾"> 五、本章回顾</h2>
-<ul>
-<li>网址前的 <code>http</code> 代表什么意思</li>
-</ul>
-<blockquote>
-<p>HTTP，即超文本传输协议，是 HyperText Transfer Protocol的缩写。</p>
-</blockquote>
-<ul>
-<li>用来识别连接在互联网上的计算机和服务器的地址叫什么</li>
-</ul>
-<blockquote>
-<p>IP 地址</p>
-</blockquote>
-<ul>
-<li>根据Web服务器的域名来查询IP地址时所用的服务器叫什么</li>
-</ul>
-<blockquote>
-<p>DNS 服务器</p>
-</blockquote>
-<ul>
-<li>向DNS服务器发送请求消息的程序叫什么</li>
-</ul>
-<blockquote>
-<p>协议栈</p>
-</blockquote>
+<p><img src="./README.assets/image-20220113151435359.png" alt="image-20220113151435359" /></p>
+<p><img src="./README.assets/image-20220113151613603.png" alt="image-20220113151613603" /></p>
 ]]></content:encoded>
     </item>
     <item>
-      <title>计算机基础</title>
-      <link>https://vue-blog.lllllan.cn/3-cs-basic/</link>
-      <guid>https://vue-blog.lllllan.cn/3-cs-basic/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">计算机基础</source>
+      <title>操作系统-常见面试题</title>
+      <link>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</link>
+      <guid>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">操作系统-常见面试题</source>
       <category>计算机基础</category>
-      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
-      <content:encoded><![CDATA[<div><p>重要声明</p>
-<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
+      <pubDate>Fri, 21 Jan 2022 02:30:27 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>Note</p>
+<p>本文转载自 <a href="https://javaguide.cn/cs-basics/operating-system/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98&amp;%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">操作系统常见面试题总结 | JavaGuide</a></p>
 </div>
-<h2 id="参考"> 参考</h2>
+<h2 id="一、操作系统基础"> 一、操作系统基础</h2>
+<h3 id="_1-1-操作系统"> 1.1 操作系统</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/105945721" target="_blank" rel="noopener noreferrer">什么是操作系统？ - 知乎 (zhihu.com)</a></p>
+<p>操作系统(Operation System, OS) 是指控制和管理整个计算机系统的硬件和软件资源，并合理的组织和调度计算机的工作和资源的分配，以提供给用户和其它软件方便的接口和环境，它是计算机系统中最基本的系统软件。</p>
+<img src="README.assets/v2-9e3753e45963e8de97ec5af05aa4f6e9_720w.jpg" alt="img" style="zoom: 33%;" />
+<p><strong>操作系统说明：</strong></p>
+<ol>
+<li>负责管理协调硬件、软件等计算机资源的工作</li>
+<li>为上层的应用程序、用户提供简单易用的服务</li>
+<li>操作系统是系统软件，而不是硬件</li>
+</ol>
+<p><img src="./README.assets/v2-80e382880632b6067b9c1b7c679de331_720w.jpg" alt="img" /></p>
+<h3 id="_1-2-系统调用"> 1.2 系统调用</h3>
+<p>根据进程访问资源的特点，我们可以把进程在系统上的运行分为两个级别：</p>
+<ol>
+<li>用户态(user mode)：用户态运行的进程可以直接读取用户程序的数据。</li>
+<li>内核态(kernel mode)：可以简单的理解系统态运行的进程或程序几乎可以访问计算机的任何资源，不受限制。</li>
+</ol>
+<p>我们运行的程序基本都是运行在用户态，如果我们调用操作系统提供的系统态级别的子功能咋办呢？那就需要系统调用了！</p>
+<p>也就是说在我们运行的用户程序中，凡是与系统态级别的资源有关的操作（如文件管理、进程控制、内存管理等)，都必须通过系统调用方式向操作系统提出服务请求，并由操作系统代为完成。</p>
+<p>这些系统调用按功能大致可分为如下几类：</p>
 <ul>
-<li>
-<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
-</li>
-<li>
-<p>《网络是怎样连接的》</p>
-</li>
+<li>设备管理。完成设备的请求或释放，以及设备启动等功能。</li>
+<li>文件管理。完成文件的读、写、创建及删除等功能。</li>
+<li>进程控制。完成进程的创建、撤销、阻塞及唤醒等功能。</li>
+<li>进程通信。完成进程之间的消息传递或信号传递等功能。</li>
+<li>内存管理。完成内存的分配、回收以及获取作业占用内存区大小及地址等功能。</li>
 </ul>
 ]]></content:encoded>
     </item>
@@ -3594,52 +3723,33 @@ after method send
 <div><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br><span>6</span><br><span>7</span><br><span>8</span><br><span>9</span><br><span>10</span><br><span>11</span><br><span>12</span><br><span>13</span><br><span>14</span><br><span>15</span><br><span>16</span><br><span>17</span><br><span>18</span><br><span>19</span><br><span>20</span><br><span>21</span><br><span>22</span><br><span>23</span><br><span>24</span><br><span>25</span><br><span>26</span><br><span>27</span><br><span>28</span><br><span>29</span><br><span>30</span><br><span>31</span><br><span>32</span><br><span>33</span><br><span>34</span><br><span>35</span><br><span>36</span><br><span>37</span><br><span>38</span><br><span>39</span><br><span>40</span><br><span>41</span><br><span>42</span><br><span>43</span><br><span>44</span><br><span>45</span><br><span>46</span><br><span>47</span><br><span>48</span><br><span>49</span><br><span>50</span><br><span>51</span><br><span>52</span><br><span>53</span><br><span>54</span><br><span>55</span><br></div></div>]]></content:encoded>
     </item>
     <item>
-      <title>操作系统-常见面试题</title>
-      <link>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</link>
-      <guid>https://vue-blog.lllllan.cn/3-cs-basic/2-operating-system/1-interview-questions/</guid>
-      <source url="https://vue-blog.lllllan.cn/rss.xml">操作系统-常见面试题</source>
-      <category>计算机基础</category>
-      <pubDate>Fri, 21 Jan 2022 02:30:27 GMT</pubDate>
-      <content:encoded><![CDATA[<div><p>Note</p>
-<p>本文转载自 <a href="https://javaguide.cn/cs-basics/operating-system/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98&amp;%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener noreferrer">操作系统常见面试题总结 | JavaGuide</a></p>
-</div>
-<h2 id="一、操作系统基础"> 一、操作系统基础</h2>
-<h3 id="_1-1-操作系统"> 1.1 操作系统</h3>
-<p><a href="https://zhuanlan.zhihu.com/p/105945721" target="_blank" rel="noopener noreferrer">什么是操作系统？ - 知乎 (zhihu.com)</a></p>
-<p>操作系统(Operation System, OS) 是指控制和管理整个计算机系统的硬件和软件资源，并合理的组织和调度计算机的工作和资源的分配，以提供给用户和其它软件方便的接口和环境，它是计算机系统中最基本的系统软件。</p>
-<img src="README.assets/v2-9e3753e45963e8de97ec5af05aa4f6e9_720w.jpg" alt="img" style="zoom: 33%;" />
-<p><strong>操作系统说明：</strong></p>
-<ol>
-<li>负责管理协调硬件、软件等计算机资源的工作</li>
-<li>为上层的应用程序、用户提供简单易用的服务</li>
-<li>操作系统是系统软件，而不是硬件</li>
-</ol>
-<p><img src="./README.assets/v2-80e382880632b6067b9c1b7c679de331_720w.jpg" alt="img" /></p>
-<h3 id="_1-2-系统调用"> 1.2 系统调用</h3>
-<p>根据进程访问资源的特点，我们可以把进程在系统上的运行分为两个级别：</p>
-<ol>
-<li>用户态(user mode)：用户态运行的进程可以直接读取用户程序的数据。</li>
-<li>内核态(kernel mode)：可以简单的理解系统态运行的进程或程序几乎可以访问计算机的任何资源，不受限制。</li>
-</ol>
-<p>我们运行的程序基本都是运行在用户态，如果我们调用操作系统提供的系统态级别的子功能咋办呢？那就需要系统调用了！</p>
-<p>也就是说在我们运行的用户程序中，凡是与系统态级别的资源有关的操作（如文件管理、进程控制、内存管理等)，都必须通过系统调用方式向操作系统提出服务请求，并由操作系统代为完成。</p>
-<p>这些系统调用按功能大致可分为如下几类：</p>
-<ul>
-<li>设备管理。完成设备的请求或释放，以及设备启动等功能。</li>
-<li>文件管理。完成文件的读、写、创建及删除等功能。</li>
-<li>进程控制。完成进程的创建、撤销、阻塞及唤醒等功能。</li>
-<li>进程通信。完成进程之间的消息传递或信号传递等功能。</li>
-<li>内存管理。完成内存的分配、回收以及获取作业占用内存区大小及地址等功能。</li>
-</ul>
-]]></content:encoded>
-    </item>
-    <item>
       <title>刷题笔记</title>
       <link>https://vue-blog.lllllan.cn/4-practice/</link>
       <guid>https://vue-blog.lllllan.cn/4-practice/</guid>
       <source url="https://vue-blog.lllllan.cn/rss.xml">刷题笔记</source>
       <category>刷题</category>
       <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+    </item>
+    <item>
+      <title>计算机基础</title>
+      <link>https://vue-blog.lllllan.cn/3-cs-basic/</link>
+      <guid>https://vue-blog.lllllan.cn/3-cs-basic/</guid>
+      <source url="https://vue-blog.lllllan.cn/rss.xml">计算机基础</source>
+      <category>计算机基础</category>
+      <pubDate>Thu, 20 Jan 2022 14:33:14 GMT</pubDate>
+      <content:encoded><![CDATA[<div><p>重要声明</p>
+<p>既然作为笔记，就存在着大量的摘抄（也就是俗话说的copy）。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出</p>
+</div>
+<h2 id="参考"> 参考</h2>
+<ul>
+<li>
+<p><a href="https://javaguide.cn/" target="_blank" rel="noopener noreferrer">JavaGuide</a></p>
+</li>
+<li>
+<p>《网络是怎样连接的》</p>
+</li>
+</ul>
+]]></content:encoded>
     </item>
     <item>
       <title>项目主页</title>

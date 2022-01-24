@@ -14,7 +14,7 @@ echo 'vue-blog.lllllan.cn' > CNAME
 
 git init
 git add -A
-git commit -m '[docs] java基础面试题 +7 题'
+git commit -m '[docs] java基础面试题 补充题目'
 
 # 如果你想要部署到 https://<USERNAME>.github.io
 git push -f git@github.com:lllllan-fv/lllllan-fv.github.io.git master
