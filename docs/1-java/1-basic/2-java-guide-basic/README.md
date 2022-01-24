@@ -18,7 +18,7 @@ category: Java
 tag:
 - Java基础
 
-# 此页面会在文章列表指定
+# 此页面会在文章列表置顶
 # sticky: true
 
 # 此页面会出现在首页的文章板块中
