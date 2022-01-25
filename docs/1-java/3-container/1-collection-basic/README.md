@@ -138,3 +138,142 @@ public static <T>
 
 详见另一篇 [ArrayList 源码解读](../2-source-code/1-arraylist)
 
+
+
+## 三、Set
+
+
+
+### 3.1 comparable 和 Comparator 的区别
+
+- `comparable` 接口实际上是出自`java.lang`包 它有一个 `compareTo(Object obj)`方法用来排序
+- `comparator`接口实际上是出自 java.util 包它有一个`compare(Object obj1, Object obj2)`方法用来排序
+
+
+
+#### 3.1.1 Comparator 定制排序
+
+```java
+ArrayList<Integer> arrayList = new ArrayList<Integer>();
+arrayList.add(-1);
+arrayList.add(3);
+arrayList.add(3);
+arrayList.add(-5);
+arrayList.add(7);
+arrayList.add(4);
+arrayList.add(-9);
+arrayList.add(-7);
+System.out.println("原始数组:");
+System.out.println(arrayList);
+// void reverse(List list)：反转
+Collections.reverse(arrayList);
+System.out.println("Collections.reverse(arrayList):");
+System.out.println(arrayList);
+
+// void sort(List list),按自然排序的升序排序
+Collections.sort(arrayList);
+System.out.println("Collections.sort(arrayList):");
+System.out.println(arrayList);
+// 定制排序的用法
+Collections.sort(arrayList, new Comparator<Integer>() {
+
+    @Override
+    public int compare(Integer o1, Integer o2) {
+        return o2.compareTo(o1);
+    }
+});
+System.out.println("定制排序后：");
+System.out.println(arrayList);
+```
+
+
+
+Output:
+
+```text
+原始数组:
+[-1, 3, 3, -5, 7, 4, -9, -7]
+Collections.reverse(arrayList):
+[-7, -9, 4, 7, -5, 3, 3, -1]
+Collections.sort(arrayList):
+[-9, -7, -5, -1, 3, 3, 4, 7]
+定制排序后：
+[7, 4, 3, 3, -1, -5, -7, -9]
+```
+
+
+
+#### 3.1.2 重写 compareTo 方法
+
+```java
+// person对象没有实现Comparable接口，所以必须实现，这样才不会出错，才可以使treemap中的数据按顺序排列
+// 前面一个例子的String类已经默认实现了Comparable接口，详细可以查看String类的API文档，另外其他
+// 像Integer类等都已经实现了Comparable接口，所以不需要另外实现了
+public  class Person implements Comparable<Person> {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        super();
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    /**
+     * T重写compareTo方法实现按年龄来排序
+     */
+    @Override
+    public int compareTo(Person o) {
+        if (this.age > o.getAge()) {
+            return 1;
+        }
+        if (this.age < o.getAge()) {
+            return -1;
+        }
+        return 0;
+    }
+}
+```
+
+```java
+public static void main(String[] args) {
+    TreeMap<Person, String> pdata = new TreeMap<Person, String>();
+    pdata.put(new Person("张三", 30), "zhangsan");
+    pdata.put(new Person("李四", 20), "lisi");
+    pdata.put(new Person("王五", 10), "wangwu");
+    pdata.put(new Person("小红", 5), "xiaohong");
+    // 得到key的值的同时得到key所对应的值
+    Set<Person> keys = pdata.keySet();
+    for (Person key : keys) {
+        System.out.println(key.getAge() + "-" + key.getName());
+    }
+}
+```
+
+
+
+Output：
+
+```text
+5-小红
+10-王五
+20-李四
+30-张三
+```
+
