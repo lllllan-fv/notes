@@ -74,7 +74,8 @@ module.exports = config({
           prefix: "1-java/2-jvm/",
           children: [
             "1-memory-area-details/",
-            "2-garbage-collection/"
+            "2-garbage-collection/",
+            "3-know-the-jvm/"
           ],
         },
         {
