@@ -454,3 +454,73 @@ class Solution {
 }
 ```
 
+
+
+### 3. [76-最小覆盖子串](https://leetcode-cn.com/problems/minimum-window-substring/)
+
+给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 "" 。
+
+ 
+
+注意：
+
+对于 t 中重复字符，我们寻找的子字符串中该字符数量必须不少于 t 中该字符数量。
+如果 s 中存在这样的子串，我们保证它是唯一的答案。
+
+```java
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+class Solution {
+
+    public String minWindow(String s, String t) {
+        Map<Character, Integer> target = new HashMap<>();
+        for (int i = 0, len = t.length(); i < len; ++i) {
+            char c = t.charAt(i);
+            target.put(c, target.getOrDefault(c, 0) + 1);
+        }
+        System.out.println(target);
+
+        Map<Character, Integer> now = new HashMap<>();
+        int ansL = -1, ansR = -1;
+        int l = 0, r = 0, len = s.length();
+        while (r < len) {
+            Character c = s.charAt(r);
+            if (target.containsKey(c)) {
+                now.put(c, now.getOrDefault(c, 0) + 1);
+            }
+
+            while (check(now, target) && l <= r) {
+                if (ansL == -1 || r - l < ansR - ansL) {
+                    ansL = l;
+                    ansR = r;
+                }
+
+                char c1 = s.charAt(l++);
+                if (target.containsKey(c1)) {
+                    now.put(c1, now.getOrDefault(c1, 0) - 1);
+                }
+            }
+
+            ++r;
+        }
+
+        return ansL == -1 ? "" : s.substring(ansL, ansR + 1);
+    }
+
+    public boolean check(Map<Character, Integer> now, Map<Character, Integer> tar) {
+        Iterator<Map.Entry<Character, Integer>> iterator = tar.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Character, Integer> next = iterator.next();
+            Character key = next.getKey();
+            Integer value = next.getValue();
+            if (now.getOrDefault(key, 0) < value) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
