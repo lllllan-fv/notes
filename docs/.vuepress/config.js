@@ -55,7 +55,6 @@ module.exports = config({
           children: [
             "1-r2coding-basic/",
             "2-java-guide-basic/",
-            "4-interview-questions/",
             {
               title: "重要知识点",
               icon: "",
@@ -64,6 +63,18 @@ module.exports = config({
                 "1-java-value-passed/",
                 "2-reflection/",
                 "3-agent/"
+              ],
+            },
+            {
+              title: "常见面试题",
+              icon: "",
+              prefix: "4-interview-questions/",
+              children: [
+                "1-basic/",
+                "2-generics-and-reflection/",
+                "3-string/",
+                "4-abnormal/",
+                "5-io/"
               ],
             },
           ],
