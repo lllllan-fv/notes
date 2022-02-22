@@ -40,6 +40,6 @@ star: true
 ## 参考
 
 - [JavaGuide](https://javaguide.cn/)
-
+- [被问懵逼了：TCP 握手没成功怎么办？](https://blog.csdn.net/qq_34827674/article/details/119809480)
 - 《网络是怎样连接的》
 
