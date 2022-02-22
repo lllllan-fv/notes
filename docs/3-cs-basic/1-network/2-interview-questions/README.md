@@ -41,7 +41,7 @@ star: true
 
 > **开放式系统互联通信参考模型**（英语：Open System Interconnection Reference Model，缩写为 OSI），简称为**OSI模型**（OSI model），一种[概念模型](https://baike.baidu.com/item/概念模型/3187025)，由[国际标准化组织](https://baike.baidu.com/item/国际标准化组织/779832)提出，一个试图使各种计算机在世界范围内互连为网络的标准框架。
 >
-> TCP/IP传输协议，即传输控制/网络协议，也叫作网络通讯协议。
+> TCP/IP是一组用于实现网络互连的[通信协议](https://baike.baidu.com/item/通信协议)。Internet[网络体系结构](https://baike.baidu.com/item/网络体系结构)以TCP/IP为核心。基于TCP/IP的参考模型将协议分成四个层次，它们分别是：网络访问层、网际互联层（[主机](https://baike.baidu.com/item/主机)到主机）、[传输层](https://baike.baidu.com/item/传输层)、和应用层。
 
 ![五层体系结构](README.assets/五层体系结构.png)
 
