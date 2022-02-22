@@ -209,6 +209,7 @@ module.exports = config({
     },
 
     mdEnhance: {
+      mark: true,
       enableAll: true,
       presentation: {
         plugins: [
