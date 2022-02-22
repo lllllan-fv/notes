@@ -115,6 +115,7 @@ module.exports = config({
           prefix: "3-cs-basic/1-network/",
           children: [
             "2-interview-questions/",
+            "3-url-to-page/",
             {
               title: "网络是怎样连接的",
               icon: "",
