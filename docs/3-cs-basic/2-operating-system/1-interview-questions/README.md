@@ -49,7 +49,7 @@ star: true
 
 [什么是操作系统？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/105945721)
 
-操作系统(Operation System, OS) 是指控制和管理整个计算机系统的硬件和软件资源，并合理的组织和调度计算机的工作和资源的分配，以提供给用户和其它软件方便的接口和环境，它是计算机系统中最基本的系统软件。
+**操作系统(Operation System, OS) 是指控制和管理整个计算机系统的硬件和软件资源的系统软件。** 需要合理地组织和调度计算机的工作和资源的分配，以提供给用户和其它软件方便的接口和环境。
 
 <img src="README.assets/v2-9e3753e45963e8de97ec5af05aa4f6e9_720w.jpg" alt="img" style="zoom: 33%;" />
 
