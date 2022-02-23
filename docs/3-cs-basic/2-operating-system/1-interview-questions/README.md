@@ -33,7 +33,11 @@ star: true
 
 ::: warning
 
-本文转载自 [操作系统常见面试题总结 | JavaGuide](https://javaguide.cn/cs-basics/operating-system/操作系统常见面试题&知识点总结/)、[进程间通信IPC (InterProcess Communication)](https://www.jianshu.com/p/c1015f5ffa74)
+本文转载自以下文章：
+
+- [操作系统常见面试题总结 | JavaGuide](https://javaguide.cn/cs-basics/operating-system/操作系统常见面试题&知识点总结/)
+- [什么是操作系统？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/105945721)
+- [进程间通信IPC (InterProcess Communication)](https://www.jianshu.com/p/c1015f5ffa74)
 
 :::
 
