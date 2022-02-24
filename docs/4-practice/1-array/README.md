@@ -567,3 +567,47 @@ class Solution {
 }
 ```
 
+
+
+### 2. [54-螺旋矩阵](https://leetcode-cn.com/problems/spiral-matrix/)
+
+> 给你一个 `m` 行 `n` 列的矩阵 `matrix` ，请按照 **顺时针螺旋顺序** ，返回矩阵中的所有元素。
+>
+> ![img](README.assets/spiral.jpg)
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int n = matrix.length, m = matrix[0].length;
+
+        List<Integer> ans = new ArrayList<>();
+        int x = 0, y = 0, k = 1;
+        int[][] dir = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+        int idx = 0;
+        int top = n * m;
+        while (k++ <= top) {
+            ans.add(matrix[x][y]);
+            matrix[x][y] = 0;
+            int nexX = x + dir[idx][0];
+            int nexY = y + dir[idx][1];
+            if (!check(nexX, n) || !check(nexY, m) || matrix[nexX][nexY] == 0) {
+                idx = (idx + 1) % 4;
+            }
+            x += dir[idx][0];
+            y += dir[idx][1];
+        }
+
+        return ans;
+    }
+
+    public boolean check(int x, int n) {
+        return x >= 0 && x < n;
+    }
+}
+```
+
