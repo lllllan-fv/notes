@@ -611,3 +611,45 @@ class Solution {
 }
 ```
 
+
+
+### 3. [剑指 Offer 29-顺时针打印矩阵](https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/)
+
+> 输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。
+
+```java
+class Solution {
+    public int[] spiralOrder(int[][] matrix) {
+        if (matrix.length == 0 || matrix[0].length == 0) return new int[]{};
+
+        int len = matrix.length * matrix[0].length;
+
+        int[] ans = new int[len];
+
+        int d = 1;
+
+        int idx = 0;
+
+        int left = 0, right = matrix[0].length - 1;
+        int top = 0, bottom = matrix.length - 1;
+
+        while (idx < len) {
+            for (int i = left; i <= right; ++i) ans[idx++] = matrix[top][i];
+            for (int j = top + 1; j <= bottom; ++j) ans[idx++] = matrix[j][right];
+
+            if (top < bottom && left < right) {
+                for (int i = right - 1; i >= left; --i) ans[idx++] = matrix[bottom][i];
+                for (int j = bottom - 1; j > top; --j) ans[idx++] = matrix[j][left];
+            }
+
+            left = left + 1;
+            right = right - 1;
+            top = top + 1;
+            bottom = bottom - 1;
+        }
+
+        return ans;
+    }
+}
+```
+
