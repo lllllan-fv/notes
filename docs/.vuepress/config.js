@@ -144,7 +144,7 @@ module.exports = config({
         {
           title: "题型分类",
           icon: "",
-          prefix: "4-practice/1-group/",
+          prefix: "4-practice/",
           children: [
             "1-array/"
           ],
