@@ -524,3 +524,46 @@ class Solution {
 }
 ```
 
+
+
+## 模拟
+
+
+
+### 1. [59-螺旋矩阵 II](https://leetcode-cn.com/problems/spiral-matrix-ii/)
+
+> 给你一个正整数 `n` ，生成一个包含 `1` 到 `n2` 所有元素，且元素按顺时针顺序螺旋排列的 `n x n` 正方形矩阵 `matrix` 。
+>
+> ![img](README.assets/spiraln.jpg)
+
+```java
+class Solution {
+
+    public boolean check(int x, int n) {
+        return x >= 0 && x < n;
+    }
+
+    public int[][] generateMatrix(int n) {
+        int[][] ans = new int[n][n];
+
+        int x = 0, y = 0, k = 1;
+        int[][] dir = new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+        int idx = 0;
+        int top = n * n;
+        while (k <= top) {
+            ans[x][y] = k++;
+            int nexX = x + dir[idx][0];
+            int nexY = y + dir[idx][1];
+            if (!check(nexX, n) || !check(nexY, n) || ans[nexX][nexY] > 0) {
+                idx = (idx + 1) % 4;
+            }
+            x += dir[idx][0];
+            y += dir[idx][1];
+        }
+
+        return ans;
+    }
+}
+```
+
