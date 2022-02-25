@@ -118,6 +118,8 @@ URL (Uniform Resource Locator，统一资源定位符)。就像每家每户都�
 
 ### 2.1 IP 地址的基本知识
 
+![image-20220225143658392](README.assets/image-20220225143658392.png)
+
 ![image-20211219221243726](README.assets/image-20211219221243726.png)
 
 ![image-20211219221343432](README.assets/image-20211219221343432.png)
