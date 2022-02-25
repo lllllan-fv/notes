@@ -45,6 +45,8 @@ star: true
 
 ### 1.1 网址（URL, Uniform Resource Locator）
 
+URL (Uniform Resource Locator，统一资源定位符)。就像每家每户都有一个门牌地址一样，每个网页也都有一个Internet地址。
+
 ![image-20211217214228466](README.assets/image-20211217214228466.png)
 
 
