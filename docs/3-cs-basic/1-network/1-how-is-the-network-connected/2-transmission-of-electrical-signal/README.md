@@ -114,7 +114,7 @@ star: true
 - 头部中记录的信息
 - 套接字中记录的信息
 
-<img src="../../../../../../data/r2coding/4.计算机基础/1.计算机网络/1.网络是怎样连接的/网络是怎样连接的.assets/image-20211227214442175.png" alt="image-20211227214442175" style="zoom:150%;" />![image-20211227214507743](README.assets/image-20211227214507743.png)
+![image-20220225172706601](README.assets/image-20220225172706601.png)![image-20211227214507743](README.assets/image-20211227214507743.png)
 
 
 
