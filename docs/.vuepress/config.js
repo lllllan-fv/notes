@@ -212,6 +212,7 @@ module.exports = config({
     mdEnhance: {
       mark: true,
       enableAll: true,
+      container: true,
       presentation: {
         plugins: [
           "highlight",
