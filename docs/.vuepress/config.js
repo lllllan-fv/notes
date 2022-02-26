@@ -153,7 +153,8 @@ module.exports = config({
           icon: "",
           prefix: "4-practice/",
           children: [
-            "1-array/"
+            "1-array/",
+            "2-list/",
           ],
         }
       ],
