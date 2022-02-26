@@ -67,3 +67,100 @@ class Solution {
 }
 ```
 
+
+
+## 二、链表常规操作
+
+
+
+### 2.1 [707. 设计链表 - 力扣](https://leetcode-cn.com/problems/design-linked-list/)
+
+> ![image-20220227001535010](README.assets/image-20220227001535010.png)
+
+```java
+class MyLinkedList {
+
+    class ListNode {
+        int val;
+        ListNode next;
+
+        public ListNode() {
+        }
+
+        public ListNode(int val) {
+            this.val = val;
+        }
+    }
+
+    ListNode head;
+
+    public MyLinkedList() {
+        this.head = new ListNode();
+    }
+
+    public int get(int index) {
+        ListNode it = this.head;
+        while (it.next != null) {
+            it = it.next;
+            if (index-- == 0) {
+                return it.val;
+            }
+        }
+        return -1;
+    }
+
+    public void addAtHead(int val) {
+        ListNode tmp = new ListNode(val);
+        tmp.next = this.head.next;
+        this.head.next = tmp;
+    }
+
+    public void addAtTail(int val) {
+        ListNode tmp = new ListNode(val);
+        ListNode it = this.head;
+        while (it.next != null) {
+            it = it.next;
+        }
+        it.next = tmp;
+    }
+
+    public void addAtIndex(int index, int val) {
+        ListNode tmp = new ListNode(val);
+
+        ListNode it = this.head;
+        while (it.next != null) {
+            if (index-- == 0) {
+                tmp.next = it.next;
+                it.next = tmp;
+                break;
+            }
+            it = it.next;
+        }
+        if (index-- == 0) {
+            it.next = tmp;
+        }
+    }
+
+    public void deleteAtIndex(int index) {
+        ListNode it = this.head;
+        while (it.next != null) {
+            if (index-- == 0) {
+                it.next = it.next.next;
+                break;
+            }
+            it = it.next;
+        }
+    }
+}
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList obj = new MyLinkedList();
+ * int param_1 = obj.get(index);
+ * obj.addAtHead(val);
+ * obj.addAtTail(val);
+ * obj.addAtIndex(index,val);
+ * obj.deleteAtIndex(index);
+ */
+```
+
