@@ -201,3 +201,58 @@ class Solution {
 }
 ```
 
+
+
+### 3.2 [92. 反转链表 II - 力扣](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
+
+> ![image-20220227004610675](README.assets/image-20220227004610675.png)
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution { 
+    public ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        while (head != null) {
+            ListNode it = head.next;
+            head.next = pre;
+            pre = head;
+            head = it;
+        }
+        return pre;
+    }
+
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode bg = new ListNode(0, head);
+        ListNode ans = bg;
+        for (int i = 1; i < left; ++i) {
+            bg = bg.next;
+        }
+        ListNode it = bg;
+        ListNode re = bg.next;
+        for (int i = left; i <= right; ++i) {
+            bg = bg.next;
+        }
+        ListNode tail = bg.next;
+        bg.next = null;
+
+        it.next = reverse(re);
+        while (it.next != null) {
+            it = it.next;
+        }
+        it.next = tail;
+
+        return ans.next;
+    }
+
+}
+```
+
