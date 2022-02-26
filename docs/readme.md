@@ -33,7 +33,7 @@ features:
   - title: 刷题笔记
     link: /4-practice/
 
-  - title: 面经zhengli
+  - title: 面经整理
     link: /5-interview/
 
 copyrightText: false

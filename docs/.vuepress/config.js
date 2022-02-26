@@ -47,7 +47,7 @@ module.exports = config({
 
     sidebar: {
       "/1-java": [
-        "1-java/",
+        "/1-java/",
         {
           title: "java 基础",
           icon: "",
@@ -108,7 +108,7 @@ module.exports = config({
       ],
 
       "/3-cs-basic": [
-        "3-cs-basic/",
+        "/3-cs-basic/",
         {
           title: "计算机网络",
           icon: "",
@@ -147,7 +147,7 @@ module.exports = config({
       ],
 
       "/4-practice": [
-        "4-practice/",
+        "/4-practice/",
         {
           title: "题型分类",
           icon: "",
