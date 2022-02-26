@@ -126,6 +126,14 @@ module.exports = config({
                 "3-network-cables-to-network-devices/",
               ],
             },
+            {
+              title: "图解HTTP",
+              icon: "",
+              prefix: "4-diagram-http/",
+              children: [
+                "1-visit-web/",
+              ],
+            },
           ],
         },
         {
