@@ -160,6 +160,7 @@ module.exports = config({
 
       "/5-interview": [
         "/5-interview/",
+        "/5-interview/1/",
       ],
     },
 
