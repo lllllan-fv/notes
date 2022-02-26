@@ -164,3 +164,40 @@ class MyLinkedList {
  */
 ```
 
+
+
+## 三、链表反转
+
+
+
+### 3.1 [206. 反转链表 - 力扣 ](https://leetcode-cn.com/problems/reverse-linked-list/)
+
+> ![image-20220227003214984](README.assets/image-20220227003214984.png)
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution { 
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        ListNode pre = null;
+        while (head != null) {
+            ListNode it = head.next;
+            head.next = pre;
+            pre = head;
+            head = it;
+        }
+        return pre;
+    }
+}
+```
+
