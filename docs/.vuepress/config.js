@@ -146,7 +146,6 @@ module.exports = config({
         },
       ],
 
-
       "/4-practice": [
         "4-practice/",
         {
@@ -157,6 +156,10 @@ module.exports = config({
             "1-array/"
           ],
         }
+      ],
+
+      "/5-interview": [
+        "/5-interview/",
       ],
     },
 
