@@ -256,3 +256,67 @@ class Solution {
 }
 ```
 
+
+
+### 3.3 [234. 回文链表 - 力扣](https://leetcode-cn.com/problems/palindrome-linked-list/)
+
+> ![image-20220227010719411](README.assets/image-20220227010719411.png)
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode() {}
+ * ListNode(int val) { this.val = val; }
+ * ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution { 
+
+    public ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        while (head != null) {
+            ListNode it = head.next;
+            head.next = pre;
+            pre = head;
+            head = it;
+        }
+        return pre;
+    }
+
+    public boolean isPalindrome(ListNode head) {
+        ListNode it = head;
+        int num = 0;
+        while (it != null) {
+            num++;
+            it = it.next;
+        }
+
+        boolean odd = num % 2 == 1;
+        num /= 2;
+
+        it = head;
+        for (int i = 1; i < num; ++i) {
+            it = it.next;
+        }
+        System.out.println(it.val);
+
+
+        ListNode tail = it.next;
+        if (odd && tail != null) tail = tail.next; 
+
+        tail = reverse(tail);
+
+        while (tail != null) {
+            if (tail.val != head.val) return false;
+            tail = tail.next;
+            head = head.next;
+        }
+
+        return true;
+    }
+}
+```
+
