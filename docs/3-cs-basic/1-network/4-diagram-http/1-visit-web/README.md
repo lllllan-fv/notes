@@ -215,3 +215,9 @@ URI的例子：
 
 ![image-20220226164641201](README.assets/image-20220226164641201.png)
 
+
+
+### 6.2 URI格式
+
+![image-20220226164739984](README.assets/image-20220226164739984.png)
+
