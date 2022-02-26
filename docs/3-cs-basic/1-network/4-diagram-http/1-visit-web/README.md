@@ -45,3 +45,12 @@ star: true
 Web使用一种名为 HTTP(HyperText Transfer Protocal，超文本传输协议)的协议作为规范，完成从客户端到服务器等一系列运作流程。
 
 ![image-20220226153648943](README.assets/image-20220226153648943.png)
+
+
+
+## 二、HTTP的诞生
+
+（简单了解）
+
+
+
