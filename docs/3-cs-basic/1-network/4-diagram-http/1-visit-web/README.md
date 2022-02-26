@@ -191,3 +191,27 @@ DNS 和 HTTP 位于应用层。提供域名到IP地址之间的解析服务。
 ## 五、各种协议和HTTP协议的关系
 
 ![image-20220226164305673](README.assets/image-20220226164305673.png)
+
+
+
+## 六、URI和URL
+
+- URI 统一资源标识符
+- URL 统一资源定位符
+
+
+
+### 6.1 统一资源标识符
+
+URI Uniform Resource Identifier。URI是某个协议方案表示的资源的定位标识符。
+
+![image-20220226164525768](README.assets/image-20220226164525768.png)
+
+URI用字符串标识某一互联网资源，而URL表示资源的地点（互联网上的位置），可以见URL是URI的子集。
+
+
+
+URI的例子：
+
+![image-20220226164641201](README.assets/image-20220226164641201.png)
+
