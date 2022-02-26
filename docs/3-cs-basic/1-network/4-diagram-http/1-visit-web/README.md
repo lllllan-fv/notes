@@ -54,3 +54,15 @@ Web使用一种名为 HTTP(HyperText Transfer Protocal，超文本传输协议)�
 
 
 
+## 三、网络基础 TCP/IP
+
+通常使用的网络是在 TCP/IP 协议族的基础上运作的，而 HTTP 属于它内部的一个子集。
+
+
+
+### 3.1 TCP/IP 协议族
+
+TCP/IP 协议族规定了通信双方必须遵守的一些规则。
+
+![image-20220226154458019](README.assets/image-20220226154458019.png)
+
