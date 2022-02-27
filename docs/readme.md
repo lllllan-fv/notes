@@ -26,6 +26,9 @@ features:
   - title: Java 笔记
     # details: 一点点自我介绍
     link: /1-java/
+
+  - title: 数据库笔记
+    link: /2-database/
   
   - title: 计算机基础
     link: /3-cs-basic/
