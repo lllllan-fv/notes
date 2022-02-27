@@ -172,3 +172,20 @@ star: true
 - truncate 清空数据：`truncate table`，值删除表中的数据，再插入数据时自增id又从1开始
 - delete 删除数据：`delete from table where ?`，删除某一列的数据
 
+
+
+### 8.2 不同的数据库语言
+
+truncate 和 drop 属于 DDL（数据定义语言）语句，操作立即生效，原数据不妨到 rollback segement 中，不能回滚，操作不处罚 tigger。
+
+delete 语句是 DML（数据库操作语言）语句，这个操作会放到 rollback segement中，事务提交之后才生效
+
+
+
+**DML 和  DDL：**
+
+- DML 是数据库操作语言 Data Manipulation Language，指对数据库中表记录的操作，主要包括插入、更新、删除和查询
+- DDL 是数据库定义语言 Data Definition Language，是对数据库内部对象进行创建、删除、修改的操作语言。
+
+
+
