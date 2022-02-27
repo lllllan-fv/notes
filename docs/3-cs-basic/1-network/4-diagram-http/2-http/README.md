@@ -101,3 +101,14 @@ GET 方法用来请求访问已被 URI 识别的资源。
 
 ![image-20220227093903573](README.assets/image-20220227093903573.png)
 
+
+
+### 5.2 POST：传输实体主体
+
+POST 方法用来传输实体的主体。
+
+![image-20220227094258190](README.assets/image-20220227094258190.png)
+
+![image-20220227094312733](README.assets/image-20220227094312733.png)
+
+虽然 POST 的功能和 GET 相似，但是 POST 的主要目的不是获取响应的主体内容。
