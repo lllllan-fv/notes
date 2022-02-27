@@ -176,3 +176,9 @@ HTTP 协议本身并不保留之前一切的请求或响应报文的信息，是
 主要使用 SSL（Secure Sockets Layer，安全套接层） 和 TLS（Transport Layer Security，传输层安全）协议把通信内容加密后经网络隧道传输。
 
 ![image-20220227102117671](README.assets/image-20220227102117671.png)
+
+
+
+### 方法总结
+
+![image-20220227102152508](README.assets/image-20220227102152508.png)
