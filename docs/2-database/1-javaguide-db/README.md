@@ -159,3 +159,16 @@ star: true
 > 【强制】禁止使用存储过程，存储过程难以调试和扩展，更没有一致性。
 >
 > —— 阿里巴巴开发手册
+
+
+
+## 八、drop、delete、truncate
+
+
+
+### 8.1 用法不同
+
+- drop 丢弃数据：`drop table`，直接删除表
+- truncate 清空数据：`truncate table`，值删除表中的数据，再插入数据时自增id又从1开始
+- delete 删除数据：`delete from table where ?`，删除某一列的数据
+
