@@ -322,7 +322,7 @@ class Solution {
 
 
 
-## 四、删除节点
+## 四、快慢指针
 
 
 
@@ -368,7 +368,55 @@ class Solution {
 
 
 
+### 4.2 [142. 环形链表 II - 力扣](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
+
+> ![image-20220227230500247](README.assets/image-20220227230500247.png)
+
+题解：[环形链表 II - 环形链表 II - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/huan-xing-lian-biao-ii-by-leetcode-solution/)
+
+```java
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode(int x) {
+ * val = x;
+ * next = null;
+ * }
+ * }
+ */
+public class Solution { 
+
+    public ListNode detectCycle(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = fast;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (fast == slow) {
+                while (head != fast) {
+                    head = head.next;
+                    fast = fast.next;
+                }
+                return head;
+            }
+        }
+
+        return null;
+    }
+}
+```
+
+
+
 ## 五、链表交点
+
+
+
+### 5.1 [面试题 02.07. 链表相交 - 力扣](https://leetcode-cn.com/problems/intersection-of-two-linked-lists-lcci/)
 
 > ![image-20220227220103499](README.assets/image-20220227220103499.png)
 
@@ -415,4 +463,3 @@ public class Solution {
     }
 }
 ```
-
