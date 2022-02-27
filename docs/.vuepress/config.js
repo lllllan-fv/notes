@@ -132,6 +132,7 @@ module.exports = config({
               prefix: "4-diagram-http/",
               children: [
                 "1-visit-web/",
+                "2-http/"
               ],
             },
           ],
