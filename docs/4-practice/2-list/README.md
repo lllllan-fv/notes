@@ -328,7 +328,7 @@ class Solution {
 
 ### 4.1 [19. 删除链表的倒数第 N 个结点 - 力扣](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/submissions/)
 
-![image-20220227211612750](README.assets/image-20220227211612750.png)
+> ![image-20220227211612750](README.assets/image-20220227211612750.png)
 
 ```java
 /**
@@ -362,6 +362,56 @@ class Solution {
 
         pre.next = slow.next;
         return ans.next;
+    }
+}
+```
+
+
+
+## 五、链表交点
+
+> ![image-20220227220103499](README.assets/image-20220227220103499.png)
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ * int val;
+ * ListNode next;
+ * ListNode(int x) {
+ * val = x;
+ * next = null;
+ * }
+ * }
+ */
+public class Solution { 
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        ListNode itA = headA, itB = headB;
+
+        int flag = 0;
+        while (flag <= 2) {
+            if (itA == itB) {
+                return itA;
+            }
+
+            if (itA.next != null) {
+                itA = itA.next;
+            } else {
+                itA = headB;
+                flag++;
+            }
+
+            if (itB.next != null) {
+                itB = itB.next;
+            } else {
+                itB = headA;
+                flag++;
+            }
+        }
+
+        return null;
     }
 }
 ```
