@@ -155,7 +155,7 @@ HTTP 协议本身并不保留之前一切的请求或响应报文的信息，是
 
 ### 5.6 OPTIONS 询问支持的方法
 
-OPTIONS 方法用来查询针对请求 URI 指定的资源支持的方法。
+**OPTIONS 方法用来查询针对请求 URI 指定的资源支持的方法。**
 
 ![image-20220227101655531](README.assets/image-20220227101655531.png)
 
@@ -163,6 +163,16 @@ OPTIONS 方法用来查询针对请求 URI 指定的资源支持的方法。
 
 ### 5.7 TRACE 追踪路径
 
-TRACE 方法是让 Web 服务器端将之前的请求通信环会给客户端的方法。
+**TRACE 方法是让 Web 服务器端将之前的请求通信环会给客户端的方法。**
 
 ![image-20220227101820954](README.assets/image-20220227101820954.png)
+
+
+
+### 5.8 CONNECT 要求用隧道协议连接代理
+
+**CONNECT 方法要求在与代理服务器通信时建立隧道，实现用隧道协议进行 TCP 通信。**
+
+主要使用 SSL（Secure Sockets Layer，安全套接层） 和 TLS（Transport Layer Security，传输层安全）协议把通信内容加密后经网络隧道传输。
+
+![image-20220227102117671](README.assets/image-20220227102117671.png)
