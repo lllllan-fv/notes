@@ -173,6 +173,39 @@ class Solution {
 
 
 
+### 1.5 [349. 两个数组的交集 - 力扣](https://leetcode-cn.com/problems/intersection-of-two-arrays/)
+
+> ![image-20220228221434099](README.assets/image-20220228221434099.png)
+
+```java
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        int[] cnt = new int[1001];
+
+        for (int i = 0, len = nums1.length; i < len; ++i) {
+            cnt[nums1[i]] = 1;
+        }
+        for (int i = 0, len = nums2.length; i < len; ++i) {
+            if (cnt[nums2[i]] == 1) cnt[nums2[i]] = 2;
+        }
+
+        List<Integer> list = new LinkedList<>();
+        for (int i = 0; i < 1001; ++i) {
+            if (cnt[i] == 2) list.add(i);
+        }
+
+        int[] ans = new int[list.size()];
+        for (int i = 0, len = list.size(); i < len; ++i) {
+            ans[i] = list.get(i);
+        }
+        return ans;
+
+    }
+}
+```
+
+
+
 ## 二、Map
 
 
