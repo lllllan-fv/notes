@@ -65,3 +65,28 @@ class Solution {
 
 
 
+### 1.2 [383. 赎金信 - 力扣](https://leetcode-cn.com/problems/ransom-note/)
+
+> ![image-20220228205408793](README.assets/image-20220228205408793.png)
+
+```java
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+
+        int[] cnt = new int[30];
+        for (int i = 0, len = ransomNote.length(); i < len; ++i) {
+            char c = ransomNote.charAt(i);
+            cnt[c - 'a']++;
+        }
+        for (int i = 0, len = magazine.length(); i < len; ++i) {
+            char c = magazine.charAt(i);
+            cnt[c - 'a']--;
+        }
+        for (int i = 0; i < 26; ++i) {
+            if (cnt[i] > 0) return false;
+        }
+        return true;
+    }
+}
+```
+
