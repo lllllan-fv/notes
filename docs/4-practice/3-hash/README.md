@@ -90,3 +90,32 @@ class Solution {
 }
 ```
 
+
+
+## 二、Map
+
+
+
+### 2.1 [49. 字母异位词分组 - 力扣](https://leetcode-cn.com/problems/group-anagrams/)
+
+> ![image-20220228211606812](README.assets/image-20220228211606812.png)
+
+字母异位词排序之后能够得到相同的字符串
+
+```java
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            char[] chars = str.toCharArray();
+            Arrays.sort(chars);
+            String key = new String(chars);
+            List<String> orDefault = map.getOrDefault(key, new LinkedList<String>());
+            orDefault.add(str);
+            map.put(key, orDefault);
+        }
+        return new LinkedList<List<String>>(map.values());
+    }
+}
+```
+
