@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 一面 7月20 1h30min
+title: TikTok 后端开发 一面
 
 # 设置作者
 author: lllllan
@@ -164,4 +164,31 @@ ln
 
 
 ### 2.3 Mmap 和 sendFile 函数零拷贝的原理
+
+
+
+#### 2.3.1 传统IO的劣势
+
+```java
+File file = new File("index.html");
+RandomAccessFile raf = new RandomAccessFile(file, "rw");
+ 
+byte[] arr = new byte[(int) file.length()];
+raf.read(arr);
+ 
+Socket socket = new ServerSocket(8080).accept();
+socket.getOutputStream().write(arr);
+```
+
+1. 调用 read，用户态变为内核态。**第一次数据拷贝**：DMA（Direct Memory Access 直接测内存存取，即不适用CPU拷贝数据到内存，而是DMA引擎传输数据到内存，用于解放CPU）引擎从磁盘读取文件，并将数据放入到内核缓冲区
+2. 内核态变为用户态。**第二次数据拷贝**：即内核缓冲区的数据拷贝到用户缓冲区
+3. 调用 write，用户态变为内核态。**第三次数据拷贝**：系统将用户缓冲区的数据拷贝到Socket缓冲区
+4. **第四次数据拷贝**：数据异步从 Socket 缓冲区，使用DMA引擎拷贝到网络协议引擎
+5. 内核态变为用户态。
+
+![传统 io 操作](README.assets/format,png.png)
+
+**复制拷贝操作太多了**
+
+
 
