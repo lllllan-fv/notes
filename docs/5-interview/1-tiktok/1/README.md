@@ -39,6 +39,7 @@ star: true
 3. [Linux基础之文件读写流程](https://blog.csdn.net/yangguosb/article/details/77886826)
 3. [深度理解 Linux 读取文件过程！](https://zhuanlan.zhihu.com/p/371574406)
 3. [零拷贝 - 莫那-鲁道](https://www.cnblogs.com/stateis0/p/10960579.html)
+3. [如何理解虚拟内存](https://zhuanlan.zhihu.com/p/96098896)
 
 :::
 
