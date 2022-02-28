@@ -286,6 +286,36 @@ class Solution {
 
 
 
+### 2.3 [454. 四数相加 II - 力扣](https://leetcode-cn.com/problems/4sum-ii/)
+
+> ![image-20220228224320692](README.assets/image-20220228224320692.png)
+
+```java
+class Solution {
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0, len1 = nums1.length; i < len1; i++) {
+            for (int j = 0, len2 = nums2.length; j < len2; ++j) {
+                int key = nums1[i] + nums2[j];
+                map.put(key, map.getOrDefault(key, 0) + 1);
+            }
+        }
+
+        int ans = 0;
+        for (int i = 0, len1 = nums3.length; i < len1; i++) {
+            for (int j = 0, len2 = nums4.length; j < len2; ++j) {
+                int key = nums3[i] + nums4[j];
+                ans += map.getOrDefault(-key, 0);
+            }
+        }
+
+        return ans;
+    }
+}
+```
+
+
+
 ## 三、Set
 
 
