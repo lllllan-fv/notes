@@ -92,6 +92,49 @@ class Solution {
 
 
 
+### 1.3 [438. 找到字符串中所有字母异位词 - 力扣](https://leetcode-cn.com/problems/find-all-anagrams-in-a-string/)
+
+> ![image-20220228212502805](README.assets/image-20220228212502805.png)
+
+```java
+class Solution {
+
+    public boolean check(int[] cnt) {
+        for (int i = 0; i < 26; ++i) {
+            if (cnt[i] != 0) return false;
+        }
+        return true;
+    }
+
+    public List<Integer> findAnagrams(String s, String p) {
+        LinkedList<Integer> ans = new LinkedList<>();
+        if (s.length() < p.length()) return ans;
+
+        int[] cnt = new int[30];
+        int len = p.length();
+        for (int i = 0; i < len; ++i) {
+            char c = p.charAt(i);
+            cnt[c - 'a']++;
+            c = s.charAt(i);
+            cnt[c - 'a']--;
+        }
+        if (check(cnt)) ans.add(0);
+
+        for (int i = len, sz = s.length(); i < sz; ++i) {
+            char c = s.charAt(i);
+            char c1 = s.charAt(i - len);
+            cnt[c - 'a']--;
+            cnt[c1 - 'a']++;
+            if (check(cnt)) ans.add(i - len + 1);
+        }
+
+        return ans;
+    }
+}
+```
+
+
+
 ## 二、Map
 
 
