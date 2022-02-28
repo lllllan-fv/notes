@@ -316,6 +316,51 @@ class Solution {
 
 
 
+### 2.4 [18. 四数之和 - 力扣](https://leetcode-cn.com/problems/4sum/)
+
+> ![image-20220228235646150](README.assets/image-20220228235646150.png)
+
+题解：[一样的道理，能解决四数之和](https://mp.weixin.qq.com/s?__biz=MzUxNjY5NTYxNA==&mid=2247489586&idx=2&sn=ca748544a1f1a785538b8ac4945d3cc3&scene=21#wechat_redirect)
+
+```java
+class Solution {
+
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new LinkedList<>();
+
+        for (int i = 0, len = nums.length; i < len; ++i) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            for (int j = i + 1; j < len; ++j) {
+                if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+
+                int l = j + 1, r = len - 1;
+                while (l < r) {
+                    int sum = nums[i] + nums[j] + nums[l] + nums[r];
+                    if (sum > target) {
+                        r--;
+                    } else if (sum < target) {
+                        l++;
+                    } else {
+                        ans.add(Arrays.asList(nums[i], nums[j], nums[l], nums[r]));
+
+                        while (r > l && nums[r] == nums[r - 1]) --r;
+                        while (r > l && nums[l] == nums[l + 1]) ++l;
+                        --r;
+                        ++l;
+                    }
+                }
+            }
+        }
+
+        return ans;
+    }
+}
+```
+
+
+
 ## 三、Set
 
 
