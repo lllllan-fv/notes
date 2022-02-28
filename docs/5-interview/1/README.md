@@ -36,6 +36,8 @@ star: true
 1. [面试经验｜个人秋招经验和面筋分享](https://leetcode-cn.com/circle/discuss/JlrHm3/)
 2. [剖析Linux内核文件系统之（inode）](https://zhuanlan.zhihu.com/p/385384549)
 3. [什么是软连接什么是硬链接](https://blog.csdn.net/qq_26129413/article/details/110228234)
+3. [Linux基础之文件读写流程](https://blog.csdn.net/yangguosb/article/details/77886826)
+3. [深度理解 Linux 读取文件过程！](https://zhuanlan.zhihu.com/p/371574406)
 
 :::
 
@@ -134,3 +136,19 @@ ln
 
 ### 1.2 Linux 读写数据
 
+
+
+### 1.2.1 读流程
+
+1. 应用程序发起读请求，触发 **系统调用 `read()` 函数**，用户切换为 ==内核态==
+2. 文件系统通过 `目录项 -> inode -> address_space -> 页缓存树`，查询 Page Cache 是否存在
+3. Page Cache 不存在产生缺页中断， **CPU 向 DMA 发出控制指令**
+4. DMA 控制器将数据从主存或硬盘拷贝到内核空间的缓冲区
+5. DMA 磁盘控制器向 CPU 发出数据读完的信号，由 CPU 负责将数据从内核缓冲区拷贝到用户缓冲区
+6. 用户进程由内核态切换回 ==用户态== ，获得文件数据
+
+![在这里插入图片描述](README.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhbmdndW9zYg==,size_16,color_FFFFFF,t_70.png)
+
+![在这里插入图片描述](README.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhbmdndW9zYg==,size_16,color_FFFFFF,t_70-16460438419762.png)
+
+![img](README.assets/v2-f634a6bf89b2bf66a9567d07790b6456_720w.jpg)
