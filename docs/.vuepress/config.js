@@ -161,6 +161,7 @@ module.exports = config({
           children: [
             "1-array/",
             "2-list/",
+            "3-hash/",
           ],
         }
       ],
