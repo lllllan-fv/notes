@@ -135,6 +135,44 @@ class Solution {
 
 
 
+### 1.4 [1002. 查找共用字符 - 力扣](https://leetcode-cn.com/problems/find-common-characters/)
+
+> ![image-20220228220402730](README.assets/image-20220228220402730.png)
+
+```java
+class Solution {
+    public List<String> commonChars(String[] words) {
+        if (words.length == 0) return new LinkedList<>();
+
+        int[] cnt = new int[30];
+        for (int i = 0, len = words[0].length(); i < len; ++i) {
+            cnt[words[0].charAt(i) - 'a']++;
+        }
+
+        for (int i = 1, sz = words.length; i < sz; ++i) {
+            String s = words[i];
+            int[] tmp = new int[30];
+            for (int j = 0, len = s.length(); j < len; ++j) {
+                tmp[s.charAt(j) - 'a']++;
+            }
+            for (int j = 0; j < 26; ++j) {
+                cnt[j] = Math.min(cnt[j], tmp[j]);
+            }
+        }
+
+        List<String> list = new LinkedList<>();
+        for (int i = 0; i < 26; ++i) {
+            for (int j = 0; j < cnt[i]; ++j) {
+                list.add(String.valueOf((char) (i + 'a')));
+            }
+        }
+        return list;
+    }
+}
+```
+
+
+
 ## 二、Map
 
 
