@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: TikTok 后端开发-国际化电商-深圳
+title: 一面 7月20 1h30min
 
 # 设置作者
 author: lllllan
@@ -38,20 +38,17 @@ star: true
 3. [什么是软连接什么是硬链接](https://blog.csdn.net/qq_26129413/article/details/110228234)
 3. [Linux基础之文件读写流程](https://blog.csdn.net/yangguosb/article/details/77886826)
 3. [深度理解 Linux 读取文件过程！](https://zhuanlan.zhihu.com/p/371574406)
+3. [零拷贝 - 莫那-鲁道](https://www.cnblogs.com/stateis0/p/10960579.html)
 
 :::
 
 
 
-## 一面 7月20 1h30min
+## 一、 Linux 文件系统相关
 
 
 
-### 1.1 Linux 文件系统相关
-
-
-
-#### 1.1.1 inode结构
+### 1.1 inode结构
 
 > inode(发音：eye-node)译成中文就是[索引节点](https://baike.baidu.com/item/索引节点/4506518)，它用来存放档案及目录的基本信息，包含时间、档名、使用者及群组等。
 
@@ -76,7 +73,7 @@ star: true
 
 
 
-#### 1.1.2 软链接
+### 1.2 软链接
 
 > 软链接又叫[符号链接](https://baike.baidu.com/item/符号链接/7177630)，这个文件包含了另一个文件的路径名。可以是任意文件或目录，可以链接不同文件系统的文件。
 
@@ -103,7 +100,7 @@ ln -s
 
 
 
-#### 1.1.3 硬链接
+### 1.3 硬链接
 
 > 硬链接（hard link，也称链接）就是一个文件的一个或多个文件名。再说白点，所谓[链接](https://baike.baidu.com/item/链接/2665501)无非是把文件名和计算机文件系统使用的节点号链接起来。因此我们可以用多个文件名与同一个文件进行链接，这些文件名可以在同一目录或不同目录。
 
@@ -126,7 +123,7 @@ ln
 
 
 
-#### 1.1.4 文件描述符是什么，怎么去修改，最多允许多少？
+### 1.4 文件描述符是什么，怎么去修改，最多允许多少？
 
 > [内核](https://baike.baidu.com/item/内核/108410)（kernel）利用文件描述符（file descriptor）来访问文件。文件描述符是[非负整数](https://baike.baidu.com/item/非负整数/2951833)。打开现存文件或新建文件时，内核会返回一个文件描述符。读写文件也需要使用文件描述符来指定待读写的文件。
 
@@ -134,11 +131,11 @@ ln
 
 
 
-### 1.2 Linux 读写数据
+## 二、 Linux 读写数据
 
 
 
-#### 1.2.1 读流程
+### 2.1 读流程
 
 1. 应用程序发起读请求，触发 **系统调用 `read()` 函数**，用户切换为 ==内核态==
 2. 文件系统通过 `目录项 -> inode -> address_space -> 页缓存树`，查询 Page Cache 是否存在
@@ -155,7 +152,7 @@ ln
 
 
 
-#### 1.2.2 写流程
+### 2.2 写流程
 
 1. 应用程序发起写请求，触发 **系统调用 `write()` 函数**，用户态切换为 ==内核态==
 2. 文件系统通过 `目录项 -> inode -> address_space -> 页缓存树`，查询 Page Cache是否存在，如果不存在则需要创建
@@ -163,3 +160,8 @@ ln
 4. 用户主动触发刷盘或者达到特定条件内核触发刷盘，唤醒 pdflush 线程将内核缓冲区的数据刷入磁盘
 
 ![在这里插入图片描述](README.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhbmdndW9zYg==,size_16,color_FFFFFF,t_70-16460441422055.png)
+
+
+
+### 2.3 Mmap 和 sendFile 函数零拷贝的原理
+

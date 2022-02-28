@@ -167,7 +167,12 @@ module.exports = config({
 
       "/5-interview": [
         "/5-interview/",
-        "/5-interview/1/",
+        {
+          title: "TikTok 后端开发-国际化电商-深圳",
+          icon: "",
+          prefix: "5-interview/1-tiktok/",
+          children: ["1/", "2/"],
+        }
       ],
     },
 
