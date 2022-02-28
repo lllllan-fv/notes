@@ -28,3 +28,40 @@ star: true
 
 ---
 
+
+
+## 一、使用数组
+
+
+
+### 1.1 [242. 有效的字母异位词 - 力扣](https://leetcode-cn.com/problems/valid-anagram/)
+
+> ![image-20220228203957979](README.assets/image-20220228203957979.png)
+
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) return false;
+
+        int[] cnt = new int[30];
+
+        for (int i = 0, len = s.length(); i < len; ++i) {
+            char c = s.charAt(i);
+            cnt[c - 'a']++;
+        }
+
+        for (int i = 0, len = t.length(); i < len; ++i) {
+            char c = t.charAt(i);
+            cnt[c - 'a']--;
+        }
+
+        for (int i = 0; i < 26; ++i) {
+            if (cnt[i] != 0) return false;
+        }
+        return true;
+    }
+}
+```
+
+
+
