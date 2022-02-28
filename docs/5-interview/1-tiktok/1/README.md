@@ -217,6 +217,12 @@ Mmap 通过内存映射，将文件映射到内核缓冲区，同时，用户空
 
 
 
+### 3.0 内存管理的概念
+
+![image-20220228194913888](README.assets/image-20220228194913888.png)
+
+
+
 ### 3.1 虚拟内存
 
 > 虚拟[内存](https://baike.baidu.com/item/内存)是[计算机系统](https://baike.baidu.com/item/计算机系统/7210959)[内存管理](https://baike.baidu.com/item/内存管理/5633616)的一种技术。它使得[应用程序](https://baike.baidu.com/item/应用程序/5985445)认为它拥有连续的可用的[内存](https://baike.baidu.com/item/内存/103614)（一个连续完整的[地址空间](https://baike.baidu.com/item/地址空间/1423980)），而实际上，它通常是被分隔成多个[物理内存](https://baike.baidu.com/item/物理内存/2502263)碎片，还有部分暂时存储在外部[磁盘存储器](https://baike.baidu.com/item/磁盘存储器/2386684)上，在需要时进行[数据交换](https://baike.baidu.com/item/数据交换/1586256)。
