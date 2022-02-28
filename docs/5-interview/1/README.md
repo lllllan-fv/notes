@@ -92,7 +92,7 @@ star: true
 **如何实现软链接：**
 
 ```shell
-ls -s
+ln -s
 ```
 
 （截图转载自 [什么是软连接什么是硬链接](https://blog.csdn.net/qq_26129413/article/details/110228234)）
