@@ -261,3 +261,32 @@ class Solution {
 }
 ```
 
+
+
+## 三、Set
+
+
+
+### 3.1 [202. 快乐数 - 力扣](https://leetcode-cn.com/problems/happy-number/)
+
+> ![image-20220228223205442](README.assets/image-20220228223205442.png)
+
+```java
+class Solution {
+    public boolean isHappy(int n) {
+        Set<Integer> set = new HashSet<>();
+        while (n != 1) {
+            if (set.contains(n)) return false;
+            set.add(n);
+            int tmp = 0;
+            while (n != 0) {
+                tmp += (n % 10) * (n % 10);
+                n /= 10;
+            }
+            n = tmp; 
+        }
+        return true;
+    }
+}
+```
+
