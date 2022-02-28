@@ -40,6 +40,7 @@ star: true
 3. [深度理解 Linux 读取文件过程！](https://zhuanlan.zhihu.com/p/371574406)
 3. [零拷贝 - 莫那-鲁道](https://www.cnblogs.com/stateis0/p/10960579.html)
 3. [如何理解虚拟内存](https://zhuanlan.zhihu.com/p/96098896)
+3. [王道计算机考研 操作系统](https://www.bilibili.com/video/BV1YE411D7nH?p=39)
 
 :::
 
