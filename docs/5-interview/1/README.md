@@ -138,13 +138,13 @@ ln
 
 
 
-### 1.2.1 读流程
+#### 1.2.1 读流程
 
 1. 应用程序发起读请求，触发 **系统调用 `read()` 函数**，用户切换为 ==内核态==
 2. 文件系统通过 `目录项 -> inode -> address_space -> 页缓存树`，查询 Page Cache 是否存在
 3. Page Cache 不存在产生缺页中断， **CPU 向 DMA 发出控制指令**
 4. DMA 控制器将数据从主存或硬盘拷贝到内核空间的缓冲区
-5. DMA 磁盘控制器向 CPU 发出数据读完的信号，由 CPU 负责将数据从内核缓冲区拷贝到用户缓冲区
+5. DMA 磁盘控制器向 CPU 发出数据读完的信号，由 CPU 负责将**数据从内核缓冲区拷贝到用户缓冲区**
 6. 用户进程由内核态切换回 ==用户态== ，获得文件数据
 
 ![在这里插入图片描述](README.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhbmdndW9zYg==,size_16,color_FFFFFF,t_70.png)
@@ -152,3 +152,14 @@ ln
 ![在这里插入图片描述](README.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhbmdndW9zYg==,size_16,color_FFFFFF,t_70-16460438419762.png)
 
 ![img](README.assets/v2-f634a6bf89b2bf66a9567d07790b6456_720w.jpg)
+
+
+
+#### 1.2.2 写流程
+
+1. 应用程序发起写请求，触发 **系统调用 `write()` 函数**，用户态切换为 ==内核态==
+2. 文件系统通过 `目录项 -> inode -> address_space -> 页缓存树`，查询 Page Cache是否存在，如果不存在则需要创建
+3. Page Cache 存在后，CPU 将数据**从用户缓冲区拷贝到内核缓冲区**，Page Cache 变为脏页，写流程返回
+4. 用户主动触发刷盘或者达到特定条件内核触发刷盘，唤醒 pdflush 线程将内核缓冲区的数据刷入磁盘
+
+![在这里插入图片描述](README.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lhbmdndW9zYg==,size_16,color_FFFFFF,t_70-16460441422055.png)
