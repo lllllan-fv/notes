@@ -263,6 +263,29 @@ class Solution {
 
 
 
+### 2.2 [1. 两数之和 - 力扣](https://leetcode-cn.com/problems/two-sum/)
+
+> ![image-20220228223704159](README.assets/image-20220228223704159.png)
+
+```java
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0, len = nums.length; i < len; ++i) {
+            int num = nums[i];
+            int key = target - num;
+            if (map.containsKey(key)) {
+                return new int[]{map.get(key), i};
+            }
+            map.put(num, i);
+        }
+        return null;
+    }
+}
+```
+
+
+
 ## 三、Set
 
 
