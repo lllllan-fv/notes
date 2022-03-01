@@ -140,3 +140,17 @@ class Solution {
 }
 ```
 
+
+
+### 2.3 [剑指 Offer 58 - II. 左旋转字符串 - 力扣](https://leetcode-cn.com/problems/zuo-xuan-zhuan-zi-fu-chuan-lcof/)
+
+> ![image-20220301152647435](README.assets/image-20220301152647435.png)
+
+```java
+class Solution {
+    public String reverseLeftWords(String s, int n) {
+        return new StringBuffer(s.substring(n, s.length())).append(s.substring(0, n)).toString();
+    }
+}
+```
+
