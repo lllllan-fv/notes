@@ -49,3 +49,38 @@ class Solution {
 }
 ```
 
+
+
+### 1.2 [541. 反转字符串 II - 力扣](https://leetcode-cn.com/problems/reverse-string-ii/)
+
+> ![image-20220301145706719](README.assets/image-20220301145706719.png)
+
+```java
+@SuppressWarnings({"all"})
+class Solution {
+    public void reverse(char[] s, int l, int r) {
+        while (l < r) {
+            char tmp = s[l];
+            s[l] = s[r];
+            s[r] = tmp;
+            l++;
+            r--;
+        }
+    }
+
+    public String reverseStr(String s, int k) {
+        char[] str = s.toCharArray();
+
+        boolean flag = true;
+        for (int i = 0, len = s.length(); i < len; i += k) {
+            if (flag) {
+                reverse(str, i, Math.min(i + k - 1, len - 1));
+            }
+            flag ^= true;
+        }
+
+        return new String(str);
+    }
+}
+```
+
