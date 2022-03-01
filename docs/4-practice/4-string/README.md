@@ -102,3 +102,41 @@ class Solution {
 }
 ```
 
+
+
+### 2.2 [151. 翻转字符串里的单词 - 力扣](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
+
+> ![image-20220301152255833](README.assets/image-20220301152255833.png)
+
+```java
+@SuppressWarnings({"all"})
+class Solution {
+
+    public String reverseWords(String s) { 
+
+        char[] str = s.toCharArray();
+        StringBuffer sb = new StringBuffer("");
+
+        boolean flag = false;
+        for (int i = 0, len = s.length(); i < len; ++i) {
+            while (i < len && s.charAt(i) == ' ') ++i;
+            int r = i + 1;
+            while (r < len && s.charAt(r) != ' ') ++r;
+
+
+            if (i < len) {
+                if (flag) {
+                    sb = new StringBuffer(" ").append(sb);
+                }
+                flag = true;
+                sb = new StringBuffer(new String(str, i, r - i)).append(sb);
+            }
+
+            i = r;
+        }
+
+        return sb.toString();
+    }
+}
+```
+
