@@ -53,30 +53,14 @@ module.exports = config({
           icon: "",
           prefix: "1-java/1-basic/",
           children: [
-            "1-r2coding-basic/",
-            "2-java-guide-basic/",
-            {
-              title: "重要知识点",
-              icon: "",
-              prefix: "3-important-points/",
-              children: [
-                "1-java-value-passed/",
-                "2-reflection/",
-                "3-agent/"
-              ],
-            },
-            {
-              title: "常见面试题",
-              icon: "",
-              prefix: "4-interview-questions/",
-              children: [
-                "1-basic/",
-                "2-generics-and-reflection/",
-                "3-string/",
-                "4-abnormal/",
-                "5-io/"
-              ],
-            },
+            "1-concept/",
+            "2-grammar/",
+            "3-data/",
+            "4-object/",
+            "5-reflection/",
+            "6-annotation/",
+            "7-exception/",
+            "8-io/",
           ],
         },
         {
