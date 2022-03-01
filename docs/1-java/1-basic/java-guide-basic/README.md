@@ -34,7 +34,7 @@ star: true
 
 本文转载自以下文章，略有改动
 
-- [Java基础常见知识&面试题总结 | JavaGuide](https://javaguide.cn/java/basis/java-basic-questions-01/)
+- 
 - [java是解释执行吗](https://blog.csdn.net/qq_23191031/article/details/81677057)
 - [浅谈JDK、JRE、JVM区别与联系](https://blog.csdn.net/ancientear/article/details/79483592)
 
