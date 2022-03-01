@@ -230,8 +230,6 @@ java 代码被编译成字节码文件，字节码是平台无关的，是面向
 
 Java 的泛型是伪泛型，这是因为 Java 在运行期间，所有的泛型信息都会被擦掉，这也就是通常所说类型擦除 。
 
-详见[JavaGuide #泛型](https://javaguide.cn/java/basis/java基础知识总结/#泛型)
-
 
 
 ### 2.4 == 和 equals() 的区别
@@ -261,7 +259,7 @@ Java 的泛型是伪泛型，这是因为 Java 在运行期间，所有的泛型
 
 如果重写 `equals()` 时没有重写 `hashCode()` 方法的话就可能会导致 `equals` 方法判断是相等的两个对象，`hashCode` 值却不相等。
 
-更多解释见[JavaGuide #hashcode-与-equals](https://javaguide.cn/java/basis/java基础知识总结/#hashcode-与-equals)
+更多解释见 [Java基础常见知识&面试题总结(上) | JavaGuide](https://javaguide.cn/java/basis/java-basic-questions-01/#hashcode-与-equals)
 
 
 
