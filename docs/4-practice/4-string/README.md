@@ -84,3 +84,21 @@ class Solution {
 }
 ```
 
+
+
+## 二、库函数
+
+
+
+### 2.1 [剑指 Offer 05. 替换空格 - 力扣](https://leetcode-cn.com/problems/ti-huan-kong-ge-lcof/)
+
+> ![image-20220301150014354](README.assets/image-20220301150014354.png)
+
+```java
+class Solution {
+    public String replaceSpace(String s) {
+        return s.replaceAll(" ", "%20");
+    }
+}
+```
+
