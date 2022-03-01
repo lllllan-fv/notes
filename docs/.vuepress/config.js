@@ -163,6 +163,7 @@ module.exports = config({
             "1-array/",
             "2-list/",
             "3-hash/",
+            "4-string/",
           ],
         }
       ],
