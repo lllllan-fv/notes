@@ -200,3 +200,8 @@ TCP会话的每一端都包含一个32位（bit）的序列号，该序列号被
 
 
 具体见 [计算机网络-常见面试题 | lllllan](../../../3-cs-basic/1-network/2-interview-questions/#五、tcp协议如何保证可靠传输)
+
+
+
+## 六、未完
+
