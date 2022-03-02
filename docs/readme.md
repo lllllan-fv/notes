@@ -50,5 +50,6 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 
 1. 存储引擎
 2. 聚集索引
+3. B+树
 
 :::

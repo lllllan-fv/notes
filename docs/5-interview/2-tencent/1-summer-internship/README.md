@@ -36,7 +36,6 @@ star: true
 
 1. [【腾讯】Java岗-暑假实习面经](https://www.iamshuaidi.com/2251.html)
 2. [MySQL存储引擎精讲](http://c.biancheng.net/view/2418.html)
-2. [存储引擎_百度百科](https://baike.baidu.com/item/存储引擎/8969956)
 2. [Mysql 中 MyISAM 和 InnoDB 的区别有哪些？](https://www.zhihu.com/question/20596402/answer/211492971)
 
 :::
@@ -103,4 +102,10 @@ MySQL中的数据用各种不同的技术存储在文件（或者内存）中。
 1. 需要支持事务，InnoDB
 2. 主要是查询工作，MyISAM；如果读写也频繁，InnoDB
 3. MyISAM 系统崩溃后恢复更困难
+
+
+
+## 三、B+树（待学）
+
+B+树是一种树数据结构，通常用于[数据库](https://baike.baidu.com/item/数据库)和[操作系统](https://baike.baidu.com/item/操作系统)的[文件系统](https://baike.baidu.com/item/文件系统)中。B+树的特点是能够保持数据稳定有序，其插入与修改拥有较稳定的[对数](https://baike.baidu.com/item/对数/91326)时间复杂度。B+树元素自底向上插入，这与[二叉树](https://baike.baidu.com/item/二叉树)恰好相反。
 
