@@ -109,3 +109,21 @@ MySQL中的数据用各种不同的技术存储在文件（或者内存）中。
 
 B+树是一种树数据结构，通常用于[数据库](https://baike.baidu.com/item/数据库)和[操作系统](https://baike.baidu.com/item/操作系统)的[文件系统](https://baike.baidu.com/item/文件系统)中。B+树的特点是能够保持数据稳定有序，其插入与修改拥有较稳定的[对数](https://baike.baidu.com/item/对数/91326)时间复杂度。B+树元素自底向上插入，这与[二叉树](https://baike.baidu.com/item/二叉树)恰好相反。
 
+
+
+## 四、TCP
+
+
+
+### 4.1 三次握手
+
+三次握手：为了对每次发送的数据量进行跟踪与协商，**确保数据段的发送和接收同步**，根据所接收到的数据量而确认数据发送、接收完毕后何时撤销联系，并建立虚连接。
+
+
+
+具体看 [计算机网络-常见面试题 | lllllan](../../../3-cs-basic/1-network/2-interview-questions/#_2-1-三次握手流程)
+
+1. 客户端向服务器端发送连接请求，`SYN = 1, seq = x`
+2. 服务器端接收后返回确认报文，`ACK = 1, SYN = 1, ack = x + 1, seq = y`
+3. 客户端再次发送确认，`ACK = 1, ack = y + 1, seq = x + 1`
+
