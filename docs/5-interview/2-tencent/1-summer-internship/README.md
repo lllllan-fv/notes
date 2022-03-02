@@ -37,6 +37,7 @@ star: true
 1. [【腾讯】Java岗-暑假实习面经](https://www.iamshuaidi.com/2251.html)
 2. [MySQL存储引擎精讲](http://c.biancheng.net/view/2418.html)
 2. [Mysql 中 MyISAM 和 InnoDB 的区别有哪些？](https://www.zhihu.com/question/20596402/answer/211492971)
+2. [TCP 、UDP、IP包的最大长度 - 江召伟](https://www.cnblogs.com/jiangzhaowei/p/9273854.html)
 
 :::
 
@@ -141,4 +142,18 @@ B+树是一种树数据结构，通常用于[数据库](https://baike.baidu.com/
 2. 服务器端接收到返回确认报文，`ACK = 1, ack = x + 1, seq = y`
 3. 服务器端向客户端发送释放连接报文，`FIN = 1, ack = x + 1, seq = y`
 4. 客户端接收到返回确认报文，`ACK = 1, ack = y + 1, seq = x + 1`
+
+
+
+### 4.3 TCP 包一次最多发送多少数据
+
+1. 链路层，数据帧的内容最大为 1500（不包括帧头和帧尾），即 MTU 为1500.
+2. 网络层，IP 包的首部要占用20字节
+3. 传输层：
+    1. UDP 包首部占用8字节，MSS = 1500 - 20 - 8 = 1472
+    2. TCP 包首部占用20字节，MSS = 1500 - 20 - 20 = 1460
+
+
+
+
 
