@@ -40,6 +40,7 @@ star: true
 2. [TCP 、UDP、IP包的最大长度 - 江召伟](https://www.cnblogs.com/jiangzhaowei/p/9273854.html)
 2. [TCP序列号 与 序列号循环介绍](https://www.gingerdoc.com/tcp-seq-and-loop)
 2. [TCP协议中的序列号 - alifpga](https://www.cnblogs.com/alifpga/p/7675799.html)
+2. [一文搞懂TCP与UDP的区别 - Fundebug](https://www.cnblogs.com/fundebug/p/differences-of-tcp-and-udp.html)
 
 :::
 
@@ -166,3 +167,26 @@ TCP 协议工作在OSI的传输层，是一种可靠的面向连接的数据流�
 TCP会话的每一端都包含一个32位（bit）的序列号，该序列号被用来跟踪该端发送的数据量。每一个包中都包含序列号，在接收端则通过确认号用来通知发送端数据成功接收。
 
 ![image-20220303011408006](README.assets/image-20220303011408006.png)
+
+
+
+## 五、TCP 和 UDP 
+
+
+
+### 5.1 TCP和UDP的区别总结
+
+具体看 [一文搞懂TCP与UDP的区别 - Fundebug](https://www.cnblogs.com/fundebug/p/differences-of-tcp-and-udp.html)
+
+|              |                    UDP                     |                  TCP                   |
+| :----------: | :----------------------------------------: | :------------------------------------: |
+|   是否连接   |                   无连接                   |                面向连接                |
+|   是否可靠   |    不可靠传输，不使用流量控制和拥塞控制    |    可靠传输，使用流量控制和拥塞控制    |
+| 连接对象个数 | 支持一对一，一对多，多对一和多对多交互通信 |            只能是一对一通信            |
+|   传输方式   |                  面向报文                  |               面向字节流               |
+|   首部开销   |            首部开销小，仅8字节             |       首部最小20字节，最大60字节       |
+|   适用场景   | 适用于实时应用（IP电话、视频会议、直播等） | 适用于要求可靠传输的应用，例如文件传输 |
+
+- TCP向上层提供面向连接的可靠服务 ，UDP向上层提供无连接不可靠服务。
+- 虽然 UDP 并没有 TCP 传输来的准确，但是也能在很多实时性要求高的地方有所作为
+- 对数据准确性要求高，速度可以相对较慢的，可以选用TCP
