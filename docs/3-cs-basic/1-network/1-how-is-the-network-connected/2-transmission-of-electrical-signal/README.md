@@ -176,7 +176,7 @@ TCP 包的大小就应该是 1500 - IP头(20) - TCP头(20) = 1460 (Bytes)　
 - 发送方：从第xxx字节开始，共有xxx字节
 - 接收方：收到到第xxx字节之前的全部数据
 
-<img src="README.assets/image-20211229180218040.png" alt="image-20211229180218040" style="zoom: 150%;" />
+![](README.assets/image-20211229180218040.png)
 
 ![image-20211229181203165](README.assets/image-20211229181203165.png)![image-20211229181227356](README.assets/image-20211229181227356.png)
 
@@ -333,7 +333,7 @@ eg：
 
 ### 5.3 IP头部
 
-<img src="README.assets/image-20220108124243007.png" alt="image-20220108124243007" style="zoom:150%;" />
+![](README.assets/image-20220108124243007.png)
 
 ![image-20220108124706189](README.assets/image-20220108124706189.png)
 
