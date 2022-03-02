@@ -44,4 +44,11 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 ---
 
 
+## 备忘录
 
+::: tip 数据库
+
+1. 存储引擎
+2. 聚集索引
+
+:::
