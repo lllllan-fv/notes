@@ -41,6 +41,7 @@ star: true
 2. [TCP序列号 与 序列号循环介绍](https://www.gingerdoc.com/tcp-seq-and-loop)
 2. [TCP协议中的序列号 - alifpga](https://www.cnblogs.com/alifpga/p/7675799.html)
 2. [一文搞懂TCP与UDP的区别 - Fundebug](https://www.cnblogs.com/fundebug/p/differences-of-tcp-and-udp.html)
+2. [浅析JAVA的垃圾回收机制（GC）](https://www.jianshu.com/p/5261a62e4d29)
 
 :::
 
@@ -209,4 +210,24 @@ TCP会话的每一端都包含一个32位（bit）的序列号，该序列号被
 - 线程：线程是进程的一个执行单元，是进程内的调度实体。
 
 具体看 [操作系统-常见面试题 | lllllan](../../../3-cs-basic/2-operating-system/1-interview-questions/#_2-1-进程和线程的区别)
+
+
+
+## 七、垃圾回收机制
+
+垃圾回收(Garbage Collection)是Java虚拟机(JVM)垃圾回收器提供的一种用于 ==在空闲时间不定时回收无任何对象引用的对象占据的内存空间== 的一种机制。
+
+
+
+::: tip 回收内存
+
+垃圾回收，回收的是无任何引用的对象锁占据的 ==内存空间== ，而不是对象本身。说白了就是销毁了对象、回收了内存。
+
+:::
+
+
+
+具体机制看 [浅析JAVA的垃圾回收机制（GC）](https://www.jianshu.com/p/5261a62e4d29)
+
+
 
