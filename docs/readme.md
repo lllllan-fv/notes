@@ -53,3 +53,12 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 3. B+树
 
 :::
+
+
+
+::: info Java
+
+1. 垃圾回收机制
+    1. OOM
+
+:::
