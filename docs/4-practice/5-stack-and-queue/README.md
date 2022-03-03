@@ -116,6 +116,32 @@ class Solution {
 
 
 
+### 1.3 [1047. 删除字符串中的所有相邻重复项 - 力扣](https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/)
+
+> ![image-20220303205641348](README.assets/image-20220303205641348.png)
+
+```java
+import java.util.Stack;
+
+class Solution {
+    public String removeDuplicates(String s) {
+        Stack<Character> st = new Stack<>();
+        for (int i = 0, len = s.length(); i < len; ++i) {
+            char c = s.charAt(i);
+            if (st.size() > 0 && st.peek() == c) {
+                st.pop();
+            } else st.add(c);
+        }
+
+        StringBuilder sb = new StringBuilder("");
+        while (st.size() > 0) sb.append(st.pop());
+        return sb.reverse().toString();
+    }
+}
+```
+
+
+
 ## 二、队列
 
 
