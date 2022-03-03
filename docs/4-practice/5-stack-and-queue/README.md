@@ -243,3 +243,37 @@ class MyStack {
  */
 ```
 
+
+
+### 2.2 [239. 滑动窗口最大值 - 力扣](https://leetcode-cn.com/problems/sliding-window-maximum/)
+
+> ![image-20220303231545970](README.assets/image-20220303231545970.png)
+
+```java
+import java.util.Deque;
+        import java.util.LinkedList;
+
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        Deque<Integer> deque = new LinkedList<>();
+
+        for (int i = 0; i < k; ++i) {
+            while (!deque.isEmpty() && nums[i] > deque.peekLast()) deque.pollLast();
+            deque.addLast(nums[i]);
+        }
+
+        int[] ans = new int[n - k + 1];
+        ans[0] = deque.peekFirst();
+        for (int i = k; i < n; ++i) {
+            while (!deque.isEmpty() && nums[i] > deque.peekLast()) deque.pollLast();
+            deque.addLast(nums[i]);
+
+            if (nums[i - k] == deque.peekFirst()) deque.pollFirst();
+            ans[i - k + 1] = deque.peekFirst();
+        }
+        return ans;
+    }
+}
+```
+
