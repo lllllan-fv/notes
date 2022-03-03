@@ -87,6 +87,35 @@ class MyQueue {
 
 
 
+### 1.2 [20. 有效的括号 - 力扣](https://leetcode-cn.com/problems/valid-parentheses/)
+
+> ![image-20220303204717266](README.assets/image-20220303204717266.png)
+
+```java
+import java.util.Stack;
+
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();
+        for (int i = 0, len = s.length(); i < len; ++i) {
+            char c = s.charAt(i);
+            if (c == '(' || c == '[' || c == '{') st.add(c);
+            else {
+                if (st.size() > 0) {
+                    if (st.peek() == '(' && c == ')') st.pop();
+                    else if (st.peek() == '[' && c == ']') st.pop();
+                    else if (st.peek() == '{' && c == '}') st.pop();
+                    else st.add(c);
+                } else st.add(c);
+            }
+        }
+        return st.empty();
+    }
+}
+```
+
+
+
 ## 二、队列
 
 
