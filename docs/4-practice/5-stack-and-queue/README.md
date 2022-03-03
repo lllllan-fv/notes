@@ -28,3 +28,60 @@ star: true
 
 ---
 
+
+
+## 一、栈
+
+
+
+### 1.1 [232. 用栈实现队列 - 力扣](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
+
+> ![image-20220303203442224](README.assets/image-20220303203442224.png)
+
+```java
+import java.util.Stack;
+
+class MyQueue {
+
+    Stack<Integer> in, out;
+
+    public MyQueue() {
+        in = new Stack<>();
+        out = new Stack<>();
+    }
+
+    public void push(int x) {
+        in.add(x);
+    }
+
+    public void CheckOut() {
+        if (out.size() == 0) {
+            while (in.size() > 0) out.add(in.pop());
+        }
+    }
+
+    public int pop() {
+        CheckOut();
+        return out.pop();
+    }
+
+    public int peek() {
+        CheckOut();
+        return out.peek();
+    }
+
+    public boolean empty() {
+        return in.empty() && out.empty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
+```
+
