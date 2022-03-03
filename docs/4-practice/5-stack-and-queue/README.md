@@ -142,6 +142,38 @@ class Solution {
 
 
 
+### 1.4 [150. 逆波兰表达式求值 - 力扣](https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/)
+
+> ![image-20220303210500142](README.assets/image-20220303210500142.png)
+
+```java
+import java.util.Stack;
+
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> st = new Stack<>();
+        for (String s : tokens) {
+            if (s.equals("+")) {
+                st.add(st.pop() + st.pop());
+            } else if (s.equals("-")) {
+                int a = st.pop(), b = st.pop();
+                st.add(b - a);
+            } else if (s.equals("*")) {
+                st.add(st.pop() * st.pop());
+            } else if (s.equals("/")) {
+                int a = st.pop(), b = st.pop();
+                st.add(b / a);
+            } else {
+                st.add(Integer.valueOf(s));
+            }
+        }
+        return st.pop();
+    }
+}
+```
+
+
+
 ## 二、队列
 
 
