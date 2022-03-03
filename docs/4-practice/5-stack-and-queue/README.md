@@ -85,3 +85,74 @@ class MyQueue {
  */
 ```
 
+
+
+## 二、队列
+
+
+
+### 2.1 [225. 用队列实现栈 - 力扣](https://leetcode-cn.com/problems/implement-stack-using-queues/)
+
+> ![image-20220303204230564](README.assets/image-20220303204230564.png)
+
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+
+class MyStack {
+    Queue<Integer> A, B;
+
+    public MyStack() {
+        A = new LinkedList<>();
+        B = new LinkedList<>();
+    }
+
+    public int getTop(Queue<Integer> a, Queue<Integer> b) {
+        while (a.size() > 1) {
+            b.add(a.poll());
+        }
+        return a.peek();
+    }
+
+    public void push(int x) {
+        if (B.size() > 0) B.add(x);
+        else A.add(x);
+    }
+
+    public int pop() {
+        if (A.size() > 0) {
+            getTop(A, B);
+            return A.poll();
+        } else {
+            getTop(B, A);
+            return B.poll();
+        }
+    }
+
+    public int top() {
+        if (A.size() > 0) {
+            int x = getTop(A, B);
+            B.add(A.poll());
+            return x;
+        } else {
+            int x = getTop(B, A);
+            A.add(B.poll());
+            return x;
+        }
+    }
+
+    public boolean empty() {
+        return A.isEmpty() && B.isEmpty();
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
+```
+
