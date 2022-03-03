@@ -277,3 +277,36 @@ class Solution {
 }
 ```
 
+
+
+### 2.3 [347. 前 K 个高频元素 - 力扣](https://leetcode-cn.com/problems/top-k-frequent-elements/)
+
+> ![image-20220303232418442](README.assets/image-20220303232418442.png)
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        PriorityQueue<Map.Entry<Integer, Integer>> Q = new PriorityQueue<>((o1, o2) -> o1.getValue() - o2.getValue());
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            Q.add(entry);
+            if (Q.size() > k) Q.poll();
+        }
+
+        int[] ans = new int[k];
+        for (int i = k; i > 0; --i) {
+            ans[i - 1] = Q.poll().getKey();
+        }
+        return ans;
+    }
+}
+```
+
