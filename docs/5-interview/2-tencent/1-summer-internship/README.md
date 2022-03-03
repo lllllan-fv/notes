@@ -279,3 +279,9 @@ OOM：Out Of Memory，内存用完了。当 JVM 因为没有足够的内存来�
 
 
 
+## 八、海量数据中查找关键字
+
+[面试题 3.一个有十亿条记录的文本文件，已经按照关键字排好序存储，设计算法，可以从文件中快速查找指定关键字的记录](https://blog.csdn.net/qq_16397653/article/details/105883554)
+
+[教你如何迅速秒杀掉：99%的海量数据处理面试题](https://blog.csdn.net/v_july_v/article/details/7382693)
+
