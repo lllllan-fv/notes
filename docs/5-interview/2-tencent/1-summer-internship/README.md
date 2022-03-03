@@ -42,6 +42,8 @@ star: true
 2. [TCP协议中的序列号 - alifpga](https://www.cnblogs.com/alifpga/p/7675799.html)
 2. [一文搞懂TCP与UDP的区别 - Fundebug](https://www.cnblogs.com/fundebug/p/differences-of-tcp-and-udp.html)
 2. [浅析JAVA的垃圾回收机制（GC）](https://www.jianshu.com/p/5261a62e4d29)
+2. [什么是java OOM？如何分析及解决oom问题？ - ThinkVenus](https://www.cnblogs.com/ThinkVenus/p/6805495.html)
+2. [深入理解Java中的内存溢出内存溢出内存溢出的几种情况（OOM 异常）导致内存溢出的原因内存溢出的解决方法](https://cloud.tencent.com/developer/article/1193300)
 
 :::
 
@@ -228,6 +230,52 @@ TCP会话的每一端都包含一个32位（bit）的序列号，该序列号被
 
 
 具体机制看 [浅析JAVA的垃圾回收机制（GC）](https://www.jianshu.com/p/5261a62e4d29)
+
+
+
+### 7.1 OOM 内存溢出
+
+OOM：Out Of Memory，内存用完了。当 JVM 因为没有足够的内存来为对象分配空间并且垃圾回收器也已经没有空间回收时，就会抛出这个 error
+
+
+
+### 7.2 产生  OOM 的原因
+
+总结来说就是 内存分配太少和用的太多。
+
+1. 启动参数内存值设定太小
+2. 内存中加载的数据量太过庞大
+3. 创建了一个超大对象（比如超大的数组），或因为死循环产生过多重复的实体对象
+4. 内存泄漏，大量对象灭有释放，JVM无法自动回收
+
+
+
+### 7.3 产生 OOM 的集中情况
+
+1. 虚拟机栈和本地方法栈溢出
+
+    > 一般是由于程序中存在死循环或者深度递归调用、栈大小设置太小引起。
+    >
+    > - 如果线程请求的栈深度大于虚拟机所允许的最大深度，将抛出 `StackOverflowError`
+    >
+    > - 如果虚拟机在扩展栈时无法申请得到足够的空间，则会抛出 `OutOfMemoryError`
+
+2. 堆溢出 `java.lang.OutOfMemoryError: Java heap space`
+
+    > 内存泄漏或者因为堆的大小设置不当引起
+
+3. 方法区溢出 `java.lang.OutOfMemoryError: Java heap space`
+
+    > 一般出现于大量 Class 或者 jsp 页面，或者采用 cglib 等反射机制的情况，因为会产生大量的 Class 信息存储于方法区
+
+    
+
+### 7.4 OOM 的解决办法
+
+1. 修改 JVM 启动残生，直接增加内存。
+2. 检查错误日志，查看 OOM 错误前是否有其他异常或错误
+3. 对对吗进行走查和分析，找出可能发生内存溢出的位置
+4. 使用内存查看工具动态查看内存使用情况
 
 
 
