@@ -51,19 +51,16 @@ star: true
 
 - **`Error`** ：`Error` 属于程序无法处理的错误 ，我们没办法通过 `catch` 来进行捕获 。例如，Java 虚拟机运行错误（`Virtual MachineError`）、虚拟机内存不够错误(`OutOfMemoryError`)、类定义错误（`NoClassDefFoundError`）等 。这些异常发生时，Java 虚拟机（JVM）一般会选择**线程终止**。
 
-    
+![types-of-exceptions-in-java](README.assets/types-of-exceptions-in-java.3508827e.png)
 
-![img](../java-guide-basic/README.assets/Java异常类层次结构图.png)
-
-![img](../java-guide-basic/README.assets/Java异常类层次结构图2.png)
-
+![img](README.assets/Java异常类层次结构图2-16463581576452-16463582756464.png)
 
 
 ### 1.1 受检查异常
 
 Java 代码在编译过程中，如果受检查异常没有被 `catch`/`throw` 处理的话，就没办法通过编译 。比如下面这段 IO 操作的代码
 
-![check-exception](../java-guide-basic/README.assets/check-exception.png)
+![image-20220304094533701](README.assets/image-20220304094533701.png)
 
 
 

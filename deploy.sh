@@ -11,6 +11,7 @@ cd dist
 
 # 如果是发布到自定义域名
 echo 'vue-blog.lllllan.cn' > CNAME
+echo 'blog.lllllan.cn' > CNAME
 
 git init
 git add -A
