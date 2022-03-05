@@ -1,4 +1,5 @@
 ---
+
 # 这是页面的图标
 icon: page
 
@@ -208,56 +209,86 @@ JVM 可以理解的代码就叫做字节码（即扩展名为 `.class` 的文件
 ### 4.2 修改基本数据类型
 
 ```java
-public static void main(String[] args) {
-    int num1 = 10;
-    int num2 = 20;
-    swap(num1, num2);
-    System.out.println("num1 = " + num1);
-    System.out.println("num2 = " + num2);
+class Solution {
+
+    public void swap(int a, int b) {
+        System.out.println("执行交换函数，将a、b的值对换");
+        int tmp = a;
+        a = b;
+        b = tmp;
+    }
+
+    public static void main(String[] args) {
+        int a = 1;
+        int b = 2;
+        System.out.println("执行前：a = " + a + ", b = " + b);
+
+        new Solution().swap(a, b);
+
+        System.out.println("执行后：a = " + a + ", b = " + b);
+    }
 }
 
-public static void swap(int a, int b) {
-    int temp = a;
-    a = b;
-    b = temp;
-    System.out.println("a = " + a);
-    System.out.println("b = " + b);
-}
-
----------------------------------------------
-    
-a = 20
-b = 10
-num1 = 10
-num2 = 20
+-----------------------------------------------------------------
+执行前：a = 1, b = 2
+执行交换函数，将a、b的值对换
+执行后：a = 1, b = 2
 ```
 
 - a和b只是从num1和num2复制得到了值，怎么操作都不会产生影响
-
-![image-20220305140343353](README.assets/image-20220305140343353.png)
 
 
 
 ### 4.3 修改引用类型中的值
 
 ```java
-public static void main(String[] args) {
-    int[] arr = { 1, 2, 3, 4, 5 };
-    System.out.println(arr[0]);
-    change(arr);
-    System.out.println(arr[0]);
+class Solution {
+
+    public void print(int[] array) {
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println("");
+    }
+
+    public void swap(int[] array) {
+        System.out.println("执行交换函数，将数组首尾两数对换");
+        int tmp = array[0];
+        array[0] = array[array.length - 1];
+        array[array.length - 1] = tmp;
+    }
+
+    public void change(int[] array) {
+        System.out.println("创建新的数组");
+        array = new int[]{4, 5, 6};
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{1, 2, 3};
+        System.out.print("原数组：");
+        new Solution().print(arr);
+
+        new Solution().swap(arr);
+        System.out.print("交换后数组：");
+        new Solution().print(arr);
+
+        new Solution().change(arr);
+        System.out.print("创建后数组：");
+        new Solution().print(arr);
+    }
 }
 
-public static void change(int[] array) {
-    // 将数组的第一个元素变为0
-    array[0] = 0;
-}
-
----------------------------------------------
-   
-1
-0
+------------------------------------------------------------------
+原数组：1 2 3 
+执行交换函数，将数组首尾两数对换
+交换后数组：3 2 1 
+创建新的数组
+创建后数组：3 2 1 
 ```
+
+- 函数中的`int[] arr` 只是对数组 **引用** 的一个拷贝
+    - 对这个引用指向的数组对象就行内容修改，两个引用都能查看到
+    - 但是对这个 **新的引用** 创建新的数组，也不会影响原来的 数组引用 指向的数组对象。
 
 ![引用数据类型参数1](README.assets/java-value-passing-02.ff1b76c9.png)
 
@@ -266,33 +297,57 @@ public static void change(int[] array) {
 ### 4.4 修改引用类型的对象
 
 ```java
-public class Person {
-    private String name;
-   // 省略构造函数、Getter&Setter方法
+class Solution {
+
+    static class Student {
+        private String name;
+
+        public Student(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        private void setName(String name) {
+            this.name = name;
+        }
+    }
+
+    static void swapName(Student s1, Student s2) {
+        System.out.println("直接交换两人的姓名");
+        String name = s1.getName();
+        s1.setName(s2.getName());
+        s2.setName(name);
+    }
+
+    static void swapStudent(Student s1, Student s2) {
+        System.out.println("交换两个对象");
+        Student tmp = s1;
+        s1 = s2;
+        s2 = tmp;
+    }
+
+    public static void main(String[] args) {
+        Student xz = new Student("xiaoZhang");
+        Student xl = new Student("xiaoLi");
+        System.out.println("xz：" + xz.getName() + ", xl: " + xl.getName());
+
+        swapName(xz, xl);
+        System.out.println("xz：" + xz.getName() + ", xl: " + xl.getName());
+
+        swapStudent(xz, xl);
+        System.out.println("xz：" + xz.getName() + ", xl: " + xl.getName());
+    }
 }
 
-public static void main(String[] args) {
-    Person xiaoZhang = new Person("小张");
-    Person xiaoLi = new Person("小李");
-    swap(xiaoZhang, xiaoLi);
-    System.out.println("xiaoZhang:" + xiaoZhang.getName());
-    System.out.println("xiaoLi:" + xiaoLi.getName());
-}
-
-public static void swap(Person person1, Person person2) {
-    Person temp = person1;
-    person1 = person2;
-    person2 = temp;
-    System.out.println("person1:" + person1.getName());
-    System.out.println("person2:" + person2.getName());
-}
-
------------------------------------------------------------
-    
-person1:小李
-person2:小张
-xiaoZhang:小张
-xiaoLi:小李
+---------------------------------------------------------------------------------
+xz：xiaoZhang, xl: xiaoLi
+直接交换两人的姓名
+xz：xiaoLi, xl: xiaoZhang
+交换两个对象
+xz：xiaoLi, xl: xiaoZhang
 ```
 
 ![引用数据类型参数2](README.assets/java-value-passing-03.da4d0422.png)
