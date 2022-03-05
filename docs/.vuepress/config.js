@@ -61,6 +61,7 @@ module.exports = config({
             "6-annotation/",
             "7-exception/",
             "8-io/",
+            "9-agent/",
           ],
         },
         {

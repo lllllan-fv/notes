@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 代理详解
+title: Java - 代理
 
 # 设置作者
 author: lllllan
