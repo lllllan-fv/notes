@@ -38,16 +38,6 @@ star: true
 
 
 
-## 15. switch 能否作用在  `byte`、`long`、`String`上？
-
-switch 中放的只能是一个整数表达式或枚举常量。而整数表达式可以是 `int` 或 `Integer`
-
-- 由于 `byte`、`short`、`char` 都可以隐式转换为 `int`，因此这些类型以及他们的包装类都是可以用的。
-- `long` 不可以
-- `String` 在 JDK1.7 之后可以使用
-
-
-
 ## 16. Object 的常用方法
 
 - `clone` ⽅法：⽤于创建并返回当前对象的⼀份拷⻉； 
