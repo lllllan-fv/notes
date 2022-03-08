@@ -31,11 +31,9 @@ star: true
 
 
 
-::: warning
+::: warning 本文转载自以下文章，略有改动
 
-本文转载自以下文章，略有改动
-
-- [Java基础常见知识&面试题总结 | JavaGuide](https://javaguide.cn/java/basis/java-basic-questions-01/)
+- [JavaGuide](https://javaguide.cn/)
 - [2分钟让你明白什么是面向对象编程](https://zhuanlan.zhihu.com/p/75265007)
 
 :::
@@ -71,9 +69,7 @@ star: true
 
 
 
-::: tip
-
-**面向对象易维护、易复用、易扩展。面向过程性能相对较高。**
+::: tip 面向对象易维护、易复用、易扩展。面向过程性能相对较高。
 
 :::
 

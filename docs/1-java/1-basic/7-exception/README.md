@@ -31,11 +31,9 @@ star: true
 
 
 
-::: warning
+::: warning 本文转载自以下文章，略有改动
 
-本文转载自以下文章，略有改动
-
-- [Java基础常见知识&面试题总结 | JavaGuide](https://javaguide.cn/java/basis/java-basic-questions-01/)
+- [JavaGuide](https://javaguide.cn/)
 
 :::
 

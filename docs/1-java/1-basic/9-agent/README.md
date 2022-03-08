@@ -34,11 +34,9 @@ copyright: true
 
 
 
-::: warning
+::: warning 本文转载自一下文章， 略有改动
 
-本文转载自 [代理详解！静态代理+JDK/CGLIB 动态代理实战 | JavaGuide](https://javaguide.cn/java/basis/代理模式详解/)， 略有改动
-
-（完全不懂）
+[JavaGuide](https://javaguide.cn/)
 
 :::
 

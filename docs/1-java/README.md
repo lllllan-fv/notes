@@ -34,10 +34,3 @@ star: true
 :::
 
 
-
-## 参考
-
-- [JavaGuide](https://javaguide.cn/)
-
-- [Road 2 Coding](https://www.r2coding.com/#/)
-
