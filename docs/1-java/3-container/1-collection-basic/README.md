@@ -277,3 +277,28 @@ Output：
 30-张三
 ```
 
+
+
+## 四、Map
+
+
+
+### 4.1 HashMap 和 HashTable 的区别
+
+1. 两者父类不同
+   1. HashMap 继承自 AbstractMap，HashTable 继承自 Dictionary
+   2. 他们都实现了 map、Cloneable（可复制）、Serializable（可序列化）三个接口
+2. 对外提供接口不同
+   1. HashTable 中提供方法 elements()：返回 value 的枚举
+   2. HashTable 中提供方法 contains()：实际上就是 containsValue()
+3. 对 null 的支持不同
+   1. HashTable：key 和 value 都不能为 null
+   2. HashMap：key 和 value 都可以为 null
+4. 安全性不同
+   1. HashMap 是线程不安全的，但是效率更高
+   2. HashTable 是线程安全的
+   3. ConcurrentHashMap 是线程安全的，效率比 HashTable 高，比 HashMap 低
+5. 初始容量大小、扩充容量大小不同
+6. 计算 hash 值的方法不同
+7. 
+
