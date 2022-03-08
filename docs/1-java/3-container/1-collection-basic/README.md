@@ -83,6 +83,16 @@ star: true
 
 
 
+### 1.3 fail-fast
+
+fail-fast 机制是 Java 集合（Collection）中的一种错误机制。当多个线程对同一个集合的内容进行 操作时，就可能会产生 fail-fast 事件。
+
+例如：当某一个线程 A 通过 iterator 去遍历某集合的过程中，若该集合的内容被其他线程所改变 了，那么线程 A 访问集合时，就会抛出 ConcurrentModificationException 异常，产生 fail-fast 事 件。这里的操作主要是指 add、remove 和 clear，对集合元素个数进行修改。
+
+解决办法：建议使用“java.util.concurrent 包下的类”去取代“java.util 包下的类”。
+
+可以这么理解：在遍历之前，把 modCount 记下来 expectModCount，后面 expectModCount 去 和 modCount 进行比较，如果不相等了，证明已并发了，被修改了，于是抛出 `ConcurrentModificationException` 异常。
+
 ## 二、List
 
 
@@ -307,8 +317,3 @@ Output：
    3. ConcurrentHashMap 是线程安全的，效率比 HashTable 高，比 HashMap 低
 5. 初始容量大小、扩充容量大小不同
 6. 计算 hash 值的方法不同
-
-
-
-
-
