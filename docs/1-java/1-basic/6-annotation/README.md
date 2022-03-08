@@ -33,7 +33,7 @@ star: true
 
 ::: warning 本文转载自以下文章，略有改动
 
-- [Java基础常见知识&面试题总结 | JavaGuide](https://javaguide.cn/java/basis/java-basic-questions-01/)
+- [JavaGuide](https://javaguide.cn/)
 
 - [java 注解-最通俗易懂的讲解](https://zhuanlan.zhihu.com/p/37701743)
 
