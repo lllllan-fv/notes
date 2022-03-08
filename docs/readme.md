@@ -60,6 +60,9 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 
 1. 垃圾回收机制
     1. OOM
+2. 集合
+    1. HashMap 扩容机制（扩容后的重新分布）
+
 
 :::
 
