@@ -34,6 +34,7 @@ star: true
 ::: warning 本文转载自以下文章，略有改动
 
 - [JavaGuide](https://javaguide.cn/)
+-  [什么是java OOM？如何分析及解决oom问题？](https://www.cnblogs.com/ThinkVenus/p/6805495.html)
 
 :::
 
@@ -126,4 +127,20 @@ try (Scanner scanner = new Scanner(new File("test.txt"))) {
     fnfe.printStackTrace();
 }
 ```
+
+
+
+## 四、OutOfMemoryError
+
+部分参考自 [什么是java OOM？如何分析及解决oom问题？](https://www.cnblogs.com/ThinkVenus/p/6805495.html)
+
+OOM，全称“Out Of Memory”，翻译成中文就是“内存用完了”，来源于java.lang.OutOfMemoryError。看下关于的官方说明： Thrown when the Java Virtual Machine cannot allocate an object because it is out of memory, and no more memory could be made available by the garbage collector. 意思就是说，当JVM因为没有足够的内存来为对象分配空间并且垃圾回收器也已经没有空间可回收时，就会抛出这个error
+
+
+
+### 4.1 堆溢出
+
+一般的异常信息：`java.lang.OutOfMemoryError:Java heap spacess。`
+
+java堆用于存储对象实例，我们只要不断的创建对象，并且保证GC Roots到对象之间有可达路径来 避免垃圾回收机制清除这些对象，就会在对象数量达到最大堆容量限制后产生内存溢出异常。
 
