@@ -204,3 +204,14 @@ MySQL中的数据用各种不同的技术存储在文件（或者内存）中。
 2. 主要是查询工作，MyISAM；如果读写也频繁，InnoDB
 3. MyISAM 系统崩溃后恢复更困难
 
+
+
+### 五、SQL 优化手段
+
+1. 查询语句中不要使用 `select *`
+2. 尽量减少子查询，使用关联查询替代（`left join, right join, inner join`）
+3. 减少使用 `in, not in`，使用 `exists, not exists` 或关联查询替代（ ==存疑== ）
+4. or 的查询尽量使用 `union, union all` 代替（在确认没有重复数据或者不用剔除重复数据时，用 `union all` 更好）
+5. 尽量避免在 where 子句中使用 `!=, <>` 操作符，否则将引擎放弃使用索引而进行全表扫描
+6. 应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表 扫描，如： `select id from t where num is null` 可以在num上设置默认值0，确保表中num列没有 null值，然后这样查询： `select id from t where num=0`
+
