@@ -196,12 +196,6 @@ public class Student {
 
 
 
-## 四、成员变量和局部变量的区别
-
-![image-20220116180214826](README.assets/image-20220116180214826.png)
-
-
-
 ## 五、比较方法
 
 

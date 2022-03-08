@@ -38,15 +38,6 @@ star: true
 
 
 
-## 9. Java 中创建对象的几种方式
-
-1. `new()`
-2. `Class.forName().newInstance()`
-3. `clone()`
-4. `ObjectInputStream.readObject()`
-
-
-
 ## 10. 抽象类和接口的区别
 
 1. 抽象类中可以定义构造函数，接口不能定义构造函数
