@@ -85,6 +85,17 @@ Java 代码在编译过程中 ，我们即使不处理不受检查异常也可�
 
 
 
+### 3.1 try/catch 中含有return，finally还会执行吗
+
+结论：
+
+1. 不管有没有出现异常，finally块中代码都会执行
+2. 当try和catch中有return时，finally仍然会执行
+3. finally是在return后面的表达式运算后执行的（此时并没有返回运算后的值，而是先把要返回的 值保存起来，管finally中的代码怎么样，返回的值都不会改变，任然是之前保存的值），所以函数 返回值是在finally执行前确定的
+4. finally中最好不要包含return，否则程序会提前退出，返回值不是try或catch中保存的返回值。
+
+
+
 ::: tip
 
 **在以下 3 种特殊情况下，`finally` 块不会被执行：**
