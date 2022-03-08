@@ -56,6 +56,8 @@ star: true
 
 Java 代码在编译过程中，如果受检查异常没有被 `catch`/`throw` 处理的话，就没办法通过编译 。比如下面这段 IO 操作的代码
 
+`IOException`、`FileNotFoundException` 、`SQLException`
+
 ![image-20220304094533701](README.assets/image-20220304094533701.png)
 
 
