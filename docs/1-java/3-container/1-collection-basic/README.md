@@ -30,9 +30,9 @@ star: true
 
 
 
-::: warning
+::: warning 本文转载自一下文章，略有改动
 
-本文转载自 [Java集合框架基础知识&面试题总结 | JavaGuide](https://javaguide.cn/java/collection/java集合框架基础知识&面试题总结/)，略有改动
+- [主页 | JavaGuide](https://javaguide.cn/)
 
 :::
 
