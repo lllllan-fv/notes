@@ -34,6 +34,7 @@ star: true
 ::: warning 本文转载自以下文章，略有改动
 
 - [Java基础常见知识&面试题总结 | JavaGuide](https://javaguide.cn/java/basis/java-basic-questions-01.html#基础概念与常识)
+- [还不知道泛型是什么？这一篇深入浅出泛型教学！](https://zhuanlan.zhihu.com/p/382239048)
 
 :::
 
@@ -123,7 +124,69 @@ star: true
 
 ## 三、泛型
 
-> **Java 泛型（generics）** 是 JDK 5 中引入的一个新特性, 泛型提供了编译时类型安全检测机制，该机制允许程序员在编译时检测到非法的类型。泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。
+下面部分转载自 [还不知道泛型是什么？这一篇深入浅出泛型教学！](https://zhuanlan.zhihu.com/p/382239048)
 
-Java 的泛型是伪泛型，这是因为 Java 在运行期间，所有的泛型信息都会被擦掉，这也就是通常所说类型擦除 。
 
+
+### 3.1 为什么会有泛型
+
+> 早期的Object类型可以接收任意的对象类型，但是在实际的使用中，会有类型转换的问题。也就存在这隐患，所以Java提供了**泛型**来解决这个安全问题。
+
+```java
+public static void main(String[] args) {
+    //测试一下泛型的经典案例
+    ArrayList arrayList = new ArrayList();
+    arrayList.add("helloWorld");
+    arrayList.add("taiziyenezha");
+    arrayList.add(88);//由于集合没有做任何限定，任何类型都可以给其中存放
+
+    for (int i = 0; i < arrayList.size(); i++) {
+        //需求：打印每个字符串的长度,就要把对象转成String类型
+        String str = (String) arrayList.get(i);
+        System.out.println(str.length());
+    }
+}
+```
+
+运行这段代码，程序在运行时发生了异常：`Exception in thread "main" java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String`
+发生了数据类型转换异常，这是为什么？
+
+由于ArrayList可以存放任意类型的元素。例子中添加了一个String类型，添加了一个Integer类型，再使用时都以String的方式使用，导致取出时强制转换为String类型后，引发了ClassCastException，因此程序崩溃了。
+
+这显然不是我们所期望的，如果程序有潜在的错误，我们更期望在编译时被告知错误，而不是在运行时报异常。而为了解决类似这样的问题（在编译阶段就可以解决），在jdk1.5后，泛型应运而生。让你在设计API时可以指定类或方法支持泛型，这样我们使用API的时候也变得更为简洁，并得到了编译时期的语法检查。
+
+我们将第一行声明初始化ArrayList的代码更改一下，编译器就会在编译阶段就能够帮我们发现类似这样的问题。现在再看看效果。
+
+```java
+ArrayList<String> arrayList = new ArrayList<>();
+arrayList.add("helloWorld");
+arrayList.add("taiziyenezha");
+arrayList.add(88);// 在编译阶段，编译器就会报错这样可以避免了我们类型强转时出现异常。
+```
+
+
+
+### 3.2 什么是泛型
+
+**泛型**：是一种把明确类型的工作推迟到创建对象或者调用方法的时候才去明确的特殊的类型。也就是说在泛型使用过程中，操作的数据类型被指定为一个参数，而这种参数类型可以用在**类、方法和接口**中，分别被称为`泛型类`、`泛型方法`、`泛型接口`。
+
+
+
+::: info 注意
+
+一般在创建对象时，将未知的类型确定具体的类型。当没有指定泛型时，默认类型为Object类型。
+
+:::
+
+
+
+### 3.3 泛型的好处
+
+- 避免了类型强转的麻烦。
+- 它提供了编译期的**类型安全**，确保在泛型类型（通常为泛型集合）上只能使用正确类型的对象，避免了在运行时出现ClassCastException。
+
+
+
+### 3.4 泛型的使用
+
+略。
