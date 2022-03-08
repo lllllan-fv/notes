@@ -3,7 +3,7 @@
 icon: info
 
 # 这是文章的标题
-title: MySQL 笔记
+title: 数据库 笔记
 
 # 设置作者
 author: lllllan

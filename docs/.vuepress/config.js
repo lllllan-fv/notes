@@ -95,6 +95,7 @@ module.exports = config({
       "/2-database": [
         "/2-database/",
         "/2-database/1-javaguide-db/",
+        "/2-database/2-mysql/"
       ],
 
       "/3-cs-basic": [
