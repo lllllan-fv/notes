@@ -239,6 +239,14 @@ public class Student {
 
 
 
+::: info Object.equals()
+
+如果没有对该方法进行重写，`Object` 中的 `equals()` 方法仍然是 == 比较。
+
+:::
+
+
+
 ### 5.2 hashCode() 与 equals()
 
 因为两个相等的对象的 `hashCode` 值必须是相等。也就是说如果 `equals` 方法判断两个对象是相等的，那这两个对象的 `hashCode` 值也要相等。
