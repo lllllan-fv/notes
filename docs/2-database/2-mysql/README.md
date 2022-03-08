@@ -215,3 +215,45 @@ MySQL中的数据用各种不同的技术存储在文件（或者内存）中。
 5. 尽量避免在 where 子句中使用 `!=, <>` 操作符，否则将引擎放弃使用索引而进行全表扫描
 6. 应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表 扫描，如： `select id from t where num is null` 可以在num上设置默认值0，确保表中num列没有 null值，然后这样查询： `select id from t where num=0`
 
+
+
+## 六、drop、delete、truncate
+
+
+
+### 6.1 用法不同
+
+- drop 丢弃数据：`drop table`，直接删除表
+- truncate 清空数据：`truncate table`，值删除表中的数据，再插入数据时自增id又从1开始
+- delete 删除数据：`delete from table where ?`，删除某一列的数据
+
+
+
+### 6.2 不同的数据库语言
+
+truncate 和 drop 属于 DDL（数据定义语言）语句，操作立即生效，原数据不妨到 rollback segement 中，不能回滚，操作不处罚 tigger。
+
+delete 语句是 DML（数据库操作语言）语句，这个操作会放到 rollback segement中，事务提交之后才生效
+
+
+
+**DML 和  DDL：**
+
+- DML 是数据库操作语言 Data Manipulation Language，指对数据库中表记录的操作，主要包括插入、更新、删除和查询
+- DDL 是数据库定义语言 Data Definition Language，是对数据库内部对象进行创建、删除、修改的操作语言。
+
+
+
+### 6.3 执行速度不同
+
+一般来说：drop > truncate > delete
+
+> `delete`命令执行的时候会产生数据库的`binlog`日志，而日志记录是需要消耗时间的，但是也有个好处方便数据回滚恢复。
+>
+> `truncate`命令执行的时候不会产生数据库日志，因此比`delete`要快。除此之外，还会把表的自增值重置和索引恢复到初始大小等。
+>
+> `drop`命令会把表占用的空间全部释放掉。
+>
+> Tips：你应该更多地关注在使用场景上，而不是执行效率。
+
+ 
