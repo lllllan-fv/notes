@@ -112,7 +112,7 @@ Java 代码在编译过程中 ，我们即使不处理不受检查异常也可�
 
 
 
-## 四、使用 `try-with-resources` 来代替`try-catch-finally`
+### 3.2 使用 `try-with-resources` 来代替`try-catch-finally`
 
 1. **适用范围（资源的定义）：** 任何实现 `java.lang.AutoCloseable`或者 `java.io.Closeable` 的对象
 2. **关闭资源和 finally 块的执行顺序：** 在 `try-with-resources` 语句中，任何 catch 或 finally 块在声明的资源关闭后运行
