@@ -206,7 +206,7 @@ MySQL中的数据用各种不同的技术存储在文件（或者内存）中。
 
 
 
-### 五、SQL 优化手段
+## 五、SQL 优化手段
 
 1. 查询语句中不要使用 `select *`
 2. 尽量减少子查询，使用关联查询替代（`left join, right join, inner join`）
