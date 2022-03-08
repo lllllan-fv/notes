@@ -97,7 +97,37 @@ star: true
 
 
 
-## 三、包装类型的常量池
+## 三、包装类
+
+
+
+
+
+### 3.1 Integer 和 int 的区别？ 
+
+1. int 是 Java 的⼋种基本数据类型之⼀，⽽ `Integer` 是 Java 为 int 类型提供的封装类
+2. int 型变量的默认值是 0，Integer 变量的默认值是 null，这⼀点说明 Integer 可以区分出未赋值和值为 0 的 区分
+3. Integer 变量必须实例化后才可以使⽤，⽽ int 不需要。
+
+
+
+### 3.2 Integer 之间的比较
+
+1. 两个 `new()` 出来的 `Integer` 进行比较：因为是两个对象，进行比较的其内存地址，结果均为 false
+2. `Integer` 和 `int` 进行比较：包装类和基本数据类型进行比较时，会对包装类进行拆包装为基本数据类型，所以最后是两个 `int` 在比较。只要数值相等就为 true
+3. 非new生成的 `Integer` 和 `new integer()` 进行比较：前者指向 Java 常量池中的对象、后者指向堆中的对象，内存地址不同，结果均为 false
+4. 两个非new生成的 `Integer` 进行比较：如果数值相等并且变量值在 `[-128, 127]` 之间，比较结果为 true，否则为 false。
+
+```java
+public static Integer valueOf(int var0) { 
+    return var0 >= -128 && var0 <= Integer.IntegerCache.high ?
+		Integer.IntegerCache.cache[var0 + 128] : new Integer(var0);
+}
+```
+
+
+
+### 3.3 包装类的常量池
 
 `Byte`,`Short`,`Integer`,`Long` 这 4 种包装类默认创建了数值 **[-128，127]** 的相应类型的缓存数据，`Character` 创建了数值在 **[0,127]** 范围的缓存数据，`Boolean` 直接返回 `True` or `False`。 
 
