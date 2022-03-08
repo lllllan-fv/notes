@@ -35,6 +35,7 @@ star: true
 
 - [JavaGuide](https://javaguide.cn/)
 - [2分钟让你明白什么是面向对象编程](https://zhuanlan.zhihu.com/p/75265007)
+- [String为什么不可变 - 梦醒点灯](https://www.cnblogs.com/leskang/p/6110631.html)
 
 :::
 
@@ -303,7 +304,9 @@ hashCode 方法相对与 equals 会更加高效，通过这两步判断，来确
 
 ### 7.1 `String` 为什么是不可变的
 
-[String为什么不可变 - 梦醒点灯](https://www.cnblogs.com/leskang/p/6110631.html)
+详细参考 [String为什么不可变 - 梦醒点灯](https://www.cnblogs.com/leskang/p/6110631.html)
+
+在Java中String类其实就是对字符数组的封装。
 
 ```java
 public final class String implements java.io.Serializable, Comparable<String>, CharSequence {
@@ -317,7 +320,49 @@ public final class String implements java.io.Serializable, Comparable<String>, C
 
 
 
-### 7.2 `StringBuffer`、`StringBuilder`
+### 7.2 `String` 真的不可变吗？
+
+一下内容转载自 [String为什么不可变 - 梦醒点灯](https://www.cnblogs.com/leskang/p/6110631.html)
+
+String的成员变量是private final 的，也就是初始化之后不可改变。那么在这几个成员中， value比较特殊，因为他是一个引用变量，而不是真正的对象。value是final修饰的，也就是说final不能再指向其他数组对象，那么我能改变value指向的数组吗？
+
+
+
+**反射**
+
+```java
+public static void testReflection() throws Exception {
+     
+    //创建字符串"Hello World"， 并赋给引用s
+    String s = "Hello World"; 
+     
+    System.out.println("s = " + s); //Hello World
+     
+    //获取String类中的value字段
+    Field valueFieldOfString = String.class.getDeclaredField("value");
+     
+    //改变value属性的访问权限
+    valueFieldOfString.setAccessible(true);
+     
+    //获取s对象上的value属性的值
+    char[] value = (char[]) valueFieldOfString.get(s);
+     
+    //改变value所引用的数组中的第5个字符
+    value[5] = '_';
+     
+    System.out.println("s = " + s);  //Hello_World
+}
+```
+
+打印结果为： s = Hello World
+
+s = Hello_World
+
+在这个过程中，s始终引用的同一个String对象，但是再反射前后，这个String对象发生了变化， 也就是说，通过反射是可以修改所谓的“不可变”对象的。但是一般我们不这么做。这个反射的实例还可以说明一个问题：如果一个对象，他组合的其他对象的状态是可以改变的，那么这个对象很可能不是不可变对象。例如一个Car对象，它组合了一个Wheel对象，虽然这个Wheel对象声明成了private final 的，但是这个Wheel对象内部的状态可以改变， 那么就不能很好的保证Car对象不可变。
+
+
+
+### 7.3 `StringBuffer`、`StringBuilder`
 
 `StringBuilder` 与 `StringBuffer` 都继承自 `AbstractStringBuilder` 类，在 `AbstractStringBuilder` 中也是使用字符数组保存字符串，不过没有使用 `final` 和 `private` 关键字修饰，最关键的是这个 `AbstractStringBuilder` 类还提供了很多修改字符串的方法比如 `append` 方法。
 
@@ -339,7 +384,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
 
 
 
-### 7.3 线程安全性
+### 7.4 线程安全性
 
 
 
@@ -358,7 +403,7 @@ abstract class AbstractStringBuilder implements Appendable, CharSequence {
 
 
 
-### 7.4 性能
+### 7.5 性能
 
 `StringBuilder` > `StringBuffer` > `String`
 
