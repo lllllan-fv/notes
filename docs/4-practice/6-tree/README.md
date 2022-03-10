@@ -29,7 +29,7 @@ star: true
 
 
 
-## 一、二叉树遍历
+## 一、树遍历
 
 
 
@@ -146,6 +146,53 @@ class Solution {
     }
 }
 ```
+
+
+
+### 3. [589. N 叉树的前序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/)
+
+> ![image-20220310202839314](README.assets/image-20220310202839314.png)
+
+```java
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution {
+
+    List<Integer> list = new LinkedList<>();
+
+    public void pre(Node root) {
+        if (root == null) return;
+        list.add(root.val);
+        for (Node node : root.children) {
+            pre(node);
+        }
+    }
+
+    public List<Integer> preorder(Node root) {
+        pre(root);
+        return list;
+    }
+}
+```
+
+
 
 
 
