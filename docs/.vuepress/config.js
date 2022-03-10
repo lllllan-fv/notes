@@ -151,6 +151,7 @@ module.exports = config({
             "3-hash/",
             "4-string/",
             "5-stack-and-queue/",
+            "6-tree/",
           ],
         }
       ],
