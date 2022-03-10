@@ -29,3 +29,45 @@ star: true
 
 
 
+## 一、二叉树遍历
+
+
+
+### 1. [144. 二叉树的前序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-preorder-traversal/)
+
+> ![image-20220310194705058](README.assets/image-20220310194705058.png)
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+    List<Integer> list = new LinkedList<>();
+
+    public void pre(TreeNode root) {
+        if (root == null) return;
+        list.add(root.val);
+        pre(root.left);
+        pre(root.right);
+    }
+
+    public List<Integer> preorderTraversal(TreeNode root) {
+        pre(root);
+        return list;
+    }
+}
+```
+
