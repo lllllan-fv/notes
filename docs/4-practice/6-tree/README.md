@@ -239,6 +239,57 @@ class Solution {
 
 
 
+### 6. [429. N 叉树的层序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/)
+
+> ![image-20220310203646539](README.assets/image-20220310203646539.png)
+
+```java
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution {
+    List<List<Integer>> list = new LinkedList<>();
+    Queue<Node> Q = new LinkedList<>();
+
+    public List<List<Integer>> levelOrder(Node root) {
+        if (root == null) return list;
+        Q.add(root);
+        while (Q.size() > 0) {
+            int len = Q.size();
+            List<Integer> l = new LinkedList<>();
+            for (int i = 0; i < len; ++i) {
+                Node node = Q.poll();
+                if (node == null) continue;
+                l.add(node.val);
+                for (Node child : node.children) {
+                    Q.add(child);
+                }
+            }
+            list.add(l);
+        }
+        return list;
+    }
+}
+```
+
+
+
 
 
 ## 二、二叉搜索树
