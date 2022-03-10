@@ -149,7 +149,7 @@ class Solution {
 
 
 
-### 3. [589. N 叉树的前序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/)
+### 4. [589. N 叉树的前序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/)
 
 > ![image-20220310202839314](README.assets/image-20220310202839314.png)
 
@@ -187,6 +187,51 @@ class Solution {
 
     public List<Integer> preorder(Node root) {
         pre(root);
+        return list;
+    }
+}
+```
+
+
+
+### 5. [590. N 叉树的后序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/n-ary-tree-postorder-traversal/)
+
+> ![image-20220310202928360](README.assets/image-20220310202928360.png)
+
+```java
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+
+    public Node() {}
+
+    public Node(int _val) {
+        val = _val;
+    }
+
+    public Node(int _val, List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+
+class Solution {
+
+    List<Integer> list = new LinkedList<>();
+
+    public void post(Node root) {
+        if (root == null) return;
+        for (Node node : root.children) {
+            post(node);
+        }
+        list.add(root.val);
+    }
+
+    public List<Integer> postorder(Node root) {
+        post(root);
         return list;
     }
 }
