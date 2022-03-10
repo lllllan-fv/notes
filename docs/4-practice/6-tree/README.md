@@ -147,3 +147,54 @@ class Solution {
 }
 ```
 
+
+
+## 二、二叉搜索树
+
+### 1. [783. 二叉搜索树节点最小距离 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/minimum-distance-between-bst-nodes/)
+
+> ![image-20220310202221539](README.assets/image-20220310202221539.png)
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+    int ans = Integer.MAX_VALUE;
+
+    public int[] dfs(TreeNode root) {
+        int left = root.val;
+        int right = root.val;
+        if (root.left != null) {
+            int[] arr = dfs(root.left);
+            left = arr[0];
+            ans = Math.min(ans, root.val - arr[1]); 
+        }
+        if (root.right != null) { 
+            int[] arr = dfs(root.right);
+            right = arr[1];
+            ans = Math.min(ans, arr[0] - root.val);
+        }
+        return new int[]{left, right};
+    }
+
+    public int minDiffInBST(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+}
+```
+
