@@ -341,3 +341,56 @@ class Solution {
 }
 ```
 
+
+
+### 2. [98. 验证二叉搜索树 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/validate-binary-search-tree/)
+
+> ![image-20220310204502755](README.assets/image-20220310204502755.png)
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+    boolean ans = true;
+
+    public int[] dfs(TreeNode root) { 
+        int left = root.val;
+        int right = root.val;
+
+        if (root.left != null) {
+            if (root.val <= root.left.val) ans = false;
+            int[] arr = dfs(root.left);
+            left = arr[0];
+            if (root.val <= arr[1]) ans = false;
+        }
+        if (root.right != null) {
+            if (root.val >= root.right.val) ans = false;
+            int[] arr = dfs(root.right);
+            right = arr[1];
+            if (root.val >= arr[0]) ans = false;
+        }
+
+        return new int[]{left, right};
+    }
+
+    public boolean isValidBST(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+}
+```
+
