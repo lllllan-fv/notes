@@ -71,7 +71,13 @@ module.exports = config({
           children: [
             "1-memory-area-details/",
             "2-garbage-collection/",
-            "3-know-the-jvm/"
+            "3-know-the-jvm/",
+            {
+              title: "深入理解JVM",
+              icon: "",
+              prefix: "4-understanding-jvm/",
+              children: ["1/"],
+            }
           ],
         },
         {
