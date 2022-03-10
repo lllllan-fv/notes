@@ -442,3 +442,45 @@ class Solution {
 }
 ```
 
+
+
+### 3. [230. 二叉搜索树中第K小的元素 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/kth-smallest-element-in-a-bst/)
+
+> ![image-20220310222311120](README.assets/image-20220310222311120.png)
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+    public int size(TreeNode root) {
+        if (root == null) return 0;
+        return 1 + size(root.left) + size(root.right);
+    }
+
+    public int kthSmallest(TreeNode root, int k) {
+        int sz = size(root.left) + 1;
+        if (sz == k) {
+            return root.val;
+        } else if (sz > k) {
+            return kthSmallest(root.left, k);
+        } else {
+            return kthSmallest(root.right, k - sz);
+        }
+    }
+}
+```
+
