@@ -71,3 +71,43 @@ class Solution {
 }
 ```
 
+
+
+### 2. [94. 二叉树的中序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+
+    List<Integer> list = new LinkedList<>();
+
+    public void inorder(TreeNode root) {
+        if (root == null) return;
+        inorder(root.left);
+        list.add(root.val);
+        inorder(root.right);
+    }
+
+    public List<Integer> inorderTraversal(TreeNode root) {
+        inorder(root);
+        return list;
+    }
+}
+```
+
+
+
