@@ -33,6 +33,12 @@ star: true
 
 ::: warning 转载声明
 
+- [java实现10种排序算法](https://blog.csdn.net/weixin_44531966/article/details/116464294)
+- [十大经典排序算法的复杂度分析](https://blog.csdn.net/alzzw/article/details/98100378)
+
+- [排序：希尔排序](https://www.jianshu.com/p/d730ae586cf3)
+- [10大经典排序算法动图演示，看这篇就够了！](https://www.cnblogs.com/aishangJava/p/10092341.html)
+
 :::
 
 
@@ -105,6 +111,8 @@ public class Solution {
 
 空间复杂度：O(1)
 
+![在这里插入图片描述](README.assets/2021050622130485.gif)
+
 ```java
 import java.util.Arrays;
 
@@ -121,6 +129,43 @@ public class Solution {
                 idx--;
             }
             arr[idx + 1] = val;
+        }
+
+        System.out.println(Arrays.toString(arr));
+    }
+}
+```
+
+
+
+## 四、希尔排序
+
+时间复杂度：O(nlog2n)
+
+空间复杂度：
+
+希尔排序是将待排序的数组元素 按下标的一定增量分组 ，分成多个子序列，然后对各个子序列进行直接插入排序算法排序；然后依次缩减增量再进行排序，直到增量为1时，进行最后一次直接插入排序，排序结束。
+
+![img](README.assets/640.gif)
+
+```java
+import java.util.Arrays;
+
+public class Solution {
+    public static void main(String[] args) {
+        int[] arr = {3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48};
+
+        int len = arr.length;
+        for (int step = len / 2; step > 0; step /= 2) {
+            for (int i = step; i < len; ++i) {
+                for (int j = i - step; j >= 0; j -= step) {
+                    if (arr[j] > arr[j + step]) {
+                        int tmp = arr[j];
+                        arr[j] = arr[j + step];
+                        arr[j + step] = tmp;
+                    }
+                }
+            }
         }
 
         System.out.println(Arrays.toString(arr));
