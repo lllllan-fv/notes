@@ -85,8 +85,8 @@ star: true
 
 ::: info 异常状况
 
-- 如果线程请求的栈深度大于虚 拟机所允许的深度，将抛出 `StackOverflowError` 异常
-- 如果Java虚拟机栈容量可以动态扩展[，当栈扩展时无法申请到足够的内存会抛出 `OutOfMemoryError` 异常
+- 如果线程请求的栈深度大于虚拟机所允许的深度，将抛出 `StackOverflowError` 异常
+- 如果Java虚拟机栈容量可以动态扩展，当栈扩展时无法申请到足够的内存会抛出 `OutOfMemoryError` 异常
 
 :::
 
@@ -102,8 +102,8 @@ star: true
 
 ::: info 异常状况
 
-- 如果线程请求的栈深度大于虚 拟机所允许的深度，将抛出 `StackOverflowError` 异常
-- 如果Java虚拟机栈容量可以动态扩展[，当栈扩展时无法申请到足够的内存会抛出 `OutOfMemoryError` 异常
+- 如果线程请求的栈深度大于本地方法栈所允许的深度，将抛出 `StackOverflowError` 异常
+- 如果本地方法栈容量可以动态扩展，当栈扩展时无法申请到足够的内存会抛出 `OutOfMemoryError` 异常
 
 :::
 
