@@ -83,3 +83,17 @@ star: true
 ### 302 Found
 
 ![image-20220312144620679](README.assets/image-20220312144620679.png)
+
+
+
+### 303 See Other
+
+![image-20220312144755166](README.assets/image-20220312144755166.png)
+
+
+
+::: tip
+
+![image-20220312144816542](README.assets/image-20220312144816542.png)
+
+:::
