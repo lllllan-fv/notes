@@ -120,3 +120,10 @@ star: true
 
 ![image-20220312145224621](README.assets/image-20220312145224621.png)
 
+
+
+### 401 Unauthorized
+
+表示发送的请求需要有通过 Http 认证的认证信息。如果之前请求过一次，则表示用户认证失败
+
+![image-20220312145322171](README.assets/image-20220312145322171.png)
