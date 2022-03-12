@@ -97,3 +97,12 @@ star: true
 ![image-20220312144816542](README.assets/image-20220312144816542.png)
 
 :::
+
+
+
+### 304 Not Modified
+
+![image-20220312145005364](README.assets/image-20220312145005364.png)
+
+
+
