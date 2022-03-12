@@ -145,20 +145,13 @@ module.exports = config({
         },
       ],
 
-      "/4-practice": [
-        "/4-practice/",
+      "/4-data-structures-and-algorithms": [
+        "/4-data-structures-and-algorithms",
         {
-          title: "题型分类",
+          title: "数据结构和算法",
           icon: "",
-          prefix: "4-practice/",
-          children: [
-            "1-array/",
-            "2-list/",
-            "3-hash/",
-            "4-string/",
-            "5-stack-and-queue/",
-            "6-tree/",
-          ],
+          prefix: "4-data-structures-and-algorithms/",
+          children: [          ],
         }
       ],
 
