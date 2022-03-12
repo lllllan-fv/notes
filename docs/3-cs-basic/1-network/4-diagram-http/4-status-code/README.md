@@ -139,3 +139,14 @@ star: true
 ### 404 Not Found
 
 ![image-20220312145618848](README.assets/image-20220312145618848.png)
+
+
+
+## 五、5XX 服务器错误
+
+
+
+### 500 Internal Server Error
+
+![image-20220312145810119](README.assets/image-20220312145810119.png)
+
