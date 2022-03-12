@@ -46,3 +46,15 @@ star: true
 
 ![image-20220312143606430](README.assets/image-20220312143606430.png)
 
+
+
+## 二、2XX 成功
+
+
+
+### 2.1 200 OK
+
+![image-20220312143852661](README.assets/image-20220312143852661.png)
+
+
+
