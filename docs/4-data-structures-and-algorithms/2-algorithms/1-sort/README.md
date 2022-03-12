@@ -38,6 +38,7 @@ star: true
 
 - [排序：希尔排序](https://www.jianshu.com/p/d730ae586cf3)
 - [10大经典排序算法动图演示，看这篇就够了！](https://www.cnblogs.com/aishangJava/p/10092341.html)
+- 
 
 :::
 
@@ -140,9 +141,9 @@ public class Solution {
 
 ## 四、希尔排序
 
-时间复杂度：O(nlog2n)
+时间复杂度：O(nlog~2~n)
 
-空间复杂度：
+空间复杂度：O(1)
 
 希尔排序是将待排序的数组元素 按下标的一定增量分组 ，分成多个子序列，然后对各个子序列进行直接插入排序算法排序；然后依次缩减增量再进行排序，直到增量为1时，进行最后一次直接插入排序，排序结束。
 
@@ -167,6 +168,54 @@ public class Solution {
                 }
             }
         }
+
+        System.out.println(Arrays.toString(arr));
+    }
+}
+```
+
+
+
+## 五、快速排序
+
+时间复杂度：O(nlog~2~n)
+
+空间复杂度：O(logn)
+
+排序算法的思想非常简单，在待排序的数列中，我们首先要找一个数字作为基准数（这只是个专用名词）。为了方便，我们一般选择第 1 个数字作为基准数（其实选择第几个并没有关系）。接下来我们需要把这个待排序的数列中小于基准数的元素移动到待排序的数列的左边，把大于基准数的元素移动到待排序的数列的右边。这时，左右两个分区的元素就相对有序了；接着把两个分区的元素分别按照上面两种方法继续对每个分区找出基准数，然后移动，直到各个分区只有一个数时为止。
+
+![bee5aef6950ac9dd5619b15a4f6daff9.gif](README.assets/bee5aef6950ac9dd5619b15a4f6daff9.gif)
+
+```java
+import java.util.Arrays;
+
+public class Solution {
+
+    public static void sort(int[] arr, int l, int r) {
+        if (l > r) return;
+
+        int i = l, j = r;
+        int tmp = arr[l];
+        while (i < j) {
+            while (tmp <= arr[j] && i < j) --j;
+            while (tmp >= arr[i] && i < j) ++i;
+            if (i < j) {
+                int tem = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tem;
+            }
+        }
+        arr[l] = arr[i];
+        arr[i] = tmp;
+
+        sort(arr, l, j - 1);
+        sort(arr, j + 1, r);
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48};
+
+        sort(arr, 0, arr.length - 1);
 
         System.out.println(Arrays.toString(arr));
     }
