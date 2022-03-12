@@ -131,6 +131,7 @@ module.exports = config({
                 "1-visit-web/",
                 "2-http/",
                 "3-http-message/",
+                "4-status-code/",
               ],
             },
           ],
