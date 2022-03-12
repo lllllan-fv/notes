@@ -156,7 +156,9 @@ module.exports = config({
           title: "算法",
           icon: "",
           prefix: "4-data-structures-and-algorithms/2-algorithms/",
-          children: []
+          children: [
+            "1-sort/",
+          ]
         },
       ],
 
