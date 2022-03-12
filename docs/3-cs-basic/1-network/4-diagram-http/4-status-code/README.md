@@ -112,3 +112,11 @@ star: true
 
 
 
+## 四、客户端错误
+
+
+
+### 400 Bad Request
+
+![image-20220312145224621](README.assets/image-20220312145224621.png)
+
