@@ -146,13 +146,18 @@ module.exports = config({
       ],
 
       "/4-data-structures-and-algorithms": [
-        "/4-data-structures-and-algorithms",
         {
-          title: "数据结构和算法",
+          title: "数据结构",
           icon: "",
-          prefix: "4-data-structures-and-algorithms/",
-          children: [          ],
-        }
+          prefix: "4-data-structures-and-algorithms/1-data-structures/",
+          children: []
+        },
+        {
+          title: "算法",
+          icon: "",
+          prefix: "4-data-structures-and-algorithms/2-algorithms/",
+          children: []
+        },
       ],
 
       "/5-interview": [

@@ -33,8 +33,8 @@ features:
   - title: 计算机基础
     link: /3-cs-basic/
 
-  - title: 刷题笔记
-    link: /4-practice/
+  - title: 数据结构和算法
+    link: 4-data-structures-and-algorithms
 
   - title: 面经整理
     link: /5-interview/
