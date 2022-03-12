@@ -222,3 +222,61 @@ public class Solution {
 }
 ```
 
+
+
+## 六、归并排序
+
+时间复杂度：O(nlog~2~n)
+
+空间复杂度：O(n)
+
+![img](README.assets/v2-2958d4f3d9dd9156f1b5dca6788fe8a7_720w.jpg)
+
+![在这里插入图片描述](README.assets/202105062211506.gif)
+
+```java
+import java.util.Arrays;
+
+public class Solution {
+
+    public static void merge(int[] arr, int l1, int r1, int l2, int r2) {
+        int L = l1, R = r2;
+        int[] tar = new int[arr.length];
+
+        int idx = l1;
+        while (l1 <= r1 && l2 <= r2) {
+            if (arr[l1] < arr[l2]) {
+                tar[idx++] = arr[l1++];
+            } else {
+                tar[idx++] = arr[l2++];
+            }
+        }
+        while (l1 <= r1) {
+            tar[idx++] = arr[l1++];
+        }
+        while (l2 <= r2) {
+            tar[idx++] = arr[l2++];
+        }
+
+        System.arraycopy(tar, L, arr, L, R - L + 1);
+    }
+
+    public static void sort(int[] arr, int l, int r) {
+        if (l < r) {
+            int mid = l + (r - l) / 2;
+            sort(arr, l, mid);
+            sort(arr, mid + 1, r);
+            merge(arr, l, mid, mid + 1, r);
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3, 44, 38, 5, 47, 15, 36, 26, 27, 2, 46, 4, 19, 50, 48};
+
+        sort(arr, 0, arr.length - 1);
+
+        System.out.println(Arrays.toString(arr));
+    }
+}
+```
+
