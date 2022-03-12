@@ -106,3 +106,9 @@ star: true
 
 
 
+### 307 Temporary Redirect
+
+![image-20220312145120022](README.assets/image-20220312145120022.png)
+
+
+
