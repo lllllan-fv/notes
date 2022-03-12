@@ -52,19 +52,19 @@ star: true
 
 
 
-### 2.1 200 OK
+### 200 OK
 
 ![image-20220312143852661](README.assets/image-20220312143852661.png)
 
 
 
-### 2.2 204 No Content
+### 204 No Content
 
 ![image-20220312144027275](README.assets/image-20220312144027275.png)
 
 
 
-### 2.3 206 Partical Content
+### 206 Partical Content
 
 ![image-20220312144154578](README.assets/image-20220312144154578.png)
 
@@ -77,3 +77,9 @@ star: true
 ### 301 Moved Permanently
 
 ![image-20220312144429807](README.assets/image-20220312144429807.png)
+
+
+
+### 302 Found
+
+![image-20220312144620679](README.assets/image-20220312144620679.png)
