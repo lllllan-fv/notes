@@ -134,3 +134,8 @@ star: true
 
 ![image-20220312145525501](README.assets/image-20220312145525501.png)
 
+
+
+### 404 Not Found
+
+![image-20220312145618848](README.assets/image-20220312145618848.png)
