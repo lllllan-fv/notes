@@ -58,3 +58,7 @@ star: true
 
 
 
+### 2.2 204 No Content
+
+![image-20220312144027275](README.assets/image-20220312144027275.png)
+
