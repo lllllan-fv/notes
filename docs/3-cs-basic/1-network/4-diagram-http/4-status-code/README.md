@@ -67,3 +67,13 @@ star: true
 ### 2.3 206 Partical Content
 
 ![image-20220312144154578](README.assets/image-20220312144154578.png)
+
+
+
+## 三、3XX 重定向
+
+
+
+### 301 Moved Permanently
+
+![image-20220312144429807](README.assets/image-20220312144429807.png)
