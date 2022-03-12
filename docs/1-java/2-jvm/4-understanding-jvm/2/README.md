@@ -131,7 +131,7 @@ Java堆是垃圾收集器管理的内存区域，因此一些资料中它也被�
 
 ::: info 异常状况
 
-如果在Java堆中没有内存完成实例分配，并且堆也无法再 扩展时，Java虚拟机将会抛出OutOfMemoryError异常
+如果在Java堆中没有内存完成实例分配，并且堆也无法再 扩展时，Java虚拟机将会抛出 `OutOfMemoryError` 异常
 
 :::
 
