@@ -62,3 +62,8 @@ star: true
 
 ![image-20220312144027275](README.assets/image-20220312144027275.png)
 
+
+
+### 2.3 206 Partical Content
+
+![image-20220312144154578](README.assets/image-20220312144154578.png)
