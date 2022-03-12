@@ -76,7 +76,7 @@ module.exports = config({
               title: "深入理解JVM",
               icon: "",
               prefix: "4-understanding-jvm/",
-              children: ["1/"],
+              children: ["2/", "3/", "4/"],
             }
           ],
         },
