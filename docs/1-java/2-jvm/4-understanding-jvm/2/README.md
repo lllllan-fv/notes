@@ -17,6 +17,7 @@ category: Java
 # 一个页面可以有多个标签
 tag:
 - JVM
+- 深入理解Java虚拟机
 
 # 此页面会在文章列表置顶
 # sticky: true
