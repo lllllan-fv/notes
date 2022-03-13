@@ -121,3 +121,69 @@ public class ReferenceCountingGC {
 - **软引用** 是用来描述一些<u>还有用，但非必须</u>的对象。只被软引用关联着的对象， ==在系统将要发生内存溢出异常前，会把这些对象列进回收范围之中进行第二次回收，如果这次回收还没有足够的内存，才会抛出内存溢出异常== 。 在JDK 1.2版之后提供了 `SoftReference` 类来实现软引用。 
 - **弱引用** 也是用来描述那些非必须对象，但是它的强度比软引用更弱一些，被弱引用关联的对象只 能生存到下一次垃圾收集发生为止。 ==当垃圾收集器开始工作，无论当前内存是否足够，都会回收掉只 被弱引用关联的对象== 。在JDK 1.2版之后提供了 `WeakReference` 类来实现弱引用。 
 - **虚引用** 也称为“幽灵引用”或者“幻影引用”，它是最弱的一种引用关系。一个对象是否有虚引用的 存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。为一个对象设置虚 引用关联的唯一目的只是为了能在这个对象被收集器回收时收到一个系统通知。在JDK 1.2版之后提供 了 `PhantomReference` 类来实现虚引用
+
+
+
+### 2.4 生存还是死亡
+
+即使在可达性分析算法中判定为不可达的对象，也不是“非死不可”的，这时候它们暂时还处于“缓刑”阶段。
+
+要真正宣告一个对象死亡，至少要经历两次标记过程：
+
+1. 如果对象在进行可达性分析后发现没有与GC Roots相连接的引用链，那它将会被第一次标记，随后进行一次筛选
+2. 筛选的条件是此对象是 否有必要执行 `finalize()` 方法。假如对象没有覆盖finalize()方法，或者finalize()方法已经被虚拟机调用 过，那么虚拟机将这两种情况都视为“没有必要执行”。
+
+![image-20220313110023814](README.assets/image-20220313110023814.png)
+
+```java
+/**
+* 此代码演示了两点：
+* 1.对象可以在被GC时自我拯救。
+* 2.这种自救的机会只有一次，因为一个对象的finalize()方法最多只会被系统自动调用一次
+* @author zzm
+*/
+public class FinalizeEscapeGC {
+    public static FinalizeEscapeGC SAVE_HOOK = null;
+    public void isAlive() {
+        System.out.println("yes, i am still alive :)");
+    }
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        System.out.println("finalize method executed!");
+        FinalizeEscapeGC.SAVE_HOOK = this;
+    }
+    public static void main(String[] args) throws Throwable {
+        SAVE_HOOK = new FinalizeEscapeGC();
+        //对象第一次成功拯救自己
+        SAVE_HOOK = null;
+        System.gc();
+        // 因为Finalizer方法优先级很低，暂停0.5秒，以等待它
+        Thread.sleep(500);
+        if (SAVE_HOOK != null) {
+            SAVE_HOOK.isAlive();
+        } else {
+            System.out.println("no, i am dead :(");
+        }
+        // 下面这段代码与上面的完全相同，但是这次自救却失败了
+        SAVE_HOOK = null;
+        System.gc();
+        // 因为Finalizer方法优先级很低，暂停0.5秒，以等待它
+        Thread.sleep(500);
+        if (SAVE_HOOK != null) {
+            SAVE_HOOK.isAlive();
+        } else {
+            System.out.println("no, i am dead :(");
+        }
+    }
+}
+```
+
+```java
+finalize method executed!
+yes, i am still alive :)
+no, i am dead :(
+```
+
+代码中有两段完全一样的代码片段，执行结果却是一次逃脱成功，一次失败了。这是因为任何一个对象的finalize()方法都只会被系统自动调用一次，如果对象面临下一次回收，它的finalize()方法不会被再次执行，因此第二段代码的自救行动失败了。
+
