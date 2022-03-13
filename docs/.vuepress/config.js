@@ -132,6 +132,7 @@ module.exports = config({
                 "2-http/",
                 "3-http-message/",
                 "4-status-code/",
+                "5-web/",
               ],
             },
           ],
