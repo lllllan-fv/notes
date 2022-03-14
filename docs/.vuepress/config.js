@@ -65,6 +65,19 @@ module.exports = config({
           ],
         },
         {
+          title: "Java 多线程",
+          icon: "",
+          prefix: "1-java/4-multithread/",
+          children: [
+            {
+              title: "深入浅出多线程",
+              icon: "",
+              prefix: "1-concurrent/",
+              children: ["1/","2/","3/"],
+            }
+          ],
+        },
+        {
           title: "JVM",
           icon: "",
           prefix: "1-java/2-jvm/",
