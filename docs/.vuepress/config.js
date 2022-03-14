@@ -49,7 +49,7 @@ module.exports = config({
       "/1-java": [
         "/1-java/",
         {
-          title: "java 基础",
+          title: "Java 基础",
           icon: "",
           prefix: "1-java/1-basic/",
           children: [
