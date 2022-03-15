@@ -73,7 +73,7 @@ module.exports = config({
               title: "深入浅出多线程",
               icon: "",
               prefix: "1-concurrent/",
-              children: ["1/","2/","3/"],
+              children: ["1/", "2/", "3/"],
             }
           ],
         },
@@ -140,13 +140,7 @@ module.exports = config({
               title: "图解HTTP",
               icon: "",
               prefix: "4-diagram-http/",
-              children: [
-                "1-visit-web/",
-                "2-http/",
-                "3-http-message/",
-                "4-status-code/",
-                "5-web/",
-              ],
+              children: ["1/", "2/", "3/", "4/", "5/", "6/", "7/", "8/", "9/", "10/", "11/"],
             },
           ],
         },
