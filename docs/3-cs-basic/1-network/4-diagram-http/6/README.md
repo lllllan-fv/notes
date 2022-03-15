@@ -265,3 +265,8 @@ Cache-Control: no-cache // 客户端的no-cache表示不接受缓存
 **Warning**
 
 ![image-20220315090210633](README.assets/image-20220315090210633.png)
+
+
+
+## 四、请求首部
+
