@@ -108,7 +108,7 @@ public class VolatileExample {
 
 
 
-![image-20220315152606391](README.assets/image-20220315152606391.png)
+![volatile内存示意图](README.assets/volatile内存示意图.jpg)
 
 
 
@@ -155,9 +155,7 @@ public class VolatileExample {
 
 大概示意图是这个样子：
 
-
-
-![image-20220315153442859](README.assets/image-20220315153442859.png)
+![内存屏障](README.assets/内存屏障-16473466483002.png)
 
 
 
