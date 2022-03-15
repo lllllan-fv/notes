@@ -70,11 +70,23 @@ module.exports = config({
           prefix: "1-java/4-multithread/",
           children: [
             {
-              title: "深入浅出多线程",
+              title: "深入浅出多线程 - 基础篇",
               icon: "",
               prefix: "1-concurrent/",
-              children: ["1/", "2/", "3/", "4/", "5/", "6/", "7/]", "8/", "9/", "10/"],
-            }
+              children: ["1/", "2/", "3/", "4/", "5/"],
+            },
+            {
+              title: "深入浅出多线程 - 原理篇",
+              icon: "",
+              prefix: "1-concurrent/",
+              children: ["6/", "7/", "8/", "9/", "10/", "11/"],
+            },
+            {
+              title: "深入浅出多线程 - 工具篇",
+              icon: "",
+              prefix: "1-concurrent/",
+              children: ["12/", "13/", "14/", "15/", "16/", "17/", "18/", "19/", "20"],
+            },
           ],
         },
         {

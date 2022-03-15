@@ -35,7 +35,7 @@ star: true
 
 ::: warning 转载声明
 
-- [深入浅出多线程 - 第三章 - GitHub](https://github.com/RedSpider1/concurrent/tree/develop/article/1/3.md)
+- [深入浅出多线程 - 第三章 - GitHub](https://github.com/RedSpider1/concurrent/tree/develop/article/01/3.md)
 - [守护线程(Daemon Thread)](https://www.cnblogs.com/xiarongjin/p/8310144.html)
 
 :::

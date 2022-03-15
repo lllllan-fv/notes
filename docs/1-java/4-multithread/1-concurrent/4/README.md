@@ -36,7 +36,7 @@ star: true
 
 ::: warning 转载声明
 
-- [深入浅出多线程 - 第四章 - GitHub](https://github.com/RedSpider1/concurrent/tree/develop/article/1/4.md)
+- [深入浅出多线程 - 第四章 - GitHub](https://github.com/RedSpider1/concurrent/tree/develop/article/01/4.md)
 - [线程状态转换图及各部分介绍](https://blog.csdn.net/sspudding/article/details/89220595)
 - [面试问题——阻塞和等待状态的区别](https://blog.csdn.net/a543760828/article/details/119886943)
 
