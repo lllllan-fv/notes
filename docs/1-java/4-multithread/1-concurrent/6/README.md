@@ -34,6 +34,7 @@ star: true
 ::: warning 转载声明
 
 - [深入浅出多线程 - 第六章 - GitHub](https://github.com/RedSpider1/concurrent/tree/develop/article/02/6.md)
+- [Java内存模型（JMM）总结](https://zhuanlan.zhihu.com/p/29881777)
 
 :::
 
@@ -76,6 +77,18 @@ star: true
 ==线程之间的共享变量存在主内存中，每个线程都有一个私有的本地内存，存储了该线程以读、写共享变量的副本==。本地内存是Java内存模型的一个抽象概念，并不真实存在。它涵盖了缓存、写缓冲区、寄存器等。
 
 Java线程之间的通信由Java内存模型（简称JMM）控制，从抽象的角度来说，JMM定义了线程和主内存之间的抽象关系。JMM的抽象示意图如图所示：
+
+
+
+::: info JMM
+
+我们常说的JVM内存模式指的是JVM的内存分区；而Java内存模式是一种 ==虚拟机规范==。
+
+Java虚拟机规范中定义了Java内存模型（Java Memory Model，JMM），用于屏蔽掉各种硬件和操作系统的内存访问差异，以**实现让Java程序在各种平台下都能达到一致的并发效果**，JMM规范了Java虚拟机与计算机内存是如何协同工作的：规定了一个线程如何和何时可以看到由其他线程修改过后的共享变量的值，以及在必须时如何同步的访问共享变量。
+
+:::
+
+
 
 ![image-20220315134250915](README.assets/image-20220315134250915.png)
 
