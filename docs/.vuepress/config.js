@@ -73,7 +73,7 @@ module.exports = config({
               title: "深入浅出多线程",
               icon: "",
               prefix: "1-concurrent/",
-              children: ["1/", "2/", "3/"],
+              children: ["1/", "2/", "3/", "4/", "5/", "6/", "7/]", "8/", "9/", "10/"],
             }
           ],
         },
