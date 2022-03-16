@@ -70,7 +70,7 @@ public class Demo {
 
 > 我们在程序里面调用了 `start()` 方法后，虚拟机会先为我们创建一个线程，然 后等到这个线程第一次得到时间片时再调用 `run()` 方法。 
 >
-> 注意不可多次调用 `start()` 方法。在第一次调用 `start()` 方法后，再次调用 `start()` 方法会抛出`IllegalThreadStateException`异常。
+> ==注意不可多次调用 `start()` 方法。在第一次调用 `start()` 方法后，再次调用 `start()` 方法会抛出`IllegalThreadStateException`异常。==
 
 
 
@@ -83,7 +83,7 @@ public interface Runnable {
 }
 ```
 
-Runnable 是一个函数式接口，这意味着我们可以使用Java 8的函数式编程 来简化代码。
+Runnable 是一个函数式接口，这意味着我们可以使用Java 8的函数式编程来简化代码。
 
 ```java
 public class Demo {
@@ -135,13 +135,13 @@ ThreadLocal.ThreadLocalMap inheritableThreadLocals = null;
 
 - target：指定要执行的任务
 
-- name：线程的名字，多个线程的名字是可以重复的。如果不指定名字，见片 段2；
+- name：线程的名字，多个线程的名字是可以重复的。如果不指定名字，见片段2；
 
 - acc：见片段3，用于初始化私有变量 `inheritedAccessControlContext`
 
-  > 这个变量有点神奇。它是一个私有变量，但是在 Thread 类里只 有 init 方法对它进行初始化，在 exit 方法把它设为 null 。其它没有任 何地方使用它。一般我们是不会使用它的，那什么时候会使用到这个变 量呢？可以参考这个stackoverflow的问题：[java - Restricting permissions of threads that execute third party software - Stack Overflow](https://stackoverflow.com/questions/13516766/restricting-permissions-of-threads-that-execute-third-party-software)
+  > 这个变量有点神奇。它是一个私有变量，但是在 Thread 类里只 有 init 方法对它进行初始化，在 exit 方法把它设为 null 。其它没有任何地方使用它。一般我们是不会使用它的，那什么时候会使用到这个变量呢？可以参考这个stackoverflow的问题：[java - Restricting permissions of threads that execute third party software - Stack Overflow](https://stackoverflow.com/questions/13516766/restricting-permissions-of-threads-that-execute-third-party-software)
 
-- inheritThreadLocals：可继承的 ThreadLocal ，见片段4， Thread 类里面有两个 私有属性来支持 ThreadLocal ，我们会在后面的章节介绍 ThreadLocal 的概念
+- inheritThreadLocals：可继承的 ThreadLocal ，见片段4， Thread 类里面有两个私有属性来支持 ThreadLocal ，我们会在后面的章节介绍 ThreadLocal 的概念
 
 
 
@@ -158,7 +158,7 @@ Thread(Runnable target, String name)
 
 - `currentThread()`：静态方法，返回对当前正在执行的线程对象的引用； 
 - `start()`：开始执行线程的方法，java虚拟机会调用线程内的run()方法； 
-- `yield()`：指的是当前线程愿 意让出对当前处理器的占用。这里需要注意的是，就算当前线程调用了yield() 方法，程序在调度的时候，也还有可能继续运行这个线程的； 
+- `yield()`：指的是当前线程愿意让出对当前处理器的占用。这里需要注意的是，==就算当前线程调用了yield() 方法，程序在调度的时候，也还有可能继续运行这个线程的==
 - `sleep()`：静态方法，使当前线程睡眠一段时间； 
 - `join()`：使当前线程等待另一个线程执行完毕之后再继续执行，内部调用的是 Object类的wait方法实现的
 
@@ -177,7 +177,7 @@ Thread(Runnable target, String name)
 
 ## 四、Callable、Future与FutureTask
 
-通常来说，我们使用 Runnable 和 Thread 来创建一个新的线程。但是它们有一个弊 端，就是 run 方法是没有返回值的。而有时候我们希望开启一个线程去执行一个任 务，并且这个任务执行完成后有一个返回值。 
+通常来说，我们使用 Runnable 和 Thread 来创建一个新的线程。但是它们有一个弊端，**就是 run 方法是没有返回值**的。而有时候我们希望开启一个线程去执行一个任务，并且这个任务执行完成后有一个返回值。 
 
 JDK提供了 `Callable` 接口与 `Future` 接口为我们解决这个问题，这也是所谓的 ==“异步” 模型==
 
@@ -194,9 +194,7 @@ public interface Callable<V> {
 }
 ```
 
-`Callable` 一般是配合线程池工具 `ExecutorService` 来使用的。
-
-我们会在后续章节解释线程池的使用。这里只介绍 `ExecutorService` 可以使用 `submit` 方法来让一个 `Callable` 接口执行。它会返回一 个 `Future` ，我们后续的程序可以通过这个 Future 的 get 方法得到结果。
+`Callable` 一般是配合线程池工具 `ExecutorService` 来使用的。 这里只介绍 `ExecutorService` 可以使用 `submit` 方法来让一个 `Callable` 接口执行。它会返回一 个 `Future` ，我们后续的程序可以通过这个 Future 的 get 方法得到结果。
 
 ```java
 // 自定义Callable
@@ -241,7 +239,7 @@ public abstract interface Future<V> {
 
 cancel 方法是试图取消一个线程的执行。 
 
-注意是 **试图取消**，并不一定能取消成功。因为任务可能已完成、已取消、或者一些 其它因素不能取消，存在取消失败的可能。 
+注意是 **试图取消**，并不一定能取消成功。因为任务可能已完成、已取消、或者一些其它因素不能取消，存在取消失败的可能。 
 
 boolean 类型的返回值是“是否取消成功”的意思。参数 `paramBoolean` 表示 **是否采用中断的方式取消线程执行**。 
 
@@ -265,7 +263,7 @@ public interface RunnableFuture<V> extends Runnable, Future<V> {
 }
 ```
 
- Future 只是 一个接口，而它里面的 `cancel` ，`get` ， `isDone` 等方法要自己实现起来都是非常复 杂的。所以JDK提供了一个 FutureTask 类来供我们使用。
+ Future 只是 一个接口，而它里面的 `cancel` ，`get` ， `isDone` 等方法要自己实现起来都是非常复杂的。所以JDK提供了一个 FutureTask 类来供我们使用。
 
 ```java
 // 自定义Callable，与上面一样
@@ -313,4 +311,4 @@ private static final int INTERRUPTING = 5;
 private static final int INTERRUPTED = 6;
 ```
 
-tate表示任务的运行状态，初始状态为NEW。运行状态只会在set、 setException、cancel方法中终止。COMPLETING、INTERRUPTING是任 务完成后的瞬时状态。
+tate表示任务的运行状态，初始状态为NEW。运行状态只会在 `set`、 `setException`、`cancel` 方法中终止。COMPLETING、INTERRUPTING是任 务完成后的瞬时状态。
