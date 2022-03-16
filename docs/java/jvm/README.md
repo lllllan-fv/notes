@@ -1,9 +1,9 @@
 ---
 # 这是页面的图标
-icon: page
+icon: info
 
 # 这是文章的标题
-title: 《深入理解JVM》
+title: 深入理解 Java 虚拟机
 
 # 设置作者
 author: lllllan
@@ -12,11 +12,10 @@ author: lllllan
 # time: 2020-01-20
 
 # 一个页面只能有一个分类
-category: Java
+category: 
 
 # 一个页面可以有多个标签
 tag:
-- JVM
 
 # 此页面会在文章列表置顶
 # sticky: true
@@ -27,13 +26,3 @@ star: true
 # 你可以自定义页脚
 # footer: 
 ---
-
-
-
-
-
-::: warning
-
-本篇是 《深入理解JVM》的一些理解和笔记
-
-:::

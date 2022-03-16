@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入浅出多线程》第二章、Java多线程入门类和接口
+title: 第二章、Java多线程入门类和接口
 
 # 设置作者
 author: lllllan

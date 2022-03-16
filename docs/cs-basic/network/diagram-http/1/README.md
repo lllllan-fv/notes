@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《图解HTTP》第一章、了解Web及网络基础
+title: 第一章、了解Web及网络基础
 
 # 设置作者
 author: lllllan

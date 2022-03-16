@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入浅出多线程》第三章、线程组和线程优先级
+title: 第三章、线程组和线程优先级
 
 # 设置作者
 author: lllllan

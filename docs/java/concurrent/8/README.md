@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入浅出多线程》第八章、volatile
+title: 第八章、volatile
 
 # 设置作者
 author: lllllan

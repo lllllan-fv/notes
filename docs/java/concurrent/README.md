@@ -3,7 +3,7 @@
 icon: info
 
 # 这是文章的标题
-title: Java 笔记
+title: 深入浅出 Java 多线程
 
 # 设置作者
 author: lllllan
@@ -12,7 +12,7 @@ author: lllllan
 # time: 2020-01-20
 
 # 一个页面只能有一个分类
-category: Java
+category: 
 
 # 一个页面可以有多个标签
 tag:
@@ -26,11 +26,3 @@ star: true
 # 你可以自定义页脚
 # footer: 
 ---
-
-::: warning 重要声明
-
-本篇笔记，大部分内容均转载自各位聚聚的博客和整理，并非原创。为了尊重原作者的劳动，此处以及每篇文章都会列出原文出处。如有遗漏，欢迎指出
-
-:::
-
-

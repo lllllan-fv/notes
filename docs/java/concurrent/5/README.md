@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入浅出多线程》第五章、Java线程间的通信
+title: 第五章、Java线程间的通信
 
 # 设置作者
 author: lllllan

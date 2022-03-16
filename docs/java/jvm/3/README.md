@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入理解JVM》第三章、垃圾收集器与内存分配策略
+title: 第三章、垃圾收集器与内存分配策略
 
 # 设置作者
 author: lllllan

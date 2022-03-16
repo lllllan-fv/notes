@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入理解JVM》第二章、Java内存区域与内存溢出异常
+title: 第二章、Java内存区域与内存溢出异常
 
 # 设置作者
 author: lllllan

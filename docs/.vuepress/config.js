@@ -62,6 +62,7 @@ module.exports = config({
 
 			// Java 多线程
 			"/java/concurrent/": [
+				"",
 				{
 					title: "深入浅出多线程 - 基础篇",
 					icon: "",
@@ -95,7 +96,7 @@ module.exports = config({
 
 			// Java 虚拟机
 			"/java/jvm/": [
-				"2/", "3/",
+				"", "2/", "3/",
 			],
 
 
@@ -137,7 +138,7 @@ module.exports = config({
 			"/algorithms/": [
 				"sort/",
 			],
-   
+
 		},
 
 		locales: {

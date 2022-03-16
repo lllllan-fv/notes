@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入浅出多线程》第九章、synchronized与锁
+title: 第九章、synchronized与锁
 
 # 设置作者
 author: lllllan

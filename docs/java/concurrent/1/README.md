@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入浅出多线程》第一章、进程与线程的基本概念
+title: 第一章、进程与线程的基本概念
 
 # 设置作者
 author: lllllan

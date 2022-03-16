@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入浅出多线程》第十章、CAS与原子操作
+title: 第十章、CAS与原子操作
 
 # 设置作者
 author: lllllan

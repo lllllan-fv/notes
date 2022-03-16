@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入浅出多线程》第四章、Java线程的状态及主要转化方法
+title: 第四章、Java线程的状态及主要转化方法
 
 # 设置作者
 author: lllllan

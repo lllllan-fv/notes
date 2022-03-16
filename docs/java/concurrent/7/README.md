@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《深入浅出多线程》第七章、重排序与happens-before
+title: 第七章、重排序与happens-before
 
 # 设置作者
 author: lllllan

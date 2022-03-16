@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《图解HTTP》第六章、Http 首部
+title: 第六章、Http 首部
 
 # 设置作者
 author: lllllan

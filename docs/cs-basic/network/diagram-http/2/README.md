@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 《图解HTTP》第二章、简单的HTTP协议
+title: 第二章、简单的HTTP协议
 
 # 设置作者
 author: lllllan
