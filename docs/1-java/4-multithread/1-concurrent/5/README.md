@@ -37,7 +37,7 @@ star: true
 
 ::: warning 转载声明
 
-- [深入浅出多线程 - 第四章 - GitHub](https://github.com/RedSpider1/concurrent/tree/develop/article/01/4.md)
+- [深入浅出多线程 - 第五章 - GitHub](https://github.com/RedSpider1/concurrent/tree/develop/article/01/5.md)
 
 :::
 
