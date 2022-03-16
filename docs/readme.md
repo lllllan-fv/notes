@@ -23,25 +23,39 @@ action:
 
 
 features:
-  - title: Java 笔记
-    # details: 一点点自我介绍
-    link: /1-java/
+  - title: Java 基础
+    link: /java/basic/1-concept/
+  - title: Java 容器
+    link: /java/container/collection-basic/
+  - title: Java 多线程
+    link: /java/concurrent/1/
+  - title: Java 虚拟机
+    link: /java/jvm/2/
 
-  - title: 数据库笔记
-    link: /2-database/
+  - title: 计算机网络
+    link: /cs-basic/network/interview-questions/
+
+  - title: 操作系统
+    link: /cs-basic/os/interview-questions/
+
+  - title: 数据库基础
+    link: /db/mysql/
   
-  - title: 计算机基础
-    link: /3-cs-basic/
+  - title: 数据结构
+    link: /data-structures/
 
-  - title: 数据结构和算法
-    link: 4-data-structures-and-algorithms
-
-  - title: 面经整理
-    link: /5-interview/
+  - title: 算法
+    link: /algorithms/sort/
 
 copyrightText: false
 footer: MIT Licensed | Copyright © 2022 lllllan
+
 ---
+
+
+
+
+
 
 
 ## 备忘录
