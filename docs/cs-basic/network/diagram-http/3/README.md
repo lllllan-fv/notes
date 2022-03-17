@@ -30,10 +30,10 @@ star: true
 ---
 
 
+ 
+::: warning 转载声明
 
-::: warning
-
-本文作为 《图解HTTP》 的笔记，绝大部分内容均抄自该书。
+- 《图解HTTP》 
 
 :::
 
