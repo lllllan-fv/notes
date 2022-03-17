@@ -65,7 +65,7 @@ Serial 收集器是一个 ==单线程工作、新生代的收集器== ，要求�
 
 ParNew 收集器实质上是 Serial 收集器的 ==多线程并行版本==。**优势：除了Serial收集器外，目前只有它能与CMS 收集器配合工作**
 
-![image-20220317091212808](README.assets/image-20220317091212808.png)
+![image-20220317152537593](README.assets/image-20220317152537593.png)
 
 ::: info CMS收集器
 
