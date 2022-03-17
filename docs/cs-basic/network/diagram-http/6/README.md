@@ -268,5 +268,5 @@ Cache-Control: no-cache // 客户端的no-cache表示不接受缓存
 
 
 
-## 四、请求首部
+## 四、其他首部 （ ==保留== ）
 
