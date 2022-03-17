@@ -3,7 +3,7 @@
 icon: info
 
 # 这是文章的标题
-title: 数据库
+title: 算法
 
 # 设置作者
 author: lllllan
@@ -12,7 +12,7 @@ author: lllllan
 # time: 2020-01-20
 
 # 一个页面只能有一个分类
-category: 数据库
+category: 
 
 # 一个页面可以有多个标签
 tag:
@@ -26,6 +26,3 @@ star: true
 # 你可以自定义页脚
 # footer: 
 ---
-
-
-

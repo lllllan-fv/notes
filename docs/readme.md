@@ -24,28 +24,28 @@ action:
 
 features:
   - title: Java 基础
-    link: /java/basic/1-concept/
+    link: /java/basic/
   - title: Java 容器
-    link: /java/container/collection-basic/
+    link: /java/container/
   - title: Java 多线程
-    link: /java/concurrent/1/
+    link: /java/concurrent/
   - title: Java 虚拟机
-    link: /java/jvm/2/
+    link: /java/jvm/
 
   - title: 计算机网络
-    link: /cs-basic/network/interview-questions/
+    link: /cs-basic/network/
 
   - title: 操作系统
-    link: /cs-basic/os/interview-questions/
+    link: /cs-basic/os/
 
   - title: 数据库基础
-    link: /db/mysql/
+    link: /db/
   
   - title: 数据结构
     link: /data-structures/
 
   - title: 算法
-    link: /algorithms/sort/
+    link: /algorithms/
 
 copyrightText: false
 footer: MIT Licensed | Copyright © 2022 lllllan
