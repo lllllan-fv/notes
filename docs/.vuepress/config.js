@@ -67,21 +67,27 @@ module.exports = config({
 				{
 					title: "深入浅出多线程 - 基础篇",
 					icon: "",
-					prefix: "",
+					prefix: "1/",
 					children: ["1/", "2/", "3/", "4/", "5/"],
 				},
 				{
 					title: "深入浅出多线程 - 原理篇",
 					icon: "",
-					prefix: "",
+					prefix: "2/",
 					children: ["6/", "7/", "8/", "9/", "10/", "11/"],
 				},
 				{
 					title: "深入浅出多线程 - 工具篇",
 					icon: "",
-					prefix: "",
+					prefix: "3/",
 					children: ["12/", "13/", "14/", "15/", "16/", "17/", "18/", "19/", "20"],
 				},
+				{
+					title: "补充",
+					icon: "",
+					prefix: "def/",
+					children: ["sequential-consistency/"],
+				}
 			],
 
 			// Java 容器
