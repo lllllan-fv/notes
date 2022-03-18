@@ -2,7 +2,8 @@
 # 这是页面的图标
 icon: page
 
-# 这是文第六章、Java内存模型基础知识
+# 这是文章标题
+title: 第六章、Java内存模型基础知识
 
 # 设置作者
 author: lllllan
