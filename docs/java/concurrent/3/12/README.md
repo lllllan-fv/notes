@@ -34,6 +34,8 @@ star: true
 ::: warning 转载声明
 
 - [深入浅出多线程 - 第十二章 - GitHub](https://github.com/RedSpider1/concurrent/tree/develop/article/03/12.md)
+- [Java线程池的使用](https://www.jianshu.com/p/7ab4ae9443b9)
+- [java线程池使用最全详解](https://blog.csdn.net/qq_40093255/article/details/116990431)
 
 :::
 
@@ -43,15 +45,29 @@ star: true
 
 ## 一、为什么要使用线程池
 
-使用线程池主要有以下三个原因：
-
-1. 创建/销毁线程需要消耗系统资源，线程池可以**复用已创建的线程**。
-2. **控制并发的数量**。并发数量过多，可能会导致资源消耗过多，从而造成服务器崩溃。（主要原因）
-3. **可以对线程做统一管理**。
 
 
+::: info 线程池的优点
 
-##  二、线程池的原理 (==不懂==)
+1. 降低资源的消耗。线程本身是一种资源，创建和销毁线程会有CPU开销，线程池可以**复用已创建的线程**。
+1. 提高任务执行的响应速度。任务执行时，可以不必等到线程创建完之后再执行。
+2. 方便线程并发数的管控。线程若是无限制的创建，不仅会额外消耗大量系统资源，更是占用过多资源而阻塞系统或oom等状况，从而降低系统的稳定性。线程池能有效管控线程，统一分配、调优，提供资源使用率
+2. 更强大的功能，线程池提供了定时、定期以及可控线程数等功能的线程池，使用方便简单。
+
+:::
+
+
+
+::: tip 线程池的缺点
+
+1. 频繁的线程创建和销毁会占用更多的CPU和内存
+2. 频繁的线程创建和销毁会对GC产生比较大的压力
+3. 线程太多，线程切换带来的开销将不可忽视
+4. 线程太少，多核CPU得不到充分利用，是一种浪费
+
+:::
+
+##  二、线程池的原理
 
 Java中的线程池顶层接口是 `Executor` 接口，`ThreadPoolExecutor` 是这个接口的实现类。
 
@@ -115,17 +131,23 @@ public ThreadPoolExecutor(int corePoolSize,
 
   > 非核心线程如果处于闲置状态超过该值，就会被销毁。如果设置 `allowCoreThreadTimeOut(true)`，则会也作用于核心线程。
 
-* **TimeUnit**：keepAliveTime的单位。
+* **TimeUnit unit**：keepAliveTime的单位。
 
   
   TimeUnit是一个枚举类型 ，包括以下属性：
 
   > NANOSECONDS ： 1微毫秒 = 1微秒 / 1000
+  >
   > MICROSECONDS ： 1微秒 = 1毫秒 / 1000
+  >
   > MILLISECONDS ： 1毫秒 = 1秒 /1000
+  >
   > SECONDS ： 秒
+  >
   > MINUTES ： 分
+  >
   > HOURS ： 小时
+  >
   > DAYS ： 天
 
 
@@ -164,11 +186,8 @@ static class DefaultThreadFactory implements ThreadFactory {
     // 构造函数
     DefaultThreadFactory() {
         SecurityManager s = System.getSecurityManager();
-        group = (s != null) ? s.getThreadGroup() :
-        Thread.currentThread().getThreadGroup();
-        namePrefix = "pool-" +
-            poolNumber.getAndIncrement() +
-            "-thread-";
+        group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
+        namePrefix = "pool-" + poolNumber.getAndIncrement() + "-thread-";
     }
     
     // 省略
@@ -191,7 +210,7 @@ static class DefaultThreadFactory implements ThreadFactory {
 
 ### 2.2 ThreadPoolExecutor的策略
 
-线程池本身有一个调度线程，这个线程就是用于管理布控整个线程池里的各种任务和事务，例如创建线程、销毁线程、任务队列管理、线程队列管理等等。
+线程池本身有一个 ==调度线程== ，这个线程就是用于管理布控整个线程池里的各种任务和事务，例如**创建线程、销毁线程、任务队列管理、线程队列管理**等等。
 
 故线程池也有自己的状态。`ThreadPoolExecutor`类中使用了一些`final int`常量变量来表示线程池的状态 ，分别为RUNNING、SHUTDOWN、STOP、TIDYING 、TERMINATED。 
 
@@ -206,11 +225,11 @@ private static final int TERMINATED =  3 << COUNT_BITS;
 
 - 线程池创建后处于**RUNNING**状态。
 
-- 调用shutdown()方法后处于**SHUTDOWN**状态，线程池不能接受新的任务，清除一些空闲worker,不会等待阻塞队列的任务完成。
+- 调用 `shutdown()` 方法后处于**SHUTDOWN**状态，线程池不能接受新的任务，清除一些空闲 worker，不会等待阻塞队列的任务完成。
 
-- 调用shutdownNow()方法后处于**STOP**状态，线程池不能接受新的任务，中断所有线程，阻塞队列中没有被执行的任务全部丢弃。此时，poolsize=0,阻塞队列的size也为0。
+- 调用 `shutdownNow()` 方法后处于**STOP**状态，线程池不能接受新的任务，中断所有线程，阻塞队列中没有被执行的任务全部丢弃。此时，`poolsize = 0` ,阻塞队列的 size 也为0。
 
-- 当所有的任务已终止，ctl记录的”任务数量”为0，线程池会变为**TIDYING**状态。接着会执行terminated()函数。 
+- 当所有的任务已终止，ctl 记录的 "任务数量" 为0，线程池会变为**TIDYING**状态。接着会执行 `terminated()` 函数。 
 
   > ThreadPoolExecutor中有一个控制状态的属性叫`ctl`，它是一个AtomicInteger类型的变量。线程池状态就是通过AtomicInteger类型的成员变量`ctl`来获取的。
   >
@@ -229,25 +248,32 @@ private static final int TERMINATED =  3 << COUNT_BITS;
 ```java
 // JDK 1.8 
 public void execute(Runnable command) {
+    // 0.如果没有线程，抛出空指针异常
     if (command == null)
-        throw new NullPointerException();   
+        throw new NullPointerException();
+    
     int c = ctl.get();
-    // 1.当前线程数小于corePoolSize,则调用addWorker创建核心线程执行任务
+    
+    // 1.当前线程数小于corePoolSize,则调用 addWorker 创建核心线程执行任务
     if (workerCountOf(c) < corePoolSize) {
        if (addWorker(command, true))
            return;
        c = ctl.get();
     }
-    // 2.如果不小于corePoolSize，则将任务添加到workQueue队列。
+    
+    // 2.如果不小于corePoolSize，则将任务添加到 workQueue 队列。
     if (isRunning(c) && workQueue.offer(command)) {
         int recheck = ctl.get();
+        
         // 2.1 如果isRunning返回false(状态检查)，则remove这个任务，然后执行拒绝策略。
-        if (! isRunning(recheck) && remove(command))
+        if (!isRunning(recheck) && remove(command))
             reject(command);
-            // 2.2 线程池处于running状态，但是没有线程，则创建线程
+        
+        // 2.2 线程池处于running状态，但是没有线程，则创建线程
         else if (workerCountOf(recheck) == 0)
             addWorker(null, false);
     }
+    
     // 3.如果放入workQueue失败，则创建非核心线程执行任务，
     // 如果这时创建非核心线程失败(当前线程总数不小于maximumPoolSize时)，就会执行拒绝策略。
     else if (!addWorker(command, false))
@@ -282,7 +308,7 @@ public void execute(Runnable command) {
 
 
 
-### 2.4 如何做到线程复用的
+### 2.4 如何做到线程复用的 （有点复杂）
 
 我们知道，一个线程在创建的时候会指定一个线程任务，当执行完这个线程任务之后，线程自动销毁。但是线程池却可以复用线程，即一个线程执行完线程任务后不销毁，继续执行另外的线程任务。那么，线程池如何做到线程复用呢？
 
@@ -303,10 +329,7 @@ private boolean addWorker(Runnable firstTask, boolean core) {
         int rs = runStateOf(c);
 
         // Check if queue empty only if necessary.
-        if (rs >= SHUTDOWN &&
-            ! (rs == SHUTDOWN &&
-               firstTask == null &&
-               ! workQueue.isEmpty()))
+        if (rs >= SHUTDOWN && !(rs == SHUTDOWN && firstTask == null && !workQueue.isEmpty()))
             return false;
 
         for (;;) {
@@ -337,6 +360,7 @@ private boolean addWorker(Runnable firstTask, boolean core) {
     try {
         // 1.创建一个worker对象
         w = new Worker(firstTask);
+        
         // 2.实例化一个Thread对象
         final Thread t = w.thread;
         if (t != null) {
@@ -349,8 +373,7 @@ private boolean addWorker(Runnable firstTask, boolean core) {
                 // shut down before lock acquired.
                 int rs = runStateOf(ctl.get());
 
-                if (rs < SHUTDOWN ||
-                    (rs == SHUTDOWN && firstTask == null)) {
+                if (rs < SHUTDOWN || (rs == SHUTDOWN && firstTask == null)) {
                     if (t.isAlive()) // precheck that t is startable
                         throw new IllegalThreadStateException();
                     workers.add(w);
@@ -409,6 +432,7 @@ final void runWorker(Worker w) {
     Thread wt = Thread.currentThread();
     Runnable task = w.firstTask;
     w.firstTask = null;
+    
     // 1.线程启动之后，通过unlock方法释放锁
     w.unlock(); // allow interrupts
     boolean completedAbruptly = true;
@@ -522,7 +546,7 @@ private Runnable getTask() {
 
 
 
-## 三、四种常见的线程池 (==保留==)
+## 三、四种常见的线程池
 
 `Executors`类中提供的几个静态方法来创建线程池。大家到了这一步，如果看懂了前面讲的`ThreadPoolExecutor`构造方法中各种参数的意义，那么一看到`Executors`类中提供的线程池的源码就应该知道这个线程池是干嘛的。
 
@@ -541,12 +565,12 @@ public static ExecutorService newCachedThreadPool() {
 `CacheThreadPool`的**运行流程**如下：
 
 1. 提交任务进线程池。
-2. 因为**corePoolSize**为0的关系，不创建核心线程，线程池最大为Integer.MAX_VALUE。
-3. 尝试将任务添加到**SynchronousQueue**队列。
-4. 如果SynchronousQueue入列成功，等待被当前运行的线程空闲后拉取执行。如果当前没有空闲线程，那么就创建一个非核心线程，然后从SynchronousQueue拉取任务并在当前线程执行。
-5. 如果SynchronousQueue已有任务在等待，入列操作将会阻塞。
+2. 因为 `corePoolSize` 为 0 的关系，==不创建核心线程==，线程池最大为 `Integer.MAX_VALUE` 。
+3. 尝试将任务添加到 `SynchronousQueue` 队列。
+4. 如果 `SynchronousQueue` 入列成功，等待被当前运行的线程空闲后拉取执行。如果当前没有空闲线程，那么就创建一个非核心线程，然后从SynchronousQueue拉取任务并在当前线程执行。
+5. 如果 `SynchronousQueue` 已有任务在等待，入列操作将会阻塞。
 
-当需要执行很多**短时间**的任务时，CacheThreadPool的线程复用率比较高， 会显著的**提高性能**。而且线程60s后会回收，意味着即使没有任务进来，CacheThreadPool并不会占用很多资源。 
+当需要执行很多**短时间**的任务时，CacheThreadPool 的线程复用率比较高， 会显著的**提高性能**。而且线程60s后会回收，意味着即使没有任务进来，CacheThreadPool 并不会占用很多资源。 
 
 
 
@@ -560,16 +584,16 @@ public static ExecutorService newFixedThreadPool(int nThreads) {
 }
 ```
 
-核心线程数量和总线程数量相等，都是传入的参数nThreads，所以只能创建核心线程，不能创建非核心线程。因为LinkedBlockingQueue的默认大小是Integer.MAX_VALUE，故如果核心线程空闲，则交给核心线程处理；如果核心线程不空闲，则入列等待，直到核心线程空闲。 
+核心线程数量和总线程数量相等，都是传入的参数 `nThreads` ，所以 ==只能创建核心线程，不能创建非核心线程== 。因为 `LinkedBlockingQueue` 的默认大小是 `Integer.MAX_VALUE` ，故如果核心线程空闲，则交给核心线程处理；如果核心线程不空闲，则入列等待，直到核心线程空闲。 
 
 
 
-::: tip 与CachedThreadPool的区别：
+::: tip 与 CachedThreadPool 的区别：
 
-- 因为 corePoolSize == maximumPoolSize ，所以FixedThreadPool只会创建核心线程。 而CachedThreadPool因为corePoolSize=0，所以只会创建非核心线程。
-- 在 getTask() 方法，如果队列里没有任务可取，线程会一直阻塞在 LinkedBlockingQueue.take() ，线程不会被回收。 CachedThreadPool会在60s后收回。
+- 因为 corePoolSize == maximumPoolSize ，所以 **`FixedThreadPool` 只会创建核心线程**。 而另一边因为 corePoolSize = 0，所以 **`CachedThreadPool` 只会创建非核心线程**。
+- 在 getTask() 方法，如果队列里没有任务可取，线程会一直阻塞在 LinkedBlockingQueue.take() ， `FixedThreadPool` 线程不会被回收。 `CachedThreadPool` 会在60s后收回。
 - 由于线程不会被回收，会一直卡在阻塞，所以**没有任务的情况下， FixedThreadPool占用资源更多**。 
-- 都几乎不会触发拒绝策略，但是原理不同。FixedThreadPool是因为阻塞队列可以很大（最大为Integer最大值），故几乎不会触发拒绝策略；CachedThreadPool是因为线程池很大（最大为Integer最大值），几乎不会导致线程数量大于最大线程数，故几乎不会触发拒绝策略。
+- **都几乎不会触发拒绝策略**，但是原理不同。<u>`FixedThreadPool` 是因为阻塞队列可以很大</u>（最大为Integer最大值），故几乎不会触发拒绝策略；<u>`CachedThreadPool` 是因为线程池很大</u>（最大为Integer最大值），几乎不会导致线程数量大于最大线程数，故几乎不会触发拒绝策略。
 
 :::
 
@@ -586,7 +610,7 @@ public static ExecutorService newSingleThreadExecutor() {
 }
 ```
 
-有且仅有一个核心线程（ corePoolSize == maximumPoolSize=1），使用了LinkedBlockingQueue（容量很大），所以，**不会创建非核心线程**。所有任务按照**先来先执行**的顺序执行。如果这个唯一的线程不空闲，那么新来的任务会存储在任务队列里等待执行。
+==有且仅有一个核心线程==（ corePoolSize = maximumPoolSize = 1），使用了LinkedBlockingQueue（容量很大），所以，**不会创建非核心线程**。所有任务按照**先来先执行**的顺序执行。如果这个唯一的线程不空闲，那么新来的任务会存储在任务队列里等待执行。
 
 
 
