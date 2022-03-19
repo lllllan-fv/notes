@@ -176,6 +176,12 @@ module.exports = config({
 			// 框架技术
 			"/framework/": [
 				"",
+				{
+					title: "框架模式",
+					icon: "",
+					prefix: "frame-mode/",
+					children: ["", "mvc/"],
+				}
 			]
 		},
 
