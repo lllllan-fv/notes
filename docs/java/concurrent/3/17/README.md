@@ -497,28 +497,28 @@ private int dowait(boolean timed, long nanos)
 
 ### 5.1 Phaser 介绍
 
-`Phase` r这个单词是 “移相器，相位器” 的意思。这个类是从JDK 1.7 中出现的。
+`Phaser` 这个单词是 “移相器，相位器” 的意思。这个类是从JDK 1.7 中出现的。
 
 > 移相器（Phaser）能够对波的相位进行调整的一种装置。任何传输介质对在其中传导的波动都会引入相移，这是早期模拟移相器的原理；现代电子技术发展后利用A/D、D/A转换实现了数字移相，顾名思义，它是一种不连续的移相技术，但特点是移相精度高。
 > 移相器在雷达、导弹姿态控制、加速器、通信、仪器仪表甚至于音乐等领域都有着广泛的应用
 
 `Phaser` 类有点复杂，这里只介绍一些基本的用法和知识点。详情可以查看JDK文档，文档里有这个类非常详尽的介绍。
 
-前面我们介绍了CyclicBarrier，可以发现它在构造方法里传入“任务总量”`parties`之后，就不能修改这个值了，并且每次调用`await()`方法也只能消耗一个`parties`计数。但Phaser可以动态地调整任务总量！
+前面我们介绍了 `CyclicBarrier` ，可以发现它在构造方法里传入“任务总量” `parties` 之后，就不能修改这个值了，并且每次调用 `await()` 方法也只能消耗一个 `parties` 计数。但 `Phaser` 可以动态地调整任务总量！
 
 名词解释：
 
-- party：对应一个线程，数量可以通过register或者构造参数传入;
+- party：对应一个线程，数量可以通过 `register` 或者构造参数传入;
 
-- arrive：对应一个party的状态，初始时是unarrived，当调用`arriveAndAwaitAdvance()`或者 `arriveAndDeregister()`进入arrive状态，可以通过`getUnarrivedParties()`获取当前未到达的数量;
+- arrive：对应一个 party 的状态，初始时是 unarrived，当调用 `arriveAndAwaitAdvance()` 或者 ` arriveAndDeregister()` 进入 arrive 状态，可以通过 `getUnarrivedParties()` 获取当前未到达的数量;
 
 - register：注册一个party，每一阶段必须所有注册的party都到达才能进入下一阶段;
 - deRegister：减少一个party。
 
-- phase：阶段，当所有注册的party都arrive之后，将会调用Phaser的`onAdvance()`方法来判断是否要进入下一阶段。
+- phase：阶段，当所有注册的 party 都 arrive 之后，将会调用 Phaser 的 `onAdvance()` 方法来判断是否要进入下一阶段。
 
-Phaser终止的两种途径，Phaser维护的线程执行完毕或者`onAdvance()`返回`true`
-此外Phaser还能维护一个树状的层级关系，构造的时候new Phaser(parentPhaser)，对于Task执行时间短的场景（竞争激烈），也就是说有大量的**party**, 那可以把每个Phaser的任务量设置较小，多个Phaser共同继承一个父Phaser。
+Phaser 终止的两种途径，Phaser 维护的线程执行完毕或者 `onAdvance()` 返回 `true`
+此外 Phaser 还能维护一个树状的层级关系，构造的时候 `new Phaser(parentPhaser)` ，对于 Task 执行时间短的场景（竞争激烈），也就是说有大量的 **party**, 那可以把每个 Phaser 的任务量设置较小，多个 Phaser 共同继承一个父Phaser。
 
 > Phasers with large numbers of parties that would otherwise experience heavy synchronization contention costs may instead be set up so that groups of sub-phasers share a common parent. This may greatly increase throughput even though it incurs greater per-operation overhead.
 >
@@ -532,7 +532,7 @@ Phaser终止的两种途径，Phaser维护的线程执行完毕或者`onAdvance(
 
 代码：
 
-```java
+```java {28,30}
 public class PhaserDemo {
     static class PreTaskThread implements Runnable {
 
@@ -591,23 +591,44 @@ public class PhaserDemo {
 输出：
 
 > 关卡1，需要加载4个模块，当前模块【加载背景音乐】  
-> 关卡1，需要加载4个模块，当前模块【加载新手教程】  
+>
+> 关卡1，需要加载4个模块，当前模块【加载新手教程】 
+>
 > 下次关卡移除加载【新手教程】模块  
-> 关卡1，需要加载3个模块，当前模块【加载地图数据】  
-> 关卡1，需要加载3个模块，当前模块【加载人物模型】  
+>
+> 关卡1，需要加载3个模块，当前模块【加载地图数据】 
+>
+>
+> 关卡1，需要加载3个模块，当前模块【加载人物模型】 
+>
+>
 > 第1次关卡准备完成  
-> 关卡2，需要加载3个模块，当前模块【加载地图数据】  
-> 关卡2，需要加载3个模块，当前模块【加载背景音乐】  
-> 关卡2，需要加载3个模块，当前模块【加载人物模型】  
+>
+> 关卡2，需要加载3个模块，当前模块【加载地图数据】 
+>
+>
+> 关卡2，需要加载3个模块，当前模块【加载背景音乐】 
+>
+>
+> 关卡2，需要加载3个模块，当前模块【加载人物模型】 
+>
+>
 > 第2次关卡准备完成  
-> 关卡3，需要加载3个模块，当前模块【加载人物模型】  
-> 关卡3，需要加载3个模块，当前模块【加载地图数据】  
-> 关卡3，需要加载3个模块，当前模块【加载背景音乐】  
+>
+> 关卡3，需要加载3个模块，当前模块【加载人物模型】 
+>
+>
+> 关卡3，需要加载3个模块，当前模块【加载地图数据】
+>
+>
+> 关卡3，需要加载3个模块，当前模块【加载背景音乐】 
+>
+>
 > 第3次关卡准备完成
 
-这里要注意关卡1的输出，在“加载新手教程”线程中调用了`arriveAndDeregister()`减少一个party之后，后面的线程使用`getRegisteredParties()`得到的是已经被修改后的parties了。但是当前这个阶段(phase)，仍然是需要4个parties都arrive才触发屏障的。从下一个阶段开始，才需要3个parties都arrive就触发屏障。
+这里要注意关卡1的输出，在“加载新手教程”线程中调用了 `arriveAndDeregister()` 减少一个 party 之后，后面的线程使用 `getRegisteredParties()` 得到的是已经被修改后的 parties 了。但是当前这个阶段(phase)，仍然是需要 4 个 partie s都 arrive 才触发屏障的。从下一个阶段开始，才需要 3 个 parties 都 arrive 就触发屏障。
 
-另外Phaser类用来控制某个阶段的线程数量很有用，但它并在意这个阶段具体有哪些线程arrive，只要达到它当前阶段的parties值，就触发屏障。所以我这里的案例虽然制定了特定的线程（加载新手教程）来更直观地表述Phaser的功能，但是其实Phaser是没有分辨具体是哪个线程的功能的，它在意的只是数量，这一点需要读者注意。
+另外 Phaser 类用来控制某个阶段的线程数量很有用，但它并在意这个阶段具体有哪些线程 arrive，只要达到它当前阶段的 parties 值，就触发屏障。所以我这里的案例虽然制定了特定的线程（加载新手教程）来更直观地表述 Phaser 的功能，但是其实Phaser是没有分辨具体是哪个线程的功能的，它在意的只是数量，这一点需要读者注意。
 
 
 
