@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 第三章、HTTP报文内的HTTP信息
+title: 第三章、HTTP报文
 
 # 设置作者
 author: lllllan
@@ -30,7 +30,7 @@ star: true
 ---
 
 
- 
+
 ::: warning 转载声明
 
 - 《图解HTTP》 

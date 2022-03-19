@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 第八章、确认访问用户身份的认证
+title: 第八章、确认用户身份
 
 # 设置作者
 author: lllllan

@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 第七章、确保Web安全的HTTPS
+title: 第七章、HTTPS
 
 # 设置作者
 author: lllllan
