@@ -86,6 +86,16 @@ public class TestVector {
 ```
 如果方法一和方法二为一个组合的话。那么当方法一获取到了`vector`的size之后，方法二已经执行完毕，这样就导致程序的错误。
 
+
+
+::: warning 疑问
+
+那为什么还说 Vector 是线程安全的？
+
+:::
+
+
+
 如果方法三与方法四组合的话。通过锁机制保证了在`vector`上的操作的原子性。
 
 并发容器是Java 5 提供的在多线程编程下用于代替同步容器，针对不同的应用场景进行设计，提高容器的并发访问性，同时定义了线程安全的复合操作。
@@ -136,10 +146,10 @@ public interface ConcurrentMap<K, V> extends Map<K, V> {
 }
 ```
 
-- **putIfAbsent：**与原有put方法不同的是，<u>putIfAbsent方法中如果插入的key相同，则不替换原有的value值；</u>
-- **remove：**与原有remove方法不同的是，新remove方法中增加了对value的判断，<u>如果要删除的 `key-value` 不能与Map中原有的 `key-value` 对应上，则不会删除该元素;</u>
-- **replace(K,V,V)：**增加了对value值的判断，如果 `key-oldValue` 能与Map中原有的key-value对应上，才进行替换操作；
-- **replace(K,V)：**与上面的 `replace` 不同的是，此 replace 不会对Map中原有的 `key-value` 进行比较，如果key存在则直接替换；
+- **putIfAbsent：** 与原有put方法不同的是，<u>putIfAbsent方法中如果插入的key相同，则不替换原有的value值；</u>
+- **remove：** 与原有remove方法不同的是，新remove方法中增加了对value的判断，<u>如果要删除的 `key-value` 不能与Map中原有的 `key-value` 对应上，则不会删除该元素;</u>
+- **replace(K,V,V)：** 增加了对value值的判断，如果 `key-oldValue` 能与Map中原有的key-value对应上，才进行替换操作；
+- **replace(K,V)：** 与上面的 `replace` 不同的是，此 replace 不会对Map中原有的 `key-value` 进行比较，如果key存在则直接替换；
 
 ---
 
@@ -153,7 +163,7 @@ ConcurrentHashMap在JDK 1.7 和JDK 1.8中有一些区别。这里我们分开介
 
 **JDK 1.7**
 
-ConcurrentHashMap在JDK 1.7中，提供了一种粒度更细的加锁机制来实现在多线程下更高的性能，这种机制叫 ==分段锁(Lock Striping)==。
+ConcurrentHashMap在JDK 1.7中，提供了一种粒度更细的加锁机制来实现在多线程下更高的性能，这种机制叫 ==分段锁(Lock Striping)== 。
 
 提供的优点是：**在并发环境下将实现更高的吞吐量，而在单线程环境下只损失非常小的性能**。
 
