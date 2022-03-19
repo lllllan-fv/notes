@@ -41,11 +41,11 @@ features:
   - title: 数据库基础
     link: /db/
   
-  - title: 数据结构
-    link: /data-structures/
+  - title: 数据结构和算法
+    link: /ds-and-algorithms/
 
-  - title: 算法
-    link: /algorithms/
+  - title: 技术概览
+    link: /framework/
 
 copyrightText: false
 footer: MIT Licensed | Copyright © 2022 lllllan

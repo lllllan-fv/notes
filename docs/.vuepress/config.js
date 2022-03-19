@@ -120,7 +120,7 @@ module.exports = config({
 			],
 
 
-			// 计算机网阔
+			// 计算机网络
 			"/cs-basic/network/": [
 				"",
 				"interview-questions/",
@@ -154,15 +154,29 @@ module.exports = config({
 				"mysql/",
 			],
 
-			// 数据结构
-			"/data-structures/": ["",],
-
-			// 算法
-			"/algorithms/": [
+			// 数据结构和算法
+			"/ds-and-algorithms/": [
 				"",
-				"sort/",
+				{
+					title: "数据结构",
+					icon: "",
+					prefix: "data-structures/",
+					children: [],
+				},
+				{
+					title: "算法",
+					icon: "",
+					prefix: "algorithms/",
+					children: [
+						"sort/",
+					]
+				}
 			],
 
+			// 框架技术
+			"/framework/": [
+				"",
+			]
 		},
 
 		locales: {
