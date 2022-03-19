@@ -49,7 +49,7 @@ star: true
 
 ## 一、synchronized的不足之处
 
-我们先来看看`synchronized`有什么不足之处。
+我们先来看看 `synchronized` 有什么不足之处。
 
 - 如果临界区是只读操作，其实可以多线程一起执行，但使用synchronized的话，**同一时间只能有一个线程执行**。
 - synchronized无法知道线程有没有成功获取到锁
@@ -85,7 +85,7 @@ star: true
 
 
 
-`ReentrantLock`的中文意思就是可重入锁。也是本文后续要介绍的重点类。
+`ReentrantLock` 的中文意思就是可重入锁。也是本文后续要介绍的重点类。
 
 
 
@@ -133,7 +133,7 @@ ReentrantLock支持非公平锁和公平锁两种。
 
 ## 三、JDK中有关锁的一些接口和类（保留）
 
-众所周知，JDK中关于并发的类大多都在`java.util.concurrent`（以下简称juc）包下。而juc.locks包看名字就知道，是提供了一些并发锁的工具类的。前面我们介绍的AQS（AbstractQueuedSynchronizer）就是在这个包下。下面分别介绍一下这个包下的类和接口以及它们之间的关系。
+众所周知，JDK中关于并发的类大多都在 `java.util.concurrent`（以下简称juc）包下。而juc.locks包看名字就知道，是提供了一些并发锁的工具类的。前面我们介绍的AQS（AbstractQueuedSynchronizer）就是在这个包下。下面分别介绍一下这个包下的类和接口以及它们之间的关系。
 
 
 
@@ -141,7 +141,7 @@ ReentrantLock支持非公平锁和公平锁两种。
 
 这三个抽象类有一定的关系，所以这里放到一起讲。
 
-首先我们看**AQS**（`AbstractQueuedSynchronizer`），之前专门有章节介绍这个类，它是在JDK 1.5 发布的，提供了一个“队列同步器”的基本功能实现。而AQS里面的“资源”是用一个`int`类型的数据来表示的，有时候我们的业务需求资源的数量超出了`int`的范围，所以在JDK 1.6 中，多了一个**AQLS**（`AbstractQueuedLongSynchronizer`）。它的代码跟AQS几乎一样，只是把资源的类型变成了`long`类型。
+首先我们看**AQS**（`AbstractQueuedSynchronizer`），之前专门有章节介绍这个类，它是在JDK 1.5 发布的，提供了一个“队列同步器”的基本功能实现。而AQS里面的“资源”是用一个 `int` 类型的数据来表示的，有时候我们的业务需求资源的数量超出了 `int` 的范围，所以在JDK 1.6 中，多了一个**AQLS**（`AbstractQueuedLongSynchronizer`）。它的代码跟AQS几乎一样，只是把资源的类型变成了 `long` 类型。
 
 AQS和AQLS都继承了一个类叫**AOS**（`AbstractOwnableSynchronizer`）。这个类也是在JDK 1.6 中出现的。这个类只有几行简单的代码。从源码类上的注释可以知道，它是用于表示锁与持有者之间的关系（独占模式）。可以看一下它的主要方法：
 
@@ -173,13 +173,13 @@ public interface ReadWriteLock {
 }
 ```
 
-Lock接口中有一个方法是可以获得一个`Condition`:
+Lock接口中有一个方法是可以获得一个 Condition`:
 
 ```java
 Condition newCondition();
 ```
 
-之前我们提到了每个对象都可以用继承自`Object`的**wait/notify**方法来实现**等待/通知机制**。而Condition接口也提供了类似Object监视器的方法，通过与**Lock**配合来实现等待/通知模式。
+之前我们提到了每个对象都可以用继承自 `Object` 的**wait/notify**方法来实现**等待/通知机制**。而Condition接口也提供了类似Object监视器的方法，通过与**Lock**配合来实现等待/通知模式。
 
 那为什么既然有Object的监视器方法了，还要用Condition呢？这里有一个二者简单的对比：
 
@@ -210,11 +210,11 @@ Condition和Object的wait/notify基本相似。其中，Condition的await方法�
 
 ### 3.3 ReentrantLock
 
-`ReentrantLock` 是一个非抽象类，它是Lock接口的JDK默认实现，实现了锁的基本功能。从名字上看，它是一个”可重入“锁，从源码上看，它内部有一个抽象类`Sync`，是继承了AQS，自己实现的一个同步器。同时，ReentrantLock内部有两个非抽象类`NonfairSync`和`FairSync`，它们都继承了Sync。从名字上看得出，分别是”非公平同步器“和”公平同步器“的意思。这意味着ReentrantLock可以支持”公平锁“和”非公平锁“。
+`ReentrantLock` 是一个非抽象类，它是Lock接口的JDK默认实现，实现了锁的基本功能。从名字上看，它是一个”可重入“锁，从源码上看，它内部有一个抽象类 `Sync`，是继承了AQS，自己实现的一个同步器。同时，ReentrantLock内部有两个非抽象类 `NonfairSync` 和 `FairSync`，它们都继承了Sync。从名字上看得出，分别是”非公平同步器“和”公平同步器“的意思。这意味着ReentrantLock可以支持”公平锁“和”非公平锁“。
 
-通过看这两个同步器的源码可以发现，它们的实现都是”独占“的。都调用了AOS的`setExclusiveOwnerThread`方法，所以ReentrantLock的锁是”独占“的，也就是说，它的锁都是”排他锁“，不能共享。
+通过看这两个同步器的源码可以发现，它们的实现都是”独占“的。都调用了AOS的 `setExclusiveOwnerThread` 方法，所以ReentrantLock的锁是”独占“的，也就是说，它的锁都是”排他锁“，不能共享。
 
-在ReentrantLock的构造方法里，可以传入一个`boolean`类型的参数，来指定它是否是一个公平锁，默认情况下是非公平的。这个参数一旦实例化后就不能修改，只能通过`isFair()`方法来查看。
+在ReentrantLock的构造方法里，可以传入一个 `boolean` 类型的参数，来指定它是否是一个公平锁，默认情况下是非公平的。这个参数一旦实例化后就不能修改，只能通过 `isFair()` 方法来查看。
 
 
 
@@ -273,7 +273,7 @@ ReentrantReadWriteLock实现了读写锁，但它有一个小弊端，就是在�
 
 ### 3.5 StampedLock
 
-`StampedLock`类是在Java 8 才发布的，也是Doug Lea大神所写，有人号称它为锁的性能之王。它没有实现Lock接口和ReadWriteLock接口，但它其实是实现了“读写锁”的功能，并且性能比ReentrantReadWriteLock更高。StampedLock还把读锁分为了“乐观读锁”和“悲观读锁”两种。
+`StampedLock` 类是在Java 8 才发布的，也是Doug Lea大神所写，有人号称它为锁的性能之王。它没有实现Lock接口和ReadWriteLock接口，但它其实是实现了“读写锁”的功能，并且性能比ReentrantReadWriteLock更高。StampedLock还把读锁分为了“乐观读锁”和“悲观读锁”两种。
 
 前面提到了ReentrantReadWriteLock会发生“写饥饿”的现象，但StampedLock不会。它是怎么做到的呢？它的核心思想在于，**在读的时候如果发生了写，应该通过重试的方式来获取新的值，而不应该阻塞写操作。这种模式也就是典型的无锁编程思想，和CAS自旋的思想一样**。这种操作方式决定了StampedLock在读线程非常多而写线程非常少的场景下非常适用，同时还避免了写饥饿情况的发生。
 
@@ -339,7 +339,7 @@ class Point {
 
 > 乐观读锁的意思就是先假定在这个锁获取期间，共享变量不会被改变，既然假定不会被改变，那就不需要上锁。在获取乐观读锁之后进行了一些操作，然后又调用了validate方法，这个方法就是用来验证tryOptimisticRead之后，是否有写操作执行过，如果有，则获取一个悲观读锁，这里的悲观读锁和ReentrantReadWriteLock中的读锁类似，也是个共享锁。
 
-可以看到，StampedLock获取锁会返回一个`long`类型的变量，释放锁的时候再把这个变量传进去。简单看看源码：
+可以看到，StampedLock获取锁会返回一个 `long` 类型的变量，释放锁的时候再把这个变量传进去。简单看看源码：
 
 ```java
 // 用于操作state后获取stamp的值
@@ -368,13 +368,3 @@ StampedLock用这个long类型的变量的前7位（LG_READERS）来表示读锁
 
 总的来说，StampedLock的性能是非常优异的，基本上可以取代ReentrantReadWriteLock的作用。
 
----
-**参考文档**
-
-1. [Java并发编程：Lock](https://www.cnblogs.com/dolphin0520/p/3923167.html)
-2. [Java多线程之Lock的使用（一）](https://juejin.im/post/582169d45bbb500059f6c241)
-3. [Java锁之ReentrantReadWriteLock ](https://juejin.im/post/5b7a834551882542c20f1985)
-4. [Java锁之ReentrantLock（一） ](https://juejin.im/post/5b6bf4a2e51d451c4e2a8886)
-5. [Java并发（8）- 读写锁中的性能之王：StampedLock ](https://juejin.im/post/5bacf523f265da0a951ee418)
-6. [Java多线程Condition接口原理详解](https://blog.csdn.net/fuyuwei2015/article/details/72602182)
-7. [Java中的Condition](https://blog.csdn.net/majinggogogo/article/details/80034585)
