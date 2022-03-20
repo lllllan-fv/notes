@@ -72,8 +72,10 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 
 ::: info Java
 
-1. 垃圾回收机制
+1. JVM
     1. OOM
+    2. 即时编译技术、逃逸分析技术
+    3. 线程本地分配缓冲区 TLAB
 2. 集合
     1. HashMap 扩容机制（扩容后的重新分布）
 
