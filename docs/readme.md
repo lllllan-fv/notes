@@ -76,6 +76,7 @@ footer: MIT Licensed | Copyright © 2022 lllllan
     1. OOM
     2. 即时编译技术、逃逸分析技术
     3. 线程本地分配缓冲区 TLAB
+    4. 指针碰撞、空闲列表
 2. 集合
     1. HashMap 扩容机制（扩容后的重新分布）
 
