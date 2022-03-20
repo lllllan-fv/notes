@@ -79,6 +79,8 @@ footer: MIT Licensed | Copyright © 2022 lllllan
     4. 指针碰撞、空闲列表
 2. 集合
     1. HashMap 扩容机制（扩容后的重新分布）
+3. AOP
+4. 缓存架构 - [彻底搞清楚什么是伪共享](https://zhuanlan.zhihu.com/p/187593289)
 
 
 :::
