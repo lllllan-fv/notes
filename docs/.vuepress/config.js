@@ -186,7 +186,7 @@ module.exports = config({
 					title: "框架模式",
 					icon: "",
 					prefix: "frame-mode/",
-					children: ["", "mvc/"],
+					children: ["mvc/", "mvvm/"],
 				}
 			]
 		},
