@@ -35,7 +35,9 @@ star: true
 
 - [MVVM_百度百科 (baidu.com)](https://baike.baidu.com/item/MVVM/96310)
 - [什么是MVVM框架？](https://zhuanlan.zhihu.com/p/59467370)
-- [前后端分手大师——MVVM 模式 - DOM哥 - 博客园 (cnblogs.com)](https://www.cnblogs.com/iovec/p/7840228.html)
+- [前后端分手大师——MVVM 模式 - DOM哥](https://www.cnblogs.com/iovec/p/7840228.html)
+- [MVC、MVP、MVVM的区别和联系](http://c.biancheng.net/view/7743.html)
+- [mvc和mvvm的区别](https://www.jianshu.com/p/b0aab1ffad93)
 
 :::
 
@@ -45,45 +47,63 @@ MVVM 是 Model-View-ViewModel 的简写。它本质上就是MVC 的改进版
 
 
 
-![img](README.assets/882926-20171115175942921-775941263.png)
+![MVVM框架图](README.assets/1-200525105346422.gif)
 
 
 
-**比MVC架构中多了一个ViewModel**，没错，就是这个ViewModel，他是MVVM相对于MVC改进的核心思想。在开发过程中，由于需求的变更或添加，项目的复杂度越来越高，代码量越来越大，此时我们会发现MVC维护起来有些吃力，首先被人吐槽的最多的就是MVC的简写变成了Massive-View-Controller（意为沉重的Controller）
+::: tip 与 MVC 的区别
 
-由于Controller主要用来处理各种逻辑和数据转化，复杂业务逻辑界面的Controller非常庞大，维护困难，所以有人想到**把Controller的数据和逻辑处理部分从中抽离出来，用一个专门的对象去管理，这个对象就是ViewModel，是Model和Controller之间的一座桥梁**。当人们去尝试这种方式时，发现Controller中的代码变得非常少，变得易于测试和维护，只需要**Controller和ViewModel做数据绑定**即可，这也就催生了MVVM的热潮。
+最直接的区别是，在 MVC 中，用户通过 Controller 进行输入，在 View 层得到反馈。
 
+而在 MVVM 中，用户的全部交互都在 View 层。
 
-
-![img](README.assets/882926-20171115175958671-1955710845.png)
-
-
-
-**View 层**
-
-View 是视图层，也就是用户界面。前端主要由 HTML 和 CSS 来构建，为了更方便地展现 ViewModel 或者 Model 层的数据，已经产生了各种各样的前后端模板语言，比如 FreeMarker、Marko、Pug、Jinja2等等，各大 MVVM 框架如 KnockoutJS，Vue，Angular 等也都有自己用来构建用户界面的内置模板语言。
-
-----
+:::
 
 
 
-**Model 层**
+## MVC 的臃肿
 
-Model 是指数据模型，泛指后端进行的各种业务逻辑处理和数据操控，主要围绕数据库系统展开。
+就像我们之前分析MVC是如何合理分配工作的一样，我们需要数据所以有了M，我们需要界面所以有了V，而我们需要找一个地方把M赋值给V来显示，所以有了C，然而我们忽略了一个很重要的操作：**数据解析**。
 
-后端业务处理再复杂跟我们前端也没有半毛钱关系，只要后端保证对外接口足够简单就行了，我请求api，你把数据返出来，咱俩就这点关系，其他都扯淡。
+在MVC出生的年代，手机APP的数据往往都比较简单，没有现在那么复杂，所以那时的数据解析很可能一步就解决了，所以既然有这样一个问题要处理，而面向对象的思想就是用类和对象来解决问题，显然V和M早就被定义死了，它们都不应该处理“解析数据”的问题，理所应当的，“解析数据”这个问题就交给C来完成了。而现在的手机App功能越来越复杂，数据结构也越来越复杂，所以数据解析也就没那么简单了。如果我们继续按照MVC的设计思路，将数据解析的部分放到了Controller里面，那么Controller就将变得相当臃肿。
+
+
+
+## MVVM 的分层
+
+虽然 MVVM 中没有 C，但是 Controller 层还在，只是存在感被弱化了。
+
+![img](README.assets/v2-2bf48b6a57b45d129a0e2621c8049963_720w.jpg)
+
+
+
+**View**
+
+View 是视图层，也就是用户界面。
 
 ---
 
 
 
-**ViewModel 层**
+**Model**
 
-ViewModel 是由前端开发人员组织生成和维护的视图数据层。在这一层，前端开发者对从后端获取的 Model 数据进行转换处理，做二次封装，以生成符合 View 层使用预期的视图数据模型。
+Model 是指数据模型，泛指后端进行的各种业务逻辑处理和数据操控，主要围绕数据库系统展开。
+
+---
 
 
 
-需要注意的是 ViewModel 所封装出来的数据模型包括视图的状态和行为两部分，而 Model 层的数据模型是只包含状态的，比如页面的这一块展示什么，那一块展示什么这些都属于视图状态（展示），而页面加载进来时发生什么，点击这一块发生什么，这一块滚动时发生什么这些都属于视图行为（交互），视图状态和行为都封装在了 ViewModel 里。这样的封装使得 ViewModel 可以完整地去描述 View 层。
+**ViewModel**
+
+Model 中的数据一般指原始数据，而 View 层想要获取的数据是复杂的，这时就需要 ViewModel 层从 Model 层获取原始数据，分析处理过之后再交给 View
+
+---
+
+
+
+**Controller**
+
+Controller 层还在，它只是接收请求并决定调用哪个接口来处理请求。而处理操作都在 ViewModel 层完成，减少了 Controller 的工作量，也就弱化了存在感。
 
 
 

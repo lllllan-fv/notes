@@ -36,6 +36,7 @@ star: true
 - [MVC 模式 | 菜鸟教程 (runoob.com)](https://www.runoob.com/design-pattern/mvc-pattern.html)
 - [MVC 模式及其优缺点](https://zhuanlan.zhihu.com/p/78891947)
 - [mvc模式有哪些优缺点](https://www.php.cn/php-weizijiaocheng-415962.html)
+- [MVC、MVP、MVVM的区别和联系](http://c.biancheng.net/view/7743.html)
 
 :::
 
@@ -55,7 +56,9 @@ star: true
 
   > 控制器本身不输出任何东西和做任何处理。它只是接收请求并决定调用哪个模型构件去处理请求，然后再确定用哪个视图来显示返回的数据。
 
-![image-20220319142427996](README.assets/image-20220319142427996.png)
+
+
+![MVC框架图](README.assets/1-200525102U9463.gif)
 
 
 
@@ -215,3 +218,5 @@ public class MVCPatternDemo {
 - **给调试增添了困难**。由于模型和视图要严格分离，这样给调试增添了困难，而且级联层级的修改是自上而下的如果某块业务只需要新增一个视图，而这个新增就会因为MVC模式思想的限制而去增加业务逻辑层和数据访问层的代码。
 
 :::
+
+

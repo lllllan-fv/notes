@@ -62,7 +62,7 @@ star: true
 常见的框架模式有：
 
 - [MVC](frame-mode/mvc/)
-- MVVM
+- [MVVM](frame-mode/mvvm/)
 - MTV
 - MVP
 - CBD
