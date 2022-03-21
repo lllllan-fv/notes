@@ -152,6 +152,43 @@ module.exports = config({
 			"/cs-basic/os/": [
 				"",
 				"interview-questions/",
+				{
+					title: "王道-操作系统",
+					icon: "",
+					prefix: "wangdao/",
+					children: [
+						{
+							title: "计算机系统概述",
+							icon: "",
+							prefix: "1/",
+							children: ["1/", "2/", "3/", "4/", "5/", "6/"],
+						},
+						{
+							title: "进程与线程",
+							icon: "",
+							prefix: "2/",
+							children: ["1/", "2/", "3/", "4/"],
+						},
+						{
+							title: "内存管理",
+							icon: "",
+							prefix: "3/",
+							children: ["1/", "2/"],
+						},
+						{
+							title: "文件管理",
+							icon: "",
+							prefix: "4/",
+							children: ["1/", "2/", "3/"],
+						},
+						{
+							title: "IO管理",
+							icon: "",
+							prefix: "5/",
+							children: ["1/", "2/", "3/"],
+						},
+					]
+				}
 			],
 
 			// 数据库
