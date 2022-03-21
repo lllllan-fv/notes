@@ -116,6 +116,12 @@ module.exports = config({
 					icon: "",
 					prefix: "3/",
 					children: ["1/", "2/", "3/", "4/", "5/", "6/", "7/", "8/"]
+				},
+				{
+					title: "类文件结构",
+					icon: "",
+					prefix: "6/",
+					children: ["2/", "3/", "4/", "5/", "6/"],
 				}
 			],
 
