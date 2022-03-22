@@ -1,5 +1,16 @@
 ## 属性
 
+::: tip DEFAULTCAPACITY ? EMPTY_ELEMENTDATA
+
+两个都是静态的空数组实例。
+
+区别在于使用了不同的构造器，第一次的扩容方式不同：
+
+- ArrayList(int initialCapacity)：如果指定初始容量为0，将使用 `EMPTY_ELEMENTDATA`
+- ArrayList()：默认初始容量为10，将使用 `DEFAULTCAPACITY_EMPTY_ELEMENTDATA`
+
+:::
+
 ```java
 private static final long serialVersionUID = 8683452581122892189L;
 
@@ -17,7 +28,6 @@ private static final Object[] EMPTY_ELEMENTDATA = {};
 /**
  * staic
  * 共享的空数组实例
- * 和 EMPTY_ELEMENTDATA 区分出来，是为了方便知道何时扩容？
  */
 private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
 
@@ -35,6 +45,95 @@ private int size;
 
 
 
+## 构造器
+
+```java {9,22，38}
+/**
+ * 构造具有指定初始容量的空列表
+ */
+public ArrayList(int initialCapacity) {
+    if (initialCapacity > 0) {
+        this.elementData = new Object[initialCapacity];
+    } else if (initialCapacity == 0) {
+        // 指定容量为0，指向空数组 EMPTY_ELEMENTDATA
+        this.elementData = EMPTY_ELEMENTDATA;
+    } else {
+        throw new IllegalArgumentException("Illegal Capacity: "+
+                                           initialCapacity);
+    }
+}
+
+/**
+ * 构造一个初始容量为10的空列表。
+ * 只不过在第一次添加元素时，才从空数组变为大小为10的数组
+ */
+public ArrayList() {
+    // 不指定容量，指向空数组 DEFAULTCAPACITY_EMPTY_ELEMENTDATA
+    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+}
+
+/**
+ * 指定集合构造 list
+ */
+public ArrayList(Collection<? extends E> c) {
+    Object[] a = c.toArray();
+    if ((size = a.length) != 0) {
+        if (c.getClass() == ArrayList.class) {
+            elementData = a;
+        } else {
+            elementData = Arrays.copyOf(a, size, Object[].class);
+        }
+    } else {
+        // 如果大小为零，指向空数组 EMPTY_ELEMENTDATA
+        elementData = EMPTY_ELEMENTDATA;
+    }
+}
+```
+
+
+
+## 紧凑函数
+
+```java {9}
+/**
+ * 将容量调整为当前的元素个数
+ */
+public void trimToSize() {
+    modCount++;
+    if (size < elementData.length) {
+        elementData = (size == 0)
+            // 只要涉及容量为零，都指向空数组 EMPTY_ELEMENTDATA
+            ? EMPTY_ELEMENTDATA
+            : Arrays.copyOf(elementData, size);
+    }
+}
+```
+
+
+
+## 扩容机制
+
+
+
+### 确认容量
+
+```java
+/**
+ * 正式扩容之前，确保一个基本的容量
+ * 
+ * 如果此时数组是空数组 DEFAULTCAPACITY_EMPTY_ELEMENTDATA，当指定容量超过默认值10时，进行扩容
+ * 否则只要指定容量非零就应该扩容
+ */
+public void ensureCapacity(int minCapacity) {
+    int minExpand = (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
+        ? 0 : DEFAULT_CAPACITY;
+
+    if (minCapacity > minExpand) {
+        ensureExplicitCapacity(minCapacity);
+    }
+}
+```
+
 
 
 
@@ -45,86 +144,9 @@ public class ArrayList<E> extends AbstractList<E>
 {
    
 
-    /**
-     * Constructs an empty list with the specified initial capacity.
-     *
-     * @param  initialCapacity  the initial capacity of the list
-     * @throws IllegalArgumentException if the specified initial capacity
-     *         is negative
-     */
-    public ArrayList(int initialCapacity) {
-        if (initialCapacity > 0) {
-            this.elementData = new Object[initialCapacity];
-        } else if (initialCapacity == 0) {
-            this.elementData = EMPTY_ELEMENTDATA;
-        } else {
-            throw new IllegalArgumentException("Illegal Capacity: "+
-                                               initialCapacity);
-        }
-    }
+  
 
-    /**
-     * Constructs an empty list with an initial capacity of ten.
-     */
-    public ArrayList() {
-        this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
-    }
-
-    /**
-     * Constructs a list containing the elements of the specified
-     * collection, in the order they are returned by the collection's
-     * iterator.
-     *
-     * @param c the collection whose elements are to be placed into this list
-     * @throws NullPointerException if the specified collection is null
-     */
-    public ArrayList(Collection<? extends E> c) {
-        Object[] a = c.toArray();
-        if ((size = a.length) != 0) {
-            if (c.getClass() == ArrayList.class) {
-                elementData = a;
-            } else {
-                elementData = Arrays.copyOf(a, size, Object[].class);
-            }
-        } else {
-            // replace with empty array.
-            elementData = EMPTY_ELEMENTDATA;
-        }
-    }
-
-    /**
-     * Trims the capacity of this <tt>ArrayList</tt> instance to be the
-     * list's current size.  An application can use this operation to minimize
-     * the storage of an <tt>ArrayList</tt> instance.
-     */
-    public void trimToSize() {
-        modCount++;
-        if (size < elementData.length) {
-            elementData = (size == 0)
-              ? EMPTY_ELEMENTDATA
-              : Arrays.copyOf(elementData, size);
-        }
-    }
-
-    /**
-     * Increases the capacity of this <tt>ArrayList</tt> instance, if
-     * necessary, to ensure that it can hold at least the number of elements
-     * specified by the minimum capacity argument.
-     *
-     * @param   minCapacity   the desired minimum capacity
-     */
-    public void ensureCapacity(int minCapacity) {
-        int minExpand = (elementData != DEFAULTCAPACITY_EMPTY_ELEMENTDATA)
-            // any size if not default element table
-            ? 0
-            // larger than default for default empty table. It's already
-            // supposed to be at default size.
-            : DEFAULT_CAPACITY;
-
-        if (minCapacity > minExpand) {
-            ensureExplicitCapacity(minCapacity);
-        }
-    }
+    
 
     private static int calculateCapacity(Object[] elementData, int minCapacity) {
         if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
