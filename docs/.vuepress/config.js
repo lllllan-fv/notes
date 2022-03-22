@@ -98,7 +98,7 @@ module.exports = config({
 					title: "源码解读",
 					icon: "",
 					prefix: "source-code/",
-					children: ["arraylist/", "arraylist/code"]
+					children: ["arraylist/",]
 				}
 			],
 
