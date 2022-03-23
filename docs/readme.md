@@ -94,3 +94,12 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 1. 常用数据结构
 
 :::
+
+
+
+::: note 计算机基础
+
+1. 操作系统
+    1. 时分复用、空分复用
+
+:::
