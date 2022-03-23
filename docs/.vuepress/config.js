@@ -122,6 +122,12 @@ module.exports = config({
 					icon: "",
 					prefix: "6/",
 					children: ["2/", "3/", "4/"],
+				},
+				{
+					title: "虚拟机类加载机制",
+					icon: "",
+					prefix: "7/",
+					children: ["2/", "3/", "4/"],
 				}
 			],
 
