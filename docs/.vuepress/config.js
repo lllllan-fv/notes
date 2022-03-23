@@ -201,6 +201,14 @@ module.exports = config({
 			"/db/": [
 				"",
 				"mysql/",
+				{
+					title: "MySQL实战45讲",
+					icon: "",
+					prefix: "mysql45/",
+					children: [
+						"01/", "02/"
+					],
+				}
 			],
 
 			// 数据结构和算法
