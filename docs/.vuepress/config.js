@@ -206,7 +206,7 @@ module.exports = config({
 					icon: "",
 					prefix: "mysql45/",
 					children: [
-						"01/", "02/"
+						"01/", "02/", "03/"
 					],
 				}
 			],
