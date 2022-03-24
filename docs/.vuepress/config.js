@@ -202,19 +202,16 @@ module.exports = config({
 				"",
 				"mysql/",
 				{
-					title: "MySQL实战45讲",
+					title: "MySQL 重要知识点",
 					icon: "",
-					prefix: "mysql45/",
+					prefix: "mysql/",
 					children: [
-						"01/", "02/", "03/"
+						"architecture/",
+						"log-system/",
+						"transaction/",
+						"mvcc/",
 					],
 				},
-				{
-					title: "补充",
-					icon: "",
-					prefix: "def/",
-					children: ["mvcc/"]
-				}
 			],
 
 			// 数据结构和算法
