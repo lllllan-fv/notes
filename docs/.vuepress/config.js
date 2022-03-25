@@ -128,6 +128,12 @@ module.exports = config({
 					icon: "",
 					prefix: "7/",
 					children: ["2/", "3/", "4/"],
+				},
+				{
+					title: "虚拟机字节码执行引擎",
+					icon: "",
+					prefix: "8/",
+					children: ["2/", "3/", "4/", "5/"],
 				}
 			],
 
