@@ -210,6 +210,7 @@ module.exports = config({
 						"log-system/",
 						"transaction/",
 						"mvcc/",
+						"phantom-read/",
 					],
 				},
 			],
