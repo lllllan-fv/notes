@@ -217,6 +217,7 @@ module.exports = config({
 						"transaction/",
 						"mvcc/",
 						"phantom-read/",
+						"index/",
 					],
 				},
 			],
