@@ -229,7 +229,7 @@ module.exports = config({
 					title: "数据结构",
 					icon: "",
 					prefix: "data-structures/",
-					children: [],
+					children: ["bst/"],
 				},
 				{
 					title: "算法",
