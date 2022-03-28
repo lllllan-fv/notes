@@ -333,6 +333,14 @@ public void delete(BSTNode<T> pre, BSTNode<T> node) {
             parent.right = leftMaxValueNode.left;
         }
     }
+        
+    if (pre == null) {
+        root = node;
+    } else if (ori == pre.left) {
+        pre.left = node;
+    } else {
+        pre.right = node;
+    }
 }
 ```
 
