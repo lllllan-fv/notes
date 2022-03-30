@@ -173,7 +173,7 @@ module.exports = config({
 							title: "计算机系统概述",
 							icon: "",
 							prefix: "1/",
-							children: ["1/", "2/", "3/", "4/", "5/", "6/"],
+							children: ["1/", "2/", "3/", "4/", "6/"],
 						},
 						{
 							title: "进程与线程",
