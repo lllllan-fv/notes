@@ -271,6 +271,11 @@ module.exports = config({
 					prefix: "design-pattern/",
 					children: ["agent/"]
 				}
+			],
+
+			// 面经整理
+			"/mianjing/":[
+				"1/",
 			]
 		},
 
