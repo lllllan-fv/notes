@@ -58,7 +58,6 @@ module.exports = config({
 				"6-annotation/",
 				"7-exception/",
 				"8-io/",
-				"9-agent/",
 			],
 
 			// Java 多线程
@@ -252,6 +251,12 @@ module.exports = config({
 					icon: "",
 					prefix: "frame-mode/",
 					children: ["mvc/", "mvvm/"],
+				},
+				{
+					title: "设计模式",
+					icon: "",
+					prefix: "design-pattern/",
+					children: ["agent/"]
 				}
 			]
 		},
