@@ -145,98 +145,93 @@ module.exports = config({
 						}
 					]
 				},
-				// {
-				// 	title: "",
-				// 	icon: "",
-				// 	prefix: "",
-				// 	children: []
-				// },
 			],
 
 
 
 			// 计算机网络
-			"/cs-basic/network/": [
-				"",
-				"interview-questions/",
-				"url-to-page/",
+			"/cs-basic/": [
 				{
-					title: "网络是怎样连接的",
-					incon: "",
-					prefix: "how-is-the-network-connected/",
-					children: ["1/", "2/", "3/", "4/", "5/", "6/"],
+					title: "计算机网络",
+					icon: "",
+					prefix: "network/",
+					children: [
+						"interview-questions/",
+						"url-to-page/",
+						{
+							title: "网络是怎样连接的",
+							incon: "",
+							prefix: "how-is-the-network-connected/",
+							children: ["1/", "2/", "3/", "4/", "5/", "6/"],
+						},
+						{
+							title: "图解HTTP",
+							icon: "",
+							prefix: "diagram-http/",
+							children: [
+								"1/", "2/", "3/", "4/", "5/", "6/",
+								"7/", "8/", "9/", "10/", "11/",
+							],
+						}
+					]
 				},
 				{
-					title: "图解HTTP",
+					title: "操作系统",
 					icon: "",
-					prefix: "diagram-http/",
+					prefix: "os/",
 					children: [
-						"1/", "2/", "3/", "4/", "5/", "6/",
-						"7/", "8/", "9/", "10/", "11/",
-					],
-				}
-			],
-
-			// 操作系统
-			"/cs-basic/os/": [
-				"",
-				"interview-questions/",
-				{
-					title: "王道-操作系统",
-					icon: "",
-					prefix: "wangdao/",
-					children: [
+						"interview-questions/",
 						{
-							title: "计算机系统概述",
+							title: "王道-操作系统",
 							icon: "",
-							prefix: "1/",
-							children: ["1/", "2/", "3/", "4/", "6/"],
-						},
-						{
-							title: "进程与线程",
-							icon: "",
-							prefix: "2/",
-							children: ["1/", "2/", "3/", "4/"],
-						},
-						{
-							title: "内存管理",
-							icon: "",
-							prefix: "3/",
-							children: ["1/", "2/"],
-						},
-						{
-							title: "文件管理",
-							icon: "",
-							prefix: "4/",
-							children: ["1/", "2/", "3/"],
-						},
-						{
-							title: "IO管理",
-							icon: "",
-							prefix: "5/",
-							children: ["1/", "2/", "3/"],
-						},
+							prefix: "wangdao/",
+							children: [
+								{
+									title: "计算机系统概述",
+									icon: "",
+									prefix: "1/",
+									children: ["1/", "2/", "3/", "4/", "6/"],
+								},
+								{
+									title: "进程与线程",
+									icon: "",
+									prefix: "2/",
+									children: ["1/", "2/", "3/", "4/"],
+								},
+								{
+									title: "内存管理",
+									icon: "",
+									prefix: "3/",
+									children: ["1/", "2/"],
+								},
+								{
+									title: "文件管理",
+									icon: "",
+									prefix: "4/",
+									children: ["1/", "2/", "3/"],
+								},
+								{
+									title: "IO管理",
+									icon: "",
+									prefix: "5/",
+									children: ["1/", "2/", "3/"],
+								},
+							]
+						}
 					]
 				}
 			],
 
-			// 数据库
-			"/db/": [
+
+			// mysql
+			"/mysql/": [
 				"",
-				"mysql/",
-				{
-					title: "MySQL 重要知识点",
-					icon: "",
-					prefix: "mysql/",
-					children: [
-						"architecture/",
-						"log-system/",
-						"transaction/",
-						"mvcc/",
-						"phantom-read/",
-						"index/",
-					],
-				},
+				"architecture/",
+				"log-system/",
+				"transaction/",
+				"mvcc/",
+				"phantom-read/",
+				"index/",
 			],
 
 			// 数据结构和算法

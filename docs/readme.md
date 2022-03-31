@@ -26,14 +26,11 @@ features:
   - title: Java 笔记
     link: /java/basic/1-concept/
 
-  - title: 计算机网络
-    link: /cs-basic/network/
+  - title: 计算机基础
+    link: /cs-basic/network/interview-questions/
 
-  - title: 操作系统
-    link: /cs-basic/os/
-
-  - title: 数据库基础
-    link: /db/
+  - title: MySQL
+    link: /mysql/
   
   - title: 数据结构和算法
     link: /ds-and-algorithms/
