@@ -23,14 +23,8 @@ action:
 
 
 features:
-  - title: Java 基础
-    link: /java/basic/
-  - title: Java 容器
-    link: /java/container/
-  - title: Java 多线程
-    link: /java/concurrent/
-  - title: Java 虚拟机
-    link: /java/jvm/
+  - title: Java 笔记
+    link: /java/basic/1-concept/
 
   - title: 计算机网络
     link: /cs-basic/network/

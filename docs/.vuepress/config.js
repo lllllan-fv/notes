@@ -47,94 +47,112 @@ module.exports = config({
 
 		sidebar: {
 
-			// Java 基础
-			"/java/basic/": [
-				"",
-				"1-concept/",
-				"2-grammar/",
-				"3-data/",
-				"4-object/",
-				"5-reflection/",
-				"6-annotation/",
-				"7-exception/",
-				"8-io/",
+			"/java/": [
+				{
+					title: "Java 基础",
+					icon: "",
+					prefix: "basic/",
+					children: [
+						"1-concept/",
+						"2-grammar/",
+						"3-data/",
+						"4-object/",
+						"5-reflection/",
+						"6-annotation/",
+						"7-exception/",
+						"8-io/",
+					]
+				},
+				{
+					title: "Java 容器",
+					icon: "",
+					prefix: "container/",
+					children: [
+						"collection-basic/",
+						{
+							title: "源码解读",
+							icon: "",
+							prefix: "source-code/",
+							children: ["arraylist/",]
+						}
+					]
+				},
+				{
+					title: "Java 多线程",
+					icon: "",
+					prefix: "concurrent/",
+					children: [
+						{
+							title: "深入浅出多线程 - 基础篇",
+							icon: "",
+							prefix: "1/",
+							children: ["1/", "2/", "3/", "4/", "5/"],
+						},
+						{
+							title: "深入浅出多线程 - 原理篇",
+							icon: "",
+							prefix: "2/",
+							children: ["6/", "7/", "8/", "9/", "10/", "11/"],
+						},
+						{
+							title: "深入浅出多线程 - 工具篇",
+							icon: "",
+							prefix: "3/",
+							children: ["12/", "13/", "14/", "15/", "16/", "17/", "18/", "19/", "20/"],
+						},
+						{
+							title: "补充",
+							icon: "",
+							prefix: "def/",
+							children: ["sequential-consistency/"],
+						}
+					]
+				},
+				{
+					title: "Java 虚拟机",
+					icon: "",
+					prefix: "jvm/",
+					children: [
+						{
+							title: "Java内存区域与内存溢出异常",
+							icon: "",
+							prefix: "2/",
+							children: ["1/", "2/"],
+						},
+						{
+							title: "垃圾收集器与内存分配策略",
+							icon: "",
+							prefix: "3/",
+							children: ["1/", "2/", "3/", "4/", "5/", "6/", "7/", "8/"]
+						},
+						{
+							title: "类文件结构",
+							icon: "",
+							prefix: "6/",
+							children: ["2/", "3/", "4/"],
+						},
+						{
+							title: "虚拟机类加载机制",
+							icon: "",
+							prefix: "7/",
+							children: ["2/", "3/", "4/"],
+						},
+						{
+							title: "虚拟机字节码执行引擎",
+							icon: "",
+							prefix: "8/",
+							children: ["2/", "3/", "4/", "5/"],
+						}
+					]
+				},
+				// {
+				// 	title: "",
+				// 	icon: "",
+				// 	prefix: "",
+				// 	children: []
+				// },
 			],
 
-			// Java 多线程
-			"/java/concurrent/": [
-				"",
-				{
-					title: "深入浅出多线程 - 基础篇",
-					icon: "",
-					prefix: "1/",
-					children: ["1/", "2/", "3/", "4/", "5/"],
-				},
-				{
-					title: "深入浅出多线程 - 原理篇",
-					icon: "",
-					prefix: "2/",
-					children: ["6/", "7/", "8/", "9/", "10/", "11/"],
-				},
-				{
-					title: "深入浅出多线程 - 工具篇",
-					icon: "",
-					prefix: "3/",
-					children: ["12/", "13/", "14/", "15/", "16/", "17/", "18/", "19/", "20/"],
-				},
-				{
-					title: "补充",
-					icon: "",
-					prefix: "def/",
-					children: ["sequential-consistency/"],
-				}
-			],
-
-			// Java 容器
-			"/java/container/": [
-				"",
-				"collection-basic/",
-				{
-					title: "源码解读",
-					icon: "",
-					prefix: "source-code/",
-					children: ["arraylist/",]
-				}
-			],
-
-			// Java 虚拟机
-			"/java/jvm/": [
-				"",
-				{
-					title: "Java内存区域与内存溢出异常",
-					icon: "",
-					prefix: "2/",
-					children: ["1/", "2/"],
-				},
-				{
-					title: "垃圾收集器与内存分配策略",
-					icon: "",
-					prefix: "3/",
-					children: ["1/", "2/", "3/", "4/", "5/", "6/", "7/", "8/"]
-				},
-				{
-					title: "类文件结构",
-					icon: "",
-					prefix: "6/",
-					children: ["2/", "3/", "4/"],
-				},
-				{
-					title: "虚拟机类加载机制",
-					icon: "",
-					prefix: "7/",
-					children: ["2/", "3/", "4/"],
-				},
-				{
-					title: "虚拟机字节码执行引擎",
-					icon: "",
-					prefix: "8/",
-					children: ["2/", "3/", "4/", "5/"],
-				}
-			],
 
 
 			// 计算机网络
