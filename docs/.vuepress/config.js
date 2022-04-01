@@ -259,12 +259,12 @@ module.exports = config({
 			// 框架技术
 			"/framework/": [
 				"",
-				{
-					title: "框架模式",
-					icon: "",
-					prefix: "frame-mode/",
-					children: ["mvc/", "mvvm/"],
-				},
+				// {
+				// 	title: "框架模式",
+				// 	icon: "",
+				// 	prefix: "frame-mode/",
+				// 	children: ["mvc/", "mvvm/"],
+				// },
 				{
 					title: "设计模式",
 					icon: "",
@@ -274,7 +274,7 @@ module.exports = config({
 			],
 
 			// 面经整理
-			"/mianjing/":[
+			"/mianjing/": [
 				"1/",
 			]
 		},
