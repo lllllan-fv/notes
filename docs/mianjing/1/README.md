@@ -59,6 +59,13 @@ star: true
 - [ ] Java各类Map对比
 - [ ] 代理模式
     - [x]  代理模式概念，静态代理、动态代理（JDK动态代理、CGlib动态代理）
+    - [ ]  两种代理的区别
+
+
+
+[Cglib和jdk动态代理的区别 - 橙发 - 博客园 (cnblogs.com)](https://www.cnblogs.com/sandaman2019/p/12636727.html)
+
+[你必须会的 JDK 动态代理和 CGLIB 动态代理 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/126503023)
 
 
 
