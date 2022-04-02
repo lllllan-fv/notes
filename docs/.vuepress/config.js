@@ -158,6 +158,7 @@ module.exports = config({
 					children: [
 						"interview-questions/",
 						"url-to-page/",
+						"http-and-https/",
 						{
 							title: "网络是怎样连接的",
 							incon: "",
