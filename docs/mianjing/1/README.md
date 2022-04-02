@@ -91,6 +91,10 @@ star: true
 - [ ] 从输入url到页面显示的详细过程
 - [x] dns解析出错（查不到太具体的答案）
 - [ ] http、https，密钥
+  - [x] http、https的区别
+  - [x] https请求过程
+  - [ ] SSL、TLS
+
 - [ ] sql语句
 - [ ] mysql索引
 - [ ] 创建索引的原则
