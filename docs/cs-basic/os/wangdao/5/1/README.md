@@ -70,7 +70,7 @@ I/O接口(设备控制器)位于CPU与设备之间，它既要与CPU通信，又
 
 
 
-![image-20220402150714751](C:\Users\lllllan\AppData\Roaming\Typora\typora-user-images\image-20220402150714751.png)
+![image-20220402150714751](README.assets/image-20220402150714751.png)
 
 
 
@@ -112,7 +112,7 @@ I/O端口是指设备控制器中可被CPU直接访问的寄存器，主要有�
 
 
 
-![image-20220402150852660](C:\Users\lllllan\AppData\Roaming\Typora\typora-user-images\image-20220402150852660.png)
+![image-20220402150852660](README.assets/image-20220402150852660.png)
 
 ## 二、I/O控制方式
 
@@ -124,7 +124,7 @@ I/O端口是指设备控制器中可被CPU直接访问的寄存器，主要有�
 
 如图5.3(a)所示，计算机从外部设备读取的每个字，CPU需要对外设状态进行循环检查，直到确定该字已经在I/O控制器的数据寄存器中。在程序直接控制方式中,由于CPU的高速性和I/O设备的低速性，致使CPU的绝大部分时间都处于等待I/O设备完成数据I/O的循环测试中，造成了CPU资源的极大浪费。在该方式中，CPU之所以要不断地测试I/O设备的状态，就是因为在CPU中未采用中断机构，使I/O设备无法向CPU报告它已完成了一个字符的输入操作。
 
-![image-20220402150930244](C:\Users\lllllan\AppData\Roaming\Typora\typora-user-images\image-20220402150930244.png)
+![image-20220402150930244](README.assets/image-20220402150930244.png)
 
 程序直接控制方式虽然简单且易于实现，但其缺点也显而易见，由于CPU和I/O设备只能串.行工作，导致CPU的利用率相当低。
 
@@ -154,7 +154,7 @@ I/O端口是指设备控制器中可被CPU直接访问的寄存器，主要有�
 
 图5.4列出了DMA控制器的组成。
 
-![image-20220402151042132](C:\Users\lllllan\AppData\Roaming\Typora\typora-user-images\image-20220402151042132.png)
+![image-20220402151042132](README.assets/image-20220402151042132.png)
 
 要在主机与控制器之间实现成块数据的直接交换,须在DMA控制器中设置如下4类寄存器：
 
@@ -199,7 +199,7 @@ I/O软件涉及的面很宽，往下与硬件有着密切关系，往上又与�
 
 
 
-![image-20220402151335667](C:\Users\lllllan\AppData\Roaming\Typora\typora-user-images\image-20220402151335667.png)
+![image-20220402151335667](README.assets/image-20220402151335667.png)
 
 
 
