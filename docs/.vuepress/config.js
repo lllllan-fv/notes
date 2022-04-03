@@ -253,6 +253,7 @@ module.exports = config({
 					prefix: "algorithms/",
 					children: [
 						"sort/",
+						"sort/unstable-quick-sort/",
 					]
 				}
 			],
