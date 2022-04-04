@@ -184,18 +184,30 @@ public HashMap(Map<? extends K, ? extends V> m) {
 
 
 
-## 添加元素
+## 添加键值对
 
 
 
 
 
-### 添加键值对
+### 添加一个键值对
 
 ```java
 public V put(K key, V value) {
     // 调用 putVal 方法来添加
     return putVal(hash(key), key, value, false, true);
+}
+```
+
+
+
+### 添加一个键值对，原来存在不做修改
+
+```java
+@Override
+public V putIfAbsent(K key, V value) {
+    // 调用 putVal 方法插入键值对，onlyIfAbsent 为 true，表示不修改原来的键值对
+    return putVal(hash(key), key, value, true, true);
 }
 ```
 
@@ -227,7 +239,7 @@ final void putMapEntries(Map<? extends K, ? extends V> m, boolean evict) {
 
 
 
-### 实际执行的添加方法
+### 链表中的添加方法
 
 - hash：键 key 的 hash
 - key：键
@@ -287,7 +299,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict) {
         if (e != null) {
             V oldValue = e.value;
             
-            // onlyIfAbsent 是啥？
+            // onlyIfAbsent 如果为 true，表示如果原来存在键值对，不做修改
             if (!onlyIfAbsent || oldValue == null)
                 // 将指定的 value 覆盖原来的 value
                 e.value = value;
@@ -311,6 +323,477 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent, boolean evict) {
     return null;
 }
 ```
+
+
+
+### 红黑树中的添加方法 ★
+
+不太行，不懂红黑树看不太懂
+
+```java
+final TreeNode<K,V> putTreeVal(HashMap<K,V> map, Node<K,V>[] tab,
+                               int h, K k, V v) {
+    Class<?> kc = null;
+    boolean searched = false;
+    TreeNode<K,V> root = (parent != null) ? root() : this;
+    
+    // 从树的根节点开始
+    for (TreeNode<K,V> p = root;;) {
+        int dir, ph; 
+        K pk;
+        if ((ph = p.hash) > h)
+            dir = -1;
+        else if (ph < h)
+            dir = 1;
+        else if ((pk = p.key) == k || (k != null && k.equals(pk)))
+            return p;
+        else if ((kc == null &&
+                  (kc = comparableClassFor(k)) == null) ||
+                 (dir = compareComparables(kc, k, pk)) == 0) {
+            if (!searched) {
+                TreeNode<K,V> q, ch;
+                searched = true;
+                if (((ch = p.left) != null &&
+                     (q = ch.find(h, k, kc)) != null) ||
+                    ((ch = p.right) != null &&
+                     (q = ch.find(h, k, kc)) != null))
+                    return q;
+            }
+            dir = tieBreakOrder(k, pk);
+        }
+
+        TreeNode<K,V> xp = p;
+        if ((p = (dir <= 0) ? p.left : p.right) == null) {
+            Node<K,V> xpn = xp.next;
+            TreeNode<K,V> x = map.newTreeNode(h, k, v, xpn);
+            if (dir <= 0)
+                xp.left = x;
+            else
+                xp.right = x;
+            xp.next = x;
+            x.parent = x.prev = xp;
+            if (xpn != null)
+                ((TreeNode<K,V>)xpn).prev = x;
+            moveRootToFront(tab, balanceInsertion(root, x));
+            return null;
+        }
+    }
+}
+```
+
+
+
+
+
+## 获取键值对
+
+
+
+### 获取 value，1
+
+```java
+public V get(Object key) {
+    Node<K,V> e;
+    // 调用 getNode 方法，返回值为空代表不存在 key 的键值对
+    return (e = getNode(hash(key), key)) == null ? null : e.value;
+}
+```
+
+
+
+### 获取 value，2
+
+```java
+@Override
+public V getOrDefault(Object key, V defaultValue) {
+    Node<K,V> e;
+    // 调用 getNode 方法查询 key 对应的 value，若查询不到返回形参 defaultValue
+    return (e = getNode(hash(key), key)) == null ? defaultValue : e.value;
+}
+```
+
+
+
+
+
+### 是否包含 key
+
+```java
+public boolean containsKey(Object key) {
+    // 调用 getNode
+    return getNode(hash(key), key) != null;
+}
+```
+
+
+
+### 是否包含 value
+
+```java
+public boolean containsValue(Object value) {
+    Node<K,V>[] tab; 
+    V v;
+    if ((tab = table) != null && size > 0) {
+        for (int i = 0; i < tab.length; ++i) {
+            // 最暴力的办法，遍历整个数组的所有链表
+            for (Node<K,V> e = tab[i]; e != null; e = e.next) {
+                if ((v = e.value) == value ||
+                    (value != null && value.equals(v)))
+                    return true;
+            }
+        }
+    }
+    return false;
+}
+```
+
+
+
+### getNode
+
+```java
+final Node<K,V> getNode(int hash, Object key) {
+    Node<K,V>[] tab; 
+    Node<K,V> first, e; 
+    int n; K k;
+    
+    // 如果数组不为空，获取对应索引处的链表
+    if ((tab = table) != null && (n = tab.length) > 0 &&
+        (first = tab[(n - 1) & hash]) != null) {
+        
+        if (first.hash == hash && // 单独判断一下第一个节点，不知道有什么用
+            ((k = first.key) == key || (key != null && key.equals(k))))
+            return first;
+        
+        if ((e = first.next) != null) {
+            // 如果该链表已经树化，调用对应的 getTreeNode
+            if (first instanceof TreeNode)
+                return ((TreeNode<K,V>)first).getTreeNode(hash, key);
+            
+            // 遍历链表，比较 key
+            do {
+                if (e.hash == hash &&
+                    ((k = e.key) == key || (key != null && key.equals(k))))
+                    return e;
+            } while ((e = e.next) != null);
+        }
+    }
+    
+    // 遍历结束，没有相同的 key，返回 null
+    return null;
+}
+```
+
+
+
+## 删除键值对
+
+
+
+### 删除 key
+
+```java
+public V remove(Object key) {
+    Node<K,V> e;
+    
+    // 调用 removeNode，返回原键值对的 value
+    return (e = removeNode(hash(key), key, null, false, true)) == null ? null : e.value;
+}
+```
+
+
+
+### 删除指定键值对
+
+```java
+@Override
+public boolean remove(Object key, Object value) {
+    // 调用 removeNode 方法，matchValue 为 true，表示键值对必须严格 key、value 都相等才能删除
+    return removeNode(hash(key), key, value, true, true) != null;
+}
+```
+
+
+
+### 删除整个map
+
+```java
+public void clear() {
+    Node<K,V>[] tab;
+    modCount++;
+    if ((tab = table) != null && size > 0) {
+        size = 0;
+        // 遍历整个数组，删除所有的链表
+        // 索引处置为 null，链表失去引用等待gc回收
+        for (int i = 0; i < tab.length; ++i)
+            tab[i] = null;
+    }
+}
+```
+
+
+
+### 链表中的删除方法
+
+```java
+final Node<K,V> removeNode(int hash, Object key, Object value,
+                           boolean matchValue, boolean movable) {
+    Node<K,V>[] tab; 
+    Node<K,V> p; 
+    int n, index;
+    
+    // 只要数组不为空，就获取对应索引处的链表
+    if ((tab = table) != null && (n = tab.length) > 0 &&
+        (p = tab[index = (n - 1) & hash]) != null) {
+        
+        Node<K,V> node = null, e; 
+        K k; 
+        V v;
+   		
+        // 单独判断第一个节点
+        if (p.hash == hash &&
+            ((k = p.key) == key || (key != null && key.equals(k))))
+            node = p;
+        
+        else if ((e = p.next) != null) {
+            // 如果该链表已经树化，调用对应的 getTreeNode
+            if (p instanceof TreeNode)
+                node = ((TreeNode<K,V>)p).getTreeNode(hash, key);
+            
+            // 遍历链表
+            else {
+                do {
+                    if (e.hash == hash &&
+                        ((k = e.key) == key ||
+                         (key != null && key.equals(k)))) {
+                        node = e;
+                        break;
+                    }
+                    p = e;
+                } while ((e = e.next) != null);
+            }
+        }
+        // 如果找到对应的 key，获取该节点
+        
+        // remove函数中的 matchValue 为 false，标识别管 value值，直接删除键值对
+        // 其他时候必须当前键值对的 value 和形参中的 value 相等才可以删除
+        if (node != null && (!matchValue || (v = node.value) == value ||
+                             (value != null && value.equals(v)))) {
+            
+            // 如果链表已经树化，调用对应的 removeTreeNode
+            if (node instanceof TreeNode)
+                ((TreeNode<K,V>)node).removeTreeNode(this, tab, movable);
+            
+            // 该节点刚好是链表第一个节点，数组索引直接改到 node.next
+            else if (node == p)
+                tab[index] = node.next;
+            
+            // 该节点在链表中间
+            else
+                p.next = node.next;
+            
+            ++modCount;
+            --size;
+            // 不知道做了什么
+            afterNodeRemoval(node);
+            return node;
+        }
+    }
+    
+    return null;
+}
+```
+
+
+
+### 红黑树中的删除方法 ★
+
+乐了，看不懂
+
+```java
+final void removeTreeNode(HashMap<K,V> map, Node<K,V>[] tab,
+                          boolean movable) {
+    int n;
+    
+    // 数组为空，别搞了
+    if (tab == null || (n = tab.length) == 0)
+        return;
+    
+    int index = (n - 1) & hash;
+    TreeNode<K,V> first = (TreeNode<K,V>)tab[index], root = first, rl;
+    TreeNode<K,V> succ = (TreeNode<K,V>)next, pred = prev;
+    
+    // 不知道 pred/prev 指代什么节点，
+    // 数组索引处指向 first
+    if (pred == null)
+        tab[index] = first = succ;
+    else
+        pred.next = succ;
+    if (succ != null)
+        succ.prev = pred;
+    if (first == null)
+        return;
+    if (root.parent != null)
+        root = root.root();
+    
+    if (root == null
+        || (movable
+            && (root.right == null
+                || (rl = root.left) == null
+                || rl.left == null))) {
+        
+        // 树中节点太少（根为空，左子树为空，右子树为空），退化为链表
+        tab[index] = first.untreeify(map);  // too small
+        return;
+    }
+    
+    TreeNode<K,V> p = this, pl = left, pr = right, replacement;
+    if (pl != null && pr != null) {
+        TreeNode<K,V> s = pr, sl;
+        while ((sl = s.left) != null) // find successor
+            s = sl;
+        boolean c = s.red; s.red = p.red; p.red = c; // swap colors
+        TreeNode<K,V> sr = s.right;
+        TreeNode<K,V> pp = p.parent;
+        if (s == pr) { // p was s's direct parent
+            p.parent = s;
+            s.right = p;
+        }
+        else {
+            TreeNode<K,V> sp = s.parent;
+            if ((p.parent = sp) != null) {
+                if (s == sp.left)
+                    sp.left = p;
+                else
+                    sp.right = p;
+            }
+            if ((s.right = pr) != null)
+                pr.parent = s;
+        }
+        p.left = null;
+        if ((p.right = sr) != null)
+            sr.parent = p;
+        if ((s.left = pl) != null)
+            pl.parent = s;
+        if ((s.parent = pp) == null)
+            root = s;
+        else if (p == pp.left)
+            pp.left = s;
+        else
+            pp.right = s;
+        if (sr != null)
+            replacement = sr;
+        else
+            replacement = p;
+    }
+    else if (pl != null)
+        replacement = pl;
+    else if (pr != null)
+        replacement = pr;
+    else
+        replacement = p;
+    if (replacement != p) {
+        TreeNode<K,V> pp = replacement.parent = p.parent;
+        if (pp == null)
+            root = replacement;
+        else if (p == pp.left)
+            pp.left = replacement;
+        else
+            pp.right = replacement;
+        p.left = p.right = p.parent = null;
+    }
+
+    TreeNode<K,V> r = p.red ? root : balanceDeletion(root, replacement);
+
+    if (replacement == p) {  // detach
+        TreeNode<K,V> pp = p.parent;
+        p.parent = null;
+        if (pp != null) {
+            if (p == pp.left)
+                pp.left = null;
+            else if (p == pp.right)
+                pp.right = null;
+        }
+    }
+    if (movable)
+        moveRootToFront(tab, r);
+}
+```
+
+
+
+## 替换键值对
+
+
+
+### 替换键值对1
+
+```java
+@Override
+public V replace(K key, V value) {
+    Node<K,V> e;
+    // 如果表中存在 key，将原来的 value 替换为新的 value
+    if ((e = getNode(hash(key), key)) != null) {
+        V oldValue = e.value;
+        e.value = value;
+        // 不知道做了什么
+        afterNodeAccess(e);
+        // 返回原来的 value
+        return oldValue;
+    }
+    return null;
+}
+```
+
+
+
+### 替换键值对2
+
+```java
+@Override
+public boolean replace(K key, V oldValue, V newValue) {
+    Node<K,V> e; V v;
+    // 如果表中存在 key，并且当前 value 等于指定的形参 oldValue，替换为形参 newValue
+    if ((e = getNode(hash(key), key)) != null &&
+        ((v = e.value) == oldValue || (v != null && v.equals(oldValue)))) {
+        e.value = newValue;
+        afterNodeAccess(e);
+        return true;
+    }
+    return false;
+}
+```
+
+
+
+### 替换指定集合
+
+```java
+@Override
+public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function) {
+    Node<K,V>[] tab;
+    
+    // 指定集合为空，抛出异常
+    if (function == null)
+        throw new NullPointerException();
+    
+    // 当前数组不为空
+    if (size > 0 && (tab = table) != null) {
+        int mc = modCount;
+        // 遍历数组中的所有链表
+        for (int i = 0; i < tab.length; ++i) {
+            for (Node<K,V> e = tab[i]; e != null; e = e.next) {
+                // 调用指定集合的 apply 方法，不知道在干嘛
+                e.value = function.apply(e.key, e.value);
+            }
+        }
+        if (modCount != mc)
+            throw new ConcurrentModificationException();
+    }
+}
+```
+
+
 
 
 
@@ -537,6 +1020,61 @@ final void treeify(Node<K,V>[] tab) {
 
 
 
+### split ★
+
+红黑树部分都看不懂
+
+```java
+final void split(HashMap<K,V> map, Node<K,V>[] tab, int index, int bit) {
+    TreeNode<K,V> b = this;
+    // Relink into lo and hi lists, preserving order
+    TreeNode<K,V> loHead = null, loTail = null;
+    TreeNode<K,V> hiHead = null, hiTail = null;
+    int lc = 0, hc = 0;
+    for (TreeNode<K,V> e = b, next; e != null; e = next) {
+        next = (TreeNode<K,V>)e.next;
+        e.next = null;
+        if ((e.hash & bit) == 0) {
+            if ((e.prev = loTail) == null)
+                loHead = e;
+            else
+                loTail.next = e;
+            loTail = e;
+            ++lc;
+        }
+        else {
+            if ((e.prev = hiTail) == null)
+                hiHead = e;
+            else
+                hiTail.next = e;
+            hiTail = e;
+            ++hc;
+        }
+    }
+
+    if (loHead != null) {
+        if (lc <= UNTREEIFY_THRESHOLD)
+            tab[index] = loHead.untreeify(map);
+        else {
+            tab[index] = loHead;
+            if (hiHead != null) // (else is already treeified)
+                loHead.treeify(tab);
+        }
+    }
+    if (hiHead != null) {
+        if (hc <= UNTREEIFY_THRESHOLD)
+            tab[index + bit] = hiHead.untreeify(map);
+        else {
+            tab[index + bit] = hiHead;
+            if (loHead != null)
+                hiHead.treeify(tab);
+        }
+    }
+}
+```
+
+
+
 
 
 ## 其他方法
@@ -601,6 +1139,91 @@ static final int tableSizeFor(int cap) {
     n |= n >>> 8;
     n |= n >>> 16;
     return (n < 0) ? 1 : (n >= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + 1;
+}
+```
+
+
+
+### computeIfAbsent
+
+```java
+@Override
+public V computeIfAbsent(K key,
+                         Function<? super K, ? extends V> mappingFunction) {
+    if (mappingFunction == null)
+        throw new NullPointerException();
+    int hash = hash(key);
+    Node<K,V>[] tab; Node<K,V> first; int n, i;
+    int binCount = 0;
+    TreeNode<K,V> t = null;
+    Node<K,V> old = null;
+    if (size > threshold || (tab = table) == null ||
+        (n = tab.length) == 0)
+        n = (tab = resize()).length;
+    if ((first = tab[i = (n - 1) & hash]) != null) {
+        if (first instanceof TreeNode)
+            old = (t = (TreeNode<K,V>)first).getTreeNode(hash, key);
+        else {
+            Node<K,V> e = first; K k;
+            do {
+                if (e.hash == hash &&
+                    ((k = e.key) == key || (key != null && key.equals(k)))) {
+                    old = e;
+                    break;
+                }
+                ++binCount;
+            } while ((e = e.next) != null);
+        }
+        V oldValue;
+        if (old != null && (oldValue = old.value) != null) {
+            afterNodeAccess(old);
+            return oldValue;
+        }
+    }
+    V v = mappingFunction.apply(key);
+    if (v == null) {
+        return null;
+    } else if (old != null) {
+        old.value = v;
+        afterNodeAccess(old);
+        return v;
+    }
+    else if (t != null)
+        t.putTreeVal(this, tab, hash, key, v);
+    else {
+        tab[i] = newNode(hash, key, v, first);
+        if (binCount >= TREEIFY_THRESHOLD - 1)
+            treeifyBin(tab, hash);
+    }
+    ++modCount;
+    ++size;
+    afterNodeInsertion(true);
+    return v;
+}
+```
+
+
+
+### computeIfPresent
+
+```java
+public V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
+    if (remappingFunction == null)
+        throw new NullPointerException();
+    Node<K,V> e; V oldValue;
+    int hash = hash(key);
+    if ((e = getNode(hash, key)) != null &&
+        (oldValue = e.value) != null) {
+        V v = remappingFunction.apply(key, oldValue);
+        if (v != null) {
+            e.value = v;
+            afterNodeAccess(e);
+            return v;
+        }
+        else
+            removeNode(hash, key, null, false, true);
+    }
+    return null;
 }
 ```
 
