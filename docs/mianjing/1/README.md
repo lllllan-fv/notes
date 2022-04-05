@@ -44,7 +44,7 @@ star: true
 
 1. 自我介绍 x 1 
 2. 项目深挖(整体架构，技术对比和选择原因，负载均衡策略，几种io模型，这块比较熟悉说了很多，面试官也没有打断，还追问了epoll具体实现，触发方式等) 
-3. hashmap原理,扩容,问了我hashmap怎么缩容(这里应该说红黑树退化链表的，hashmap没有缩容，我还以为自己记错了😭) 
+3. [hashmap原理](../../java/container/source-code/hashmap/),扩容,问了我hashmap怎么缩容(这里应该说红黑树退化链表的，hashmap没有缩容，我还以为自己记错了😭) 
 4. hashtable hashmap synchronizedmap concurrentmap(细说，这里我紧张，面试官开始引导我，爱了！！！) 
 5. [代理模式](../../framework/design-pattern/agent/) （静态动态，动态的两种方式及区别，cglib缺点我说了final和首次字节码生成的效率） 
 6. 快排归并，区别，手撕时间复杂度推导 
@@ -56,6 +56,9 @@ star: true
 
 
 - [ ] HashMap 扩容、退化
+    - [x] 基本的put和get
+    - [ ] 红黑树相关的操作
+
 - [ ] Java各类Map对比
 - [x] 代理模式
     - [x]  代理模式概念，静态代理、动态代理（JDK动态代理、CGlib动态代理）
@@ -77,7 +80,7 @@ star: true
 8. mysql索引(这里说了b+树，感觉面试官问的是唯一索引聚集索引那些，理解错意思x2) 
 9. 创建索引的原则(区分度，是否是查询时使用，插入性能和读取性能权衡，减少回表) 
 10. ACID(每个都问了细节) 
-11. MVCC 
+11. [MVCC](../../mysql/mvcc/) 
 12. 用过的设计模式(提了项目里的代理模式，aqs的模板方法模式) 
 13. spring,springmvc中代理模式用在哪些地方 
 14. aop 
@@ -98,12 +101,18 @@ star: true
 - [ ] sql语句
 - [ ] mysql索引
 - [ ] 创建索引的原则
-- [ ] ACID
-- [ ] MVCC
+- [x] ACID
+- [x] MVCC
 - [ ] 设计模式
 - [ ] spring中的代理模式
 - [ ] aop
 - [x] 稳定快排
+
+
+
+[细说Spring——AOP详解（AOP概览）_Jivan2233的博客-CSDN博客_aop](https://blog.csdn.net/q982151756/article/details/80513340)
+
+
 
 
 
