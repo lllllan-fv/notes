@@ -91,7 +91,7 @@ star: true
 
 
 
-- [ ] 从输入url到页面显示的详细过程
+- [x] 从输入url到页面显示的详细过程
 - [x] dns解析出错（查不到太具体的答案）
 - [ ] http、https，密钥
   - [x] http、https的区别
