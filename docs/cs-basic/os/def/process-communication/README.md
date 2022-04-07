@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 操作系统
+title: 进程间通信
 
 # 设置作者
 author: lllllan
