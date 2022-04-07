@@ -73,7 +73,7 @@ module.exports = config({
 							title: "源码解读",
 							icon: "",
 							prefix: "source-code/",
-							children: ["arraylist/","hashmap/"]
+							children: ["arraylist/", "hashmap/"]
 						}
 					]
 				},
@@ -171,7 +171,7 @@ module.exports = config({
 							prefix: "diagram-http/",
 							children: [
 								"1/", "2/", "3/", "4/", "5/", "6/",
-								"7/", "8/", "9/", "10/", "11/",
+								"7/", "8/", "9/", "10/",
 							],
 						}
 					]
