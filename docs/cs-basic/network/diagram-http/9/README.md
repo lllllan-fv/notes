@@ -47,7 +47,7 @@ star: true
 
 ::: info SPDY
 
-SPDY（读作“SPeeDY”）是[Google](https://baike.baidu.com/item/Google)开发的基于[TCP](https://baike.baidu.com/item/TCP/33012)的会话层 [1] 协议，用以最小化网络延迟，提升网络速度，优化用户的网络使用体验。SPDY并不是一种用于替代HTTP的协议，而是对[HTTP](https://baike.baidu.com/item/HTTP)协议的增强。新协议的功能包括数据流的多路复用、请求优先级以及HTTP报头压缩。谷歌表示，引入[SPDY协议](https://baike.baidu.com/item/SPDY协议/15652060)后，在实验室测试中页面加载速度比原先快64%
+SPDY（读作“SPeeDY”）是[Google](https://baike.baidu.com/item/Google)开发的基于[TCP](https://baike.baidu.com/item/TCP/33012)的会话层协议，用以最小化网络延迟，提升网络速度，优化用户的网络使用体验。SPDY并不是一种用于替代HTTP的协议，而是对[HTTP](https://baike.baidu.com/item/HTTP)协议的增强。新协议的功能包括数据流的多路复用、请求优先级以及HTTP报头压缩。谷歌表示，引入[SPDY协议](https://baike.baidu.com/item/SPDY协议/15652060)后，在实验室测试中页面加载速度比原先快64%
 
 :::
 
