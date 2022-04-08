@@ -46,7 +46,7 @@ star: true
 6. socket有使用过吗? 
 7.  Java对http1.1 keep-alive的实现，[http的keep-alive和tcp的keepalive](../../cs-basic/network/keep-alive/)
 8.  底层如何通过socket传输数据? 如何知道是那个请求的数据? 
-9.  讲讲多路复用?
+9.  讲讲[多路复用](../../cs-basic/os/def/multiplexing/)
 10.  mybatis源码?不会 
 11.  说一下你对索引的理解,聚集索引 和 非聚集索引 
 12.  为什么索引会采用B+树? 
@@ -66,6 +66,10 @@ star: true
   - [ ] keep-alive 实现，查不到原理啊
 
 - [ ] 多路复用、时分复用、空分复用
+    - [x] IO多路复用
+    - [ ] 时分复用
+    - [ ] 空分复用
+
 - [ ] 索引理解
   - [ ] 聚簇索引
   - [ ] 非聚簇索引
