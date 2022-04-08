@@ -30,7 +30,7 @@ star: true
 
 
 
-[[春招 已oc\] 字节 成都 飞书后端 人力套件 一二三面经_笔经面经_牛客网 (nowcoder.com)](https://www.nowcoder.com/discuss/868973?type=0&order=7&pos=7&page=1&source_id=discuss_center_0_nctrack&channel=1009&ncTraceId=d0a73883bdb740f3968ec2e23effb273.353.16493833740621503&gio_id=C91C10B51FF30120EDE03275F6698FF2-1649383374967)
+[春招 已oc 字节 成都 飞书后端 人力套件 一二三面经_笔经面经_牛客网 (nowcoder.com)](https://www.nowcoder.com/discuss/868973?type=0&order=7&pos=7&page=1&source_id=discuss_center_0_nctrack&channel=1009&ncTraceId=d0a73883bdb740f3968ec2e23effb273.353.16493833740621503&gio_id=C91C10B51FF30120EDE03275F6698FF2-1649383374967)
 
 
 
@@ -39,7 +39,7 @@ star: true
 ## 2022.03.19   1面 
 
 1.  项目介绍 
-2. 发送方发送fin之后进入什么状态,接收方进入什么状态? 
+2. [发送方发送fin之后进入什么状态，接收方进入什么状态? ](../../cs-basic/network/interview-questions/#_3-1-四次挥手流程)
 3.  进程通信的方式? 
 4.  什么时候会用到管道
 5.  管道的底层原理是什么?
@@ -55,10 +55,10 @@ star: true
 
 ---
 
-- [ ] TCP挥手
-  - [ ] 每个包发送之后的状态
+- [x] TCP挥手
+  - [x] 每个包发送之后的状态
 - [ ] 进程通信方式
-  - [ ] 管道的底层原理
+  - [ ] 管道的底层原理 - 看不懂
   - [ ] socket
     - [ ] 底层、怎么知道哪个请求的数据
 - [ ] http1.1
