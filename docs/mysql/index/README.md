@@ -382,3 +382,9 @@ mysql> select * from tuser where name like '张%' and age = 10 and ismale = 1;
 图3中，在(name,age)索引里面我特意去掉了age的值，这个过程InnoDB并不会去看age的值，只是按顺序把“name第一个字是’张’”的记录一条条取出来回表。因此，需要回表4次。
 
 图4跟图3的区别是，InnoDB在(name,age)索引内部就判断了age是否等于10，对于不等于10的记录，直接判断并跳过。在我们的这个例子中，只需要对ID4、ID5这两条记录回表取数据判断，就只需要回表2次。
+
+
+
+## 三、索引类型
+
+[通俗易懂 索引、单列索引、复合索引、主键、唯一索引、聚簇索引、非聚簇索引、唯一聚簇索引 的区别与联系 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/66553466)
