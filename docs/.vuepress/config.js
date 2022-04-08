@@ -184,6 +184,7 @@ module.exports = config({
 					children: [
 						"",
 						"def/process-communication/",
+						"def/multiplexing/",
 						// {
 						// 	title: "",
 						// 	icon: "",
