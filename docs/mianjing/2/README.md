@@ -44,7 +44,7 @@ star: true
 4.  什么时候会用到管道
 5.  管道的底层原理是什么?
 6. socket有使用过吗? 
-7.  Java对http1.1 keep-alive的实现
+7.  Java对http1.1 keep-alive的实现，[http的keep-alive和tcp的keepalive](../../cs-basic/network/keep-alive/)
 8.  底层如何通过socket传输数据? 如何知道是那个请求的数据? 
 9.  讲讲多路复用?
 10.  mybatis源码?不会 
@@ -63,7 +63,7 @@ star: true
     - [ ] 底层、怎么知道哪个请求的数据
 - [ ] http1.1
   - [ ] http各版本区别
-  - [ ] keep-alive 实现
+  - [ ] keep-alive 实现，查不到原理啊
 
 - [ ] 多路复用、时分复用、空分复用
 - [ ] 索引理解
