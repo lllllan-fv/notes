@@ -271,7 +271,7 @@ star: true
 
 
 
-::: Belady 异常
+::: danger Belady 异常
 
 FIFO 算法还会产生所分配的物理块数增大而页故障数不减反增的异常现象，称为Belady异常。只有FIFO算法可能出现Belady异常，LRU 和OPT算法永远不会出现Belady异常。
 
