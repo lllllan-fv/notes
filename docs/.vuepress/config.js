@@ -286,7 +286,7 @@ module.exports = config({
 
 			// 面经整理
 			"/mianjing/": [
-				"1/", "2/"
+				"1/", "2/", "3/",
 			]
 		},
 
