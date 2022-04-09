@@ -93,6 +93,8 @@ star: true
 
 
 
+[解决哈希冲突（四种方法）_君诀的博客-CSDN博客_解决哈希冲突的方法](https://blog.csdn.net/qq_48241564/article/details/118613312)
+
 地址转换 [内存管理概念 | lllllan](http://blog.lllllan.cn/cs-basic/os/wangdao/3/1/#_4-2-基本地址变换机构)
 
 

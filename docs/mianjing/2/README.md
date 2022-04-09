@@ -44,7 +44,7 @@ star: true
 4.  什么时候会用到管道
 5.  管道的底层原理是什么?
 6. socket有使用过吗? 
-7.  Java对http1.1 keep-alive的实现，[http的keep-alive和tcp的keepalive](../../cs-basic/network/keep-alive/)
+7.  Java对http1.1 keep-alive的实现，[http的keep-alive和tcp的keepalive](../../cs-basic/network/keep-alive/)、[http各版本区别](../../cs-basic/network/http-and-https/#http不同版本之间的区别)
 8.  底层如何通过socket传输数据? 如何知道是那个请求的数据? 
 9.  讲讲[多路复用](../../cs-basic/os/def/multiplexing/)
 10.  mybatis源码?不会 
@@ -62,14 +62,11 @@ star: true
   - [ ] socket
     - [ ] 底层、怎么知道哪个请求的数据
 - [ ] http1.1
-  - [ ] http各版本区别
+  - [x] http各版本区别
   - [ ] keep-alive 实现，查不到原理啊
-
 - [ ] 多路复用
     - [x] IO多路复用
     - [x] 时分复用
-    - [ ] 空分复用
-
 - [ ] 索引理解
   - [ ] 聚簇索引
   - [ ] 非聚簇索引
@@ -85,7 +82,7 @@ star: true
 1.  自我介绍 
 2.  了解linux 嘛
 3.  Linux 中 怎么排查对应的程序 占用内存 或者 使用cpu? top
-4.  一个请求 从 输入网址到返回
+4.  [一个请求从输入网址到返回](../../cs-basic/network/url-to-page/)
 5.  HTTPS加密流程 
 6. spring 的设计模式 
 7.  IOC 和 AOP
@@ -103,7 +100,7 @@ star: true
 
 - [ ] linux
   - [ ] 排查对应程序 占用内存、使用CPU情况
-- [ ] url到页面显示
+- [x] url到页面显示
 - [ ] https加密流程
 - [ ] spring设计模式
 - [ ] ioc、aop
