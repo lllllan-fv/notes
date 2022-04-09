@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 字节跳动 抖音直播支付 日常实习面经
+title: 字节|抖音直播支付|日常实习
 
 # 设置作者
 author: lllllan
