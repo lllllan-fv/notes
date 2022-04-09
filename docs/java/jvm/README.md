@@ -33,6 +33,7 @@ star: true
 
 - [面试官 | JVM 为什么使用元空间替换了永久代？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/111809384)
 - [【JVM】JVM加载class文件的原理机制_FAIRY哦的博客-CSDN博客_jvm加载类文件原理机制](https://blog.csdn.net/renjingjingya0429/article/details/88525915)
+- [java对象的创建过程_你别过来的博客-CSDN博客_对象的创建过程](https://blog.csdn.net/fly_rice/article/details/82354188)
 
 :::
 
@@ -109,3 +110,8 @@ JVM中类的装在是由类加载器和它的子类来实现的，Java中的类�
 ### 类加载的动态性体现
 
 一个应用程序总是由n多个类组成，Java程序启动时，并不是一次把所有的类全部加载再运行，他总是把保证程序运行的基础类一次性加载到JVM中，其他类等到JVM用到的时候再加载，这样是为了节省内存的开销，因为Java最早就是为嵌入式系统而设计的，内存宝贵，而用到时再加载这也是Java动态性的一种体现。
+
+
+## 对象创建的过程 ★
+
+[对象创建过程](2/2/#一、对象的创建过程)
