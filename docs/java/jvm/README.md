@@ -53,3 +53,13 @@ JDK1.8 以前，采用的是永久代。当时的堆和方法区在逻辑上是�
 
 JDK1.8 之后，取消了永久代，改用元空间。元空间不再和堆连续，而是 ==存在于本地内存== 。这么做的好处是，只要本地内存足够，他就不会像永久代一样出现OOM：`java.lang.OutOfMemoryError: PermGen space`
 
+
+
+## 什么时候触发 Full GC
+
+
+
+1. 老年代空间不足。老年代只有在新生代对象转入及创建大对象、大数组是2才会出现不足的现象；当执行 Full GC 之后空间仍然得不到满足，则抛出 `java.lang.OutOfMemoryError: Java heap space`
+2. 方法区空间不足。当系统中要加载、反射的类和调用的方法较多时，方法区可能会被占满；当执行 Full GC 之后空间仍然得不到满足，则抛出 `java.lang.OutOfMemoryError: PermGen space`
+3. 对于采用CMS进行老年代GC的程序而言，尤其要注意GC日志中是否有promotion failed和concurrent mode failure两种状况，当这两种状况出现时可能会触发Full GC。
+4. 统计得到的Minor GC晋升到旧生代的平均大小大于旧生代的剩余空间。[空间担保机制](3/8/#五、空间分配担保)
