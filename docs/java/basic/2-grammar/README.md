@@ -35,6 +35,7 @@ star: true
 
 - [JavaGuide](https://javaguide.cn/)
 - [还不知道泛型是什么？这一篇深入浅出泛型教学！](https://zhuanlan.zhihu.com/p/382239048)
+- [详解Java 中 static 的作用 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/259368621)
 
 :::
 
@@ -136,6 +137,16 @@ System.out.println(null instanceof Object);
 3. 被final修饰的变量不可以被改变。如果修饰引用，那么表示引用不可变，引用指向的内容可变.
 4. 被final修饰的方法，JVM会尝试将其内联，以提高运行效率 
 5. 被final修饰的常量，在编译阶段会存入常量池中
+
+
+
+### 3.3 static 的作用
+
+
+
+1. static 成员变量/成员方法：称为静态变量和静态方法，属于类而非实例。因此可以通过 `类名.静态变量名/静态方法名` 的方式来获取变量或者调用，而不用创建实例
+2. static 代码块：称为静态代码块，会在JVM加载类时执行，可以做一些类成员变量的初始化工作
+3. static 内部类：称为静态内部类，静态内部类只能访问外部类的静态方法和静态变量，而不能访问其实例变量。
 
 
 
