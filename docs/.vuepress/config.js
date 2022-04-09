@@ -113,6 +113,7 @@ module.exports = config({
 					icon: "",
 					prefix: "jvm/",
 					children: [
+						"",
 						{
 							title: "Java内存区域与内存溢出异常",
 							icon: "",
