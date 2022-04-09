@@ -56,10 +56,8 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 
 ::: tip 数据库
 
-1. 存储引擎
-2. 聚集索引
-3. B+树
-3. 解决幻读
+- [ ] B+树
+- [ ] MySQL解决幻读
 
 :::
 
@@ -67,15 +65,13 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 
 ::: info Java
 
-1. JVM
-    1. OOM
-    2. 即时编译技术、逃逸分析技术
-    3. 线程本地分配缓冲区 TLAB
-    4. 指针碰撞、空闲列表
-2. 集合
-    1. HashMap 扩容机制（扩容后的重新分布）
-3. AOP
-4. 缓存架构 - [彻底搞清楚什么是伪共享](https://zhuanlan.zhihu.com/p/187593289)
+- [ ] JVM
+    - [ ] 即时编译技术、逃逸分析技术
+    - [ ] 线程本地分配缓冲区TLAB
+    - [ ] 指针碰撞、空闲列表
+- [ ] 集合
+    - [ ] fail-fast
+- [ ] AOP、AOC
 
 
 :::
@@ -84,17 +80,6 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 
 ::: warning 面试题
 
-1. 海量数据处理
-1. 排序算法
-1. 常用数据结构
-
-:::
-
-
-
-::: note 计算机基础
-
-1. 操作系统
-    1. 时分复用、空分复用
+- [ ] 海量数据处理
 
 :::
