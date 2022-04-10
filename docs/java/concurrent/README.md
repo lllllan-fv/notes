@@ -186,3 +186,26 @@ synchronized (lock) {
 但是在多线程下，这个重排序可能会导致一些问题，见 [禁止重排序 | 多线程下重排序的危害](2/8/#_2-2-禁止重排序)
 
 使用 volatile 修饰以后，会对重排序做一定的限制。
+
+
+
+## interrupted 和 isInterrupted ★
+
+```java
+public static boolean interrupted() {
+    return currentThread().isInterrupted(true);
+}
+
+public boolean isInterrupted() {
+    return isInterrupted(false);
+}
+
+private native boolean isInterrupted(boolean ClearInterrupted);
+```
+
+
+
+看源代码，两个方法都会调用同一个方法 `isInterrupted(boolean ClearInterrupted)`，返回值是该线程的中断标识。
+
+区别在于，调用 `interrupted()` 方法会清楚中断状态，而 `isInterrupted()` 方法并不会。
+
