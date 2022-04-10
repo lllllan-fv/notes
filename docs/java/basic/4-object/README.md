@@ -31,7 +31,7 @@ star: true
 
 
 
-::: warning 本文转载自以下文章，略有改动
+::: warning 转载声明
 
 - [JavaGuide](https://javaguide.cn/)
 - [2分钟让你明白什么是面向对象编程](https://zhuanlan.zhihu.com/p/75265007)

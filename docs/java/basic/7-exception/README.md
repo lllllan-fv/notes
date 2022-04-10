@@ -31,7 +31,7 @@ star: true
 
 
 
-::: warning 本文转载自以下文章，略有改动
+::: warning 转载声明
 
 - [JavaGuide](https://javaguide.cn/)
 -  [什么是java OOM？如何分析及解决oom问题？](https://www.cnblogs.com/ThinkVenus/p/6805495.html)

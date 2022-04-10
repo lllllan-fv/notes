@@ -31,7 +31,7 @@ star: true
 
 
 
-::: warning 本文转载自以下文章，略有改动
+::: warning 转载声明
 
 - [JavaGuide](https://javaguide.cn/)
 - [还不知道泛型是什么？这一篇深入浅出泛型教学！](https://zhuanlan.zhihu.com/p/382239048)

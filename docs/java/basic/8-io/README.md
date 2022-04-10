@@ -29,7 +29,7 @@ star: true
 
 ---
 
-::: warning 本文转载自以下文章，略有改动
+::: warning 转载声明
 
 - [JavaGuide](https://javaguide.cn/)
 -  [Java序列化之排除被序列化字段(transient/静态变量](https://blog.csdn.net/lisulong1/article/details/52269262)

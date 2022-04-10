@@ -32,7 +32,7 @@ star: true
 
 
 
-::: warning 本文转载自以下文章，略有改动
+::: warning 转载声明
 
 - [JavaGuide](https://javaguide.cn/)
 - [java是解释执行吗](https://blog.csdn.net/qq_23191031/article/details/81677057)
