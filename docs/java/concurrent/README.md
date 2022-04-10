@@ -209,3 +209,23 @@ private native boolean isInterrupted(boolean ClearInterrupted);
 
 区别在于，调用 `interrupted()` 方法会清楚中断状态，而 `isInterrupted()` 方法并不会。
 
+
+
+## synchronized 和 ReentrantLock ★
+
+不太懂。[Java锁](3/14/)
+
+
+
+他们都是加锁方式同步，而且都是阻塞式的同步。当一个线程获得了对象锁，进入了同步块，其他访问该同步块的线程都必须阻塞在同步块外面等待。
+
+
+
+ReentrantLock提供了一些功能：
+
+1. 等待可中断。持有锁的线程长期不释放的时候，正在等待的线程可以选择放弃等待，相对于synchronized来说可以避免出现死锁的情况
+2. 公平锁。ReentrantLock默认是非公平锁，可以通过参数设为公平锁（多个线程等待同一个锁时必须按照申请锁的时间顺序来获得锁），但是性能不是很好。
+3. 锁绑定多个条件。一个ReentrantLock对象可以同时绑定多个对象
+
+
+
