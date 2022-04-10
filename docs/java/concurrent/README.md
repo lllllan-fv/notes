@@ -127,3 +127,31 @@ public class Run {
 区别：notify() 方法随机唤醒对象的等待池中的一个线程，进入锁池；notifyAll() 唤醒对象的等待池中的所有线程，进入锁池。
 
 只是调入锁池，但是一定只有一个线程能够获得锁并执行。
+
+
+
+## sleep 和 wait
+
+[sleep和wait的区别](1/5/#_5-2-sleep方法)
+
+
+
+sleep是Thread的方法，可以在任意位置使用，让线程睡眠。
+
+wait是Object的方法，必须在同步块/同步方法中使用。wait方法是让当前获得锁的线程释放锁，因此必须在同步块/同步方法中使用，确保该线程获得了锁。
+
+```java
+synchronized (lock) {
+    try {
+        System.out.println("before wait");
+        
+        lock.wait();
+
+        // 进入等待被唤醒之后，会从这里重新执行
+        System.out.println("after wait");
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
+```
+
