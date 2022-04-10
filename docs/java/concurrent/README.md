@@ -33,6 +33,7 @@ star: true
 ::: warning 转载声明
 
 - [如何正确地停止一个线程？ - 王晓符 - 博客园 (cnblogs.com)](https://www.cnblogs.com/greta/p/5624839.html)
+- [notify() 和 notifyAll() 有什么区别？_ConstXiong的博客-CSDN博客_notifyall](https://blog.csdn.net/meism5/article/details/90238268)
 
 :::
 
@@ -110,3 +111,19 @@ public class Run {
 }
 ```
 
+
+
+## notify 和 notifyAll
+
+[notify() 和 notifyAll() 有什么区别？_ConstXiong的博客-CSDN博客_notifyall](https://blog.csdn.net/meism5/article/details/90238268)
+
+先解释两个概念。
+
+- 锁池：获得锁的线程能够执行，没有获得锁的线程则在锁池中争夺这个锁。
+- 等待池：某个线程获得锁之后，调用了 wait() 方法，则会进入等待池。进入等待池的线程不会去争夺锁。
+
+
+
+区别：notify() 方法随机唤醒对象的等待池中的一个线程，进入锁池；notifyAll() 唤醒对象的等待池中的所有线程，进入锁池。
+
+只是调入锁池，但是一定只有一个线程能够获得锁并执行。
