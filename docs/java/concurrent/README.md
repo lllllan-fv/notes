@@ -157,6 +157,14 @@ synchronized (lock) {
 
 
 
+## wait 和 notify 必须要在同步块中调用
+
+1. 这些方法都是对象级别的，时从锁出发去执行的方法。因此只有获得了独占锁的线程，才能够去调用该对象的方法
+2. 如果不这么做，就会抛出 `IllegalMonitorStateException`
+3. 为了避免 wait 和 notify 之间产生竞态条件
+
+
+
 ## volatile ★
 
 [volatile](2/8/)
