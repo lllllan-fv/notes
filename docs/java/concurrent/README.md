@@ -34,6 +34,7 @@ star: true
 
 - [如何正确地停止一个线程？ - 王晓符 - 博客园 (cnblogs.com)](https://www.cnblogs.com/greta/p/5624839.html)
 - [notify() 和 notifyAll() 有什么区别？_ConstXiong的博客-CSDN博客_notifyall](https://blog.csdn.net/meism5/article/details/90238268)
+- [65. SynchronizedMap 和 ConcurrentHashMap 有什么区别？_江湖@小小白的博客-CSDN博客](https://blog.csdn.net/zhu_fangyuan/article/details/110455386)
 
 :::
 
@@ -228,4 +229,16 @@ ReentrantLock提供了一些功能：
 3. 锁绑定多个条件。一个ReentrantLock对象可以同时绑定多个对象
 
 
+
+## SynchronizedMap 和 ConcurrentMap ▲
+
+（还有点小问题）
+
+[65. SynchronizedMap 和 ConcurrentHashMap 有什么区别？_江湖@小小白的博客-CSDN博客](https://blog.csdn.net/zhu_fangyuan/article/details/110455386)
+
+
+
+1. SynchronizedMap 一次锁住整张表来保证线程安全，所以每次只能有一个线程来访问Map.
+2. ConcurrentHashMap 中则是一次锁住一个桶。ConcurrentHashMap 默认将 hash 表分为 16 个桶，诸如get、put、remove 等常用操作只锁当前需要用到的桶。这样，原来只能一个线程进入，现在却能同时有 16 个写线程执行，并发性能的提升是显而易见的。
+3. 另外 ConcurrrentHashMap 使用一种不同的迭代方式。在这种迭代方式中，当 iterator 被创建后集合再发生改变就不再是抛出 ConcurrentModificationException，取而代之的是在改变 new 新的数据从而不影响原有的数据，iterator 完成后再将头指针替换为新的数据，这样 iterator 线程可以使用原来老的数据，而写线程也可以并发的完成改变。
 
