@@ -53,6 +53,7 @@ module.exports = config({
 					icon: "",
 					prefix: "basic/",
 					children: [
+						"",
 						"1-concept/",
 						"2-grammar/",
 						"3-data/",
