@@ -205,15 +205,21 @@ static class DefaultThreadFactory implements ThreadFactory {
 
 * **RejectedExecutionHandler handler** 
 
-  **拒绝处理策略**，线程数量大于最大线程数就会采用拒绝处理策略，四种拒绝处理的策略为 ：
 
-  1. **ThreadPoolExecutor.AbortPolicy**：**默认拒绝处理策略**，丢弃任务并抛出RejectedExecutionException异常。 
 
-  2. **ThreadPoolExecutor.DiscardPolicy**：丢弃新来的任务，但是不抛出异常。 
+::: info 拒绝处理策略
 
-  3. **ThreadPoolExecutor.DiscardOldestPolicy**：丢弃队列头部（最旧的）的任务，然后重新尝试执行程序（如果再次失败，重复此过程）。
+线程数量大于最大线程数就会采用拒绝处理策略，四种拒绝处理的策略为 ：
 
-  4. **ThreadPoolExecutor.CallerRunsPolicy**：由调用线程处理该任务。
+1. **ThreadPoolExecutor.AbortPolicy**：**默认拒绝处理策略**，丢弃任务并抛出RejectedExecutionException异常。 
+
+2. **ThreadPoolExecutor.DiscardPolicy**：丢弃新来的任务，但是不抛出异常。 
+
+3. **ThreadPoolExecutor.DiscardOldestPolicy**：丢弃队列头部（最旧的）的任务，然后重新尝试执行程序（如果再次失败，重复此过程）。
+
+4. **ThreadPoolExecutor.CallerRunsPolicy**：由调用线程处理该任务。
+
+:::
 
 
 
