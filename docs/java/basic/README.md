@@ -38,6 +38,16 @@ star: true
 
 
 
+## Java程序是如何执行的
+
+
+
+1. Java 代码编译成字节码。Java 源代码 → 词法分析器 → 语义分析器 → 字节码
+2. Java 虚拟机使用类加载器装在 class 文件
+3. 字节码校验，解释器翻译成机器码
+
+![img](README.assets/5-1ZZ41409331Y.png)
+
 
 
 ## fail-fast 机制
