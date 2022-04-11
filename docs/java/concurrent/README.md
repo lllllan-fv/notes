@@ -36,6 +36,7 @@ star: true
 - [notify() 和 notifyAll() 有什么区别？_ConstXiong的博客-CSDN博客_notifyall](https://blog.csdn.net/meism5/article/details/90238268)
 - [65. SynchronizedMap 和 ConcurrentHashMap 有什么区别？_江湖@小小白的博客-CSDN博客](https://blog.csdn.net/zhu_fangyuan/article/details/110455386)
 - [看完你就明白的锁系列之自旋锁 - 程序员cxuan - 博客园 (cnblogs.com)](https://www.cnblogs.com/cxuanBlog/p/11679883.html)
+- [拜托，线程间的通信真的很简单。 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/138689342)
 
 :::
 
@@ -112,6 +113,25 @@ public class Run {
     }
 }
 ```
+
+
+
+## 线程通信
+
+[线程通信方式](1/5/)
+
+[拜托，线程间的通信真的很简单。 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/138689342)
+
+
+
+通信大体可以分为【共享内存】、【消息传递】和【管道流】
+
+- 共享内存：volatile修饰的变量
+- 消息传递：
+    - 等待/通知机制：使用锁的 `wait()` 和 `notify()` 来阻塞和唤醒线程。
+    - join：阻塞当前线程去执行另一线程x，直到x的执行结束之后才会接触当前线程的阻塞。
+
+- 管道输入输出：
 
 
 

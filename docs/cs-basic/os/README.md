@@ -192,7 +192,7 @@ star: true
 
 [进程通信方式](def/process-communication/)
 
-[线程通信方式](../../java/concurrent/1/5/)
+[线程通信方式](../../java/concurrent/#线程通信)
 
 
 
