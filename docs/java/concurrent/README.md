@@ -114,6 +114,19 @@ public class Run {
 
 
 
+## 线程安全
+
+如果你的代码在多线程下执行和在单线程下执行永远都能获得一样的结果，那么这个代码就是线程安全的。
+
+
+
+1. 不可变。像String、Integer、Long这些，都是final类型的类，任何一个线程都改变不了它们的值，要改变除非新创建一个，因此这些不可变对象不需要任何同步手段就可以直接在多线程环境下使用
+2. 绝对线程安全。不管运行时环境如何，调用者都不需要额外的同步措施。要做到这一点通常需要付出许多额外的代价，Java中标注自己是线程安全的类，实际上绝大多数都不是线程安全的，不过绝对线程安全的类，Java中也有，比方说CopyOnWriteArrayList、CopyOnWriteArraySet
+3. 相对线程安全。相对线程安全也就是我们通常意义上所说的线程安全，像 Vector 这种，add、remove方法都是原子操作，不会被打断，但也仅限于此，如果有个线程在遍历某个Vector、有个线程同时在add这个Vector，99% 的情况下都会出现 `ConcurrentModificationException`，也就是 fail-fast 机制。
+4. 非线程安全。这个就没什么好说的了，ArrayList、LinkedList、HashMap等都是线程非安全的类
+
+
+
 ## notify 和 notifyAll
 
 [notify() 和 notifyAll() 有什么区别？_ConstXiong的博客-CSDN博客_notifyall](https://blog.csdn.net/meism5/article/details/90238268)
@@ -158,11 +171,25 @@ synchronized (lock) {
 
 
 
+## yield
+
+Yield方法可以暂停当前正在执行的线程对象，让其它有相同优先级的线程执行。它是一个静态方法而且只保证当前线程放弃CPU占用而不能保证使其它线程一定能占用CPU，执行yield()的线程有可能在进入到暂停状态后马上又被执行。
+
+
+
 ## wait 和 notify 必须要在同步块中调用
 
 1. 这些方法都是对象级别的，时从锁出发去执行的方法。因此只有获得了独占锁的线程，才能够去调用该对象的方法
 2. 如果不这么做，就会抛出 `IllegalMonitorStateException`
 3. 为了避免 wait 和 notify 之间产生竞态条件
+
+
+
+## Java线程池方法 submit() 和 execute()
+
+- 两个方法都可以向线程池提交任务。
+- execute() 方法的返回类型是 void，它定义在 Executor 接口中。而 submit() 方法可以返回持有计算结果的 Future 对象，它定义在 ExecutorService 接口中，它扩展了 Executor 接口
+- 其它线程池类像 ThreadPoolExecutor 和 ScheduledThreadPoolExecutor 都有这些方法。
 
 
 
@@ -209,6 +236,18 @@ private native boolean isInterrupted(boolean ClearInterrupted);
 看源代码，两个方法都会调用同一个方法 `isInterrupted(boolean ClearInterrupted)`，返回值是该线程的中断标识。
 
 区别在于，调用 `interrupted()` 方法会清楚中断状态，而 `isInterrupted()` 方法并不会。
+
+
+
+## synchronized 和锁 ★
+
+synchronized 关键字解决的是多个线程之间访问资源的同步性，synchronized 关键字可以保证被它修饰的方法或者代码块在任意时刻只能有一个线程执行。
+
+
+
+[synchronized和锁](2/9/)
+
+Java 早期版本 synchronized 属于重量级锁，效率底下。Java 6 为了减少获得锁和释放锁带来的性能消耗，引入了【偏向锁】和【轻量级锁】。
 
 
 
