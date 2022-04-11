@@ -36,6 +36,7 @@ star: true
 - [JavaGuide](https://javaguide.cn/)
 - [2分钟让你明白什么是面向对象编程](https://zhuanlan.zhihu.com/p/75265007)
 - [String为什么不可变 - 梦醒点灯](https://www.cnblogs.com/leskang/p/6110631.html)
+- [一文理解哈希冲突四种解决方法 - 简书 (jianshu.com)](https://www.jianshu.com/p/a343dae4a818)
 
 :::
 
@@ -186,7 +187,7 @@ public class Student {
 
 ### 3.1 对象实体和对象引用
 
-一个对象引用可以指向 0 个或 1 个对象（一根绳子可以不系气球，也可以系一个气球）;一个对象可以有 n 个引用指向它（可以用 n 条绳子系住一个气球）。
+一个对象引用可以指向 0 个或 1 个对象（一根绳子可以不系气球，也可以系一个气球）；一个对象可以有 n 个引用指向它（可以用 n 条绳子系住一个气球）。
 
 
 
@@ -196,7 +197,7 @@ public class Student {
 
 
 
-### 3.3 四种引用，强弱软虚 （看不懂）
+### 3.3 四种引用，强弱软虚
 
 - 强引用 
 
@@ -209,7 +210,7 @@ public class Student {
 
 - 软引用 
 
-  软引用在程序内存不足时，会被回收，使用方式： 
+  **软引用在程序内存不足时会被回收**，使用方式： 
 
   ```java
   // 注意：wrf这个引用也是强引用，它是指向SoftReference这个对象的， 
@@ -221,7 +222,7 @@ public class Student {
 
 - 弱引用 
 
-  弱引用就是只要JVM垃圾回收器发现了它，就会将之回收，使用方式： 
+  弱引用就是只要JVM**垃圾回收器发现了它就会将之回收**，使用方式： 
 
   ```java
   WeakReference wrf = new WeakReference(str);
@@ -231,17 +232,13 @@ public class Student {
 
 - 虚引用 
 
-- 虚引用的回收机制跟弱引用差不多，但是它被回收之前，会被放入 ReferenceQueue 中。注意 哦，其它引用是被JVM回收后才被传入 ReferenceQueue 中的。由于这个机制，所以虚引用大多 被用于引用销毁前的处理工作。还有就是，虚引用创建的时候，必须带有 ReferenceQueue ， 使用例子： 
+    虚引用的回收机制跟弱引用差不多，但是它被回收之前，会被放入 ReferenceQueue 中。注意 哦，其它引用是被JVM回收后才被传入 ReferenceQueue 中的。由于这个机制，所以虚引用大多 被用于引用销毁前的处理工作。还有就是，虚引用创建的时候，必须带有 ReferenceQueue ， 使用例子： 
 
-  ```java
-  PhantomReference prf = new PhantomReference(new String("str"), new ReferenceQueue<>()); 
-  ```
+    ```java
+    PhantomReference prf = new PhantomReference(new String("str"), new ReferenceQueue<>()); 
+    ```
 
-  可用场景： 对象销毁前的一些操作，比如说资源释放等。 Object.finalize() 虽然也可以做这 类动作，但是这个方式即不安全又低效 
-
-
-
-上诉所说的几类引用，都是指对象本身的引用，而不是指Reference的四个子类的引用 (SoftReference等)。
+    可用场景： 对象销毁前的一些操作，比如说资源释放等。 Object.finalize() 虽然也可以做这 类动作，但是这个方式即不安全又低效 
 
 
 
@@ -263,10 +260,12 @@ public class Student {
 
 
 
-### 4.1 JDK8 的改变
+::: info JDK8 的改变
 
 1. 允许在接口中包含具体实现的方法，使用 `default` 修饰
-2. 因为允许具体实现的放，接口中也就允许有静态方法
+2. 因为允许具体实现的方法，接口中也就允许有静态方法
+
+:::
 
 
 
@@ -337,7 +336,29 @@ hashCode 方法相对与 equals 会更加高效，通过这两步判断，来确
 
 
 
-### 5.3 哈希冲突的解决办法 （保留）
+### 5.3 哈希冲突的解决办法
+
+[一文理解哈希冲突四种解决方法 - 简书 (jianshu.com)](https://www.jianshu.com/p/a343dae4a818)
+
+[哈希冲突_Juliussss的博客-CSDN博客_哈希冲突](https://blog.csdn.net/weixin_41167848/article/details/91356737)
+
+
+
+哈希是通过对数据进行再压缩，提高效率的一种解决方法。但由于通过哈希函数产生的哈希值是有限的，而数据可能比较多，导致经过哈希函数处理后仍然有不同的数据对应相同的索引值。这时候就产生了哈希冲突**两个值都需要同一个地址索引位置**）。
+
+
+
+解决办法：
+
+1. 开放地址方法（再散列法）
+    1. 线性探测
+    2. 平方探测
+    3. 伪随机探测
+2. 链式地址法
+3. 再哈希法
+4. 创建公共溢出区
+
+
 
 
 
@@ -355,7 +376,7 @@ hashCode 方法相对与 equals 会更加高效，通过这两步判断，来确
 
 ::: tip 
 
-构造方法不能被 override（重写）,但是可以 overload（重载）,所以你可以看到一个类中有多个构造函数的情况。
+构造方法不能被 override（重写），但是可以 overload（重载），所以你可以看到一个类中有多个构造函数的情况。
 
 :::
 
@@ -400,7 +421,7 @@ public final class String implements java.io.Serializable, Comparable<String>, C
 
 ### 7.2 `String` 真的不可变吗？
 
-一下内容转载自 [String为什么不可变 - 梦醒点灯](https://www.cnblogs.com/leskang/p/6110631.html)
+以下内容转载自 [String为什么不可变 - 梦醒点灯](https://www.cnblogs.com/leskang/p/6110631.html)
 
 String的成员变量是private final 的，也就是初始化之后不可改变。那么在这几个成员中， value比较特殊，因为他是一个引用变量，而不是真正的对象。value是final修饰的，也就是说final不能再指向其他数组对象，那么我能改变value指向的数组吗？
 
@@ -432,11 +453,16 @@ public static void testReflection() throws Exception {
 }
 ```
 
-打印结果为： s = Hello World
+打印结果为： 
 
+```java
+s = Hello World
 s = Hello_World
+```
 
-在这个过程中，s始终引用的同一个String对象，但是再反射前后，这个String对象发生了变化， 也就是说，通过反射是可以修改所谓的“不可变”对象的。但是一般我们不这么做。这个反射的实例还可以说明一个问题：如果一个对象，他组合的其他对象的状态是可以改变的，那么这个对象很可能不是不可变对象。例如一个Car对象，它组合了一个Wheel对象，虽然这个Wheel对象声明成了private final 的，但是这个Wheel对象内部的状态可以改变， 那么就不能很好的保证Car对象不可变。
+
+
+在这个过程中，s始终引用的同一个String对象，但是再反射前后，这个String对象发生了变化， 也就是说，通过反射是可以修改所谓的【不可变】对象的。但是一般我们不这么做。这个反射的实例还可以说明一个问题：如果一个对象，他组合的其他对象的状态是可以改变的，那么这个对象很可能不是不可变对象。例如一个Car对象，它组合了一个Wheel对象，虽然这个Wheel对象声明成了private final 的，但是这个Wheel对象内部的状态可以改变， 那么就不能很好的保证Car对象不可变。
 
 
 
