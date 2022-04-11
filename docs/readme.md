@@ -24,7 +24,7 @@ action:
 
 features:
   - title: Java 笔记
-    link: /java/basic/1-concept/
+    link: /java/basic/
 
   - title: 计算机基础
     link: /cs-basic/network/interview-questions/
