@@ -353,3 +353,15 @@ ReentrantLock提供了一些功能：
 - 两个方法都可以向线程池提交任务。
 - execute() 方法的返回类型是 void，它定义在 Executor 接口中。而 submit() 方法可以返回持有计算结果的 Future 对象，它定义在 ExecutorService 接口中，它扩展了 Executor 接口
 - 其它线程池类像 ThreadPoolExecutor 和 ScheduledThreadPoolExecutor 都有这些方法。
+
+
+
+### 常用队列
+
+[阻塞队列](3/13/)
+
+- `ArrayBlockingQueue`，基于数组结构的有界阻塞队列，按先进先出原则进行排序
+- `LinkedBlockingQueue`，基于链表的阻塞队列，按照先进先出排序元素，吞吐量高于 ArrayBlocklingQueue
+- `SynchronousQueue`，不存储元素的阻塞队列
+- `PriorityBlockingQueue`，具有优先级的无限阻塞队列
+- `DelayQueue`，队列中的元素只有当其指定的延迟时间到了，才能够从队列中获取到该元素；没有大小限制的队列，因此往队列中插入数据的操作（生产者）永远不会被阻塞，而只有获取数据的操作（消费者）才会被阻塞。
