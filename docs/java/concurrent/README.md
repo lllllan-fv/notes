@@ -37,8 +37,23 @@ star: true
 - [65. SynchronizedMap 和 ConcurrentHashMap 有什么区别？_江湖@小小白的博客-CSDN博客](https://blog.csdn.net/zhu_fangyuan/article/details/110455386)
 - [看完你就明白的锁系列之自旋锁 - 程序员cxuan - 博客园 (cnblogs.com)](https://www.cnblogs.com/cxuanBlog/p/11679883.html)
 - [拜托，线程间的通信真的很简单。 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/138689342)
+- [什么是上下文切换_有关心情的博客-CSDN博客_上下文切换](https://blog.csdn.net/qq_41359051/article/details/89673188)
+- [送命题：进程切换与线程切换的区别 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/258956479)
+- [Java 什么是守护线程 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/107649830)
 
 :::
+
+
+
+## 上下文切换 ▲
+
+[什么是上下文切换_有关心情的博客-CSDN博客_上下文切换](https://blog.csdn.net/qq_41359051/article/details/89673188)
+
+[送命题：进程切换与线程切换的区别 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/258956479)
+
+还是有点模糊，稍后再看。
+
+
 
 
 
@@ -336,6 +351,12 @@ ReentrantLock提供了一些功能：
 
 
 
+## 悲观锁和乐观锁
+
+[乐观锁 & 悲观锁 & CAS](2/10/)
+
+
+
 ## CAS ★
 
 [CompareAndSwap](2/10/)
@@ -415,3 +436,25 @@ ReentrantLock提供了一些功能：
 ## ThreadLocal 原理
 
 没太看懂，先放一下。
+
+
+
+## JMM ★
+
+[Java内存模型](2/6/)
+
+
+
+## AQS ★
+
+[抽象队列同步器](2/11/)
+
+
+
+## 守护线程
+
+[Java 什么是守护线程 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/107649830)
+
+守护线程可以理解是一种服务线程。和用户线程的区别在于，当所有的用户线程都执行结束了，即时守护线程还在执行，但也没有执行的必要了，此时就可以结束程序了。
+
+比如垃圾回收线程就是典型的守护线程。所有的用户线程都执行完了，也没有再回收垃圾的必要了，直接结束程序即可。
