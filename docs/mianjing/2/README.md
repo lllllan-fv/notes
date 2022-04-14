@@ -62,7 +62,7 @@ star: true
   - [ ] socket
     - [ ] 底层、怎么知道哪个请求的数据
 - [ ] http1.1
-  - [x] http各版本区别
+  - [ ] http各版本区别
   - [x] keep-alive 
 - [ ] 多路复用
     - [x] IO多路复用
@@ -82,18 +82,20 @@ star: true
 2.  了解linux 嘛
 3.  Linux 中 怎么排查对应的程序 占用内存 或者 使用cpu? top
 4.  [一个请求从输入网址到返回](../../cs-basic/network/url-to-page/)
-5.  HTTPS加密流程 
-6. spring 的设计模式 
+5.  [HTTPS加密流程 ](../../cs-basic/network/http-and-https/#https工作流程)
+6.  spring 的设计模式 
 7.  IOC 和 AOP
-8. JWT加密如何实现?如何预防攻击?
-9. 数据库的索引怎么理解?
+    - [浅谈IOC--说清楚IOC是什么_ivan820819的博客-CSDN博客_ioc](https://blog.csdn.net/ivan820819/article/details/79744797)
+    - [细说Spring——AOP详解（AOP概览）_Jivan2233的博客-CSDN博客_aop](https://blog.csdn.net/q982151756/article/details/80513340)
+8.  JWT加密如何实现?如何预防攻击?
+9.  数据库的索引怎么理解?
 10.  数据库的隔离级别有哪些?
-11. 什么情况下该采用那个级别?
-12. Java中的锁有哪些?
-13. synchronize锁的升级 和 降级?
-14. hashmap的实现
-15. hashmap安全嘛? concurrenthashmap
-16. 算法题: 括号匹配 
+11.  什么情况下该采用那个级别?
+12.  Java中的锁有哪些?
+13.  synchronize锁的升级 和 降级?
+14.  hashmap的实现
+15.  hashmap安全嘛? concurrenthashmap
+16.  算法题: 括号匹配 
 
 ---
 
@@ -103,6 +105,9 @@ star: true
 - [ ] https加密流程
 - [ ] spring设计模式
 - [ ] ioc、aop
+    - [x] IOC
+    - [ ] AOP
+
 - [ ] JWT加密
   - [ ] 如何实现
   - [ ] 如何预防攻击

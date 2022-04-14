@@ -69,7 +69,7 @@ footer: MIT Licensed | Copyright © 2022 lllllan
     - [ ] 即时编译技术、逃逸分析技术
     - [ ] 线程本地分配缓冲区TLAB
     - [ ] 指针碰撞、空闲列表
-- [ ] AOP、AOC
+- [ ] AOP、IOC
 
 
 :::

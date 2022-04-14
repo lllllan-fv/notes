@@ -49,4 +49,3 @@ star: true
 9. Redis，[Redis+Spring缓存实例](https://blog.csdn.net/u013142781/article/details/50515320)
 10. Shiro，[Shiro安全框架入门篇](https://blog.csdn.net/u013142781/article/details/50629708)
 
-- 
