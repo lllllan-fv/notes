@@ -58,8 +58,12 @@ star: true
 - [ ] HashMap 扩容、退化
     - [x] 基本的put和get
     - [ ] 红黑树相关的操作
-
 - [ ] Java各类Map对比
+    - [x] HashMap
+    - [x] HashTable
+    - [ ] TreeMap
+    - [ ] ConcurrentHashMap
+
 - [x] 代理模式
     - [x]  代理模式概念，静态代理、动态代理（JDK动态代理、CGlib动态代理）
     - [x]  两种代理的区别
@@ -72,7 +76,7 @@ star: true
 
 1. 自我介绍x2 
 2. 看你第一个项目聊了很多，这次说说第二个项目(麻了，第二个项目是一个落地的crud,只问了5分钟不太感兴趣就没再问) 
-3. 经典题~从输入url到显示页面的过程(这里提了dns,tcp连接,http协议，然后开始追问，把这几个玩意都细讲了) 
+3. 经典题~[从输入url到显示页面的过程](../../cs-basic/network/url-to-page/)(这里提了dns,tcp连接,http协议，然后开始追问，把这几个玩意都细讲了) 
 4. [dns解析出错，怎么排查错误]([dns错误怎么解决？怎么排查及解决dns解析故障？-贝锐花生壳官网 (oray.com)](https://hsk.oray.com/news/7898.html))
 5. tcp,udp 
 6. [http,https,https理解，秘钥交换过程](../../cs-basic/network/http-and-https/)
@@ -96,8 +100,9 @@ star: true
 - [ ] http、https，密钥
   - [x] http、https的区别
   - [x] https请求过程
+  - [x] HTTPS的握手
   - [ ] SSL、TLS
-
+  
 - [ ] sql语句
 - [ ] mysql索引
 - [ ] 创建索引的原则

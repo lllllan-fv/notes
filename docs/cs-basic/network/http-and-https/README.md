@@ -38,6 +38,7 @@ star: true
 - [HTTPS加密（握手）过程](https://www.jianshu.com/p/e30a8c4fa329)
 - [HTTP/1.0、HTTP/1.1、HTTP/2、HTTPS - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/43787334)
 - [一文读懂 HTTP/2 特性 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/26559480)
+- [刨根问底系列之https到底是如何防篡改的？面试必备 - 掘金 (juejin.cn)](https://juejin.cn/post/6845166890675863559#comment)
 
 :::
 
@@ -58,6 +59,8 @@ HTTP 协议以明文方式发送内容，不提供任何方式的数据加密，
 
 
 ### HTTPS
+
+[刨根问底系列之https到底是如何防篡改的？面试必备 - 掘金 (juejin.cn)](https://juejin.cn/post/6845166890675863559#comment)
 
 **HTTPS**（Hypertext Transfer Protocol Secure：超文本传输安全协议）是一种透过计算机网络进行安全通信的传输协议。HTTPS 经由 HTTP 进行通信，但利用 SSL/TLS 来加密数据包。HTTPS 开发的主要目的，是提供对网站服务器的身份认证，保护交换数据的隐私与完整性。
 
@@ -133,18 +136,73 @@ HTTP/2以Google发布的SPDY协议为基础，于2015年发布。它不叫HTTP/2
 
 ## HTTPS工作流程
 
-![img](README.assets/https-intro.png)
+[HTTPS协议详解(四)：TLS/SSL握手过程_hherima的博客-CSDN博客_ssl握手](https://blog.csdn.net/hherima/article/details/52469674)
+
+[刨根问底系列之https详细握手过程 - 掘金 (juejin.cn)](https://juejin.cn/post/6847902219745181709)
 
 
 
-1. 首先，客户端发起握手请求，以明文传输请求信息，包含版本信息，加密-套件候选列表，压缩算法候选列表，随机数，扩展字段等信息(`这个没什么好说的，就是用户在浏览器里输入一个HTTPS网址，然后连接到服务端的443端口。`)
-2. 服务端的配置，采用HTTPS协议的服务器必须要有一套数字证书，可以自己制作，也可以向组织申请。区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出提示页面。`这套证书其实就是一对公钥和私钥。`如果对公钥不太理解，可以想象成一把钥匙和一个锁头，只是世界上只有你一个人有这把钥匙，你可以把锁头给别人，别人可以用这个锁把重要的东西锁起来，然后发给你，因为只有你一个人有这把钥匙，所以只有你才能看到被这把锁锁起来的东西。
-3. 服务端返回协商的信息结果，包括选择使用的协议版本 version，选择的加密套件 cipher suite，选择的压缩算法 compression method、随机数 random_S 以及证书。(`这个证书其实就是公钥，只是包含了很多信息，如证书的颁发机构，过期时间等等。`)
-4. 客户端验证证书的合法性，包括可信性，是否吊销，过期时间和域名。(`这部分工作是由客户端的SSL/TLS来完成的，首先会验证公钥是否有效，比如颁发机构，过期时间等等，如果发现异常，则会弹出一个警示框，提示证书存在的问题。如果证书没有问题，那么就生成一个随机值。然后用证书（也就是公钥）对这个随机值进行加密。就好像上面说的，把随机值用锁头锁起来，这样除非有钥匙，不然看不到被锁住的内容。`)
-5. 客户端使用公匙对对称密匙加密，发送给服务端。(`这部分传送的是用证书加密后的随机值，目的是让服务端得到这个随机值，以后客户端和服务端的通信就可以通过这个随机值来进行加密解密了。`)
-6. 服务器用私钥解密，拿到对称加密的密匙。(`服务端用私钥解密后，得到了客户端传过来的随机值，然后把内容通过该随机值进行对称加密，将信息和私钥通过某种算法混合在一起，这样除非知道私钥，不然无法获取内容，而正好客户端和服务端都知道这个私钥，所以只要加密算法够彪悍，私钥够复杂，数据就够安全。`)
-7. 传输加密后的信息，这部分信息就是服务端用私钥加密后的信息，可以在客户端用随机值解密还原。
-8. 客户端解密信息，客户端用之前生产的私钥解密服务端传过来的信息，于是获取了解密后的内容。整个过程第三方即使监听到了数据，也束手无策。
+![img](README.assets/173272d3c783474atplv-t2oaga2asx-zoom-in-crop-mark1304000.awebp)
+
+
+
+1. ==客户端发起握手请求 client_hello==
+
+    以明文传输请求信息，包含
+
+    - TLS版本信息
+    - 随机数（用于后续的密钥协商）random_C
+    - 加密套件候选列表
+    - 压缩算法候选列表
+    - 扩展字段等信息 
+
+2. ==服务端发送 server_hello 返回协商的信息结果==
+
+    - 选择使用的TLS协议版本
+    - 随机数 random_S
+    - 选择的加密套件 cipher suite
+    - 选择的压缩算法 compression method
+
+3. ==服务端发送证书==
+
+    服务器端配置对应的证书链，用于身份验证和密钥交换
+
+4. ==服务端发送Server Hello Done==
+
+    通知客户端 server_hello 信息发送结束
+
+5. 客户端验证证书的合法性，包括可信性，是否吊销，过期时间和域名
+
+6. ==客户端发送.client_key_exchange + change_cipher_spec + encrypted_handshake_message==
+
+    - **client_key_exchange**，合法性验证通过之后，客户端计算产生随机数字 Pre-master，并用证书公钥加密，发送给服务器。两个明文随机数 random_C 和 random_S 与自己计算产生的 Pre-master，计算得到协商密钥 ` enc_key=Fuc(random_C, random_S, Pre-Master)`
+    - **change_cipher_spec**，客户端通知服务器后续的通信都采用协商的通信密钥和加密算法进行加密通信
+    - **encrypted_handshake_message**，结合之前所有通信参数的 hash 值与其它相关信息生成一段数据，采用协商密钥 session secret 与算法进行加密，然后发送给服务器用于数据与握手验证
+
+7. ==服务端发送change_cipher_spec + encrypted_handshake_message==
+
+    - 服务器用私钥解密加密的 Pre-master 数据，基于之前交换的两个明文随机数 random_C 和 random_S，计算得到协商密钥：`enc_key=Fuc(random_C, random_S, Pre-Master)`
+    - 计算之前所有接收信息的 hash 值，然后解密客户端发送的 encrypted_handshake_message，验证数据和密钥正确性;
+    - change_cipher_spec, 验证通过之后，服务器同样发送 change_cipher_spec 以告知客户端后续的通信都采用协商的密钥与算法进行加密通信
+    -  encrypted_handshake_message, 服务器也结合所有当前的通信参数信息生成一段数据并采用协商密钥 session secret 与算法加密并发送到客户端
+
+8. 握手结束
+
+    - 客户端计算所有接收信息的 hash 值，并采用协商密钥解密 encrypted_handshake_message，验证服务器发送的数据和密钥，验证通过则握手完成;
+
+
+
+::: note 山寨版总结
+
+1. 客户端请求握手 client_hello
+2. 服务端发送 server_hello
+3. 服务端发送证书
+4. 服务端发送 server_hello_down
+5. 客户端验证证书，使用随机数计算接下来传输使用的共享密钥（看上面，是几次随机数计算出来的），使用证书中的公钥对共享密钥进行加密，发送给服务端
+6. 服务端使用已知的随机数计算出共享密钥，与客户端发送过来的密钥进行比较，验证正确性。
+7. 双方确认之后使用共享密钥对数据进行加密后通信
+
+:::
 
 
 
