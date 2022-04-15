@@ -142,7 +142,7 @@ HTTP/2以Google发布的SPDY协议为基础，于2015年发布。它不叫HTTP/2
 
 
 
-![img](README.assets/173272d3c783474atplv-t2oaga2asx-zoom-in-crop-mark1304000.awebp)
+![img](README.assets/https.png)
 
 
 
