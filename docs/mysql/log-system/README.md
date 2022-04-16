@@ -36,6 +36,7 @@ star: true
 - [02讲日志系统](https://funnylog.gitee.io/mysql45/02讲日志系统：一条SQL更新语句是如何执行的.html)
 - [MySQL之Redo log - 简书 (jianshu.com)](https://www.jianshu.com/p/d13b3c98ce30)
 - [详细分析MySQL事务日志(redo log和undo log) - 骏马金龙 - 博客园 (cnblogs.com)](https://www.cnblogs.com/f-ck-need-u/p/9010872.html#!comments) ★
+- [必须了解的MySQL三大日志：binlog、redo log和undo log - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/190886874)
 
 :::
 
@@ -212,3 +213,7 @@ redo log 是循环写的，会覆盖掉/抹除已经写入数据库磁盘的内�
 ## 两阶段提交
 
 既然 redo log 和 binlog 都要保留，就涉及到了两者一致性的问题。
+
+
+
+有点模糊不清，虽然确定了 ==binlog只有在事务提交以后才会记录==，但是关于 redo log 是在什么具体时间去记录什么，查不到太好的内容，于是就不太能理清两阶段提交。保留以后再查。
