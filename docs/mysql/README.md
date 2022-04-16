@@ -274,3 +274,7 @@ varchar的10代表了申请的空间长度,也是可以存储的数据的最大�
 
 
 
+
+## 锁
+
+[【MySQL】MySQL中的锁机制 - 周二鸭 - 博客园 (cnblogs.com)](https://www.cnblogs.com/jojop/p/13982679.html)
