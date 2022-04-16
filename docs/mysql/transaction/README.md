@@ -262,7 +262,7 @@ star: true
 MVCC 解决了不可重复读
 
 - MySQL的快照读，[MVCC](../mvcc/)避免了幻读
-- MySQL的当前读，[next-key 锁](../phantom-read/)解决了幻读
+- MySQL的当前读，[next-key 锁](../next-key-lock/)解决了幻读
 
 :::
 

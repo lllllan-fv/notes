@@ -243,7 +243,7 @@ module.exports = config({
 				"log-system/",
 				"transaction/",
 				"mvcc/",
-				"phantom-read/",
+				"next-key-lock/",
 				"index/",
 			],
 
