@@ -33,7 +33,7 @@ star: true
 
 ::: warning 转载声明
 
-- [MySQL实战45讲 (gitee.io)](https://funnylog.gitee.io/mysql45/iframe/)
+- [02讲日志系统](https://funnylog.gitee.io/mysql45/02讲日志系统：一条SQL更新语句是如何执行的.html)
 - [MySQL之Redo log - 简书 (jianshu.com)](https://www.jianshu.com/p/d13b3c98ce30)
 - [详细分析MySQL事务日志(redo log和undo log) - 骏马金龙 - 博客园 (cnblogs.com)](https://www.cnblogs.com/f-ck-need-u/p/9010872.html#!comments) ★
 

@@ -32,7 +32,7 @@ star: true
 
 ::: warning 转载声明
 
-[MySQL实战45讲 (gitee.io)](https://funnylog.gitee.io/mysql45/iframe/)
+- [01讲基础架构：一条SQL查询语句是如何执行的](https://funnylog.gitee.io/mysql45/01讲基础架构：一条SQL查询语句是如何执行的.html)
 
 :::
 
