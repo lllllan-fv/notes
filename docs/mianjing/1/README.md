@@ -110,14 +110,8 @@ star: true
 - [x] MVCC
 - [ ] 设计模式
 - [ ] spring中的代理模式
-- [ ] aop
+- [x] aop
 - [x] 稳定快排
-
-
-
-[细说Spring——AOP详解（AOP概览）_Jivan2233的博客-CSDN博客_aop](https://blog.csdn.net/q982151756/article/details/80513340)
-
-
 
 
 
