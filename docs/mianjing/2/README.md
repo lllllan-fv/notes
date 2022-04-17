@@ -106,7 +106,7 @@ star: true
 - [ ] spring设计模式
 - [ ] ioc、aop
     - [x] IOC
-    - [ ] AOP
+    - [x] AOP
 
 - [ ] JWT加密
   - [ ] 如何实现
