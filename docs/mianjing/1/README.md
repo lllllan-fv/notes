@@ -85,7 +85,7 @@ star: true
 9. 创建索引的原则(区分度，是否是查询时使用，插入性能和读取性能权衡，减少回表) 
 10. ACID(每个都问了细节) 
 11. [MVCC](../../mysql/mvcc/) 
-12. 用过的设计模式(提了项目里的代理模式，aqs的模板方法模式) 
+12. 用过的[设计模式](../../framework/design-pattern/)(提了项目里的代理模式，aqs的模板方法模式) 
 13. spring,springmvc中代理模式用在哪些地方 
 14. [aop](../../framework) 
 15. 思维题 ： [如何实现稳定的快速排序](../../ds-and-algorithms/algorithms/sort/unstable-quick-sort/)、 对一个省上百万考生的考试成绩排序 要求o(n)  交叉链表找交叉节点 
