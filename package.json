@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "vuepress": "^1.9.7",
-    "vuepress-theme-hope": "^1.24.0"
+    "vuepress-theme-hope": "^1.28.4"
   },
   "main": "index.js",
   "repository": "git@github.com:lllllan-fv/blog.git",
