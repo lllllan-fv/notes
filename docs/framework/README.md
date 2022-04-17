@@ -31,21 +31,33 @@ star: true
 
 ::: warning 转载声明
 
-- [java常用的框架介绍 - 诸葛文斌](https://www.cnblogs.com/byqh/p/5595384.html)
-- [MVC框架_百度百科 (baidu.com)](https://baike.baidu.com/item/MVC框架/9241230)
+- [AOP 面向切面编程 - 简书 (jianshu.com)](https://www.jianshu.com/p/f1770b9dce27)
+- [细说Spring——AOP详解（AOP概览）_Jivan2233的博客-CSDN博客_aop](https://blog.csdn.net/q982151756/article/details/80513340)
+- [Spring(4)——面向切面编程（AOP模块） - 简书 (jianshu.com)](https://www.jianshu.com/p/994027425b44)
 
 :::
 
 
 
-1. Spring MVC，[SpringMVC简介](https://blog.csdn.net/evankaka/article/details/45501811)
-2. Spring，[Spring AOP 实现原理](https://blog.csdn.net/moreevan/article/details/11977115)、[Spring IOC容器基本原理](https://www.cnblogs.com/linjiqin/archive/2013/11/04/3407126.html)
-3. MyBatis，[mybaits入门](https://blog.csdn.net/u013142781/article/details/50388204)
-4. Dubbo，[Dubbo分布式服务框架入门](https://blog.csdn.net/u013142781/article/details/50387583)
-5. Maven，[Maven入门](https://blog.csdn.net/u013142781/article/details/50316383)
-6. RabbitMQ，[RabbitMQ消息队列入门篇](https://blog.csdn.net/u013142781/article/details/50487028)
-7. Log4j，[Log4j日志在java项目中的使用](https://blog.csdn.net/u013142781/article/details/50405684)
-8. Ehcache，[Spring+EhCache缓存实例](https://blog.csdn.net/u013142781/article/details/50507607)
-9. Redis，[Redis+Spring缓存实例](https://blog.csdn.net/u013142781/article/details/50515320)
-10. Shiro，[Shiro安全框架入门篇](https://blog.csdn.net/u013142781/article/details/50629708)
+## AOP
+
+[细说Spring——AOP详解（AOP概览）_Jivan2233的博客-CSDN博客_aop](https://blog.csdn.net/q982151756/article/details/80513340)
+
+
+
+AOP全称 `Aspect Oriented Programming` 意为面向切面编程，也叫做面向方法编程， ==是通过预编译方式和运行期动态代理的方式实现不修改源代码的情况下给程序动态统一添加功能的技术== 。
+
+AOP技术利用一种称为【横切】的技术，剖解开封装对象的内部，将影响多个类的公共行为封装到一个可重用的模块中，并将其命名为 `Aspect` 切面。 ==利用AOP可以对业务逻辑各个部分进行隔离，从而使业务逻辑各部分之间的耦合度降低，提高程序的可重用性，同时提高开发效率。==
+
+
+
+- 连接点，join point。连接点是程序过程中 **能够** 插入切面的点。
+- 切入点，point cut。真正插入切面连接点。
+- 通知，advice。在切入点中具体要做的事情。
+- 切面，aspect。切入点 + 通知，在什么时候、什么地方做什么事情。
+- 织入，weaving。把切面切入到对象，并创建出代理对象的过程。
+
+> 好奇怪的描述，不是特别明确。
+
+![image-20220417145300699](README.assets/image-20220417145300699.png)
 

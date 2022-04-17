@@ -84,7 +84,7 @@ star: true
 4.  [一个请求从输入网址到返回](../../cs-basic/network/url-to-page/)
 5.  [HTTPS加密流程 ](../../cs-basic/network/http-and-https/#https工作流程)
 6.  spring 的设计模式 
-7.  IOC 和 AOP
+7.  IOC 和 [AOP](../../framework) 
     - [浅谈IOC--说清楚IOC是什么_ivan820819的博客-CSDN博客_ioc](https://blog.csdn.net/ivan820819/article/details/79744797)
     - [细说Spring——AOP详解（AOP概览）_Jivan2233的博客-CSDN博客_aop](https://blog.csdn.net/q982151756/article/details/80513340)
 8.  JWT加密如何实现?如何预防攻击?
