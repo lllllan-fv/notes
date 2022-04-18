@@ -160,6 +160,7 @@ module.exports = config({
 					prefix: "network/",
 					children: [
 						"interview-questions/",
+						"3-handshake/",
 						"url-to-page/",
 						"http-and-https/",
 						"keep-alive/",
