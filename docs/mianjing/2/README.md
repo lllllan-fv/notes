@@ -89,11 +89,16 @@ star: true
     - [细说Spring——AOP详解（AOP概览）_Jivan2233的博客-CSDN博客_aop](https://blog.csdn.net/q982151756/article/details/80513340)
 8.  [JWT](../../cs-basic/network/interview-questions/)加密如何实现?如何预防攻击?
 9.  数据库的索引怎么理解?
+    1.  [MySQL 面试题合集 | lllllan](http://blog.lllllan.cn/mysql/#索引)
+    2.  [索引 | lllllan](http://blog.lllllan.cn/mysql/index/)
+
 10.  数据库的隔离级别有哪些?
+     1.  [事务 | lllllan](http://blog.lllllan.cn/mysql/transaction/#事务隔离级别)
+
 11.  什么情况下该采用那个级别?
-12.  Java中的锁有哪些?
+12.  Java中的锁有哪些? - [第九章、synchronized与锁 | lllllan](http://blog.lllllan.cn/java/concurrent/2/9/)
 13.  synchronize锁的升级 和 降级?
-14.  hashmap的实现
+14.  hashmap的实现 [HashMap 源码解读 | lllllan](http://blog.lllllan.cn/java/container/source-code/hashmap/)
 15.  hashmap安全嘛? concurrenthashmap
 16.  算法题: 括号匹配 
 
@@ -111,13 +116,13 @@ star: true
 - [ ] JWT加密
   - [x] 如何实现
   - [ ] 如何预防攻击
-- [ ] 索引理解
-- [ ] 数据库隔离级别
+- [x] 索引理解
+- [x] 数据库隔离级别
   - [ ] 怎么选择
 - [ ] Java 锁
   - [ ] synchronize锁的升级和降级
-- [ ] hashmap实现
-  - [ ] 是否安全
+- [x] hashmap实现
+  - [x] 是否安全
   - [ ] concurrentHashMap
 - [x] 题：括号匹配
 
