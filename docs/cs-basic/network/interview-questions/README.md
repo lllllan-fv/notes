@@ -484,7 +484,9 @@ Json web token（JWT）是为了网络应用环境间传递声明而执行的一
 5. 服务器发现数据中有 token，验明正身；
 6. 服务器返回该用户的用户资料；
 
-![img](README.assets/webp.webp)
+
+
+![img](README.assets/jwt.png)
 
 
 
