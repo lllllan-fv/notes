@@ -3,7 +3,7 @@
 icon: page
 
 # 这是文章的标题
-title: 从输入 url 网址到显示页面的过程
+title: 输入url网址到页面显示
 
 # 设置作者
 author: lllllan

@@ -1,6 +1,6 @@
 ---
 # 这是页面的图标
-icon: info
+icon: page
 
 # 这是文章的标题
 title: 计算机网络
