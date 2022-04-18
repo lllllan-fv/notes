@@ -44,9 +44,9 @@ star: true
 
 ## 一、线程组
 
-Java中用ThreadGroup来表示线程组，我们可以使用线程组对线程进行批量控制。
+Java 中用 ThreadGroup 来表示线程组，我们可以使用线程组对线程进行批量控制。
 
-==每个Thread 必然存在于一个ThreadGroup中，Thread不能独立于ThreadGroup存在== .执行main()方法线程的名字是main，如果在new Thread时没有显式指定，那么默认将父线程（当前执行new Thread的线程）线程组设置为自己的线程组。
+==每个 Thread 必然存在于一个 ThreadGroup 中，Thread 不能独立于 ThreadGroup 存在。== 执行 main() 方法线程的名字是 main，如果在 new Thread 时没有显式指定，那么默认将父线程（当前执行 new Thread 的线程）线程组设置为自己的线程组。
 
 ```java
 public class Demo {
@@ -72,17 +72,17 @@ testThread当前线程组名字：main
 testThread线程名字：Thread-0
 ```
 
-ThreadGroup管理着它下面的Thread，ThreadGroup是一个标准的 ==向下引用== 的树状结构，这样设计的原因是**防止"上级"线程被"下级"线程引用而无法有效地被GC回收**。
+ThreadGroup 管理着它下面的 Thread，ThreadGroup 是一个标准的 ==向下引用== 的树状结构，这样设计的原因是 **防止【上级】线程被【下级】线程引用而无法有效地被GC回收**。
 
 
 
 ## 二、线程的优先级
 
-Java中线程优先级可以指定，范围是1~10（**数字越大优先级越高**）。但是并不是所有的操作系统都支持10级优先级的划分（比如有些操作系统只支持3级划分：低，中，高），Java只是给操作系统一个优先级的**参考值**，线程最终**在操作系统的优先级**是多少还是由操作系统决定。
+Java 中线程优先级可以指定，范围是 1~10（**数字越大优先级越高**）。但是并不是所有的操作系统都支持 10 级优先级的划分（比如有些操作系统只支持 3 级划分：低，中，高），Java 只是给操作系统一个优先级的 **参考值**，线程最终 **在操作系统的优先级** 是多少还是由操作系统决定。
 
-Java默认的线程优先级为 **5**，线程的执行顺序由调度程序来决定，线程的优先级会在线程被调用之前设定。
+Java 默认的线程优先级为 **5**，线程的执行顺序由调度程序来决定，线程的优先级会在线程被调用之前设定。
 
-通常情况下，高优先级的线程将会比低优先级的线程有**更高的几率**得到执行。
+通常情况下，高优先级的线程将会比低优先级的线程有 **更高的几率** 得到执行。
 
 
 
@@ -113,11 +113,11 @@ public class Demo {
 
 ::: tip 设置优先级指定线程执行的顺序？
 
-既然有1-10的级别来设定了线程的优先级，这时候可能有些读者会问，那么我是不是可以在业务实现的时候，采用这种方法来指定一些线程执行的先后顺序？
+既然有 1-10 的级别来设定了线程的优先级，这时候可能有些读者会问，那么我是不是可以在业务实现的时候，采用这种方法来指定一些线程执行的先后顺序？
 
-对于这个问题，我们的答案是:No!
+对于这个问题，我们的答案是：No!
 
-Java中的优先级来说不是特别的可靠，**Java程序中对线程所设置的优先级只是给操作系统一个建议，操作系统不一定会采纳。而真正的调用顺序，是由操作系统的线程调度算法决定的**。
+Java 中的优先级来说不是特别的可靠，**Java程序中对线程所设置的优先级只是给操作系统一个建议，操作系统不一定会采纳。而真正的调用顺序，是由操作系统的线程调度算法决定的**。
 
 :::
 
@@ -159,9 +159,9 @@ public class Demo {
 
 
 
-Java提供一个**线程调度器**来监视和控制处于**RUNNABLE状态**的线程。线程的调度策略采用 ==**抢占式**== ，优先级高的线程比优先级低的线程会有更大的几率优先执行。在优先级相同的情况下，按照“先到先得”的原则。每个Java程序都有一个默认的主线程，就是通过JVM启动的第一个线程main线程。
+Java 提供一个 **线程调度器** 来监视和控制处于 **RUNNABLE状态** 的线程。线程的调度策略采用 ==**抢占式**== ，优先级高的线程比优先级低的线程会有更大的几率优先执行。在优先级相同的情况下，按照【先到先得】的原则。每个 Java 程序都有一个默认的主线程，就是通过 JVM 启动的第一个线程 main 线程。
 
-还有一种线程称为**守护线程（Daemon）**，守护线程默认的优先级比较低。
+还有一种线程称为 **守护线程（Daemon）**，守护线程默认的优先级比较低。
 
 
 
@@ -179,7 +179,7 @@ Java提供一个**线程调度器**来监视和控制处于**RUNNABLE状态**的
 
 
 
-一个线程默认是非守护线程，可以通过Thread类的setDaemon(boolean on)来设置。
+一个线程默认是非守护线程，可以通过 Thread 类的 setDaemon(boolean on) 来设置。
 
 :::
 
@@ -205,7 +205,7 @@ public static void main(String[] args) {
 我是线程的优先级6
 ```
 
-所以，如果某个线程优先级大于线程所在**线程组的最大优先级**，那么该线程的优先级将会失效，取而代之的是线程组的最大优先级。
+所以，如果某个线程优先级大于线程所在 **线程组的最大优先级**，那么该线程的优先级将会失效，取而代之的是线程组的最大优先级。
 
 
 
@@ -268,23 +268,23 @@ public class ThreadGroupDemo {
 
 
 
-### 4.1  `ThreadGroup`源码中的成员变量
+### 4.1  ThreadGroup 源码中的成员变量
 
 ```java
 public class ThreadGroup implements Thread.UncaughtExceptionHandler {
-    private final ThreadGroup parent; // 父亲ThreadGroup
-    String name; // ThreadGroupr 的名称
-    int maxPriority; // 线程最大优先级
-    boolean destroyed; // 是否被销毁
-    boolean daemon; // 是否守护线程
-    boolean vmAllowSuspension; // 是否可以中断
+    private final ThreadGroup parent;	// 父亲ThreadGroup
+    String name; 						// ThreadGroupr 的名称
+    int maxPriority; 					// 线程最大优先级
+    boolean destroyed; 					// 是否被销毁
+    boolean daemon; 					// 是否守护线程
+    boolean vmAllowSuspension; 			// 是否可以中断
  
-    int nUnstartedThreads = 0; // 还未启动的线程
-    int nthreads; // ThreadGroup中线程数目
-    Thread threads[]; // ThreadGroup中的线程
+    int nUnstartedThreads = 0; 			// 还未启动的线程
+    int nthreads; 						// ThreadGroup中线程数目
+    Thread threads[]; 					// ThreadGroup中的线程
  
-    int ngroups; // 线程组数目
-    ThreadGroup groups[]; // 线程组数组
+    int ngroups; 						// 线程组数目
+    ThreadGroup groups[]; 				// 线程组数组
 }
 ```
 
@@ -300,7 +300,8 @@ private ThreadGroup() {
     this.parent = null;
 }
 
-// 默认是以当前ThreadGroup传入作为parent  ThreadGroup，新线程组的父线程组是目前正在运行线程的线程组。
+// 默认是以当前 ThreadGroup 传入作为 parent  
+// ThreadGroup，新线程组的父线程组是目前正在运行线程的线程组。
 public ThreadGroup(String name) {
     this(Thread.currentThread().getThreadGroup(), name);
 }
@@ -323,7 +324,7 @@ private ThreadGroup(Void unused, ThreadGroup parent, String name) {
 
 
 
-### 4.3 `checkParentAccess`方法
+### 4.3 checkParentAccess方法
 
 ```java
 // 检查parent ThreadGroup
@@ -341,11 +342,11 @@ public final void checkAccess() {
 }
 ```
 
-这里涉及到`SecurityManager`这个类，它是Java的安全管理器，它允许应用程序在执行一个可能不安全或敏感的操作前确定该操作是什么，以及是否是在允许执行该操作的安全上下文中执行它。应用程序可以允许或不允许该操作。
+这里涉及到 `SecurityManager` 这个类，它是 Java 的安全管理器，它允许应用程序在执行一个可能不安全或敏感的操作前确定该操作是什么，以及是否是在允许执行该操作的安全上下文中执行它。应用程序可以允许或不允许该操作。
 
 比如引入了第三方类库，但是并不能保证它的安全性。
 
-其实Thread类也有一个checkAccess()方法，不过是用来当前运行的线程是否有权限修改被调用的这个线程实例。（Determines if the currently running thread has permission to modify this thread.）
+其实 Thread 类也有一个 checkAccess() 方法，不过是用来当前运行的线程是否有权限修改被调用的这个线程实例。（Determines if the currently running thread has permission to modify this thread.）
 
 
 
