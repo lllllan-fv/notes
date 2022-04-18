@@ -40,17 +40,27 @@ star: true
 2. new/delete和malloc/free的区别
 3. new操作符可以被重载吗
 4. static关键字的作用
+    1. [Java - 基础语法 | lllllan](http://localhost:8080/java/basic/2-grammar/#_3-3-static-的作用)
+
 5. C++的多态了解吗
 6. 构造函数和析构函数可以是虚函数吗
 7. vector底层实现机制
+    1. [Vector 源码解读 | lllllan](http://localhost:8080/java/container/source-code/vector/)
+
 8. map和unordered_map的区别
 9. 哈希冲突的解决方法
+    1. [常见面试题 | lllllan](http://localhost:8080/java/basic/#哈希冲突的解决办法)
+
 10. 进程和线程的区别
+    1. [操作系统 | lllllan](http://localhost:8080/cs-basic/os/#二、进程和线程)
+
 11. 进程中的一个线程有问题，会有什么影响
 12. 实现一个服务，可以多进程，单进程，多线程，会怎么选择实现的方式，考虑是什么
 13. 高并发线程不够用怎么办
 14. epoll的两种模式
 15. 常见的进程间的通信方式，哪个最快
+    1. [进程间通信 | lllllan](http://localhost:8080/cs-basic/os/def/process-communication/)
+
 16. 为什么共享内存最快
 17. 介绍一下虚拟地址和物理地址，虚拟地址怎么映射到物理地址
 18. TCP和UDP的区别
@@ -72,7 +82,7 @@ star: true
     - [ ] new可以被重载吗
 - [ ] static 关键字作用
     - [ ] 各种关键字
-- [ ] vector底层实现
+- [x] vector底层实现
 - [ ] 哈希冲突的解决办法
 - [x] 进程和线程的区别
     - [ ] 进程中的一个线程出现问题，会有什么影响
