@@ -46,15 +46,15 @@ star: true
 
 ## 一、操作系统中的线程状态转换
 
-> 在现在的操作系统中，线程是被视为轻量级进程的，所以**操作系统线程的状态其实和操作系统进程的状态是一致的**。
+> 在现在的操作系统中，线程是被视为轻量级进程的，所以 **操作系统线程的状态其实和操作系统进程的状态是一致的**。
 
 ![系统进程状态转换图](README.assets/系统进程状态转换图.png)
 
 操作系统线程主要有以下三个状态：
 
-- 就绪状态(ready)：线程正在等待使用CPU，经调度程序调用之后可进入running状态。
-- 执行状态(running)：线程正在使用CPU。
-- 等待状态(waiting): 线程经过等待事件的调用或者正在等待其他资源（如I/O）。
+- 就绪状态(ready)：线程正在等待使用 CPU，经调度程序调用之后可进入 running 状态。
+- 执行状态(running)：线程正在使用 CPU。
+- 等待状态(waiting)：线程经过等待事件的调用或者正在等待其他资源（如 I/O）。
 
 
 
@@ -78,7 +78,7 @@ public enum State {
 
 ### 2.1 NEW
 
-处于NEW状态的线程此时尚未启动。这里的尚未启动指的是**还没调用Thread实例的start()方法。**
+处于 NEW 状态的线程此时尚未启动。这里的尚未启动指的是 **还没调用 Thread 实例的 start() 方法。**
 
 ```java
 private void testStateNew() {
@@ -89,13 +89,13 @@ private void testStateNew() {
 
 
 
-::: tip 关于start()的两个引申问题
+::: tip 关于 start() 的两个引申问题
 
-1. 反复调用同一个线程的start()方法是否可行？ 
+1. 反复调用同一个线程的 start() 方法是否可行？ 
 
-   > 不行。在调用一次start()之后，threadStatus的值会改变（threadStatus !=0），此时再次调用start()方法会抛出IllegalThreadStateException异常。
+   > 不行。在调用一次 start() 之后，threadStatus 的值会改变（threadStatus !=0），此时再次调用 start() 方法会抛出 IllegalThreadStateException 异常。
 
-2. 假如一个线程执行完毕（此时处于TERMINATED状态），再次调用这个线程的start()方法是否可行？
+2. 假如一个线程执行完毕（此时处于 TERMINATED 状态），再次调用这个线程的 start() 方法是否可行？
 
    > 不行
 
@@ -107,7 +107,7 @@ private void testStateNew() {
 
 ::: code-group-item start() 源码
 
-```java {3}
+```java {2,3}
 public synchronized void start() {
     if (threadStatus != 0)
         throw new IllegalThreadStateException();
@@ -165,19 +165,19 @@ public static State toThreadState(int var0) {
 
 
 
-我们可以看到，在start()内部，这里有一个threadStatus的变量。如果它不等于0，调用start()是会直接抛出异常的。
+==在 start() 内部，这里有一个 threadStatus 的变量。如果它不等于 0，调用 start() 是会直接抛出异常的。==
 
 
 
 ### 2.2  RUNNABLE
 
-表示当前线程正在运行中。处于RUNNABLE状态的线程在Java虚拟机中运行，也有可能在等待CPU分配资源。
+表示当前线程正在运行中。处于 RUNNABLE 状态的线程在 Java 虚拟机中运行，也有可能在等待 CPU 分配资源。
 
 
 
 ::: tip Java 的 Runnable
 
-Java线程的**RUNNABLE**状态其实是包括了传统操作系统线程的**ready**和**running**两个状态的。
+Java 线程的 **RUNNABLE** 状态其实是包括了传统操作系统线程的 **ready** 和 **running** 两个状态的。
 
 :::
 
@@ -196,7 +196,7 @@ Java线程的**RUNNABLE**状态其实是包括了传统操作系统线程的**re
 
 ### 2.3 BLOCKED
 
-阻塞状态。处于BLOCKED状态的线程 ==正等待锁的释放== 以进入同步区。
+阻塞状态。处于 BLOCKED 状态的线程 ==正等待锁的释放== 以进入同步区。
 
 
 
@@ -204,23 +204,23 @@ Java线程的**RUNNABLE**状态其实是包括了传统操作系统线程的**re
 
 等待状态。==原本获得锁== 的线程被要求等待，变成RUNNABLE状态需要其他线程唤醒。
 
-调用如下3个方法会使线程进入等待状态：
+调用如下 3 个方法会使线程进入等待状态：
 
 - Object.wait()：使当前线程处于等待状态直到另一个线程唤醒它；
-- Thread.join()：等待线程执行完毕，底层调用的是Object实例的wait方法；
+- Thread.join()：等待线程执行完毕，底层调用的是 Object 实例的 wait 方法；
 - LockSupport.park()：除非获得调用许可，否则禁用当前线程进行线程调度
 
 
 
 ### 2.5 TIMED_WAITING
 
-超时等待状态。线程等待一个具体的时间，时间到后会被自动唤醒。
+超时等待状态。 ==线程等待一个具体的时间，时间到后会被自动唤醒。==
 
 调用如下方法会使线程进入超时等待状态：
 
 - Thread.sleep(long millis)：使当前线程睡眠指定时间；
-- Object.wait(long timeout)：线程休眠指定时间，等待期间可以通过notify()/notifyAll()唤醒；
-- Thread.join(long millis)：等待当前线程最多执行millis毫秒，如果millis为0，则会一直执行；
+- Object.wait(long timeout)：线程休眠指定时间，等待期间可以通过 notify()/notifyAll() 唤醒；
+- Thread.join(long millis)：等待当前线程最多执行 millis 毫秒，如果 millis 为 0，则会一直执行；
 - LockSupport.parkNanos(long nanos)： 除非获得调用许可，否则禁用当前线程进行线程调度指定时间；
 - LockSupport.parkUntil(long deadline)：同上，也是禁止线程进行调度指定时间；
 
@@ -230,11 +230,11 @@ Java线程的**RUNNABLE**状态其实是包括了传统操作系统线程的**re
 
 **阻塞**
 
-Java 文档将**BLOCKED**状态正式定义为：“被阻塞等待监视器锁的线程处于此状态。”
+Java 文档将 **BLOCKED** 状态正式定义为：【被阻塞等待监视器锁的线程处于此状态】
 
 举个栗子：你出门需要开车，但是车已经被你老爸开走了，你想要用车就必须等你老爸回来。
 
-你是线程**T1**，你老爸是线程**T2**，锁是汽车。**T1**在锁（即汽车）上被**BLOCKED**，因为**T2**已经获得了这个锁。
+你是线程 **T1**，你老爸是线程 **T2**，锁是汽车。**T1** 在锁（即汽车）上被 **BLOCKED**，因为 **T2** 已经获得了这个锁。
 
 ------
 
@@ -242,11 +242,11 @@ Java 文档将**BLOCKED**状态正式定义为：“被阻塞等待监视器锁�
 
 **等待**
 
-Java 文档将**WAITING**状态正式定义为：“无限期等待另一个线程执行特定操作的线程处于此状态。”
+Java 文档将 **WAITING** 状态正式定义为：【无限期等待另一个线程执行特定操作的线程处于此状态】
 
 还是这个栗子：你老爸回来之后车空闲了，你本来都已经上车了，但是你老妈叫你等她把饭做好，然后让你把便当带走。
 
-你是线程**T1**，老妈是线程**T2**。你松开了锁（上了车又下来了），并进入WAITING状态。直到老妈（即**T2**）把便当做好给你，你一直会被困在这个**WAITING**状态。
+你是线程 **T1**，老妈是线程 **T2**。你松开了锁（上了车又下来了），并进入 WAITING 状态。直到老妈（即**T2**）把便当做好给你，你会一直被困在这个 **WAITING** 状态。
 
 ----
 
@@ -256,7 +256,7 @@ Java 文档将**WAITING**状态正式定义为：“无限期等待另一个线�
 
 还是这个栗子：老妈的便当还没做好，但是你上班快迟到了，最多只能再等她五分钟，五分钟后不管便当能不能做好，都要开车离开了。
 
-你是线程 **T1**，老妈是线程 **T2**，你只等待五分钟，并进入TIMED_WAITING状态。五分钟后将不再等待。
+你是线程 **T1**，老妈是线程 **T2**，你只等待五分钟，并进入 TIMED_WAITING 状态。五分钟后将不再等待。
 
 :::
 
@@ -278,7 +278,7 @@ Java 文档将**WAITING**状态正式定义为：“无限期等待另一个线�
 
 ### 3.1 BLOCKED与RUNNABLE状态的转换
 
-处于BLOCKED状态的线程是因为在等待锁的释放。假如这里有两个线程a和b，a线程提前获得了锁并且暂未释放锁，此时b就处于BLOCKED状态
+处于 BLOCKED 状态的线程是因为在等待锁的释放。假如这里有两个线程 a 和 b，a 线程提前获得了锁并且暂未释放锁，此时 b 就处于 BLOCKED 状态
 
 ```java
 @Test
@@ -313,17 +313,17 @@ private synchronized void testMethod() {
 }
 ```
 
-初看之下，大家可能会觉得线程a会先调用同步方法，同步方法内又调用了Thread.sleep()方法，必然会输出TIMED_WAITING，而线程b因为等待线程a释放锁所以必然会输出BLOCKED。
+初看之下，大家可能会觉得线程 a 会先调用同步方法，同步方法内又调用了 Thread.sleep() 方法，必然会输出 TIMED_WAITING ，而线程 b 因为等待线程 a 释放锁所以必然会输出 BLOCKED。
 
-其实不然，有两点需要值得大家注意，一是**在测试方法blockedTest()内还有一个main线程**，二是**启动线程后执行run方法还是需要消耗一定时间的**。
+其实不然，有两点需要值得大家注意，一是 **在测试方法 blockedTest() 内还有一个 main 线程**，二是**启动线程后执行 run 方法还是需要消耗一定时间的**。
 
-> 测试方法的main线程只保证了a，b两个线程调用start()方法（转化为RUNNABLE状态），如果CPU执行效率高一点，还没等两个线程真正开始争夺锁，就已经打印此时两个线程的状态（RUNNABLE）了。
+> 测试方法的 main 线程只保证了 a，b 两个线程调用 start() 方法（转化为 RUNNABLE 状态），如果 CPU 执行效率高一点，还没等两个线程真正开始争夺锁，就已经打印此时两个线程的状态（RUNNABLE）了。
 >
-> 当然，如果CPU执行效率低一点，其中某个线程也是可能打印出BLOCKED状态的（此时两个线程已经开始争夺锁了）。
+> 当然，如果 CPU 执行效率低一点，其中某个线程也是可能打印出 BLOCKED 状态的（此时两个线程已经开始争夺锁了）。
 
-这时你可能又会问了，要是我想要打印出BLOCKED状态我该怎么处理呢？BLOCKED状态的产生需要两个线程争夺锁才行。那我们处理下测试方法里的main线程就可以了，让它“休息一会儿”，调用一下`Thread.sleep()`方法。
+这时你可能又会问了，要是我想要打印出 BLOCKED 状态我该怎么处理呢？BLOCKED状态的产生需要两个线程争夺锁才行。那我们处理下测试方法里的 main 线程就可以了，让它“休息一会儿”，调用一下 `Thread.sleep()` 方法。
 
-这里需要注意的是main线程休息的时间，要保证在线程争夺锁的时间内，不要等到前一个线程锁都释放了你再去争夺锁，此时还是得不到BLOCKED状态的。
+这里需要注意的是 main 线程休息的时间，要保证在线程争夺锁的时间内，不要等到前一个线程锁都释放了你再去争夺锁，此时还是得不到BLOCKED状态的。
 
 我们把上面的测试方法blockedTest()改动一下：
 
@@ -417,7 +417,7 @@ public void blockedTest() {
 
 这里调用a.join(1000L)，因为是指定了具体a线程执行的时间的，并且执行时间是小于a线程sleep的时间，所以a线程状态输出TIMED_WAITING。
 
-b线程状态仍然不固定（RUNNABLE或BLOCKED）。
+b线程状态仍然不固定（RUNNABLE 或 BLOCKED）。
 
 ### 3.4 线程中断
 
