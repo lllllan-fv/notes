@@ -44,21 +44,21 @@ star: true
 
 ## 一、AQS简介
 
-**AQS**是`AbstractQueuedSynchronizer`的简称，即`抽象队列同步器`，从字面意思上理解:
+**AQS** 是 `AbstractQueuedSynchronizer` 的简称，即 `抽象队列同步器`，从字面意思上理解:
 
 - 抽象：抽象类，只实现一些主要逻辑，有些方法由子类实现；
 - 队列：使用先进先出（FIFO）队列存储数据；
 - 同步：实现了同步的功能。
 
-那AQS有什么用呢？**AQS是一个用来构建锁和同步器的框架，使用AQS能简单且高效地构造出应用广泛的同步器**，比如我们提到的ReentrantLock，Semaphore，ReentrantReadWriteLock，SynchronousQueue，FutureTask等等皆是基于AQS的。
+那 AQS 有什么用呢？**AQS是 一个用来构建锁和同步器的框架，使用 AQS 能简单且高效地构造出应用广泛的同步器**，比如我们提到的 ReentrantLock，Semaphore，ReentrantReadWriteLock，SynchronousQueue，FutureTask 等等皆是基于AQS的。
 
-当然，我们自己也能利用AQS非常轻松容易地构造出符合我们自己需求的同步器，只要子类实现它的几个`protected`方法就可以了
+当然，我们自己也能利用 AQS 非常轻松容易地构造出符合我们自己需求的同步器，只要子类实现它的几个 `protected` 方法就可以了
 
 
 
 ## 二、AQS的数据结构
 
-AQS内部使用了一个 `volatile` 的变量 `state` 来作为资源的标识。同时定义了几个获取和改变 `state` 的`protected` 方法，子类可以覆盖这些方法来实现自己的逻辑：
+AQS 内部使用了一个 `volatile` 的变量 `state` 来作为资源的标识。同时定义了几个获取和改变 `state` 的`protected` 方法，子类可以覆盖这些方法来实现自己的逻辑：
 
 ```java
 getState()
@@ -66,13 +66,13 @@ setState()
 compareAndSetState()
 ```
 
-这三种操作均是**原子操作**，其中 `compareAndSetState` 的实现依赖于 `Unsafe` 的 `compareAndSwapInt()` 方法。
+这三种操作均是 **原子操作**，其中 `compareAndSetState` 的实现依赖于 `Unsafe` 的 `compareAndSwapInt()` 方法。
 
-而AQS类本身实现的是一些排队和阻塞的机制，比如具体线程等待队列的维护（如获取资源失败入队/唤醒出队等）。它内部使用了一个先进先出（FIFO）的双端队列，并使用了两个指针head和tail用于标识队列的头部和尾部。其数据结构如图：
+而 AQS 类本身实现的是一些排队和阻塞的机制，比如具体线程等待队列的维护（如获取资源失败入队/唤醒出队等）。它内部使用了一个先进先出（FIFO）的双端队列，并使用了两个指针 head 和 tail 用于标识队列的头部和尾部。其数据结构如图：
 
 ![AQS数据结构](README.assets/AQS数据结构-16475883302572.png)
 
-**但它并不是直接储存线程，而是储存拥有线程的Node节点。**
+**但它并不是直接储存线程，而是储存拥有线程的 Node 节点。**
 
 
 
@@ -85,7 +85,7 @@ compareAndSetState()
 
 一般情况下，子类只需要根据需求实现其中一种模式，当然也有同时实现两种模式的同步类，如`ReadWriteLock`。
 
-AQS中关于这两种资源共享模式的定义源码（均在内部类Node中）。我们来看看Node的结构：
+AQS 中关于这两种资源共享模式的定义源码（均在内部类Node中）。我们来看看 Node 的结构：
 
 ```java
 static final class Node {
@@ -137,7 +137,7 @@ private Node addWaiter(Node mode) {
 }
 ```
 
-> 注意：通过Node我们可以实现两个队列，一是通过prev和next实现CLH队列(线程同步队列,双向队列)，二是nextWaiter实现Condition条件上的等待线程队列(单向队列)，这个Condition主要用在ReentrantLock类中。
+> 注意：通过 Node 我们可以实现两个队列，一是通过 prev 和 next 实现 CLH 队列（线程同步队列，双向队列），二是 nextWaiter 实现 Condition 条件上的等待线程队列（单向队列），这个 Condition 主要用在 ReentrantLock 类中。
 
  
 
@@ -153,17 +153,17 @@ private Node addWaiter(Node mode) {
 
 
 
-AQS的设计是基于**模板方法模式**的，它有一些方法必须要子类去实现的，它们主要有：
+AQS 的设计是基于 **模板方法模式** 的，它有一些方法必须要子类去实现的，它们主要有：
 
-- `isHeldExclusively()`：该线程是否正在独占资源。只有用到condition才需要去实现它。
-- `tryAcquire(int)`：独占方式。尝试获取资源，成功则返回true，失败则返回false。
-- `tryRelease(int)`：独占方式。尝试释放资源，成功则返回true，失败则返回false。
+- `isHeldExclusively()`：该线程是否正在独占资源。只有用到 condition 才需要去实现它。
+- `tryAcquire(int)`：独占方式。尝试获取资源，成功则返回 true，失败则返回 false。
+- `tryRelease(int)`：独占方式。尝试释放资源，成功则返回 true，失败则返回 false。
 - `tryAcquireShared(int)`：共享方式。尝试获取资源。负数表示失败；0表示成功，但没有剩余可用资源；正数表示成功，且有剩余资源。
 - `tryReleaseShared(int)`：共享方式。尝试释放资源，如果释放后允许唤醒后续等待结点返回true，否则返回false。
 
 
 
-这些方法虽然都是 ==`protected`== 方法，但是它们并没有在AQS具体实现，而是直接抛出异常（这里不使用抽象方法的目的是：==避免强迫子类中把所有的抽象方法都实现一遍，减少无用功，这样子类只需要实现自己关心的抽象方法即可== ，比如 Semaphore 只需要实现 tryAcquire 方法而不用实现其余不需要用到的模版方法）：
+这些方法虽然都是 ==`protected`== 方法，但是它们并没有在 AQS 具体实现，而是直接抛出异常（这里不使用抽象方法的目的是：==避免强迫子类中把所有的抽象方法都实现一遍，减少无用功，这样子类只需要实现自己关心的抽象方法即可== ，比如 Semaphore 只需要实现 tryAcquire 方法而不用实现其余不需要用到的模版方法）：
 
 ```java
 protected boolean tryAcquire(int arg) {
@@ -171,13 +171,13 @@ protected boolean tryAcquire(int arg) {
 }
 ```
 
-而AQS实现了一系列主要的逻辑。下面我们从源码来分析一下获取和释放资源的主要逻辑：
+而 AQS 实现了一系列主要的逻辑。下面我们从源码来分析一下获取和释放资源的主要逻辑：
 
 
 
 ### 获取资源
 
-获取资源的入口是acquire(int arg)方法。arg是要获取的资源的个数，在独占模式下始终为1。我们先来看看这个方法的逻辑：
+获取资源的入口是 acquire(int arg) 方法。arg是要获取的资源的个数，在独占模式下始终为1。我们先来看看这个方法的逻辑：
 
 ```java
 public final void acquire(int arg) {
@@ -186,9 +186,9 @@ public final void acquire(int arg) {
 }
 ```
 
-首先调用tryAcquire(arg)尝试去获取资源。前面提到了这个方法是在子类具体实现的。
+首先调用 tryAcquire(arg )尝试去获取资源。前面提到了这个方法是在子类具体实现的。
 
-如果获取资源失败，就通过addWaiter(Node.EXCLUSIVE)方法把这个线程插入到等待队列中。其中传入的参数代表要插入的Node是独占式的。这个方法的具体实现：
+如果获取资源失败，就通过 addWaiter(Node.EXCLUSIVE) 方法把这个线程插入到等待队列中。其中传入的参数代表要插入的 Node 是独占式的。这个方法的具体实现：
 
 ```java
 private Node addWaiter(Node mode) {
