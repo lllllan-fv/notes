@@ -107,7 +107,7 @@ star: true
 - [ ] linux
   - [ ] 排查对应程序 占用内存、使用CPU情况
 - [x] url到页面显示
-- [ ] https加密流程
+- [x] https加密流程
 - [ ] spring设计模式
 - [ ] ioc、aop
     - [x] IOC
