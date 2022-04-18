@@ -87,7 +87,7 @@ star: true
 7.  IOC 和 [AOP](../../framework) 
     - [浅谈IOC--说清楚IOC是什么_ivan820819的博客-CSDN博客_ioc](https://blog.csdn.net/ivan820819/article/details/79744797)
     - [细说Spring——AOP详解（AOP概览）_Jivan2233的博客-CSDN博客_aop](https://blog.csdn.net/q982151756/article/details/80513340)
-8.  JWT加密如何实现?如何预防攻击?
+8.  [JWT](../../cs-basic/network/interview-questions/)加密如何实现?如何预防攻击?
 9.  数据库的索引怎么理解?
 10.  数据库的隔离级别有哪些?
 11.  什么情况下该采用那个级别?
@@ -109,7 +109,7 @@ star: true
     - [x] AOP
 
 - [ ] JWT加密
-  - [ ] 如何实现
+  - [x] 如何实现
   - [ ] 如何预防攻击
 - [ ] 索引理解
 - [ ] 数据库隔离级别
