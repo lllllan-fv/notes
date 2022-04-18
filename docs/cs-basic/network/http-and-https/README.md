@@ -39,6 +39,7 @@ star: true
 - [HTTP/1.0、HTTP/1.1、HTTP/2、HTTPS - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/43787334)
 - [一文读懂 HTTP/2 特性 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/26559480)
 - [刨根问底系列之https到底是如何防篡改的？面试必备 - 掘金 (juejin.cn)](https://juejin.cn/post/6845166890675863559#comment)
+- https://javaguide.cn/cs-basics/network/http&https.html
 
 :::
 
@@ -203,6 +204,26 @@ HTTP/2以Google发布的SPDY协议为基础，于2015年发布。它不叫HTTP/2
 7. 双方确认之后使用共享密钥对数据进行加密后通信
 
 :::
+
+
+
+### 数字签名
+
+[HTTP vs HTTPS（应用层） | JavaGuide](https://javaguide.cn/cs-basics/network/http&https.html#公钥传输的信赖性)
+
+
+
+数字签名，是 CA 在给服务器颁发证书时，使用散列+加密的组合技术，在证书上盖个章，以此来提供验伪的功能。具体行为如下：
+
+> CA 知道服务器的公钥，对该公钥采用散列技术生成一个摘要。CA 使用 CA 私钥对该摘要进行加密，并附在证书下方，发送给服务器。
+>
+> 现在服务器将该证书发送给客户端，客户端需要验证该证书的身份。客户端找到第三方机构 CA，获知 CA 的公钥，并用 CA 公钥对证书的签名进行解密，获得了 CA 生成的摘要。
+>
+> 客户端对证书数据（也就是服务器的公钥）做相同的散列处理，得到摘要，并将该摘要与之前从签名中解码出的摘要做对比，如果相同，则身份验证成功；否则验证失败。
+
+![img](README.assets/digital-signature.6fb25ead.png)
+
+
 
 
 
