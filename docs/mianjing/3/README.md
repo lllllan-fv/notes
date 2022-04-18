@@ -67,10 +67,18 @@ star: true
     1. [计算机网络-常见面试题 | lllllan](http://localhost:8080/cs-basic/network/interview-questions/#四、tcp、udp协议的区别)
 
 19. TCP粘包是什么
+    1. [计算机网络-常见面试题 | lllllan](http://localhost:8080/cs-basic/network/interview-questions/#tcp粘包和拆包-★)
+
 20. 描述一下TCP的四次挥手
+    1. [四次挥手 | lllllan](http://localhost:8080/cs-basic/network/4-wave/)
+
 21. TIME_WAIT状态的作用
+    1. [四次挥手 | lllllan](http://localhost:8080/cs-basic/network/4-wave/#四次挥手流程)
+
 22. MySQL索引底层什么实现的
 23. 为什么采用B+树
+    1. [索引 | lllllan](http://localhost:8080/mysql/index/)
+
 24. 聚簇索引和非聚簇索引的区别
 25. 聚簇索引一个表可以有多个吗
 
@@ -95,13 +103,13 @@ star: true
     - [x] 为什么共享内存最快 - 直接在内存存取
 - [ ] 虚拟地址怎么映射到物理地址
 - [x] TCP和UDP的区别
-    - [ ] TCP粘包是什么
+    - [x] TCP粘包是什么
     - [x] TCP四次挥手
-    - [ ] TIME_WAIT状态的作用
+    - [x] TIME_WAIT状态的作用
 - [ ] mysql索引底层实现
-    - [ ] 为什么采用B+树
-    - [ ] 聚簇索引和非聚簇索引
-    - [ ] 一个表中可以有多个聚簇索引吗
+    - [x] 为什么采用B+树
+    - [x] 聚簇索引和非聚簇索引
+    - [x] 一个表中可以有多个聚簇索引吗
 
 
 
@@ -119,25 +127,50 @@ star: true
 4. 引用可以为空吗
 5. const修饰一个引用表示什么意思
 6. set的底层是怎么实现的
-7. 为什么采用[红黑树]()，为什么不用哈希
+7. 为什么采用红黑树，为什么不用哈希
+    1. [在Java8中为什么要使用红黑树来实现的HashMap？_清风追梦enjoy的博客-CSDN博客_hashmap为什么要用红黑树](https://blog.csdn.net/it_qingfengzhuimeng/article/details/103308308)
+
 8. http协议和https协议的区别
+    1. [HTTP和HTTPS | lllllan](http://localhost:8080/cs-basic/network/http-and-https/#http-与-https-区别)
+
 9. https的建连，有几次握手
 10. http协议工作在哪一层
+    1. 应用层
+
 11. 传输层协议有哪些
+    1. tcp、udp
+
 12. http的长连接和短连接
+    1. [keep-alive | lllllan](http://localhost:8080/cs-basic/network/keep-alive/)
+
 13. tcp的长连接和短连接
+    1. HTTP的长连接和短连接本质上是TCP长连接和短连接
+
 14. 常用的IO模型
 15. 什么是IO复用
 16. IO多路复用模型的区别
 17. select、poll、epoll分别适用于什么场景
 18. 了解什么是局部性原理吗
+    1. 空间局部性、时间局部性
+
 19. 什么情况会使用局部性原理
 20. 使用索引的优点和缺点
+    1. 检索快、维护难占空间
+
 21. b+树索引和哈希索引了解吗
+    1. [索引 | lllllan](http://localhost:8080/mysql/index/)
+
 22. 实际场景，有一个查询语句select * from table where a>1 and b=1，怎么给a，b建一个联合索引性能比较好
+    1. 当遇到范围查询(>、<、between、like)就会停止匹配
+    2. 联合索引（b，a）
+
 23. 什么是事务
+    1. [事务 | lllllan](http://localhost:8080/mysql/transaction/)
+
 24. 事务有哪些特性
 25. Innodb支持哪些隔离级别
+    1. [事务 | lllllan](http://localhost:8080/mysql/transaction/#事务隔离级别)
+
 26. 幻读可以举个例子吗
 27. MySQL怎么解决幻读问题
 28. 什么是间隙锁
@@ -155,11 +188,11 @@ star: true
 - [ ] set底层实现
     - [ ] 为什么采用红黑树，而不是哈希
 - [ ] http和https
-    - [ ] https的握手
-    - [ ] http在哪一层工作
-    - [ ] http长连接和短连接
+    - [x] https的握手
+    - [x] http在哪一层工作
+    - [x] http长连接和短连接
     - [ ] tcp长连接和短连接
-- [ ] 传输层协议有哪些
+    - [x] 传输层协议有哪些
 - [ ] 常用的IO模型
     - [ ] IO多路复用
     - [ ] IO多路复用模型的区别
@@ -169,11 +202,13 @@ star: true
 - [ ] 索引的优点和缺点
     - [ ] b+树索引和哈希索引
 - [ ] `select * from table where a>1 and b=1` 怎么简历联合索引性能好
+    - [x] 最左匹配原则
+
 - [ ] 事务
-    - [ ] 事务特性
+    - [x] 事务特性
 - [ ] innodb隔离级别
-    - [ ] 幻读例子
-    - [ ] mysql怎么解决幻读
+    - [x] 幻读例子
+    - [x] mysql怎么解决幻读
     - [ ] 间隙锁
     - [ ] 间隙锁只有在RR级别下才有吗
 - [ ] 大树相乘
@@ -184,9 +219,13 @@ star: true
 
 1. map和unordered_map的实现
 2. 怎么处理哈希冲突
+    1. [常见面试题 | lllllan](http://localhost:8080/java/basic/#哈希冲突的解决办法)
+
 3. 了解哪些程序语言的锁
 4. 阻塞到唤醒为什么还会有开销
 5. 了解cas吗
+    1. [第十章、CAS与原子操作 | lllllan](http://localhost:8080/java/concurrent/2/10/)
+
 6. 怎么实现一个优先级队列
 7. 对2000万高考考生的分数进行[排序]()
 
@@ -201,9 +240,9 @@ star: true
 
 
 - [ ] map实现
-- [ ] 怎么处理哈希冲突
+- [x] 怎么处理哈希冲突
 - [ ] java锁
 - [ ] 阻塞到唤醒为什么有开销
-- [ ] cas
+- [x] cas
 - [ ] 怎么实现优先队列
 - [ ] 给m个不重复字符和一个长度为n的字符串，能否在这个字符串中找到一个长度为m的连续子串，使得子串都由上面的m个字符组成。
