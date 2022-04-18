@@ -42,7 +42,7 @@ star: true
 
 ## 一、Thread 类和 Runnable 接口
 
-JDK提供了 `Thread` 类和 `Runnable` 接口来让我们实 现自己的“线程”类。
+JDK提供了 `Thread` 类和 `Runnable` 接口来让我们实 现自己的【线程】类。
 
 -  继承 `Thread` 类，并重写 `run` 方法；
 - 实现 `Runnable` 接口的 `run` 方法；
@@ -93,6 +93,7 @@ public class Demo {
             System.out.println("MyThread");
         }
     }
+    
     public static void main(String[] args) {
         new Thread(new MyThread()).start();
         // Java 8 函数式编程，可以省略MyThread类
@@ -135,7 +136,7 @@ ThreadLocal.ThreadLocalMap inheritableThreadLocals = null;
 
 - target：指定要执行的任务
 
-- name：线程的名字，多个线程的名字是可以重复的。如果不指定名字，见片段2；
+- name：线程的名字，多个线程的名字是可以重复的。如果不指定名字，见片段2
 
 - acc：见片段3，用于初始化私有变量 `inheritedAccessControlContext`
 
@@ -166,12 +167,12 @@ Thread(Runnable target, String name)
 
 ## 三、Thread类与Runnable接口的比较
 
-- 由于Java“单继承，多实现”的特性，Runnable接口使用起来比Thread **更灵活**。 
-- Runnable接口出现更符合面向对象，将线程单独进行对象的封装。 
-- Runnable接口出现，**降低了线程对象和线程任务的耦合性**。 
-- 如果使用线程时不需要使用Thread类的诸多方法，显然使用Runnable接口 **更为轻量**。
+- 由于 Java【单继承，多实现】的特性，Runnable 接口使用起来比 Thread **更灵活**。 
+- Runnable 接口出现更符合面向对象，将线程单独进行对象的封装。 
+- Runnable 接口出现，**降低了线程对象和线程任务的耦合性**。 
+- 如果使用线程时不需要使用 Thread 类的诸多方法，显然使用 Runnable 接口 **更为轻量**。
 
-我们通常优先使用“实现 Runnable 接口”这种方式来自定义线程类
+我们通常优先使用【实现 Runnable 接口】这种方式来自定义线程类
 
 
 
@@ -179,7 +180,7 @@ Thread(Runnable target, String name)
 
 通常来说，我们使用 Runnable 和 Thread 来创建一个新的线程。但是它们有一个弊端，**就是 run 方法是没有返回值**的。而有时候我们希望开启一个线程去执行一个任务，并且这个任务执行完成后有一个返回值。 
 
-JDK提供了 `Callable` 接口与 `Future` 接口为我们解决这个问题，这也是所谓的 ==“异步” 模型==
+JDK提供了 `Callable` 接口与 `Future` 接口为我们解决这个问题，这也是所谓的 ==异步模型==
 
 
 
@@ -241,7 +242,7 @@ cancel 方法是试图取消一个线程的执行。
 
 注意是 **试图取消**，并不一定能取消成功。因为任务可能已完成、已取消、或者一些其它因素不能取消，存在取消失败的可能。 
 
-boolean 类型的返回值是“是否取消成功”的意思。参数 `paramBoolean` 表示 **是否采用中断的方式取消线程执行**。 
+boolean 类型的返回值是【是否取消成功】的意思。参数 `paramBoolean` 表示 **是否采用中断的方式取消线程执行**。 
 
 所以有时候，为了让任务有能够取消的功能，就使用 `Callable` 来代替 `Runnable` 。如果为了可取消性而使用 `Future` 但又不提供可用的结果，则可以声明 Future 形式类型、并返回 null 作为底层任务的结果。
 
@@ -263,7 +264,7 @@ public interface RunnableFuture<V> extends Runnable, Future<V> {
 }
 ```
 
- Future 只是 一个接口，而它里面的 `cancel` ，`get` ， `isDone` 等方法要自己实现起来都是非常复杂的。所以JDK提供了一个 FutureTask 类来供我们使用。
+Future 只是 一个接口，而它里面的 `cancel` ，`get` ， `isDone` 等方法要自己实现起来都是非常复杂的。所以JDK提供了一个 FutureTask 类来供我们使用。
 
 ```java
 // 自定义Callable，与上面一样
@@ -274,6 +275,7 @@ class Task implements Callable<Integer>{
         Thread.sleep(1000);
         return 2;
     }
+    
     public static void main(String args[]) throws Exception {
         // 使用
         ExecutorService executor = Executors.newCachedThreadPool();
@@ -284,9 +286,9 @@ class Task implements Callable<Integer>{
 }
 ```
 
-- 调用 submit 方法是没有返回值的。 这里实际上是调用的 submit(Runnable task) 方法，而上面的Demo，调用的 是 submit(Callable task) 方法。
+- 调用 submit 方法是没有返回值的。 这里实际上是调用的 submit(Runnable task) 方法，而上面的 Demo，调用的 是 submit(Callable task) 方法。
 - 是使用 FutureTask 直接取 get 取值，而上面的Demo是通过 submit 方法 返回的 Future 去取值
-- 在很多高并发的环境下，有可能Callable和FutureTask会创建多次。FutureTask能 够在高并发环境下确保任务只执行一此
+- 在很多高并发的环境下，有可能 Callable 和 FutureTask 会创建多次。FutureTask 能够在高并发环境下确保任务只执行一此
 
 
 
@@ -311,4 +313,4 @@ private static final int INTERRUPTING = 5;
 private static final int INTERRUPTED = 6;
 ```
 
-tate表示任务的运行状态，初始状态为NEW。运行状态只会在 `set`、 `setException`、`cancel` 方法中终止。COMPLETING、INTERRUPTING是任 务完成后的瞬时状态。
+state 表示任务的运行状态，初始状态为 NEW。运行状态只会在 `set`、 `setException`、`cancel` 方法中终止。COMPLETING、INTERRUPTING 是任务完成后的瞬时状态。
