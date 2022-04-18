@@ -79,9 +79,13 @@ HTTPS 默认工作在 TCP 协议443端口，它的工作流程一般如以下方
 
 
 
+
+
 ### HTTP/1.0 和 HTTP/1.1
 
-1. **缓存处理**：HTTP/1.0 使用 `Pragma:no-cache + Last-Modified/If-Modified-Since`来作为缓存判断的标准；HTTP/1.1 引入了更多的缓存控制策略：`Cache-Control`、`Etag/If-None-Match`等。
+[HTTP 1.0 vs HTTP 1.1（应用层） | JavaGuide](https://javaguide.cn/cs-basics/network/http1.0&http1.1.html)
+
+1. **缓存处理**：HTTP/1.0 使用 `Pragma:no-cache + Last-Modified/If-Modified-Since`来作为缓存判断的标准； ==HTTP/1.1 引入了更多的缓存控制策略== ：`Cache-Control`、`Etag/If-None-Match`等。
 
 2. **错误状态管理**：HTTP/1.1新增了24个错误状态响应码，如409（Conflict）表示请求的资源与资源的当前状态发生冲突；410（Gone）表示服务器上的某个资源被永久性的删除。
 
