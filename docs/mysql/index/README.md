@@ -388,3 +388,21 @@ mysql> select * from tuser where name like '张%' and age = 10 and ismale = 1;
 ## 三、索引类型
 
 [通俗易懂 索引、单列索引、复合索引、主键、唯一索引、聚簇索引、非聚簇索引、唯一聚簇索引 的区别与联系 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/66553466)
+
+
+
+## 索引命中
+
+[如何监测MySQL是否命中索引？_空心人(・。・)的博客-CSDN博客_mysql怎么查看索引是否命中](https://blog.csdn.net/ba_qi/article/details/88799093)
+
+
+
+## 索引失效
+
+[索引失效的情况及解决(超详细)_zyy_demon的博客-CSDN博客_索引失效的几种情况和解决](https://blog.csdn.net/sy_white/article/details/122112440)
+
+1. or 条件中含有非索引
+2. 左模糊查询
+3. 索引参与计算
+4. 违背最左匹配原则
+

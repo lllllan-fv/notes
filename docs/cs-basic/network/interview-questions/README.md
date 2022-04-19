@@ -40,6 +40,7 @@ star: true
 - [什么是 JWT -- JSON WEB TOKEN - 简书 (jianshu.com)](https://www.jianshu.com/p/576dbf44b2ae)
 - [JWT如何实现登录、鉴权 - 简书 (jianshu.com)](https://www.jianshu.com/p/e4d9dcda0558)
 - [面试题：聊聊TCP的粘包、拆包以及解决方案 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/356225028)
+- [服务器端一个端口可以响应很多客户端的请求吗？-CSDN社区](https://bbs.csdn.net/topics/40099566)
 
 :::
 
@@ -364,3 +365,12 @@ JSON Web Token由【头部(Header)、载荷(Payload)、签证(Signature)】三�
 >  HMACSHA256(  base64UrlEncode(header) + "." +  base64UrlEncode(payload),   secret) 
 
 算出签名以后，把 Header、Payload、Signature 三个部分拼成一个字符串，每个部分之间用"点"（.）分隔，就构成整个JWT对象TOKEN， 就可以返回给用户。
+
+
+
+## 服务端一个端口响应多个客户端请求
+
+服务端至少要有一个SOCKET处于监听状态（Listen），负责监听针对某个端口（Port）的连接请求；
+当客户端的请求到达时，动态创建（new）一个SOCKET用于连接，此时，用于监听的SOCKET再次进入监听状态（调用Listen），此后，由参与连接的SOCKET完成与客户端的通信过程。
+通常，创建几百个连接是可以，但不会同时启动上百个线程同时处理所有的请求；如果同时请求的客户端比较多（比如＞50），则通常启动固定数目（低于请求）的线程，请求排队等待处理。
+线程的数目参考处理的速度，如果是瞬间完成的，则可以少，如果处理较慢，则可以多

@@ -110,8 +110,6 @@ MySQL中的数据用各种不同的技术存储在文件（或者内存）中。
 
 
 
-
-
 ## 关键字
 
 
@@ -164,3 +162,4 @@ varchar的10代表了申请的空间长度,也是可以存储的数据的最大�
 ## 锁
 
 [【MySQL】MySQL中的锁机制 - 周二鸭 - 博客园 (cnblogs.com)](https://www.cnblogs.com/jojop/p/13982679.html)
+
