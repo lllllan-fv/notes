@@ -111,18 +111,27 @@ star: true
 
 5. HTTP 如何传输大文件呢？（分块传输，Transfer-Encoding: chunked）  
     - 分块传输怎么判断什么时候传输完成呢？（最后一个包是空的） 
+    - [HTTP 传输大文件有哪些方案？ - 掘金 (juejin.cn)](https://juejin.cn/post/7005347768491311134)
 
 6. 为什么 TCP 会粘包？（TCP 是字节流）  
     - 怎么解决粘包？（刚才不一直在聊 HTTP 解决粘包吗。。。） 
     - [TCP粘包问题分析和解决（全） - 小 楼 一 夜 听 春 雨 - 博客园 (cnblogs.com)](https://www.cnblogs.com/kex1n/p/6502002.html)
 
 7. Java 的 Object 有哪些方法？（记不全会提醒你，然后一个一个问）  
-    - equals() 和 hashcode() 八股 
-    - 哈希冲突如何解决？（开放定址，链接法，再哈希）    
+
+    - [Java - 面向对象 | lllllan](http://blog.lllllan.cn/java/basic/4-object/#八、-object-类的常见方法)
+
+    1. equals() 和 hashcode() 八股 
+    2. 哈希冲突如何解决？（开放定址，链接法，再哈希）    
         - 这些办法的优缺点？ 
         - 负载因子是什么？怎么算？ 
-    - clone() 怎么用？引用拷贝深拷贝浅拷贝？ 
-    - wait() 和 sleep() 八股 
+    3. clone() 怎么用？引用拷贝深拷贝浅拷贝？ 
+
+    - [java对象clone()方法_客 人的博客-CSDN博客_clone](https://blog.csdn.net/qq_33314107/article/details/80271963)
+
+    1. wait() 和 sleep() 八股 
+
+    - [第五章、Java线程间的通信 | lllllan](http://blog.lllllan.cn/java/concurrent/1/5/#_5-2-sleep方法)
 
 8. 场景题：2T 的两个大文件，每一行存储一个字符串，内存只有 1G，找出两个文件中相同的字符串？（哈希，分治）  
     - 你设计的算法，每一个字符串需要被读几次？ 
@@ -150,7 +159,7 @@ star: true
         - [ ] 各自的优缺点
         - [ ] 负载因子
     - [ ] clone 怎么用，深浅
-    - [ ] wait 和 sleep
+    - [x] wait 和 sleep
 - [ ] 2T 的两个大文件，每一行存储一个字符串，内存只有 1G，找出两个文件中相同的字符串
 - [x] 算法：最长有效括号
 

@@ -56,8 +56,8 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 
 ::: tip 数据库
 
-- [ ] B+树
-- [ ] MySQL解决幻读
+- B+树
+- MySQL解决幻读
 
 :::
 
@@ -65,11 +65,10 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 
 ::: info Java
 
-- [ ] JVM
-    - [ ] 即时编译技术、逃逸分析技术
-    - [ ] 线程本地分配缓冲区TLAB
-    - [ ] 指针碰撞、空闲列表
-- [ ] AOP、IOC
+- JVM
+    - 即时编译技术、逃逸分析技术
+    - 线程本地分配缓冲区TLAB
+    - 指针碰撞、空闲列表
 
 
 :::
@@ -78,6 +77,11 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 
 ::: warning 面试题
 
-- [ ] 海量数据处理
+- 海量数据处理
 
 :::
+
+
+
+- [HTTP 传输大文件有哪些方案？ - 掘金 (juejin.cn)](https://juejin.cn/post/7005347768491311134)
+- [java对象clone()方法_客 人的博客-CSDN博客_clone](https://blog.csdn.net/qq_33314107/article/details/80271963)
