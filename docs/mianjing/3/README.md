@@ -113,12 +113,6 @@ star: true
 
 
 
-[解决哈希冲突（四种方法）_君诀的博客-CSDN博客_解决哈希冲突的方法](https://blog.csdn.net/qq_48241564/article/details/118613312)
-
-地址转换 [内存管理概念 | lllllan](http://blog.lllllan.cn/cs-basic/os/wangdao/3/1/#_4-2-基本地址变换机构)
-
-
-
 ## 字节二面3.30
 
 1. 自我介绍
@@ -129,51 +123,43 @@ star: true
 6. set的底层是怎么实现的
 7. 为什么采用红黑树，为什么不用哈希
     1. [在Java8中为什么要使用红黑树来实现的HashMap？_清风追梦enjoy的博客-CSDN博客_hashmap为什么要用红黑树](https://blog.csdn.net/it_qingfengzhuimeng/article/details/103308308)
-
 8. http协议和https协议的区别
     1. [HTTP和HTTPS | lllllan](http://localhost:8080/cs-basic/network/http-and-https/#http-与-https-区别)
-
 9. https的建连，有几次握手
 10. http协议工作在哪一层
     1. 应用层
-
 11. 传输层协议有哪些
     1. tcp、udp
-
 12. http的长连接和短连接
     1. [keep-alive | lllllan](http://localhost:8080/cs-basic/network/keep-alive/)
-
 13. tcp的长连接和短连接
     1. HTTP的长连接和短连接本质上是TCP长连接和短连接
-
 14. 常用的IO模型
 15. 什么是IO复用
+     1. [操作系统 | lllllan](http://localhost:8080/cs-basic/os/#_5-3-unix常见的io模型-★)
+
 16. IO多路复用模型的区别
 17. select、poll、epoll分别适用于什么场景
 18. 了解什么是局部性原理吗
-    1. 空间局部性、时间局部性
-
+     1. 空间局部性、时间局部性
 19. 什么情况会使用局部性原理
 20. 使用索引的优点和缺点
-    1. 检索快、维护难占空间
-
+     1. 检索快、维护难占空间
 21. b+树索引和哈希索引了解吗
-    1. [索引 | lllllan](http://localhost:8080/mysql/index/)
-
+     1. [索引 | lllllan](http://localhost:8080/mysql/index/)
 22. 实际场景，有一个查询语句select * from table where a>1 and b=1，怎么给a，b建一个联合索引性能比较好
-    1. 当遇到范围查询(>、<、between、like)就会停止匹配
-    2. 联合索引（b，a）
-
+     1. 当遇到范围查询(>、<、between、like)就会停止匹配
+     2. 联合索引（b，a）
 23. 什么是事务
-    1. [事务 | lllllan](http://localhost:8080/mysql/transaction/)
-
+     1. [事务 | lllllan](http://localhost:8080/mysql/transaction/)
 24. 事务有哪些特性
 25. Innodb支持哪些隔离级别
-    1. [事务 | lllllan](http://localhost:8080/mysql/transaction/#事务隔离级别)
-
+     1. [事务 | lllllan](http://localhost:8080/mysql/transaction/#事务隔离级别)
 26. 幻读可以举个例子吗
 27. MySQL怎么解决幻读问题
 28. 什么是间隙锁
+     1. [MYSQL（04）-间隙锁详解 - 简书 (jianshu.com)](https://www.jianshu.com/p/32904ee07e56)
+
 29. 间隙锁只有RR级别下才有的吗
 
 做题：大数相乘，字符串模拟
@@ -198,7 +184,7 @@ star: true
     - [ ] IO多路复用模型的区别
     - [ ] select、poll、epoll适用场景
 - [ ] 局部性原理
-    - [ ] 什么情况下使用局部性原理
+    - [x] 什么情况下使用局部性原理
 - [ ] 索引的优点和缺点
     - [ ] b+树索引和哈希索引
 - [ ] `select * from table where a>1 and b=1` 怎么简历联合索引性能好
@@ -211,7 +197,7 @@ star: true
     - [x] mysql怎么解决幻读
     - [ ] 间隙锁
     - [ ] 间隙锁只有在RR级别下才有吗
-- [ ] 大树相乘
+- [ ] 大数相乘
 
 
 

@@ -74,7 +74,9 @@ module.exports = config({
 							title: "源码解读",
 							icon: "",
 							prefix: "source-code/",
-							children: ["arraylist/", "vector/", "hashmap/", "hashtable/"]
+							children: [
+								"arraylist/", "vector/", "hashmap/", "hashtable/", "concurrent-hashmap/"
+							]
 						}
 					]
 				},
