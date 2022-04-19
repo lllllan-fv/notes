@@ -79,10 +79,10 @@ star: true
     - [x] 最左匹配
     - [ ] B+树叶子节点怎么二分
 - [ ] 怎么知道索引命中了没有
-- [ ] 索引失效的情况
-- [ ] like左边有通配符为什么不匹配
+- [x] 索引失效的情况
+- [x] like左边有通配符为什么不匹配
 - [ ] 字符串左右模糊匹配
-- [ ] url到页面显示
+- [x] url到页面显示
     - [ ] 具体用到什么协议
 - [x] 算法：岛屿数量
 
@@ -95,8 +95,13 @@ star: true
 1. 自我介绍 
 2. 项目讨论（两个项目问了 15 分钟，疯狂轰炸原理、代码细节） 
 3. HTTP 的 keep-alive 和 TCP 的 keep-alive（项目延伸问题，讨论了 10 分钟）
-    - HTTP 的 keep-alive 多长？（不了解，提到 Nginx 好像是 60s，但理论上应该没限制？） 
+    1. [keep-alive | lllllan](http://blog.lllllan.cn/cs-basic/network/keep-alive/)	
+    2. HTTP 的 keep-alive 多长？（不了解，提到 Nginx 好像是 60s，但理论上应该没限制？） 
+
 4. HTTP 怎么拆包的？（CRLF 分隔，同时有一个 Content-Length 字段决定 body 长度） 
+    1. [HTTP与TCP的区别和联系 - jason.bai - 博客园 (cnblogs.com)](https://www.cnblogs.com/baizhanshi/p/8482612.html)
+    2. [解析 http 协议是否要处理粘包？ 是否要考虑到收到的数据包为不符 http 协议格式的数据包的情况? - 知乎 (zhihu.com)](https://www.zhihu.com/question/24598268)
+
 5. HTTP 如何传输大文件呢？（分块传输，Transfer-Encoding: chunked）  
     - 分块传输怎么判断什么时候传输完成呢？（最后一个包是空的） 
 6. 为什么 TCP 会粘包？（TCP 是字节流）  
@@ -118,7 +123,7 @@ star: true
 
 ---
 
-- [ ] HTTP 的 keep-alive 和 TCP 的 keepalive
+- [x] HTTP 的 keep-alive 和 TCP 的 keepalive
     - [ ] 多长时间
 - [ ] HTTP 拆包
 - [ ] HTTP 传输大文件
