@@ -45,7 +45,7 @@ star: true
 1. 自我介绍
 2. 项目讨论
 3. MySQL 有哪些索引？（主键，唯一，普通）
-    1. [索引 | lllllan](http://localhost:8080/mysql/index/)
+    1. [索引 | lllllan](http://blog.lllllan.cn/mysql/index/)
 
 4. 聚类、非聚类索引区别？
 5. 联合索引 abc，查 a（走索引），查 b （不走），查 b = 1 and a = 1（走），查 a > 0 and b = 1 （走，但 b 列走不了）

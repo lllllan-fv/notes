@@ -40,44 +40,44 @@ star: true
 2. new/delete和malloc/free的区别
 3. new操作符可以被重载吗
 4. static关键字的作用
-    1. [Java - 基础语法 | lllllan](http://localhost:8080/java/basic/2-grammar/#_3-3-static-的作用)
+    1. [Java - 基础语法 | lllllan](http://blog.lllllan.cn/java/basic/2-grammar/#_3-3-static-的作用)
 
 5. C++的多态了解吗
 6. 构造函数和析构函数可以是虚函数吗
 7. vector底层实现机制
-    1. [Vector 源码解读 | lllllan](http://localhost:8080/java/container/source-code/vector/)
+    1. [Vector 源码解读 | lllllan](http://blog.lllllan.cn/java/container/source-code/vector/)
 
 8. map和unordered_map的区别
 9. 哈希冲突的解决方法
-    1. [常见面试题 | lllllan](http://localhost:8080/java/basic/#哈希冲突的解决办法)
+    1. [常见面试题 | lllllan](http://blog.lllllan.cn/java/basic/#哈希冲突的解决办法)
 
 10. 进程和线程的区别
-    1. [操作系统 | lllllan](http://localhost:8080/cs-basic/os/#二、进程和线程)
+    1. [操作系统 | lllllan](http://blog.lllllan.cn/cs-basic/os/#二、进程和线程)
 
 11. 进程中的一个线程有问题，会有什么影响
 12. 实现一个服务，可以多进程，单进程，多线程，会怎么选择实现的方式，考虑是什么
 13. 高并发线程不够用怎么办
 14. epoll的两种模式
 15. 常见的进程间的通信方式，哪个最快
-    1. [进程间通信 | lllllan](http://localhost:8080/cs-basic/os/def/process-communication/)
+    1. [进程间通信 | lllllan](http://blog.lllllan.cn/cs-basic/os/def/process-communication/)
 
 16. 为什么共享内存最快
 17. 介绍一下虚拟地址和物理地址，虚拟地址怎么映射到物理地址
 18. TCP和UDP的区别
-    1. [计算机网络-常见面试题 | lllllan](http://localhost:8080/cs-basic/network/interview-questions/#四、tcp、udp协议的区别)
+    1. [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/interview-questions/#四、tcp、udp协议的区别)
 
 19. TCP粘包是什么
-    1. [计算机网络-常见面试题 | lllllan](http://localhost:8080/cs-basic/network/interview-questions/#tcp粘包和拆包-★)
+    1. [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/interview-questions/#tcp粘包和拆包-★)
 
 20. 描述一下TCP的四次挥手
-    1. [四次挥手 | lllllan](http://localhost:8080/cs-basic/network/4-wave/)
+    1. [四次挥手 | lllllan](http://blog.lllllan.cn/cs-basic/network/4-wave/)
 
 21. TIME_WAIT状态的作用
-    1. [四次挥手 | lllllan](http://localhost:8080/cs-basic/network/4-wave/#四次挥手流程)
+    1. [四次挥手 | lllllan](http://blog.lllllan.cn/cs-basic/network/4-wave/#四次挥手流程)
 
 22. MySQL索引底层什么实现的
 23. 为什么采用B+树
-    1. [索引 | lllllan](http://localhost:8080/mysql/index/)
+    1. [索引 | lllllan](http://blog.lllllan.cn/mysql/index/)
 
 24. 聚簇索引和非聚簇索引的区别
 25. 聚簇索引一个表可以有多个吗
@@ -124,19 +124,19 @@ star: true
 7. 为什么采用红黑树，为什么不用哈希
     1. [在Java8中为什么要使用红黑树来实现的HashMap？_清风追梦enjoy的博客-CSDN博客_hashmap为什么要用红黑树](https://blog.csdn.net/it_qingfengzhuimeng/article/details/103308308)
 8. http协议和https协议的区别
-    1. [HTTP和HTTPS | lllllan](http://localhost:8080/cs-basic/network/http-and-https/#http-与-https-区别)
+    1. [HTTP和HTTPS | lllllan](http://blog.lllllan.cn/cs-basic/network/http-and-https/#http-与-https-区别)
 9. https的建连，有几次握手
 10. http协议工作在哪一层
     1. 应用层
 11. 传输层协议有哪些
     1. tcp、udp
 12. http的长连接和短连接
-    1. [keep-alive | lllllan](http://localhost:8080/cs-basic/network/keep-alive/)
+    1. [keep-alive | lllllan](http://blog.lllllan.cn/cs-basic/network/keep-alive/)
 13. tcp的长连接和短连接
     1. HTTP的长连接和短连接本质上是TCP长连接和短连接
 14. 常用的IO模型
 15. 什么是IO复用
-     1. [操作系统 | lllllan](http://localhost:8080/cs-basic/os/#_5-3-unix常见的io模型-★)
+     1. [操作系统 | lllllan](http://blog.lllllan.cn/cs-basic/os/#_5-3-unix常见的io模型-★)
 
 16. IO多路复用模型的区别
 17. select、poll、epoll分别适用于什么场景
@@ -146,15 +146,15 @@ star: true
 20. 使用索引的优点和缺点
      1. 检索快、维护难占空间
 21. b+树索引和哈希索引了解吗
-     1. [索引 | lllllan](http://localhost:8080/mysql/index/)
+     1. [索引 | lllllan](http://blog.lllllan.cn/mysql/index/)
 22. 实际场景，有一个查询语句select * from table where a>1 and b=1，怎么给a，b建一个联合索引性能比较好
      1. 当遇到范围查询(>、<、between、like)就会停止匹配
      2. 联合索引（b，a）
 23. 什么是事务
-     1. [事务 | lllllan](http://localhost:8080/mysql/transaction/)
+     1. [事务 | lllllan](http://blog.lllllan.cn/mysql/transaction/)
 24. 事务有哪些特性
 25. Innodb支持哪些隔离级别
-     1. [事务 | lllllan](http://localhost:8080/mysql/transaction/#事务隔离级别)
+     1. [事务 | lllllan](http://blog.lllllan.cn/mysql/transaction/#事务隔离级别)
 26. 幻读可以举个例子吗
 27. MySQL怎么解决幻读问题
 28. 什么是间隙锁
@@ -205,15 +205,15 @@ star: true
 
 1. map和unordered_map的实现
 2. 怎么处理哈希冲突
-    1. [常见面试题 | lllllan](http://localhost:8080/java/basic/#哈希冲突的解决办法)
+    1. [常见面试题 | lllllan](http://blog.lllllan.cn/java/basic/#哈希冲突的解决办法)
 
 3. 了解哪些程序语言的锁
 4. 阻塞到唤醒为什么还会有开销
 5. 了解cas吗
-    1. [第十章、CAS与原子操作 | lllllan](http://localhost:8080/java/concurrent/2/10/)
+    1. [第十章、CAS与原子操作 | lllllan](http://blog.lllllan.cn/java/concurrent/2/10/)
 
 6. 怎么实现一个优先级队列
-7. 对2000万高考考生的分数进行[排序]()
+7. 对2000万高考考生的分数进行排序
 
 做题：给m个不重复字符和一个长度为n的字符串，能否在这个字符串中找到一个长度为m的连续子串，使得子串都由上面的m个字符组成。
 

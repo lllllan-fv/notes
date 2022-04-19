@@ -49,21 +49,21 @@ star: true
 #  **一面:** 
 
 1. HashMap和ConcurrentHashMap，说一下扩容过程，有什么区别。
-    1. [HashMap 源码解读 | lllllan](http://localhost:8080/java/container/source-code/hashmap/)
-    2. [ConcurrentHashMap 源码解读 | lllllan](http://localhost:8080/java/container/source-code/concurrent-hashmap/)
+    1. [HashMap 源码解读 | lllllan](http://blog.lllllan.cn/java/container/source-code/hashmap/)
+    2. [ConcurrentHashMap 源码解读 | lllllan](http://blog.lllllan.cn/java/container/source-code/concurrent-hashmap/)
 
 2. Java的泛型如何实现？泛型擦除是什么
     1. [面试官问我：“泛型擦除是什么，会带来什么问题？” - 云+社区 - 腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1649866)
 
 3. java的类加载为什么要使用双亲委派机制
-    1. [JVM 常见问题 | lllllan](http://localhost:8080/java/jvm/#双亲委派机制)
+    1. [JVM 常见问题 | lllllan](http://blog.lllllan.cn/java/jvm/#双亲委派机制)
     2. 避免一个类的重复加载
     3. 保护框架需要加载的类不会被应用程序覆盖
 
 4. 挖项目，问数据库表和字段的设计（有点紧张，说得很磕巴）
 5. 说一下MySQL事务隔离级别，默认的级别是什么？是否解决了幻读？如何解决？MVCC如何实现？
-    1. [事务 | lllllan](http://localhost:8080/mysql/transaction/)
-    2. [MVCC | lllllan](http://localhost:8080/mysql/mvcc/)
+    1. [事务 | lllllan](http://blog.lllllan.cn/mysql/transaction/)
+    2. [MVCC | lllllan](http://blog.lllllan.cn/mysql/mvcc/)
 
 6. MySQL主从复制了解吗，如果让你设计，你会如何实现？（直说没了解，想了半天也没有想出来如何设计，面试官不断引导，奈何本人不争气）
 7. 说一下https和http区别，说一下握手过程（这里说得比较详细，从非对称加密开始讲起
@@ -108,7 +108,7 @@ star: true
 5. 了解k8s吗？了解云原生吗？（我说我了解docker，他说docker只是个容器。我说云原生没有很确切的概念，他说没错，看来你看过相关的。。
 6. 了解AQS吗？（讲了一下AQS的源码，比较满意）
 7. 了解java内存模型吗？说说volatile底层原理。（讲了一下JMM，内存读写屏障）
-    1. [第六章、Java内存模型基础知识 | lllllan](http://localhost:8080/java/concurrent/2/6/)
+    1. [第六章、Java内存模型基础知识 | lllllan](http://blog.lllllan.cn/java/concurrent/2/6/)
 
 8. 项目中遇到什么问题？如何解决？（说了一些技术细节
 9. 算法题：最长回文子串，求x的算术平方根，验证一个树是否为另一个的子树。
