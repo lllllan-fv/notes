@@ -49,8 +49,16 @@ star: true
 #  **一面:** 
 
 1. HashMap和ConcurrentHashMap，说一下扩容过程，有什么区别。
+    1. [HashMap 源码解读 | lllllan](http://localhost:8080/java/container/source-code/hashmap/)
+    2. [ConcurrentHashMap 源码解读 | lllllan](http://localhost:8080/java/container/source-code/concurrent-hashmap/)
+
 2. Java的泛型如何实现？泛型擦除是什么
+    1. [面试官问我：“泛型擦除是什么，会带来什么问题？” - 云+社区 - 腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1649866)
+
 3. java的类加载为什么要使用双亲委派机制
+    1. 避免一个类的重复加载
+    2. 保护框架需要加载的类不会被应用程序覆盖
+
 4. 挖项目，问数据库表和字段的设计（有点紧张，说得很磕巴）
 5. 说一下MySQL事务隔离级别，默认的级别是什么？是否解决了幻读？如何解决？MVCC如何实现？
 6. MySQL主从复制了解吗，如果让你设计，你会如何实现？（直说没了解，想了半天也没有想出来如何设计，面试官不断引导，奈何本人不争气）
@@ -71,6 +79,7 @@ star: true
 - [ ] Java泛型
     - [ ] 如何实现
     - [ ] 泛型擦除
+- [x] 双亲委派机制
 - [ ] MySQL事务隔离级别
     - [ ] 默认级别
     - [ ] 怎么解决幻读
