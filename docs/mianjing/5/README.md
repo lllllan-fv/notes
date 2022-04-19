@@ -93,7 +93,9 @@ star: true
 ## 二面（3月11日，80分钟）
 
 1. 自我介绍 
+
 2. 项目讨论（两个项目问了 15 分钟，疯狂轰炸原理、代码细节） 
+
 3. HTTP 的 keep-alive 和 TCP 的 keep-alive（项目延伸问题，讨论了 10 分钟）
     1. [keep-alive | lllllan](http://blog.lllllan.cn/cs-basic/network/keep-alive/)	
     2. HTTP 的 keep-alive 多长？（不了解，提到 Nginx 好像是 60s，但理论上应该没限制？） 
@@ -102,10 +104,18 @@ star: true
     1. [HTTP与TCP的区别和联系 - jason.bai - 博客园 (cnblogs.com)](https://www.cnblogs.com/baizhanshi/p/8482612.html)
     2. [解析 http 协议是否要处理粘包？ 是否要考虑到收到的数据包为不符 http 协议格式的数据包的情况? - 知乎 (zhihu.com)](https://www.zhihu.com/question/24598268)
 
+    > - 请求行的边界是CRLF，如果读取到CRLF，则意味着请求行的信息已经读取完成。
+    >
+    > - Header的边界是CRLF，如果连续读取两个CRLF，则意味着header的信息读取完成。
+    > - body的长度是有Content-Length 来进行确定。如果没有Content-Length ，则是chunked协议(具体参考前面的trunked协议)。
+
 5. HTTP 如何传输大文件呢？（分块传输，Transfer-Encoding: chunked）  
     - 分块传输怎么判断什么时候传输完成呢？（最后一个包是空的） 
+
 6. 为什么 TCP 会粘包？（TCP 是字节流）  
     - 怎么解决粘包？（刚才不一直在聊 HTTP 解决粘包吗。。。） 
+    - [TCP粘包问题分析和解决（全） - 小 楼 一 夜 听 春 雨 - 博客园 (cnblogs.com)](https://www.cnblogs.com/kex1n/p/6502002.html)
+
 7. Java 的 Object 有哪些方法？（记不全会提醒你，然后一个一个问）  
     - equals() 和 hashcode() 八股 
     - 哈希冲突如何解决？（开放定址，链接法，再哈希）    
@@ -113,10 +123,13 @@ star: true
         - 负载因子是什么？怎么算？ 
     - clone() 怎么用？引用拷贝深拷贝浅拷贝？ 
     - wait() 和 sleep() 八股 
+
 8. 场景题：2T 的两个大文件，每一行存储一个字符串，内存只有 1G，找出两个文件中相同的字符串？（哈希，分治）  
     - 你设计的算法，每一个字符串需要被读几次？ 
     - 复杂度多少？还可以优化吗？ 
+
 9. 算法题：最长有效括号（磨了 20 分钟才写出来，把测试通过就行了） 
+
 10. 没反问...... 
 
 总结：**网络问得很细，Java 问得偏八股。**面试官全程面无表情，但没啥反馈。做算法题的时间有点长，可能着急结束，代码跑通了就行，甚至连代码都没细看，面试体验很一般。
@@ -133,7 +146,7 @@ star: true
     - [ ] 怎么解决
 - [ ] Object的方法
     - [x] equals 和 hashcode
-    - [ ] 哈希冲突解决
+    - [x] 哈希冲突解决
         - [ ] 各自的优缺点
         - [ ] 负载因子
     - [ ] clone 怎么用，深浅
@@ -180,7 +193,7 @@ star: true
 - [ ] 路由器和交换机
     - [ ] 链路层干嘛，协议
     - [ ] IP地址和MAC地址
-- [ ] ACID
+- [x] ACID
 - [ ] 物理地址和虚拟地址
     - [ ] 地址转换
     - [ ] 快表和多级页表
