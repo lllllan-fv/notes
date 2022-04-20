@@ -187,10 +187,15 @@ star: true
 7. 物理地址和虚拟地址区别？  
     - 怎么转换？ 
     - 为什么要多级页表和快表？ 
+    - [内存管理概念 | lllllan](http://blog.lllllan.cn/cs-basic/os/wangdao/3/1/#_4-3-具有快表的地址变换机构)
     - 缺页中断处理流程？ 
+    - [虚拟内存管理 | lllllan](http://blog.lllllan.cn/cs-basic/os/wangdao/3/2/#_2-2-缺页中断机构)
     - 页表项的结构？（页地址、页偏移，各种标记位标识 CPU 特权级、读写权限、是否在内存中......） 
+    - [虚拟内存管理 | lllllan](http://blog.lllllan.cn/cs-basic/os/wangdao/3/2/#_2-1-页表机制)
     - 你提到了 CPU 特权级？怎么转换的？（中断） 
+    - [操作系统运行环境 | lllllan](http://blog.lllllan.cn/cs-basic/os/wangdao/1/3/#三、系统调用)
     - 具体有哪些中断？（外部中断，异常，软中断） 
+    - [操作系统运行环境 | lllllan](http://blog.lllllan.cn/cs-basic/os/wangdao/1/3/#_2-2-中断和异常的分类)
 8. 数据从网卡到内存的过程描述一下？  
     - 具体有几次中断？ 
 9. CPU 4 个核有共享缓存对吧，怎么保证缓存一致性？（总线锁，MESI） 
@@ -210,9 +215,9 @@ star: true
 - [x] ACID
 - [ ] 物理地址和虚拟地址
     - [ ] 地址转换
-    - [ ] 快表和多级页表
+    - [x] 快表和多级页表
     - [ ] 缺页中断处理流程
-    - [ ] 页表项结构
+    - [x] 页表项结构
     - [ ] CPU 特权指令，转换
     - [ ] 中断分类
 - [ ] 数据从网卡到内存的过程
