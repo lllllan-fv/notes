@@ -161,7 +161,8 @@ module.exports = config({
 					icon: "",
 					prefix: "network/",
 					children: [
-						"interview-questions/",
+						"",
+						"osi&tcp/",
 						"3-handshake/",
 						"4-wave/",
 						"url-to-page/",

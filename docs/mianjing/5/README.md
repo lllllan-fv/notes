@@ -179,6 +179,7 @@ star: true
 3. buffer 用来干嘛？（没说两句被打断，面试官指的是项目中的，开始没理解到） 
 4. 用过哪些 Linux 命令？ 
 5. 路由器和交换机区别？  
+    - [路由器和交换机 | lllllan](http://blog.lllllan.cn/cs-basic/network/def/router-and-switch/#路由器)
     - 链路层是干什么的？有哪些协议？ 
     - IP 地址和 MAC 地址的区别？ 
 6. 事务 ACID 知道吧，解释 C 的含义？（说了很久，面试官说基本对，下去再看看） 
