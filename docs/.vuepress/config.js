@@ -166,7 +166,14 @@ module.exports = config({
 						"4-wave/",
 						"url-to-page/",
 						"http-and-https/",
-						"keep-alive/",
+						{
+							title: "补充",
+							icon: "",
+							prefix: "def/",
+							children: [
+								"keep-alive/", "http-big-data/"
+							]
+						}
 						{
 							title: "网络是怎样连接的",
 							incon: "",
