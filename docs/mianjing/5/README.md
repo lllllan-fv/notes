@@ -182,6 +182,7 @@ star: true
     - [路由器和交换机 | lllllan](http://blog.lllllan.cn/cs-basic/network/def/router-and-switch/#路由器)
     - 链路层是干什么的？有哪些协议？ 
     - IP 地址和 MAC 地址的区别？ 
+    - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/#ip地址和mac地址)
 6. 事务 ACID 知道吧，解释 C 的含义？（说了很久，面试官说基本对，下去再看看） 
 7. 物理地址和虚拟地址区别？  
     - 怎么转换？ 
@@ -205,7 +206,7 @@ star: true
 - [ ] linux 命令
 - [ ] 路由器和交换机
     - [ ] 链路层干嘛，协议
-    - [ ] IP地址和MAC地址
+    - [x] IP地址和MAC地址
 - [x] ACID
 - [ ] 物理地址和虚拟地址
     - [ ] 地址转换
