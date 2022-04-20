@@ -115,7 +115,7 @@ star: true
 
 6. 为什么 TCP 会粘包？（TCP 是字节流）  
     - 怎么解决粘包？（刚才不一直在聊 HTTP 解决粘包吗。。。） 
-    - [TCP粘包问题分析和解决（全） - 小 楼 一 夜 听 春 雨 - 博客园 (cnblogs.com)](https://www.cnblogs.com/kex1n/p/6502002.html)
+    - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/interview-questions/#tcp粘包和拆包-★)m/kex1n/p/6502002.html)
 
 7. Java 的 Object 有哪些方法？（记不全会提醒你，然后一个一个问）  
 
@@ -134,9 +134,12 @@ star: true
     - [第五章、Java线程间的通信 | lllllan](http://blog.lllllan.cn/java/concurrent/1/5/#_5-2-sleep方法)
 
 8. 场景题：2T 的两个大文件，每一行存储一个字符串，内存只有 1G，找出两个文件中相同的字符串？（哈希，分治）  
+    
+    - [算法系列-大数据面试题-两个大文件中找出共同记录_五癫的博客-CSDN博客_两个超大文件找共同出现的单词](https://blog.csdn.net/tiankong_/article/details/77234726)
+
     - 你设计的算法，每一个字符串需要被读几次？ 
     - 复杂度多少？还可以优化吗？ 
-
+    
 9. 算法题：最长有效括号（磨了 20 分钟才写出来，把测试通过就行了） 
 
 10. 没反问...... 
@@ -149,7 +152,7 @@ star: true
     - [ ] 多长时间
 - [ ] HTTP 拆包
 - [ ] HTTP 传输大文件
-    - [ ] 分块传输
+    - [x] 分块传输
     - [ ] 怎么判断什么时候传输完成
 - [ ] TCP 为什么会粘包
     - [ ] 怎么解决
@@ -165,7 +168,7 @@ star: true
 
 
 
-[算法系列-大数据面试题-两个大文件中找出共同记录_五癫的博客-CSDN博客_两个超大文件找共同出现的单词](https://blog.csdn.net/tiankong_/article/details/77234726)
+
 
 
 
