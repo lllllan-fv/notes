@@ -27,7 +27,7 @@ features:
     link: /java/basic/
 
   - title: 计算机基础
-    link: /cs-basic/network/interview-questions/
+    link: /cs-basic/network/
 
   - title: MySQL
     link: /mysql/
