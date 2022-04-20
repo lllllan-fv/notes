@@ -173,7 +173,7 @@ module.exports = config({
 							children: [
 								"keep-alive/", "http-big-data/"
 							]
-						}
+						},
 						{
 							title: "网络是怎样连接的",
 							incon: "",

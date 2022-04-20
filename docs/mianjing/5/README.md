@@ -111,7 +111,7 @@ star: true
 
 5. HTTP 如何传输大文件呢？（分块传输，Transfer-Encoding: chunked）  
     - 分块传输怎么判断什么时候传输完成呢？（最后一个包是空的） 
-    - [HTTP 传输大文件有哪些方案？ - 掘金 (juejin.cn)](https://juejin.cn/post/7005347768491311134)
+    - [HTTP 传输大文件 | lllllan](http://blog.lllllan.cn/cs-basic/network/def/http-big-data/)
 
 6. 为什么 TCP 会粘包？（TCP 是字节流）  
     - 怎么解决粘包？（刚才不一直在聊 HTTP 解决粘包吗。。。） 
