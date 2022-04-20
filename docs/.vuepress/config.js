@@ -171,7 +171,7 @@ module.exports = config({
 							icon: "",
 							prefix: "def/",
 							children: [
-								"keep-alive/", "http-big-data/"
+								"keep-alive/", "http-big-data/", "router-and-switch/",
 							]
 						},
 						{
