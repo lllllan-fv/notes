@@ -101,8 +101,8 @@ star: true
     2. HTTP 的 keep-alive 多长？（不了解，提到 Nginx 好像是 60s，但理论上应该没限制？） 
 
 4. HTTP 怎么拆包的？（CRLF 分隔，同时有一个 Content-Length 字段决定 body 长度） 
-    1. [HTTP与TCP的区别和联系 - jason.bai - 博客园 (cnblogs.com)](https://www.cnblogs.com/baizhanshi/p/8482612.html)
-    2. [解析 http 协议是否要处理粘包？ 是否要考虑到收到的数据包为不符 http 协议格式的数据包的情况? - 知乎 (zhihu.com)](https://www.zhihu.com/question/24598268)
+    1. [第二章、用电信号传输 TCP/IP 数据 | lllllan](http://blog.lllllan.cn/cs-basic/network/how-is-the-network-connected/2/#_3-2-对较大数据进行拆分)
+    1. [应用层的拆包和粘包 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/77275039)
 
     > - 请求行的边界是CRLF，如果读取到CRLF，则意味着请求行的信息已经读取完成。
     >
@@ -134,7 +134,7 @@ star: true
     - [第五章、Java线程间的通信 | lllllan](http://blog.lllllan.cn/java/concurrent/1/5/#_5-2-sleep方法)
 
 8. 场景题：2T 的两个大文件，每一行存储一个字符串，内存只有 1G，找出两个文件中相同的字符串？（哈希，分治）  
-    
+   
     - [算法系列-大数据面试题-两个大文件中找出共同记录_五癫的博客-CSDN博客_两个超大文件找共同出现的单词](https://blog.csdn.net/tiankong_/article/details/77234726)
 
     - 你设计的算法，每一个字符串需要被读几次？ 
@@ -198,6 +198,8 @@ star: true
     - [操作系统运行环境 | lllllan](http://blog.lllllan.cn/cs-basic/os/wangdao/1/3/#_2-2-中断和异常的分类)
 8. 数据从网卡到内存的过程描述一下？  
     - 具体有几次中断？ 
+    - [计算机网络——数据从网卡到应用的过程_JMW1407的博客-CSDN博客_数据包从网卡到应用层的过程](https://blog.csdn.net/JMW1407/article/details/108636657)
+    - [第二章、用电信号传输 TCP/IP 数据 | lllllan](http://blog.lllllan.cn/cs-basic/network/how-is-the-network-connected/2/#_5-10-接受返回包)
 9. CPU 4 个核有共享缓存对吧，怎么保证缓存一致性？（总线锁，MESI） 
 10. 平时怎么学的？ 
 11. 反问 

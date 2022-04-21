@@ -68,42 +68,6 @@ star: true
 
 
 
-### CPU缓存
-
-[程序优化：CPU缓存基础知识 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/80672073)
-
-CPU缓存(CPU Cache)的目的是为了提高访问内存(RAM)的效率。
-
-CPU缓存有多级缓存，比如 L1、L2、L3 等：
-
-- L1容量最小，速度最快，每个核都有L1缓存，L1又专门针对指令和数据分成L1d(数据缓存)、L1i(指令缓存)。
-- L2容量比L1大，速度比L1慢，每个核都有L2缓存。
-- L3容量最大，速度最慢，多个核共享一个L3缓存
-
-
-
-![img](README.assets/v2-83dd5e9c74adb7c58f4f17e5a7219b63_720w.jpg)
-
-
-
-::: note 读写策略
-
-- 当CPU从内存读数据时，如果该数据没有在缓存中(read miss)，CPU会把数据拷贝到缓存。
-
-- 当CPU往内存写数据时：
-
-- - 缓存命中：
-
-    - - Write through 更新缓存的数据，同时更新内存的数据。
-        - Write back 只更新缓存的数据，同时在缓存项设置一个drity标志位，内存的数据只会在某个时刻更新(比如替换cache line时)。
-
-    - 缓存未命中：
-
-    - - Write allocate 在写之前先把数据加载到缓存，然后再实施上面的写策略。
-        - No-write allocate 不加载缓存，直接把数据写到内存。数据只有在 read miss 时才会加载到缓存。
-
-:::
-
 
 
 ### 硬链接和软链接

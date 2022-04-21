@@ -207,6 +207,7 @@ module.exports = config({
 							children: [
 								"process-communication/",
 								"multiplexing/",
+								"cpu-cache/",
 							],
 						},
 						{
