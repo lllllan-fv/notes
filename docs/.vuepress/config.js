@@ -198,14 +198,17 @@ module.exports = config({
 					prefix: "os/",
 					children: [
 						"",
-						"def/process-communication/",
-						"def/multiplexing/",
-						// {
-						// 	title: "",
-						// 	icon: "",
-						// 	prefix: "",
-						// 	children: [],
-						// },
+						"processes&threads/",
+						"memory-manage/",
+						{
+							title: "补充",
+							icon: "",
+							prefix: "def",
+							children: [
+								"process-communication/",
+								"multiplexing/",
+							],
+						},
 						{
 							title: "王道-操作系统",
 							icon: "",
