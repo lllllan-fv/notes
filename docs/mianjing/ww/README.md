@@ -113,7 +113,7 @@ star: true
 
 4. mmap了解嘛
     - ==[阿里二面：什么是mmap？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/357820303)==
-    - ==[认真分析mmap：是什么 为什么 怎么用 - 胡潇 - 博客园 (cnblogs.com)](https://www.cnblogs.com/hu==xiao-tee/p/4660352.html)
+    - ==[认真分析mmap：是什么 为什么 怎么用 - 胡潇 - 博客园 (cnblogs.com)](https://www.cnblogs.com/huxiao-tee/p/4660352.html)==
 
 5. 共享内存和管道的通信效率的比较
 
