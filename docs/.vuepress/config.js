@@ -172,7 +172,7 @@ module.exports = config({
 							icon: "",
 							prefix: "def/",
 							children: [
-								"keep-alive/", "http-big-data/", "router-and-switch/",
+								"keep-alive/", "http-big-data/", "router-and-switch/", "tcp-reliable-transmission/",
 							]
 						},
 						{
