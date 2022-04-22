@@ -201,6 +201,7 @@ star: true
     - [计算机网络——数据从网卡到应用的过程_JMW1407的博客-CSDN博客_数据包从网卡到应用层的过程](https://blog.csdn.net/JMW1407/article/details/108636657)
     - [第二章、用电信号传输 TCP/IP 数据 | lllllan](http://blog.lllllan.cn/cs-basic/network/how-is-the-network-connected/2/#_5-10-接受返回包)
 9. CPU 4 个核有共享缓存对吧，怎么保证缓存一致性？（总线锁，MESI） 
+    - [CPU 缓存 | lllllan](http://blog.lllllan.cn/cs-basic/os/def/cpu-cache/)
 10. 平时怎么学的？ 
 11. 反问 
 
@@ -221,9 +222,9 @@ star: true
     - [ ] 缺页中断处理流程
     - [x] 页表项结构
     - [ ] CPU 特权指令，转换
-    - [ ] 中断分类
+    - [x] 中断分类
 - [ ] 数据从网卡到内存的过程
     - [ ] 几次中断
 - [ ] CPU 共享缓存
-    - [ ] 缓存一致性
+    - [x] 缓存一致性
 

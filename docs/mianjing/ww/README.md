@@ -114,10 +114,13 @@ star: true
 4. mmap了解嘛
     - ==[阿里二面：什么是mmap？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/357820303)==
     - ==[认真分析mmap：是什么 为什么 怎么用 - 胡潇 - 博客园 (cnblogs.com)](https://www.cnblogs.com/huxiao-tee/p/4660352.html)==
+    - ==[彻底理解mmap()_Holy_666的博客-CSDN博客_mmap](https://blog.csdn.net/Holy_666/article/details/86532671)==
 
 5. 共享内存和管道的通信效率的比较
 
 6. 用户态和内核态的数据拷贝
+
+    - ==[用户态、内核态及零拷贝 - koushr - 博客园 (cnblogs.com)](https://www.cnblogs.com/koushr/p/5873404.html)==
 
 7. 管道大小是不是可以调整，怎么调整
 
@@ -136,95 +139,98 @@ star: true
     1. 虚拟内存的作用
 
 11. TCP和UDP的区别
-     - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/#tcp、udp协议的区别)
+      - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/#tcp、udp协议的区别)
 
 12. TCP的拥塞控制
-     - ==[通俗易懂跟你讲解什么是拥塞控制？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/97709686)==
+      - [TCP可靠传输 | lllllan](http://blog.lllllan.cn/cs-basic/network/def/tcp-reliable-transmission/#拥塞控制)
 
-13. 应用层协议主要用到TCP的协议有哪些
+13. 应用层协议主要用到TCP、UDP的协议有哪些
 
-14. 应用层协议主要用到UDP的协议有哪些
+     - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/#使用tcp、udp的协议)
+     - FTP协议 SMTP协议
 
-15. FTP协议 SMTP协议
+14. HTTP请求格式
 
-16. HTTP请求格式
+     1. 请求头包含了哪些东西
 
-17. 请求头包含了哪些东西
+     - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/#首部字段)
 
-     1. 有哪些比较经典的请求头
+     1. 请求方法有哪些
 
-18. 请求方法有哪些
+     - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/#请求方法)
 
      1. POST和GET的区别
 
-19. HTTP响应报文包括哪些
-     - ==[第三章、HTTP报文 | lllllan](http://blog.lllllan.cn/cs-basic/network/diagram-http/3/)==
+     - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/#get和post)
 
-20. HTTP返回码
+15. HTTP响应报文包括哪些
+      - ==[第三章、HTTP报文 | lllllan](http://blog.lllllan.cn/cs-basic/network/diagram-http/3/)==
 
-     1. 各举一个例子
+16. HTTP返回码
 
-     - [第四章、Http状态码 | lllllan](http://blog.lllllan.cn/cs-basic/network/diagram-http/4/)
+      1. 各举一个例子
 
-21. 内存泄漏和内存溢出的区别
-     - 区别：内存溢出是指程序在申请内存时，没有足够的内存空间供其使用， 系统已经不能再分配出你所需要的空间；内存泄露是指程序在申请内存后，无法释放已申请的内存空间，一次内存泄露危害可以忽略，但是内存泄漏次数多了就会导致内存溢出。
+      - [第四章、Http状态码 | lllllan](http://blog.lllllan.cn/cs-basic/network/diagram-http/4/)
 
-     1. 内存泄漏是怎么引起的
+17. 内存泄漏和内存溢出的区别
+      - 区别：内存溢出是指程序在申请内存时，没有足够的内存空间供其使用， 系统已经不能再分配出你所需要的空间；内存泄露是指程序在申请内存后，无法释放已申请的内存空间，一次内存泄露危害可以忽略，但是内存泄漏次数多了就会导致内存溢出。
 
-     - ==[什么是内存泄漏，常见引起引起内存泄漏的原因,及解决办法_Lonely池的博客-CSDN博客_内存泄漏](https://blog.csdn.net/baidu_32015283/article/details/87916080)==
+      1. 内存泄漏是怎么引起的
 
-     2. 内存溢出是怎么引起的
+      - ==[什么是内存泄漏，常见引起引起内存泄漏的原因,及解决办法_Lonely池的博客-CSDN博客_内存泄漏](https://blog.csdn.net/baidu_32015283/article/details/87916080)==
 
-     - [运行时数据区域 | lllllan](http://blog.lllllan.cn/java/jvm/2/1/)
+      2. 内存溢出是怎么引起的
 
-22. ~~C++中内存泄露的分类~~
+      - [运行时数据区域 | lllllan](http://blog.lllllan.cn/java/jvm/2/1/)
 
-23. 堆栈队列的概念
+18. ~~C++中内存泄露的分类~~
 
-24. 二叉树的中序前序后序遍历的概念
+19. 堆栈队列的概念
 
-25. 什么是线程安全，是有什么风险
+20. 二叉树的中序前序后序遍历的概念
 
-26. ~~C++里是怎么保证线程安全的~~
+21. 什么是线程安全，是有什么风险
 
-27. 线程池了解过嘛，线程池是什么概念
+22. ~~C++里是怎么保证线程安全的~~
 
-28. ~~什么是多态，C++有什么机制来实现多态，具体有什么关键字~~
+23. 线程池了解过嘛，线程池是什么概念
 
-29. ~~virtual关键字有用过嘛~~
+24. ~~什么是多态，C++有什么机制来实现多态，具体有什么关键字~~
 
-30. ~~C++的sizeof的计算，什么样的原理，是怎么用的~~
+25. ~~virtual关键字有用过嘛~~
 
-31. ~~什么是虚函数~~
+26. ~~C++的sizeof的计算，什么样的原理，是怎么用的~~
 
-32. 之前来面试过字节嘛
+27. ~~什么是虚函数~~
 
-33. ~~什么是LRU，应用场景是什么，在C++里面~~
+28. 之前来面试过字节嘛
 
-34. SQL语句了解嘛
+29. ~~什么是LRU，应用场景是什么，在C++里面~~
 
-35. HTTPS建立的流程
-     - [HTTP和HTTPS | lllllan](http://blog.lllllan.cn/cs-basic/network/http-and-https/#https工作流程)
+30. SQL语句了解嘛
 
-36. HTTP1.1/HTTP2.0/HTTP3.0有什么改进嘛
-     - ==[了解 HTTP3.0 吗？简要说一下 HTTP 的一个发展历程？_CreatorRay的博客-CSDN博客_http3.0](https://blog.csdn.net/m0_46171043/article/details/115167824)==
+31. HTTPS建立的流程
+      - [HTTP和HTTPS | lllllan](http://blog.lllllan.cn/cs-basic/network/http-and-https/#https工作流程)
 
-37. 算法题
+32. HTTP1.1/HTTP2.0/HTTP3.0有什么改进嘛
+      - ==[了解 HTTP3.0 吗？简要说一下 HTTP 的一个发展历程？_CreatorRay的博客-CSDN博客_http3.0](https://blog.csdn.net/m0_46171043/article/details/115167824)==
 
-     1. 二叉树的中序遍历非递归
+33. 算法题
 
-     - [94. 二叉树的中序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
+      1. 二叉树的中序遍历非递归
 
-     2. 二叉树最大子路径和
+      - [94. 二叉树的中序遍历 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/)
 
-     - [124. 二叉树中的最大路径和 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
+      2. 二叉树最大子路径和
 
-38. 你平时是怎么学习的
+      - [124. 二叉树中的最大路径和 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
 
-39. 后续的职业发展怎么考虑的
+34. 你平时是怎么学习的
 
-40. 后面想做什么方向
+35. 后续的职业发展怎么考虑的
 
-41. 为什么想做客户端
+36. 后面想做什么方向
 
-42. 反问
+37. 为什么想做客户端
+
+38. 反问
