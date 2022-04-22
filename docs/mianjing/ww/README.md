@@ -155,24 +155,19 @@ star: true
 
      - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/#首部字段)
 
-     1. 请求方法有哪些
+     2. 请求方法有哪些
 
      - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/#请求方法)
 
-     1. POST和GET的区别
+     3. POST和GET的区别
 
      - [计算机网络-常见面试题 | lllllan](http://blog.lllllan.cn/cs-basic/network/#get和post)
 
-15. HTTP响应报文包括哪些
-      - ==[第三章、HTTP报文 | lllllan](http://blog.lllllan.cn/cs-basic/network/diagram-http/3/)==
-
-16. HTTP返回码
-
-      1. 各举一个例子
+     4. HTTP返回码
 
       - [第四章、Http状态码 | lllllan](http://blog.lllllan.cn/cs-basic/network/diagram-http/4/)
 
-17. 内存泄漏和内存溢出的区别
+15. 内存泄漏和内存溢出的区别
       - 区别：内存溢出是指程序在申请内存时，没有足够的内存空间供其使用， 系统已经不能再分配出你所需要的空间；内存泄露是指程序在申请内存后，无法释放已申请的内存空间，一次内存泄露危害可以忽略，但是内存泄漏次数多了就会导致内存溢出。
 
       1. 内存泄漏是怎么引起的
@@ -183,39 +178,39 @@ star: true
 
       - [运行时数据区域 | lllllan](http://blog.lllllan.cn/java/jvm/2/1/)
 
-18. ~~C++中内存泄露的分类~~
+16. ~~C++中内存泄露的分类~~
 
-19. 堆栈队列的概念
+17. 堆栈队列的概念
 
-20. 二叉树的中序前序后序遍历的概念
+18. 二叉树的中序前序后序遍历的概念
 
-21. 什么是线程安全，是有什么风险
+19. 什么是线程安全，是有什么风险
 
-22. ~~C++里是怎么保证线程安全的~~
+20. ~~C++里是怎么保证线程安全的~~
 
-23. 线程池了解过嘛，线程池是什么概念
+21. 线程池了解过嘛，线程池是什么概念
 
-24. ~~什么是多态，C++有什么机制来实现多态，具体有什么关键字~~
+22. ~~什么是多态，C++有什么机制来实现多态，具体有什么关键字~~
 
-25. ~~virtual关键字有用过嘛~~
+23. ~~virtual关键字有用过嘛~~
 
-26. ~~C++的sizeof的计算，什么样的原理，是怎么用的~~
+24. ~~C++的sizeof的计算，什么样的原理，是怎么用的~~
 
-27. ~~什么是虚函数~~
+25. ~~什么是虚函数~~
 
-28. 之前来面试过字节嘛
+26. 之前来面试过字节嘛
 
-29. ~~什么是LRU，应用场景是什么，在C++里面~~
+27. ~~什么是LRU，应用场景是什么，在C++里面~~
 
-30. SQL语句了解嘛
+28. SQL语句了解嘛
 
-31. HTTPS建立的流程
+29. HTTPS建立的流程
       - [HTTP和HTTPS | lllllan](http://blog.lllllan.cn/cs-basic/network/http-and-https/#https工作流程)
 
-32. HTTP1.1/HTTP2.0/HTTP3.0有什么改进嘛
+30. HTTP1.1/HTTP2.0/HTTP3.0有什么改进嘛
       - ==[了解 HTTP3.0 吗？简要说一下 HTTP 的一个发展历程？_CreatorRay的博客-CSDN博客_http3.0](https://blog.csdn.net/m0_46171043/article/details/115167824)==
 
-33. 算法题
+31. 算法题
 
       1. 二叉树的中序遍历非递归
 
@@ -225,12 +220,12 @@ star: true
 
       - [124. 二叉树中的最大路径和 - 力扣（LeetCode） (leetcode-cn.com)](https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/)
 
-34. 你平时是怎么学习的
+32. 你平时是怎么学习的
 
-35. 后续的职业发展怎么考虑的
+33. 后续的职业发展怎么考虑的
 
-36. 后面想做什么方向
+34. 后面想做什么方向
 
-37. 为什么想做客户端
+35. 为什么想做客户端
 
-38. 反问
+36. 反问
