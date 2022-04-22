@@ -203,7 +203,7 @@ module.exports = config({
 						{
 							title: "补充",
 							icon: "",
-							prefix: "def",
+							prefix: "def/",
 							children: [
 								"process-communication/",
 								"multiplexing/",
