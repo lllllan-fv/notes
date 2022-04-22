@@ -47,10 +47,7 @@ footer: MIT Licensed | Copyright © 2022 lllllan
 
 
 
-- cpu缓存
-- mmap
-    - [阿里二面：什么是mmap？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/357820303)
-    - [认真分析mmap：是什么 为什么 怎么用 - 胡潇 - 博客园 (cnblogs.com)](https://www.cnblogs.com/huxiao-tee/p/4660352.html)
-- 网络拥塞
-    - [通俗易懂跟你讲解什么是拥塞控制？ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/97709686)
+
+
+- [3.1 HTTP 常见面试题 | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/2_http/http_interview.html#get-与-post)
 
