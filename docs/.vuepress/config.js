@@ -169,7 +169,8 @@ module.exports = config({
 							icon: "",
 							prefix: "http/",
 							children: [
-								"http-and-https/",
+								"version/",
+								"https/",
 							]
 						},
 						{
