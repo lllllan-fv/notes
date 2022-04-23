@@ -163,10 +163,24 @@ module.exports = config({
 					children: [
 						"",
 						"osi&tcp/",
-						"3-handshake/",
-						"4-wave/",
 						"url-to-page/",
-						"http-and-https/",
+						{
+							title: "HTTP",
+							icon: "",
+							prefix: "http/",
+							children: [
+								"http-and-https/",
+							]
+						},
+						{
+							title: "TCP",
+							icon: "",
+							prefix: "tcp/",
+							children: [
+								"3-handshake/",
+								"4-wave/",
+							]
+						},
 						{
 							title: "补充",
 							icon: "",
