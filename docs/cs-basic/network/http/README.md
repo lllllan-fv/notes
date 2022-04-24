@@ -51,7 +51,13 @@ star: true
 - URL 规定只能支持 ASCII，所以 GET 请求的参数只允许 ASCII 字符 
 - 而且浏览器会对 URL 的长度有限制（HTTP协议本身对 URL长度并没有做任何规定）。
 
+
+
+::: center
+
 ![GET 请求](README.assets/12-Get请求.png)
+
+:::
 
 
 
@@ -63,7 +69,13 @@ star: true
 - body 中的数据可以是任意格式的数据，只要客户端与服务端协商好即可
 - 而且浏览器不会对 body 大小做限制
 
+
+
+::: center
+
 ![POST 请求](README.assets/13-Post请求.png)
+
+:::
 
 
 
