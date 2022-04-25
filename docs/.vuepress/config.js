@@ -172,6 +172,8 @@ module.exports = config({
 								"",
 								"version/",
 								"https/",
+								"keep-alive/",
+								"http-big-data/",
 							]
 						},
 						{
@@ -179,8 +181,10 @@ module.exports = config({
 							icon: "",
 							prefix: "tcp/",
 							children: [
+								"",
 								"3-handshake/",
 								"4-wave/",
+								"tcp-reliable-transmission/",
 							]
 						},
 						{
@@ -188,7 +192,7 @@ module.exports = config({
 							icon: "",
 							prefix: "def/",
 							children: [
-								"keep-alive/", "http-big-data/", "router-and-switch/", "tcp-reliable-transmission/",
+								"router-and-switch/",
 							]
 						},
 						{
