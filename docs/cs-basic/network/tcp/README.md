@@ -40,6 +40,7 @@ star: true
 - [4.7 为什么 TCP 每次建立连接时，初始化序列号都要不一样呢？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/isn_deff.html)
 - [4.9 已建立连接的TCP，收到SYN会发生什么？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/challenge_ack.html)
 - [4.10 四次挥手中收到乱序的 FIN 包会如何处理？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/out_of_order_fin.html)
+- [4.11 在 TIME_WAIT 状态的 TCP 连接，收到 SYN 后会发生什么？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/time_wait_recv_syn.html)
 
 :::
 
@@ -184,3 +185,38 @@ TCP 每次建立连接时，初始化序列号都要不一样。 ==主要原因�
 
 
 ![img](README.assets/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bCP5p6XY29kaW5n,size_20,color_FFFFFF,t_70,g_se,x_16-16508607352363.png)
+
+
+
+## TIME_WAIT 期间收到 SYN
+
+> - 合法 SYN：客户端的 SYN 的「序列号」比服务端「期望下一个收到的序列号」要**大**，**并且** SYN 的「时间戳」比服务端「最后收到的报文的时间戳」要**大**。
+> - 非法 SYN：客户端的 SYN 的「序列号」比服务端「期望下一个收到的序列号」要**小**，**或者** SYN 的「时间戳」比服务端「最后收到的报文的时间戳」要**小**。
+
+
+
+- 收到合法 SYN，重用此链接，跳过 TIME_WAIT，进入 SYN_RECV 状态
+- 收到非法 SYN，回复第四次挥手的 ACK 报文，客户端接收后返回 RST 报文
+
+
+
+### 收到合法 SYN
+
+![图片](README.assets/39d0d04adf72fe3d37623acff9ae2507.png)
+
+
+
+### 收到非法 SYN
+
+![图片](README.assets/642a6699c0234da3444e96805dddcc09.png)
+
+
+
+### 收到 RST 
+
+处于 TIME_WAIT 状态的连接，收到 RST 会断开连接吗？
+
+会不会断开，关键看 `net.ipv4.tcp_rfc1337` 这个内核参数（默认情况是为 0）：
+
+- 如果这个参数设置为 0， 收到 RST 报文会提前结束 TIME_WAIT 状态，释放连接。
+- 如果这个参数设置为 1， 就会丢掉 RST 报文。
