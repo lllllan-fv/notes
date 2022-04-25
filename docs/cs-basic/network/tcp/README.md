@@ -41,6 +41,8 @@ star: true
 - [4.9 已建立连接的TCP，收到SYN会发生什么？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/challenge_ack.html)
 - [4.10 四次挥手中收到乱序的 FIN 包会如何处理？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/out_of_order_fin.html)
 - [4.11 在 TIME_WAIT 状态的 TCP 连接，收到 SYN 后会发生什么？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/time_wait_recv_syn.html)
+- [4.12 TCP 连接，一端断电和进程崩溃有什么区别？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/tcp_down_and_crash.html)
+- [4.13 拔掉网线后， 原本的 TCP 连接还存在吗？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/tcp_unplug_the_network_cable.html)
 
 :::
 
@@ -220,3 +222,56 @@ TCP 每次建立连接时，初始化序列号都要不一样。 ==主要原因�
 
 - 如果这个参数设置为 0， 收到 RST 报文会提前结束 TIME_WAIT 状态，释放连接。
 - 如果这个参数设置为 1， 就会丢掉 RST 报文。
+
+
+
+## TCP连接中，电脑断电和进程崩溃
+
+- TCP 连接的一方突然断电，另一方是不知道的。
+- TCP 连接的一方进程突然崩溃， ==操作系统可以感知得到，会向另一方发送 FIN 报文，进行四次挥手==
+
+
+
+
+
+### 连接一方宕机以后，仍有数据传输
+
+- 如果一方宕机以后又迅速重启，在接收到数据包以后， ==会向另一方发送 RST 报文，另一方接收到以后会断开连接==
+- 如果宕机以后没有重启，发送方会进行超时重传，直到 ==达到「最大重传次数」或者「最大超时时间」这两个的其中一个条件后，就会停止重传==
+
+
+
+## 拔网线对TCP连接的影响
+
+==拔掉网线并不会改变客户端的 TCP 连接状态，并且还是处于 ESTABLISHED 状态==
+
+
+
+- 如果有数据传输
+    - 网线不插回去，发送方会进行超时重传，当重传次数达到上限以后就会断开连接
+    - 网线插回去之后还是能够正常通信
+- 如果没有数据传输
+    - 如果开启了保活机制，在规定时间内一直没有响应，另一方就会断开连接
+    - 如果没有开启保活机制，将一直保持连接状态
+
+
+
+## 保活机制
+
+定义一个时间段，在这个时间段内，如果没有任何连接相关的活动，TCP 保活机制会开始作用，每隔一个时间间隔，发送一个探测报文，该探测报文包含的数据非常少，如果连续几个探测报文都没有得到响应，则认为当前的 TCP 连接已经死亡，系统内核将错误信息通知给上层应用程序。
+
+
+
+```
+net.ipv4.tcp_keepalive_time=7200
+net.ipv4.tcp_keepalive_intvl=75  
+net.ipv4.tcp_keepalive_probes=9
+```
+
+
+
+- tcp_keepalive_time = 7200：表示保活时间是 7200 秒（2小时），也就 2 小时内如果没有任何连接相关的活动，则会启动保活机制
+- tcp_keepalive_intvl = 75：表示每次检测间隔 75 秒；
+- tcp_keepalive_probes = 9：表示检测 9 次无响应，认为对方是不可达的，从而中断本次的连接。
+
+也就是说在 Linux 系统中，最少需要经过 2 小时 11 分 15 秒才可以发现一个「死亡」连接。
