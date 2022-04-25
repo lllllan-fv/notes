@@ -39,6 +39,7 @@ star: true
 - [4.6 如何理解是 TCP 面向字节流协议？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/tcp_stream.html)
 - [4.7 为什么 TCP 每次建立连接时，初始化序列号都要不一样呢？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/isn_deff.html)
 - [4.9 已建立连接的TCP，收到SYN会发生什么？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/challenge_ack.html)
+- [4.10 四次挥手中收到乱序的 FIN 包会如何处理？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/out_of_order_fin.html)
 
 :::
 
@@ -169,3 +170,17 @@ TCP 每次建立连接时，初始化序列号都要不一样。 ==主要原因�
 
 
 ![img](README.assets/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bCP5p6XY29kaW5n,size_20,color_FFFFFF,t_70,g_se,x_16.png)
+
+
+
+## 挥手过程中收到乱序的 FIN
+
+先明确一点，在握手过程中，双方第一个序列号是随机生成 的。通信过程中的序列号则是连续的。
+
+
+
+==所以如果在挥手过程中，客户端收到了服务器的 FIN，但是发现序列号不连续，则认定存在发送但未到达的数据包，会等待数据接收完毕之后才会进入 `TIME_WAIT` 阶段。==
+
+
+
+![img](README.assets/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bCP5p6XY29kaW5n,size_20,color_FFFFFF,t_70,g_se,x_16-16508607352363.png)
