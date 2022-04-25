@@ -131,3 +131,9 @@ TCP 每次建立连接时，初始化序列号都要不一样。 ==主要原因�
 
 
 详细的看 [4.7 为什么 TCP 每次建立连接时，初始化序列号都要不一样呢？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/isn_deff.html)
+
+
+
+## SYN 报文什么情况会被丢弃
+
+没有很懂 [4.8 SYN 报文什么时候情况下会被丢弃？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/syn_drop.html)
