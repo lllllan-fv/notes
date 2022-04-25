@@ -275,3 +275,16 @@ net.ipv4.tcp_keepalive_probes=9
 - tcp_keepalive_probes = 9：表示检测 9 次无响应，认为对方是不可达的，从而中断本次的连接。
 
 也就是说在 Linux 系统中，最少需要经过 2 小时 11 分 15 秒才可以发现一个「死亡」连接。
+
+
+
+## tcp_tw_reuse 为什么默认是关闭的
+
+哈哈好难 [4.14 tcptwreuse 为什么默认是关闭的？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/tcp_tw_reuse_close.html)
+
+
+
+## HTTPS中TLS和TCP能同时握手吗
+
+[4.14 HTTPS 中 TLS 和 TCP 能同时握手吗？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/tcp_tls.html)
+
