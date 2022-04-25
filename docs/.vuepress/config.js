@@ -33,16 +33,10 @@ module.exports = config({
 
 		nav: [
 			{ text: "Blog Home", link: "/", icon: "home" },
-			// {
-			//   text: "Guide",
-			//   icon: "creative",
-			//   link: "/guide/",
-			// },
-			// {
-			//   text: "Docs",
-			//   link: "https://vuepress-theme-hope.github.io/",
-			//   icon: "note",
-			// },
+			{ text: "Java", link: "/java/basic/" },
+			{ text: "计算机网络", link: "/cs-basic/network/" },
+			{ text: "操作系统", link: "/cs-basic/os/" },
+			{ text: "MySQL", link: "/mysql/" },
 		],
 
 		sidebar: {
@@ -155,118 +149,107 @@ module.exports = config({
 
 
 			// 计算机网络
-			"/cs-basic/": [
+			"/cs-basic/network/": [
+				"",
+				"osi&tcp/",
+				"url-to-page/",
 				{
-					title: "计算机网络",
+					title: "HTTP",
 					icon: "",
-					prefix: "network/",
+					prefix: "http/",
 					children: [
 						"",
-						"osi&tcp/",
-						"url-to-page/",
-						{
-							title: "HTTP",
-							icon: "",
-							prefix: "http/",
-							children: [
-								"",
-								"version/",
-								"https/",
-								"keep-alive/",
-								"http-big-data/",
-							]
-						},
-						{
-							title: "TCP",
-							icon: "",
-							prefix: "tcp/",
-							children: [
-								"",
-								"3-handshake/",
-								"4-wave/",
-								"tcp-reliable-transmission/",
-							]
-						},
-						{
-							title: "补充",
-							icon: "",
-							prefix: "def/",
-							children: [
-								"router-and-switch/",
-							]
-						},
-						{
-							title: "网络是怎样连接的",
-							incon: "",
-							prefix: "how-is-the-network-connected/",
-							children: ["1/", "2/", "3/", "4/", "5/", "6/"],
-						},
-						{
-							title: "图解HTTP",
-							icon: "",
-							prefix: "diagram-http/",
-							children: [
-								"1/", "2/", "3/", "4/", "5/", "6/",
-								"7/", "8/", "9/", "10/",
-							],
-						}
+						"version/",
+						"https/",
+						"keep-alive/",
+						"http-big-data/",
 					]
 				},
 				{
-					title: "操作系统",
+					title: "TCP",
 					icon: "",
-					prefix: "os/",
+					prefix: "tcp/",
 					children: [
 						"",
-						"processes&threads/",
-						"memory-manage/",
+						"3-handshake/",
+						"4-wave/",
+						"tcp-reliable-transmission/",
+					]
+				},
+				{
+					title: "补充",
+					icon: "",
+					prefix: "def/",
+					children: [
+						"router-and-switch/",
+					]
+				},
+				{
+					title: "网络是怎样连接的",
+					incon: "",
+					prefix: "how-is-the-network-connected/",
+					children: ["1/", "2/", "3/", "4/", "5/", "6/"],
+				},
+				{
+					title: "图解HTTP",
+					icon: "",
+					prefix: "diagram-http/",
+					children: [
+						"1/", "2/", "3/", "4/", "5/", "6/",
+						"7/", "8/", "9/", "10/",
+					],
+				}
+			],
+
+			"/cs-basic/os/": [
+				"",
+				"processes&threads/",
+				"memory-manage/",
+				{
+					title: "补充",
+					icon: "",
+					prefix: "def/",
+					children: [
+						"process-communication/",
+						"multiplexing/",
+						"cpu-cache/",
+					],
+				},
+				{
+					title: "王道-操作系统",
+					icon: "",
+					prefix: "wangdao/",
+					children: [
 						{
-							title: "补充",
+							title: "计算机系统概述",
 							icon: "",
-							prefix: "def/",
-							children: [
-								"process-communication/",
-								"multiplexing/",
-								"cpu-cache/",
-							],
+							prefix: "1/",
+							children: ["1/", "2/", "3/", "4/", "6/"],
 						},
 						{
-							title: "王道-操作系统",
+							title: "进程与线程",
 							icon: "",
-							prefix: "wangdao/",
-							children: [
-								{
-									title: "计算机系统概述",
-									icon: "",
-									prefix: "1/",
-									children: ["1/", "2/", "3/", "4/", "6/"],
-								},
-								{
-									title: "进程与线程",
-									icon: "",
-									prefix: "2/",
-									children: ["1/", "2/", "3/", "4/"],
-								},
-								{
-									title: "内存管理",
-									icon: "",
-									prefix: "3/",
-									children: ["1/", "2/"],
-								},
-								{
-									title: "文件管理",
-									icon: "",
-									prefix: "4/",
-									children: ["1/", "2/", "3/"],
-								},
-								{
-									title: "IO管理",
-									icon: "",
-									prefix: "5/",
-									children: ["1/", "2/", "3/"],
-								},
-							]
-						}
+							prefix: "2/",
+							children: ["1/", "2/", "3/", "4/"],
+						},
+						{
+							title: "内存管理",
+							icon: "",
+							prefix: "3/",
+							children: ["1/", "2/"],
+						},
+						{
+							title: "文件管理",
+							icon: "",
+							prefix: "4/",
+							children: ["1/", "2/", "3/"],
+						},
+						{
+							title: "IO管理",
+							icon: "",
+							prefix: "5/",
+							children: ["1/", "2/", "3/"],
+						},
 					]
 				}
 			],
@@ -323,38 +306,6 @@ module.exports = config({
 			]
 		},
 
-		locales: {
-			"/zh/": {
-				nav: [
-					{ text: "博客主页", link: "/zh/", icon: "home" },
-					{ text: "项目主页", link: "/zh/home/", icon: "home" },
-					{
-						text: "如何使用",
-						icon: "creative",
-						link: "/zh/guide/",
-					},
-					{
-						text: "主题文档",
-						icon: "note",
-						link: "https://vuepress-theme-hope.github.io/zh/",
-					},
-				],
-				sidebar: {
-					"/zh/": [
-						"",
-						"home",
-						"slides",
-						"layout",
-						{
-							title: "如何使用",
-							icon: "creative",
-							prefix: "guide/",
-							children: ["", "page", "markdown", "disable", "encrypt"],
-						},
-					],
-				},
-			},
-		},
 
 		// blog: {
 		//   intro: "/intro/",

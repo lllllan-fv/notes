@@ -7,9 +7,9 @@ heroImage: /logo.png
 tagline: 盛意以江河，江河不及你
 
 action:
-#  - text: Java 笔记
-#    link: /1-java/
-#    type: primary
+  - text: Java 笔记
+    link: /java/basic/
+    type: primary
 
 #  - text: MySQL 笔记
 #    link: /2-mysql/
@@ -23,11 +23,11 @@ action:
 
 
 features:
-  - title: Java 笔记
-    link: /java/basic/
-
-  - title: 计算机基础
+  - title: 计算机网络
     link: /cs-basic/network/
+
+  - title: 操作系统
+    link: /cs-basic/os/
 
   - title: MySQL
     link: /mysql/
@@ -45,9 +45,4 @@ copyrightText: false
 footer: MIT Licensed | Copyright © 2022 lllllan
 ---
 
-
-
-
-
-- [3.1 HTTP 常见面试题 | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/2_http/http_interview.html#get-与-post)
 
