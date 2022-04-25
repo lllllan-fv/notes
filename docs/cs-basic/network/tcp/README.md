@@ -38,6 +38,7 @@ star: true
 
 - [4.6 如何理解是 TCP 面向字节流协议？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/tcp_stream.html)
 - [4.7 为什么 TCP 每次建立连接时，初始化序列号都要不一样呢？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/isn_deff.html)
+- [4.9 已建立连接的TCP，收到SYN会发生什么？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/challenge_ack.html)
 
 :::
 
@@ -137,3 +138,34 @@ TCP 每次建立连接时，初始化序列号都要不一样。 ==主要原因�
 ## SYN 报文什么情况会被丢弃
 
 没有很懂 [4.8 SYN 报文什么时候情况下会被丢弃？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/syn_drop.html)
+
+
+
+## 已经建立连接的TCP收到SYN
+
+一个已经建立的 TCP 连接，客户端中途宕机了，而服务端此时也没有数据要发送，一直处于 establish 状态，客户端恢复后，向服务端建立连接，此时服务端会怎么处理？
+
+- 如果端口号和历史连接不相同，就会建立一个新的连接
+- 如果端口号和历史连接相同，服务器返回一个携带正确 ack 的报文，客户端检查发现序列号对不上，回复 RST 报文断开连接
+
+
+
+### 端口号和历史连接不相同
+
+如果客户端恢复后发送的 SYN 报文中的源端口号跟上一次连接的源端口号不一样，此时服务端会认为是新的连接要建立，于是就会通过三次握手来建立新的连接。
+
+
+
+对于旧的 TCP 连接，如果服务端一直没有发送数据包给客户端，在超过一段时间后， TCP 保活机制就会启动，检测到客户端没有存活后，接着服务端就会释放掉该连接。
+
+
+
+### 端口号和历史连接相同
+
+每次建立连接的时候，SYN 报文中的序列号是随机生成的。处于 establish 的服务器，在接收到这个随机的序列号之后，会回复一个携带正确学历好的 ACK 报文， `Challenge ACK`
+
+客户端收到 `Challenge ACK` 之后，发现序列号不是期望收到的，就会回复 RST 报文，服务器接收到后会释放连接。
+
+
+
+![img](README.assets/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5bCP5p6XY29kaW5n,size_20,color_FFFFFF,t_70,g_se,x_16.png)
