@@ -37,6 +37,7 @@ star: true
 ::: warning 转载声明
 
 - [4.6 如何理解是 TCP 面向字节流协议？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/tcp_stream.html)
+- [4.7 为什么 TCP 每次建立连接时，初始化序列号都要不一样呢？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/isn_deff.html)
 
 :::
 
@@ -114,3 +115,19 @@ struct {
 ```
 
 当接收方接收到包头的大小（比如 4 个字节）后，就解析包头的内容，于是就可以知道数据的长度，然后接下来就继续读取数据，直到读满数据的长度，就可以组装成一个完整到用户消息来处理了。
+
+
+
+## 不同的初始化序列号
+
+TCP 每次建立连接时，初始化序列号都要不一样。 ==主要原因是为了防止历史报文被下一个相同四元组的连接接收。==
+
+
+
+假如我某次连接中某个数据包被网络阻塞了。而当这个数据包达到接收方的时候，此时已经不是原来的连接了，而是断开以后、重新建立的新的 TCP 连接，只是恰巧双方的 IP 地址和端口号都和上一次连接相同。
+
+此时这个数据包到达接收方以后，如果使用序列号，和当前通信过程中的某个数据包的序列号重叠，将发生数据错乱。
+
+
+
+详细的看 [4.7 为什么 TCP 每次建立连接时，初始化序列号都要不一样呢？ | 小林coding (xiaolincoding.com)](https://xiaolincoding.com/network/3_tcp/isn_deff.html)
