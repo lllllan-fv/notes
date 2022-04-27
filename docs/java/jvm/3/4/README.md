@@ -59,7 +59,7 @@ star: true
 
 
 
-::: info 准确式GC 和 OopMap
+::: info 准确式 GC 和 OopMap
 
 > 保守式GC，不知道每个位置上的数据时什么类型，只能扫描整个新生代。
 
