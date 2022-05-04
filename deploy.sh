@@ -10,17 +10,16 @@ npm run build
 cd dist
 
 # 如果是发布到自定义域名
-echo 'vue-blog.lllllan.cn' > CNAME
-echo 'blog.lllllan.cn' > CNAME
+echo 'notes.lllllan.cn' > CNAME
 
 git init
 git add -A
 git commit -m '更新'
 
 # 如果你想要部署到 https://<USERNAME>.github.io
-git push -f git@github.com:lllllan-fv/lllllan-fv.github.io.git master
+# git push -f git@github.com:lllllan-fv/lllllan-fv.github.io.git master
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>  REPO=github上的项目
-# git push -f git@github.com:<USERNAME>/vuepress.git master:gh-pages
+git push -f git@github.com:lllllan-fv/notes.git master:notes
 
 cd -
