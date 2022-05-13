@@ -29,7 +29,7 @@ module.exports = config({
 		hostname: "https://notes.lllllan.cn",
 
 		author: "lllllan",
-		repo: "https://github.com/lllllan-fv/blog",
+		repo: "https://github.com/lllllan-fv/notes",
 
 		nav: [
 			{ text: "Blog Home", link: "/", icon: "home" },
